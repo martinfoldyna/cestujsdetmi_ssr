@@ -1,0 +1,67 @@
+.lightbox-container {
+  display: block;
+}
+
+.lightbox-image {
+  width: 100%;
+  max-height: 90vh;
+  border-radius: $border-radius;
+  user-select: none; /* standard syntax */
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
+}
+
+.react-responsive-modal-modal {
+  box-shadow: none !important;
+  background: none !important;
+  padding: 0 !important;
+  display: flex;
+  align-self: center;
+}
+
+.lightbox-container .arrow,
+.react-responsive-modal-closeButton {
+  color: #fff;
+  font-size: 2em;
+  cursor: pointer;
+  padding: .5em;
+  border-radius: $border-radius;
+  background-color: rgba(0,0,0,.5) !important;
+}
+
+.lightbox-container .counter {
+  position: absolute;
+  top: 14px;
+  padding: .5em;
+  left: 14px;
+  color: #fff;
+  border-radius: $border-radius;
+}
+
+.lightbox-container .image-description {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 14px;
+  color: #fff;
+  text-shadow: 0 0 15px rgb(0, 0, 0);
+}
+
+.lightbox-container .arrow {
+  position: absolute;
+  top: 50%;
+}
+
+#lightbox-close svg{
+  color: #fff;
+}
+
+.lightbox-container .arrow-right {
+  right: .7em;
+}
+
+.lightbox-container .arrow-left {
+  left: .7em;
+}

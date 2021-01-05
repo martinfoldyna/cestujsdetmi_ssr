@@ -1,0 +1,421 @@
+/**** CUSTOM TEXT INPUT AND TEXTAREA ****/
+.form-item input.inputText:focus ~ .floating-label,
+.form-item textarea.inputText:focus ~ .floating-label,
+.form-item input.inputText:not(:focus):valid ~ .floating-label,
+.form-item textarea.inputText:not(:focus):valid ~ .floating-label {
+  transform: scale3d(0.7,0.7,1);
+  top: 5px;
+}
+
+.inputText {
+  border: 1px solid $grey;
+  border-radius: 3px;
+  background-clip: padding-box;
+  width: 100%;
+  transition: 0.1s all linear;
+  padding: 21px 20px 10px 38px;
+  background-color: $grey;
+  color: #000000;
+  box-sizing: border-box;
+  outline: none;
+}
+
+textarea.inputText {
+  height: 40vh;
+  resize: vertical;
+}
+
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  transform-origin: 0 0;
+  z-index: 1;
+  top: 50%;
+  left: 38px;
+  transform: translateY(-50%);
+  transition: top .2s, transform 0.2s;
+  transition-timing-function: ease-out;
+  color: #8F8F8F;
+}
+
+.form-item textarea.inputText ~ .floating-label {
+  top: 21px;
+  transform: translateY(0);
+}
+
+.form-item {
+  position: relative;
+  margin: 0 1em;
+  transition: color 0.4s ease;
+  color: #b4b4aa;
+  box-sizing: border-box;
+}
+
+.error-wrapper {
+  height: 25px;
+  position: relative;
+  margin-left: 1em;
+}
+
+.error-wrapper .error-message {
+  position: absolute;
+  top: 2px;
+  color: $danger;
+  margin: 0;
+  font-size: .8em;
+}
+
+/**** CUSTOM CHECKBOX AND RADIO ****/
+/* The container */
+.checkbox-container {
+  //display: block;
+  position: relative;
+  padding-left: 45px;
+  //margin-bottom: 12px;
+  cursor: pointer;
+  height: 35px;
+  margin-bottom: 0;
+  display: flex;
+  //font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  left: 0;
+  height: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  background-color: #F8F8F8;
+  border: 3px solid #E3E3E3;
+  border-radius: $border-radius;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: $blue;
+  border-color: $blue;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.checkbox-container .checkmark:after {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.checkbox-container .checkmark.check:after {
+  width: 10px;
+  height: 10px;
+  background: url("../public/icons/checkmark.svg");
+}
+
+.radio-label {
+  align-self: center;
+  display: block;
+}
+
+.form-icon {
+  position: absolute;
+  top: 50%;
+  left: 19px;
+  transform: translate(-50%, -50%);
+  font-size: .8em;
+  color: #8F8F8F;
+}
+
+/**** CUSTOM SELECT ****/
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+  width: 100%;
+  margin: 2em 0 2em;
+}
+
+
+.custom-select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  border-radius: $border-radius;
+}
+
+.custom-select__trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 .8em;
+  height: 2.5em;
+  //line-height: 60px;
+  background-color: transparent;
+  cursor: pointer;
+  //border-width: 2px 0 2px 0;
+  //border-style: solid;
+  //border-color: #394a6d;
+}
+
+.custom-options {
+  position: absolute;
+  display: block;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 2px solid $grey;
+  border-top: 0;
+  background: #fff;
+  transition: all 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 2;
+  margin-bottom: 2em;
+  max-height: 400px;
+  overflow: scroll;
+}
+.custom-select.open .custom-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+.custom-option {
+  position: relative;
+  display: block;
+  padding: 0 10px 0 10px;
+  font-size: $font-size;
+  font-weight: 300;
+  color: #3b3b3b;
+  line-height: 60px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.custom-option:hover {
+  cursor: pointer;
+  background-color: $blue;
+  color: #ffffff;
+}
+.custom-option.selected {
+  color: #ffffff;
+  background-color: $blue;
+}
+
+
+.arrow {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-180deg);
+  right: 1em;
+  color: $blue;
+  font-size: .9em;
+  transition: .5s transform ease-in-out;
+}
+
+.open .arrow {
+  transform: translateY(-50%) rotate(0);
+}
+
+//.arrow::before, .arrow::after {
+//  content: "";
+//  position: absolute;
+//  bottom: 0px;
+//  width: 0.15rem;
+//  height: 100%;
+//  transition: all 0.5s;
+//}
+//
+//.arrow::before {
+//  left: -5px;
+//  transform: rotate(45deg);
+//  background-color: $blue;
+//}
+//
+//.arrow::after {
+//  left: 5px;
+//  transform: rotate(-45deg);
+//  background-color: $blue;
+//}
+//
+//.open .arrow::before {
+//  left: -5px;
+//  transform: rotate(-45deg);
+//}
+//.open .arrow::after {
+//  left: 5px;
+//  transform: rotate(45deg);
+//}
+
+.custom-select-wrapper .search-input {
+  width: 100%;
+  display: block;
+  border: none;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+}
+
+.custom-select-wrapper .search-input::placeholder {
+  opacity: 1;
+  font-size: 1.2em;
+  color: #000;
+}
+
+.map-component .custom-select {
+  border: 2px solid $blue;
+  background-color: transparent;
+}
+
+.map-component .custom-select-wrapper .search-input {
+  color: $blue;
+  font-weight: 600;
+  font-size: $font-size-description;
+}
+
+.thumbnail-wrapper {
+
+}
+
+.objekt-image {
+  height: 150px;
+}
+
+.objekt-image .image-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.objekt-image .image-container .overlay {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .5);
+  cursor: pointer;
+}
+
+.objekt-image .image-container:hover .overlay{
+  display: block;
+  z-index: 100;
+}
+
+.objekt-image .image-container .overlay .enlarge-icon,
+.objekt-detail-image .overlay .enlarge-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  z-index: 200;
+}
+
+.objekt-image .image-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: $border-radius;
+}
+
+.objekt-image .reorder {
+  font-size: 2em;
+}
+
+.objekt-image .cancel-filter-icon {
+  font-size: 2em;
+}
+
+.form-select {
+  margin: 0;
+}
+
+.form-select.custom-select-wrapper.disabled {
+  cursor: not-allowed;
+}
+
+.form-select.custom-select-wrapper.disabled > .custom-select {
+  pointer-events: none;
+}
+
+.form-select .arrow{
+  top: 21px;
+  //transform: rotate(180deg);
+  right: 2em;
+}
+
+.form-select .custom-options {
+  margin: 0 1em;
+}
+
+.autocomplete-hints {
+  margin: 0 1em;
+}
+
+.autocomplete-hint-item {
+  border-bottom: 1px solid $grey;
+  cursor: pointer;
+}
+
+.autocomplete-hint-item:hover {
+  background-color: $grey;
+}
+
+.custom-select-wrapper .search-input.placeholder-blue::placeholder {
+  color: $blue;
+}
+
+.custom-select-wrapper .search-input.placeholder-orange::placeholder {
+  color: $orange;
+}
+
+.custom-select-wrapper .search-input.placeholder-blue::placeholder {
+  color: $blue;
+}
+
+.custom-select-wrapper .search-input.placeholder-blue::placeholder {
+  color: $blue;
+}
+
+
+
+
+

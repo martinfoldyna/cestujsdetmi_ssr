@@ -1,0 +1,262 @@
+@import "Variables";
+
+// Background colors
+.bg-light-blue-2 {
+  background-color: $light-blue-2;
+}
+
+.bg-light-blue {
+  background-color: $light-blue;
+}
+
+.bg-blue {
+  background-color: $blue;
+}
+
+.bg-green {
+  background-color: $green;
+}
+.bg-pink {
+  background-color: $pink;
+}
+.bg-purple {
+  background-color: $purple;
+}
+.bg-dark-purple {
+  background-color: $dark-purple;
+}
+.bg-light-purple {
+  background-color: $light-purple;
+}
+.bg-orange {
+  background-color: $orange;
+}
+.bg-light-orange {
+  background-color: $light-orange;
+}
+.bg-red {
+  background-color: $red;
+}
+.bg-yellow {
+  background-color: $yellow;
+}
+.bg-light-yellow {
+  background-color: $light-yellow !important;
+}
+.bg-white {
+  background-color: #fff;
+}
+.bg-grey {
+  background-color: $grey;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.border-grey {
+  border: 2px solid $grey;
+  border-radius: $border-radius;
+}
+
+.border-none {
+  border: none;
+}
+
+// outlines
+.outline-orange {
+  border: 2px solid $orange;
+  background-color: transparent;
+}
+
+.outline-orange:hover {
+  background-color: $orange;
+  color: $white;
+}
+
+.outline-blue {
+  border: 2px solid $blue;
+  background-color: transparent;
+}
+
+.outline-blue:hover {
+  border: 2px solid $blue;
+  //color: $white;
+}
+
+.outline-red {
+  border: 2px solid $red;
+  background-color: transparent;
+}
+.outline-red:hover,
+.outline-red:active {
+  background-color: $red;
+  color: $white;
+}
+
+// Borders
+.border-danger {
+  border-color: $danger !important;
+}
+
+// Text colors
+.text-light-blue {
+  color: $light-blue-2;
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.text-blue-darken {
+  color: $blue-darken;
+}
+.text-green {
+  color: $green;
+}
+.text-pink {
+  color: $pink;
+}
+.text-purple {
+  color: $purple;
+}
+.text-purple-darken {
+  color: $purple-darken;
+}
+.text-dark-purple-darken {
+  color: $dark-purple-darken;
+}
+.text-orange {
+  color: $orange;
+}
+.text-red {
+  color: $red;
+}
+.text-yellow {
+  color: $yellow;
+}
+.text-yellow-darken {
+  color: $yellow-darken;
+}
+.text-white {
+  color: #fff;
+}
+
+.text-black {
+  color: #000
+}
+
+.text-grey {
+  color: $dark-grey
+}
+
+.border-blue {
+  border-color: $blue !important;
+}
+
+.border-orange {
+  border-color: $orange !important;
+}
+
+// Links
+.link-coloured:hover {
+  background-position: 0 100%;
+}
+
+.link-blue {
+  background-image: linear-gradient(to right, $blue, $blue 50%, #000 50%);
+  position: relative;
+  display: inline-block;
+  color: #157DFF;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position .5s ease;
+  text-decoration: none !important;
+}
+.link-green {
+  background-image: linear-gradient(to right, $green, $green 50%, #000 50%);
+  position: relative;
+  display: inline-block;
+  color: #157DFF;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position .5s ease;
+  text-decoration: none !important;
+
+}
+.link-pink {
+  background-image: linear-gradient(to right, $pink, $pink 50%, #000 50%);
+    position: relative;
+  display: inline-block;
+  color: #157DFF;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position .5s ease;
+  text-decoration: none !important;
+
+}
+.link-purple {
+  background-image: linear-gradient(to right, $purple, $purple 50%, #000 50%);
+    position: relative;
+  display: inline-block;
+  color: #157DFF;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position .5s ease;
+  text-decoration: none !important;
+
+}
+.link-orange {
+  background-image: linear-gradient(to right, $orange, $orange 50%, #000 50%);
+    position: relative;
+  display: inline-block;
+  color: #157DFF;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position .5s ease;
+  text-decoration: none !important;
+
+}
+.link-red {
+  background-image: linear-gradient(to right, $red, $red 50%, #000 50%);
+    position: relative;
+  display: inline-block;
+  color: #157DFF;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position .5s ease;
+  text-decoration: none !important;
+
+}
+.link-yellow {
+  background-image: linear-gradient(to right, $yellow, $yellow 50%, #000 50%);
+    position: relative;
+  display: inline-block;
+  color: #157DFF;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position .5s ease;
+  text-decoration: none !important;
+
+}

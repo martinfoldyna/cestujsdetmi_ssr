@@ -1,0 +1,66 @@
+// Alert types
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
+export const SET_TOAST = "SET_TOAST";
+
+// VyletyDetail types
+export const OBJEKT_UPLOADED = "OBJEKT_UPLOADED";
+export const OBJEKT_UPDATED = "OBJEKT_UPDATED";
+export const OBJEKT_UPDATE_ERROR = "OBJEKT_UPDATE_ERROR";
+export const GET_OBJEKTY = "GET_OBJEKTY";
+export const GET_NEW_PUBLISHED_OBJEKTY = "GET_NEW_PUBLISHED_OBJEKTY";
+export const GET_LAST_MINUTE = "GET_LAST_MINUTE";
+export const GET_KATEGORIE = "GET_KATEGORIE";
+export const GET_PODKATEGORIE = "GET_PODKATEGORIE";
+export const GET_OBJEKTY_IN_OBLAST = "GET_OBJEKTY_IN_OBLAST";
+export const ADD_OBJEKTY = "ADD_OBJEKTY";
+export const REMOVE_OBJEKT_IN_STORAGE = "REMOVE_OBJEKT_IN_STORAGE";
+export const REMOVE_OBJEKTY_IN_STORAGE = "REMOVE_OBJEKTY_IN_STORAGE";
+export const START_UPLOADING = "START_UPLOADING";
+export const COUNT_OBJEKTY = "COUNT_OBJEKTY";
+export const START_LOADING = "START_LOADING";
+export const GET_ONE_OBJEKT = "GET_ONE_OBJEKT";
+export const OBJEKTY_ERROR = "OBJEKTY_ERROR";
+export const OBJEKT_UPLOAD_ERROR = "OBJEKT_UPLOAD_ERROR";
+
+// Ojekty typy types
+export const GET_OBJEKTY_TYPY = "GET_OBJEKTY_TYPY";
+export const GET_OBJEKT_TYP_BY_VALUE = "GET_OBJEKTY_TYPY";
+
+// Rady a tipy types
+export const POST_ADVICE_UPLOADED = "POST_ADVICE_UPLOADED";
+export const POST_ADVICE_ERROR = "POST_ADVICE_ERROR";
+export const GET_ADVICE_POSTS = "GET_ADVICE_POSTS";
+export const REMOVE_ADVICE_POST = "REMOVE_ADVICE_POST";
+export const GET_ADVICE_POST = "GET_ADVICE_POST";
+export const GET_RELATED_POSTS = "GET_RELATED_POSTS";
+export const POSTS_ADVICE_ERROR = "POSTS_ADVICE_ERROR";
+
+// Places types
+export const GET_ALL_REGIONS = "GET_ALL_REGIONS";
+export const GET_ALL_CITIES = "GET_ALL_CITIES";
+export const GET_ALL_CITIES_IN_REGION = "GET_ALL_CITIES_IN_REGION";
+export const ALL_REGIONS_ERROR = "ALL_REGIONS_ERROR";
+export const ALL_CITIES_ERROR = "ALL_CITIES_ERROR";
+
+// Webcams
+export const GET_ALL_WEBCAMS = "GET_ALL_WEBCAMS";
+export const GET_ONE_WEBCAM = "GET_ONE_WEBCAM";
+export const ADD_WEBCAMS = "ADD_WEBCAMS";
+export const GET_WEBCAMS_ERROR = "GET_WEBCAMS_ERROR";
+
+// Mapbox
+export const GEOCODING_SUCCESS = "GEOCODING_SUCCESS";
+export const GEOCODING_FAIL = "GEOCODING_FAIL";
+
+// Users
+export const REGISTER_USER = "REGISTER_USER";
+export const USER_RECEIVED = "USER_RECEIVED";
+export const LOGIN_USER = "LOGIN_USER";
+export const USER_ERROR = "USER_ERROR";
+export const LOGOUT_USER = "LOGOUT_USER";
+
+// Previo
+export const GET_HOTELS = "GET_HOTELS";
+export const GET_HOTEL = "GET_HOTEL";
+export const HOTELS_ERROR = "HOTELS_ERROR";

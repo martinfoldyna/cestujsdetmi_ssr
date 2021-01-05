@@ -1,0 +1,366 @@
+@import "Variables";
+
+.article-card,
+.tipy-na-ubytovani-home-card .article-card{
+  margin: 1.5em 0 2em;
+  text-align: justify;
+  padding: 1em;
+  border-radius: $border-radius;
+  transition: .5s all;
+  position: relative;
+}
+.homepage .article-homepage-card {
+  padding: 0;
+}
+
+
+.article-heading:hover {
+  text-decoration: none !important;
+}
+
+.article-card:first-of-type {
+  margin-top: 0;
+}
+
+.article-card h3 {
+  font-weight: 600;
+}
+
+.article-card p {
+  font-weight: 400;
+}
+
+.article-card .article-heading {
+  margin: 0 0 .5em;
+  text-decoration: underline;
+  font-size: 23px;
+  transition: .2s all;
+  text-align: left;
+}
+
+.article-card .article-description {
+  margin: 0 .5em 0 0;
+}
+
+.article-card .article-description p {
+  margin-bottom: 0;
+}
+
+.article-card .article-news-date {
+  position: absolute;
+  bottom: 10%;
+  left: -10px;
+  background-color: $pink-faded;
+  padding: 5px 10px;
+  font-weight: 600;
+  font-family: $font-family-montserrat;
+  border-radius: $border-radius;
+  color: #fff;
+}
+
+.article-card .article-location {
+  font-size: 12px;
+  margin-bottom: .5em;
+  display: block;
+}
+
+.article-card .img-wrapper {
+  border-radius: $border-radius;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-basis: 30%;
+  margin-right: 1em;
+  width: 100%;
+  transition: .2s all;
+  position: relative;
+}
+
+.homepage .article-homepage-card .article-heading {
+  margin: 0;
+  text-align: left;
+}
+
+.article-homepage-card .article-description p{
+  margin-top: .5em;
+}
+
+.article-homepage-card .img-wrapper {
+  margin-right: 0;
+  flex-basis: 40%;
+}
+
+.article-homepage-card .content-wrapper {
+  margin-right: 0;
+  flex-basis: 60%;
+}
+
+.article-card .content-wrapper {
+  flex-basis: 70%;
+  height: 100%;
+  margin-left: 1em;
+}
+
+.aktuality-card {
+  padding-bottom: 1em;
+  padding-top: 1em;
+  border-bottom: 1px solid $grey;
+}
+
+.aktuality-card:first-of-type {
+  padding-top: 0;
+}
+
+.aktuality-card .date-info {
+  margin-right: 1em;
+}
+
+.plan-card {
+  padding: 2em;
+  height: auto;
+  background-color: #F8F8F8;
+  box-sizing: border-box;
+  border-radius: $border-radius;
+  //display: grid;
+  grid-template-rows: 10% 50% 20% 10%;
+  border-bottom: 4px solid #E6E6E6;
+}
+
+.plan-card .card-heading {
+  grid-row: 1;
+  font-size: 24px;
+}
+
+.plan-card .card-heading span {font-family: inherit}
+
+.plan-card .card-body {
+  grid-row: 2;
+  line-height: 22px;
+}
+
+.plan-card .card-price {
+  display: block;
+  grid-row: 3;
+  font-size: 3em;
+  margin: 1em auto;
+  text-align: center;
+  font-family: $font-family-montserrat;
+}
+
+.plan-card .card-price .currency {
+  font-size: 1rem;
+}
+
+.plan-card .price .currency {
+  font-size: 2rem;
+}
+
+.plan-card a {
+  grid-row: 4;
+}
+
+.filter-card {
+  border-radius: $border-radius;
+  margin: 1em 0;
+}
+
+.filter-card.full-padding {
+  padding: 1.7em 1.5em;
+}
+
+.filter-card.full-padding .selects {
+  padding: 0;
+}
+
+.filter-card .selects {
+  padding: 1.7em 1.5em 0;
+}
+
+.filter-card .categories {
+  padding-bottom: 1.7em;
+}
+
+.filter-card .categories > .filter-name{
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+
+.filter-card:first-of-type {
+  margin-top: 0;
+}
+
+.filter-card h3 {
+  margin-top: 0;
+}
+
+.filter-card .filter-name {
+  font-weight: 600;
+}
+
+.filter-card .col:first-of-type .filter-name {
+  margin-top: 0;
+}
+
+.filter-card .col .categories-list li {
+  padding: .5em 1.5em;
+  position: relative;
+}
+
+.filter-card .col .categories-list li.blue:hover,
+.filter-card .col .categories-list li.blue.selected{
+  background-color: $blue;
+  color: $white;
+}
+
+.filter-card .col .categories-list li.orange:hover,
+.filter-card .col .categories-list li.orange.selected{
+  background-color: $orange;
+  color: $white;
+}
+
+.filter-card .col .categories-list li.purple:hover,
+.filter-card .col .categories-list li.purple.selected{
+  background-color: $purple;
+  color: $white;
+}
+
+.filter-card .col .categories-list li.pink:hover,
+.filter-card .col .categories-list li.pink.selected{
+  background-color: $pink;
+  color: $white;
+}
+
+.filter-card .col .categories-list li.green:hover,
+.filter-card .col .categories-list li.green.selected{
+  background-color: $green;
+  color: $white;
+}
+
+.filter-card .col .categories-list li:last-of-type::after,
+.filter-card .col .categories-list li:hover::after,
+.filter-card .col .categories-list li.selected::after {
+  display: none;
+}
+
+.filter-card .col .categories-list li::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 1.5em;
+  right: 1.5em;
+  height: 1px;
+  background-color: #E3E3E3;
+}
+
+.filter-card .custom-select-wrapper {
+  margin: .5em 0;
+}
+
+.filter-card .custom-select {
+  border: 2px solid #E3E3E3;
+  box-sizing: border-box;
+}
+
+.filter-card .form-item{
+  margin: 0;
+}
+
+.filter-card .checkbox-container{
+  padding-left: 34px;
+}
+
+.filter-card .form-item .checkmark {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+  background-color: #fff;
+}
+
+.last-minute-small {
+  padding: 1.7em 1.5em;
+}
+
+.last-minute-small .card-heading,
+.small-article-card h3 {
+  text-decoration: underline;
+}
+
+.last-minute-small .card-heading {
+  font-size: 18px;
+}
+
+
+.small-card-heading h4{
+  margin: 0;
+}
+
+.article-card:nth-of-type(2){
+  background-color: $grey;
+}
+
+.article-card .article-location svg {
+  margin-right: .5em;
+}
+
+.article-date-range p {
+  margin: 0;
+  font-size: 12px;
+  position: absolute;
+  bottom: 1em;
+  left: -.5em;
+  padding: .5em;
+  background-color: rgb(160, 83, 167);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.filter-place-badge {
+  padding: 1em;
+  background-color: $grey;
+}
+
+.admin-objekt {
+  min-height: 360px;
+  margin-top: 0 !important;
+}
+
+.admin-objekt .img-wrapper{
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: $border-radius;
+}
+
+.admin-objekt .section-content {
+  height: 100%;
+}
+
+.admin-user-info .row .form-item {
+  margin-bottom: 1em;
+}
+
+.login-card {
+  max-width: 500px;
+  margin: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  color: $text-black;
+  min-width: 400px;
+  text-align: center;
+}
+
+.login-card h3 {
+  text-align: left;
+}
+
+.login-card span, .login-card a {
+  font-size: 14px;
+}
+
+.login-card .btn.bg-white {
+
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  font-weight: normal;
+}
