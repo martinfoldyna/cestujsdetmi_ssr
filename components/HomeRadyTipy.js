@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import enums from "../enums";
 import { objectToArray } from "../helpers/helpers";
 
-const RadyTipyHomepage = ({ radyTipy: { posts }, getAdvices }) => {
+const RadyTipyHomepage = ({ posts }) => {
   const [categorizedPosts, setCategorizedPosts] = useState({
     [enums.RADY_TIPY.KATEGORIE.cestujsdetmi_doporucuje.key]: null,
     [enums.RADY_TIPY.KATEGORIE.deti_a_zdravi.key]: null,
@@ -155,4 +155,4 @@ const mapStateToProps = (state) => ({
   radyTipy: state.radyTipy,
 });
 
-export default connect(mapStateToProps, { getAdvices })(RadyTipyHomepage);
+export default RadyTipyHomepage;

@@ -14,7 +14,7 @@ import { Row, Col } from "react-grid-system";
 import Post from "../../../layouts/Post";
 // import HeadTitle from "../../../layouts/HeadTitle";
 
-const WebcamDetail = ({ webcams: { webcam, webcams }, getWebcam }) => {
+const WebcamDetail = ({ webcam }) => {
   const router = useRouter();
   const { hodnota } = router.query;
 
@@ -100,4 +100,4 @@ const mapStateToProps = (state) => ({
   webcams: state.webcams,
 });
 
-export default connect(mapStateToProps, { getWebcam })(WebcamDetail);
+export default WebcamDetail;

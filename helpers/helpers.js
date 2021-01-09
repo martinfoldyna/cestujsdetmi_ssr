@@ -69,12 +69,19 @@ export const friendlyUrl = (string) => {
  */
 export const trimString = (string, words_number = 21) => {
   // create element where html string will be stored
-  const span = document.createElement("span");
-  // set html string as innerHTML
-  span.innerHTML = string;
-  // retrieve text content of html element
-  const text = span.textContent || span.innerText;
-  const splittedText = text.split(" ");
+  // const span = document.createElement("span");
+  // // set html string as innerHTML
+  // span.innerHTML = string;
+  // // retrieve text content of html element
+  // const text = span.textContent || span.innerText;
+  // const splittedText = text.split(" ");
+  // const slicedString = splittedText.slice(0, words_number).join(" ");
+  // // Check if string ends by letter -> if not remove last character
+  // return /^[á-ža-z0-9]/i.test(slicedString[slicedString.length - 1])
+  //   ? slicedString
+  //   : slicedString.slice(0, -1);
+  const deHtmlString = string.replace(/<[^>]*>?/gm, "");
+  const splittedText = deHtmlString.split(" ");
   const slicedString = splittedText.slice(0, words_number).join(" ");
   // Check if string ends by letter -> if not remove last character
   return /^[á-ža-z0-9]/i.test(slicedString[slicedString.length - 1])
@@ -95,7 +102,6 @@ export const objectToQueryString = (object) => {
       if (paramKey !== "method") {
         returnString += returnString.length !== 0 ? "&" : "";
         const paramItem = object[paramKey];
-        console.log(`${paramItem}: ${typeof paramItem}`);
         if (typeof paramItem === "string" || typeof paramItem === "number") {
           returnString += `${paramKey}=${paramItem}`;
         } else if (Array.isArray(paramItem)) {

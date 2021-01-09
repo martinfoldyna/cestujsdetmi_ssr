@@ -91,6 +91,4 @@ const mapStateToProps = (state) => ({
   objekty: state.objekty.objekty,
 });
 
-export default connect(mapStateToProps, {
-  getObjektyByParams,
-})(Aktuality);
+export default Aktuality;

@@ -34,7 +34,8 @@ import { MyLink } from "../layouts/MyLink";
 const ObjektDetail = ({
   getObjektByID,
   addReview,
-  objekty: { loading, objekt, objektyInOblast },
+  objekt,
+  objektyInOblast,
   getObjektyInOblast,
   removeObjektInStorage,
 }) => {
@@ -708,9 +709,4 @@ const mapStateToProps = (state) => ({
   objekty: state.objekty,
 });
 
-export default connect(mapStateToProps, {
-  getObjektByID,
-  addReview,
-  getObjektyInOblast,
-  removeObjektInStorage,
-})(ObjektDetail);
+export default ObjektDetail;

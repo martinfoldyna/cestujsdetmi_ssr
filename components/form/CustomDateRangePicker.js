@@ -120,4 +120,4 @@ CustomDateRangePicker.propTypes = {};
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, {})(CustomDateRangePicker);
+export default CustomDateRangePicker;

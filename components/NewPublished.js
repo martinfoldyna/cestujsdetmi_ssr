@@ -7,10 +7,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getNewPublished } from "../redux/actions/objekty";
 
-const NewPublished = ({ newPublished, getNewPublished }) => {
-  useEffect(() => {
-    getNewPublished();
-  }, []);
+const NewPublished = ({ newPublished }) => {
+  // useEffect(() => {
+  //   getNewPublished();
+  // }, []);
 
   return (
     <div className="section new-published">
@@ -51,11 +51,11 @@ const NewPublished = ({ newPublished, getNewPublished }) => {
 
 NewPublished.propTypes = {
   newPublished: PropTypes.array,
-  getNewPublished: PropTypes.func.isRequired,
+  getNewPublished: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   newPublished: state.objekty.newPublished,
 });
 
-export default connect(mapStateToProps, { getNewPublished })(NewPublished);
+export default NewPublished;

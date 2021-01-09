@@ -7,11 +7,7 @@ import Article from "./cards/Article";
 import { countObjekty, getObjektyByParams } from "../redux/actions/objekty";
 import enums from "../enums";
 
-const ListFilteredItems = ({
-  objekty: { loading, objekty },
-  getObjektyByParams,
-  typ_objektu,
-}) => {
+const ListFilteredItems = ({ objekty, typ_objektu }) => {
   const router = useRouter();
   const { filter, kraj, mesto, oblast } = router.query;
 
@@ -30,22 +26,21 @@ const ListFilteredItems = ({
       typ_objektu,
       ...queryParams,
     });
-    console.log("count", count);
     setObjektyCount(count);
   };
+  //
+  // useEffect(() => {
+  //   // getObjektyByParams(fetchParams);
+  //   // setObjektyCount(() => countObjekty());
+  //   countAllObjekty();
+  // }, []);
 
-  useEffect(() => {
-    // getObjektyByParams(fetchParams);
-    // setObjektyCount(() => countObjekty());
-    countAllObjekty();
-  }, []);
-
-  const fetchObjects = () => {
-    getObjektyByParams({
-      ...fetchParams,
-      kategorie_value: filter,
-    });
-  };
+  // const fetchObjects = () => {
+  //   getObjektyByParams({
+  //     ...fetchParams,
+  //     kategorie_value: filter,
+  //   });
+  // };
 
   const paginate = async () => {
     await getObjektyByParams({
@@ -70,8 +65,6 @@ const ListFilteredItems = ({
         ? regionQuery.split(",")
         : regionQuery
       : kraj;
-
-    console.log(JSON.stringify(applyFilter));
 
     let filtered = objekty?.filter((objekt) => {
       for (let filterItem in applyFilter) {
@@ -136,7 +129,7 @@ const ListFilteredItems = ({
     countAllObjekty({ kategorie_value: filter });
   }, [filter, mesto, kraj, oblast]);
 
-  return loading && !objekty ? (
+  return !objekty ? (
     <LoadingSkeleton />
   ) : (
     <div className="filtered-objects">
@@ -148,7 +141,7 @@ const ListFilteredItems = ({
           />
         </div>
       ))}
-      {!loading && objekty && objekty.length === 0 && objektyCount === 0 && (
+      {objekty && objekty.length === 0 && objektyCount === 0 && (
         <p>Omlouvám se, ale tato kategorie neobsahuje žádné objekty.</p>
       )}
       {objekty?.length > 0 && objekty?.length < objektyCount && (
@@ -176,6 +169,4 @@ const mapStateToProps = (state) => ({
   objekty: state.objekty,
 });
 
-export default connect(mapStateToProps, { getObjektyByParams })(
-  ListFilteredItems
-);
+export default ListFilteredItems;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-grid-system";
-import { FaUser } from "react-icons/all";
+import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { Section, SectionContent, SectionHeading } from "../layouts/Section";
 import SideCards from "../layouts/SideCards";

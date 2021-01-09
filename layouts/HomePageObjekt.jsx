@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { IoMdPin } from "react-icons/io";
 import { trimString } from "../helpers/helpers";
+import parse from "html-react-parser";
 
 const HomePageObjekt = ({
   article,
@@ -68,12 +69,14 @@ const HomePageObjekt = ({
             )}
             <div className="article-description">
               {article.perex ? (
-                trimString(article.perex, number_of_words)
+                parse(trimString(article.perex, number_of_words))
               ) : article?.zakladni_popis || article?.text ? (
                 <p>
-                  {trimString(
-                    article?.zakladni_popis || article?.text,
-                    number_of_words
+                  {parse(
+                    trimString(
+                      article?.zakladni_popis || article?.text,
+                      number_of_words
+                    )
                   )}
                   ...
                 </p>

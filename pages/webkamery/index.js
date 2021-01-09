@@ -10,13 +10,16 @@ import Post from "../../layouts/Post";
 import SideCards from "../../layouts/SideCards";
 import SideFilter from "../../components/cards/SideFilter";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
+import { fetchQuery } from "../../helpers/fetch";
+import enums from "../../enums";
 
-const Webcams = ({
-  webcams: { webcams, loading },
-  getAllWebcams,
-  loadMoreWebcams,
-  match,
-}) => {
+export async function getStaticProps() {
+  const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
+
+  return { props: { webcams } };
+}
+
+const Webcams = ({ webcams, getAllWebcams, loadMoreWebcams, match }) => {
   const limit = 9;
   const [next, setNext] = useState(limit);
 
@@ -53,7 +56,7 @@ const Webcams = ({
             <SideCards />
           </Col>
           <Col lg={9.5}>
-            {loading && !webcams ? (
+            {!webcams ? (
               <LoadingSkeleton />
             ) : (
               <Row>
@@ -94,6 +97,4 @@ const mapStateToProps = (state) => ({
   webcams: state.webcams,
 });
 
-export default connect(mapStateToProps, { getAllWebcams, loadMoreWebcams })(
-  Webcams
-);
+export default Webcams;

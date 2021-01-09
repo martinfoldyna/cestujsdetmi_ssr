@@ -4,35 +4,55 @@ import { connect } from "react-redux";
 import HomePageObjekt from "../../layouts/HomePageObjekt";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
 import { useRouter } from "next/router";
+import { fetchQuery } from "../../helpers/fetch";
+import enums from "../../enums";
+import { objectToArray } from "../../helpers/helpers";
+import RadyTipy from "./index";
+import RadyTipyLayout from "../../layouts/RadyTipyLayout";
 
-const RadyTipyKategorie = ({ radyTipy: { posts } }) => {
-  const router = useRouter();
-  const { kategorie } = router.query;
-  return posts ? (
+export async function getStaticPaths() {
+  const categories = objectToArray(enums.RADY_TIPY.KATEGORIE);
+
+  return {
+    paths: categories.map((category) => ({
+      params: {
+        kategorie: category.key,
+      },
+    })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(context) {
+  const radyTipy = await fetchQuery(
+    `${enums.URLS.radyTipy}&kategorie=${context.params.kategorie}`
+  );
+
+  return { props: { radyTipy: radyTipy } };
+}
+
+const RadyTipyKategorie = ({ radyTipy }) => {
+  return radyTipy ? (
     <div>
-      {posts
-        .filter((post) => post.kategorie === kategorie)
-        .map((post, index) => (
-          <HomePageObjekt
-            article={post}
-            topic="rady-a-tipy"
-            key={post.id}
-            number_of_words={50}
-            className={(index + 1) % 2 === 0 ? "bg-grey" : ""}
-          />
-        ))}
+      {radyTipy.map((post, index) => (
+        <HomePageObjekt
+          article={post}
+          topic="rady-a-tipy"
+          key={post.id}
+          number_of_words={50}
+          className={(index + 1) % 2 === 0 ? "bg-grey" : ""}
+        />
+      ))}
     </div>
   ) : (
     <LoadingSkeleton />
   );
 };
 
+RadyTipyKategorie.Layout = RadyTipyLayout;
+
 RadyTipyKategorie.propTypes = {
   radyTipy: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  radyTipy: state.radyTipy,
-});
-
-export default connect(mapStateToProps)(RadyTipyKategorie);
+export default RadyTipyKategorie;

@@ -16,13 +16,27 @@ import SideBar from "../../layouts/Sidebar";
 import SideFilter from "../../components/cards/SideFilter";
 import SideCards from "../../layouts/SideCards";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
+import { fetchQuery } from "../../helpers/fetch";
+import { searchParamsToUrlQuery } from "next/dist/next-server/lib/router/utils/querystring";
+import { objectToQueryString } from "../../helpers/helpers";
 
-const TipyNaUbytovani = ({
-  objekty,
-  getObjektyByParams,
-  // location,
-  removeObjekty,
-}) => {
+export async function getStaticProps() {
+  const limit = 6;
+
+  const fetchParams = {
+    typ_objektu: "ubytovani",
+    _limit: limit,
+    _start: 0,
+  };
+
+  const objekty = await fetchQuery(
+    `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
+  );
+
+  return { props: { objekty } };
+}
+
+const TipyNaUbytovani = ({ objekty, getObjektyByParams, removeObjekty }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
@@ -38,13 +52,6 @@ const TipyNaUbytovani = ({
     _limit: limit,
     _start: 0,
   };
-
-  // useEffect(() => {
-  //   console.log(objekty);
-  //   if (!objekty) {
-  //     getObjektyByParams(fetchParams);
-  //   }
-  // }, []);
 
   return (
     <Fragment>
@@ -97,32 +104,13 @@ const TipyNaUbytovani = ({
                 <SideFilter topic={enums.TYP_OBJEKTU.ubytovani.key} />
               )}
             </div>
-            {/*<Switch>*/}
-            {/*  <Route exact path={match.path}>*/}
-            {
-              <ListFilteredItems
-                region={selectedRegion}
-                city={selectedCity}
-                typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
-              />
-            }
-            {/*</Route>*/}
-            {/*  <Route*/}
-            {/*    exact*/}
-            {/*    path={`${match.path}/:filter/:kraj?/:oblast?/:mesto?`}*/}
-            {/*  >*/}
-            {/*    {*/}
-            {/*      <ListFilteredItems*/}
-            {/*        region={selectedRegion}*/}
-            {/*        city={selectedCity}*/}
-            {/*        typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}*/}
-            {/*      />*/}
-            {/*    }*/}
-            {/*  </Route>*/}
-            {/*  <Route exact path={`${match.path}/detail/:id`}>*/}
-            {/*    <ObjektDetail />*/}
-            {/*  </Route>*/}
-            {/*</Switch>*/}
+
+            <ListFilteredItems
+              region={selectedRegion}
+              city={selectedCity}
+              typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
+              objekty={objekty}
+            />
 
             <div className="hide-desktop">
               <div className="mt-1">
@@ -137,17 +125,13 @@ const TipyNaUbytovani = ({
 };
 
 TipyNaUbytovani.propTypes = {
-  objekty: PropTypes.object.isRequired,
-  getObjektyByParams: PropTypes.func.isRequired,
-  removeObjekty: PropTypes.func.isRequired,
+  objekty: PropTypes.object,
+  getObjektyByParams: PropTypes.func,
+  removeObjekty: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   objekty: state.objekty?.objekty,
 });
 
-export default connect(mapStateToProps, {
-  getObjektyByParams,
-  getAllObjekty: getObjekty,
-  removeObjekty,
-})(TipyNaUbytovani);
+export default TipyNaUbytovani;

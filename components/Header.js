@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Image from "next/image";
-const HeaderComponent = ({ users: { user } }) => {
+const HeaderComponent = ({ user }) => {
   const [sticky, setSticky] = useState(false);
   const [stickyUp, setStickyUp] = useState(false);
 
@@ -133,11 +133,11 @@ const HeaderComponent = ({ users: { user } }) => {
 };
 
 HeaderComponent.propTypes = {
-  users: PropTypes.object.isRequired,
+  users: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps)(HeaderComponent);
+export default HeaderComponent;

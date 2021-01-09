@@ -16,13 +16,26 @@ import SideBar from "../../layouts/Sidebar";
 import SideFilter from "../../components/cards/SideFilter";
 import SideCards from "../../layouts/SideCards";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
+import { fetchQuery } from "../../helpers/fetch";
+import { objectToQueryString } from "../../helpers/helpers";
 
-const TipyNaVylety = ({
-  objekty,
-  getObjektyByParams,
-  // location,
-  removeObjekty,
-}) => {
+export async function getStaticProps() {
+  const limit = 6;
+
+  const fetchParams = {
+    typ_objektu: "zabava",
+    _limit: limit,
+    _start: 0,
+  };
+
+  const objekty = await fetchQuery(
+    `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
+  );
+
+  return { props: { objekty } };
+}
+
+const TipyNaVylety = ({ objekty }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
@@ -104,6 +117,7 @@ const TipyNaVylety = ({
                 region={selectedRegion}
                 city={selectedCity}
                 typ_objektu={enums.TYP_OBJEKTU.zabava.key}
+                objekty={objekty}
               />
             }
             {/*</Route>*/}
@@ -146,8 +160,4 @@ const mapStateToProps = (state) => ({
   objekty: state.objekty?.objekty,
 });
 
-export default connect(mapStateToProps, {
-  getObjektyByParams,
-  getAllObjekty: getObjekty,
-  removeObjekty,
-})(TipyNaVylety);
+export default TipyNaVylety;

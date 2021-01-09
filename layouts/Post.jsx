@@ -1,9 +1,8 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { trimString } from "../helpers/helpers";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
-const ImageComponent = React.lazy(() => import("./../layouts/ImageComponent"));
+import Image from "next/image";
 
 const Post = ({ post }) => {
   const router = useRouter();
@@ -19,26 +18,23 @@ const Post = ({ post }) => {
     ? post.obrazek.formats.thumbnail.url
     : "";
 
-  console.log(image);
-
   return (
     <Link href={router.pathname + "/detail/" + post.hodnota}>
       <div className="post">
         {(post.galerie || post.image_filename || post.obrazek) && (
           <div className="post-thumbnail-wrapper">
-            <Suspense fallback={<div>Loading image..</div>}>
-              <ImageComponent
-                src={image}
-                alt={
-                  post.galerie && post.galerie[0]?.alternativeText
-                    ? post.galerie[0]?.alternativeText
-                    : post.obrazek
-                    ? post.obrazek.alternativeText
-                    : post.nazev
-                }
-                className="post-thumbnail"
-              />
-            </Suspense>
+            <Image
+              src={image}
+              alt={
+                post.galerie && post.galerie[0]?.alternativeText
+                  ? post.galerie[0]?.alternativeText
+                  : post.obrazek
+                  ? post.obrazek.alternativeText
+                  : post.nazev
+              }
+              className="post-thumbnail"
+              layout="fill"
+            />
           </div>
         )}
         <h3 className="post-heading">{post.nazev}</h3>

@@ -8,13 +8,17 @@ import Map from "../components/Map";
 import Highlighted from "../layouts/Highlighted";
 import HomePageSections from "../components/HomePageSections";
 import PropTypes from "prop-types";
-import { getObjekty } from "../redux/actions/objekty";
+import { getNewPublished, getObjekty } from "../redux/actions/objekty";
 import { useEffect } from "react";
 import HomeRadyTipy from "../components/HomeRadyTipy";
 import LastMinute from "../components/LastMinute";
 import NewPublished from "../components/NewPublished";
+import { wrapper } from "../redux/store";
+import { bindActionCreators } from "redux";
+import { fetchQuery } from "../helpers/fetch";
+import enums from "../enums";
 
-const Home = ({ getObjekty, objekty: { objekty, loading } }) => {
+const Home = ({ objekty, radyTipy, newPublished }) => {
   const fetchData = () => {
     if (!objekty) {
       getObjekty();
@@ -42,53 +46,11 @@ const Home = ({ getObjekty, objekty: { objekty, loading } }) => {
             heading="Aktuality"
             data={objekty}
           />
-          <HomeRadyTipy />
+          <HomeRadyTipy posts={radyTipy} />
           <LastMinute />
-          <HomePageSections
-            topic="nejctenejsi"
-            data={objekty}
-            loading={loading}
-          />
-          <NewPublished />
+          <HomePageSections topic="nejctenejsi" data={objekty} />
+          <NewPublished newPublished={newPublished} />
         </div>
-        {/*<h1 className={styles.title}>*/}
-        {/*  Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
-        {/*</h1>*/}
-
-        {/*<p className={styles.description}>*/}
-        {/*  Get started by editing{' '}*/}
-        {/*  <code className={styles.code}>pages/index.js</code>*/}
-        {/*</p>*/}
-
-        {/*<div className={styles.grid}>*/}
-        {/*  <a href="https://nextjs.org/docs" className={styles.card}>*/}
-        {/*    <h3>Documentation &rarr;</h3>*/}
-        {/*    <p>Find in-depth information about Next.js features and API.</p>*/}
-        {/*  </a>*/}
-
-        {/*  <a href="https://nextjs.org/learn" className={styles.card}>*/}
-        {/*    <h3>Learn &rarr;</h3>*/}
-        {/*    <p>Learn about Next.js in an interactive course with quizzes!</p>*/}
-        {/*  </a>*/}
-
-        {/*  <a*/}
-        {/*    href="https://github.com/vercel/next.js/tree/master/examples"*/}
-        {/*    className={styles.card}*/}
-        {/*  >*/}
-        {/*    <h3>Examples &rarr;</h3>*/}
-        {/*    <p>Discover and deploy boilerplate example Next.js projects.</p>*/}
-        {/*  </a>*/}
-
-        {/*  <a*/}
-        {/*    href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"*/}
-        {/*    className={styles.card}*/}
-        {/*  >*/}
-        {/*    <h3>Deploy &rarr;</h3>*/}
-        {/*    <p>*/}
-        {/*      Instantly deploy your Next.js site to a public URL with Vercel.*/}
-        {/*    </p>*/}
-        {/*  </a>*/}
-        {/*</div>*/}
       </main>
     </div>
   );
@@ -105,4 +67,21 @@ const mapStateToProps = (state) => ({
   radyTipy: state.radyTipy,
 });
 
-export default connect(mapStateToProps, { getObjekty })(Home);
+const mapDispatchToProps = (dispatch) => ({
+  getObjekty: bindActionCreators(getObjekty, dispatch),
+});
+
+export default Home;
+
+export async function getServerSideProps() {
+  const objekty = await fetchQuery(enums.URLS.objektInfoMini);
+  const radyTipy = await fetchQuery(enums.URLS.radyTipy);
+  const newPublished = await fetchQuery(enums.URLS.newPublished);
+  return {
+    props: {
+      objekty,
+      radyTipy,
+      newPublished,
+    },
+  };
+}

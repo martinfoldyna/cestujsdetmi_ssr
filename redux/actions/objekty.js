@@ -31,7 +31,7 @@ export const getObjekty = () => async (dispatch) => {
       `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos-minified?_sort=druh_zapisu_value:DESC,createdAt:DESC`
     );
 
-    console.log(res);
+    console.log(res.data);
 
     dispatch({
       type: GET_OBJEKTY,

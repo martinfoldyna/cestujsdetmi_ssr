@@ -20,7 +20,7 @@ const initReducer = (state = { tick: "init" }, action) => {
   }
 };
 
-const rootReducer = combineReducers({
+const combinedReducers = combineReducers({
   initReducer,
   users,
   objekty,
@@ -31,5 +31,18 @@ const rootReducer = combineReducers({
   radyTipy,
   webcams,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === HYDRATE) {
+    const nextState = {
+      ...state, // use previous state
+      ...action.payload, // apply delta from hydration
+    };
+    // if (state.count.count) nextState.count.count = state.count.count; // preserve count value on client side navigation
+    return nextState;
+  } else {
+    return combinedReducers(state, action);
+  }
+};
 
 export default rootReducer;

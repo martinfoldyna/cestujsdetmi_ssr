@@ -13,7 +13,7 @@ import CustomDateRangePicker from "../form/CustomDateRangePicker";
 const SideFilter = ({
   color,
   kategorie,
-  getCategories,
+  // getCategories,
   topic,
   dateRange = false,
   fullPadding = false,
@@ -26,18 +26,17 @@ const SideFilter = ({
   const beautifiedRegion = objectToArray(enums.REGION);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!kategorie) {
-      getCategories();
-    }
-    console.log(kategorie);
-  }, [kategorie, getCategories]);
+  // useEffect(() => {
+  //   if (!kategorie) {
+  //     getCategories();
+  //   }
+  //   console.log(kategorie);
+  // }, [kategorie, getCategories]);
 
   const cancelFilter = (e) => {
     if (e.target.classList.contains("selected")) {
       e.target.classList.remove("selected");
       Router.push(router.pathname);
-      console.log(router.pathname);
     }
   };
 
@@ -236,4 +235,4 @@ const mapStateToProps = (state) => ({
   kategorie: state.objekty?.kategorie,
 });
 
-export default connect(mapStateToProps, { getCategories })(SideFilter);
+export default SideFilter;

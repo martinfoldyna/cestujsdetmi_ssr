@@ -6,11 +6,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getLastMinute } from "../redux/actions/objekty";
 
-const LastMinute = ({ getLastMinute }) => {
-  useEffect(() => {
-    getLastMinute();
-  }, []);
-
+const LastMinute = ({}) => {
   return (
     <section className="section">
       <Row className="justify-content-arround bg-grey m-0 row">
@@ -43,4 +39,4 @@ const mapStateToProps = (state) => ({
   lastMinute: state.objekty.lastMinute,
 });
 
-export default connect(mapStateToProps, { getLastMinute })(LastMinute);
+export default LastMinute;

@@ -17,9 +17,38 @@ import parse from "html-react-parser";
 import { BsClock } from "react-icons/bs";
 import Post from "../../../layouts/Post";
 import { Row, Col } from "react-grid-system";
+import { objectToArray, objectToQueryString } from "../../../helpers/helpers";
+import enums from "../../../enums";
+import { fetchQuery } from "../../../helpers/fetch";
+import RadyTipyLayout from "../../../layouts/RadyTipyLayout";
 
-const MyComponent = ({
-  radyTipy: { post, relatedPosts },
+export async function getStaticPaths() {
+  const fetchParams = {
+    typ_objektu: "zabava",
+  };
+
+  const advices = await fetchQuery(`${enums.URLS.radyTipy}`);
+
+  return {
+    paths: advices.map((advice) => ({
+      params: {
+        hodnota: advice.hodnota,
+      },
+    })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(context) {
+  const post = await fetchQuery(
+    `${enums.URLS.radyTipy}&hodnota=${context.params.hodnota}`
+  );
+
+  return { props: { post: post[0] } };
+}
+
+const RadyTipyDetail = ({
+  post,
   getAdvice,
   history,
   removeAdvice,
@@ -33,17 +62,17 @@ const MyComponent = ({
     getAdvice(hodnota);
   };
 
-  const [realtedLimit, setRealtedLimit] = useState(9);
+  const [relatedLimit, setRelatedLimit] = useState(9);
 
-  useEffect(() => {
-    loadAdvice();
-  }, []);
-
-  useEffect(() => {
-    return function cleanUp() {
-      removeAdvice();
-    };
-  }, []);
+  // useEffect(() => {
+  //   loadAdvice();
+  // }, []);
+  //
+  // useEffect(() => {
+  //   return function cleanUp() {
+  //     removeAdvice();
+  //   };
+  // }, []);
 
   return post ? (
     <div>
@@ -79,51 +108,51 @@ const MyComponent = ({
               />
             </div>
           )}
-          <div className="content-wrapper">{parse(post.text)}</div>
+          <div className="content-wrapper">{post.text && parse(post.text)}</div>
         </SectionContent>
       </Section>
-      {post?.page_keywords && (
-        <Section className="realted-advices border-section">
-          <SectionHeading background="none">
-            <h2>Související články</h2>
-          </SectionHeading>
-          <SectionContent>
-            <Row>
-              {relatedPosts ? (
-                relatedPosts.map(
-                  (post, index) =>
-                    index < realtedLimit && (
-                      <Fragment>
-                        <Col md={4}>
-                          <Post post={post} />
-                        </Col>
-                      </Fragment>
-                    )
-                )
-              ) : (
-                <LoadingSkeleton />
-              )}
-            </Row>
-            {realtedLimit < relatedPosts?.length && (
-              <div className="d-flex justify-content-center">
-                <button
-                  className="btn bg-yellow text-white"
-                  onClick={() => setRealtedLimit((prevState) => prevState * 2)}
-                >
-                  Načíst další
-                </button>
-              </div>
-            )}
-          </SectionContent>
-        </Section>
-      )}
+      {/*{post?.page_keywords && (*/}
+      {/*  <Section className="realted-advices border-section">*/}
+      {/*    <SectionHeading background="none">*/}
+      {/*      <h2>Související články</h2>*/}
+      {/*    </SectionHeading>*/}
+      {/*    <SectionContent>*/}
+      {/*      <Row>*/}
+      {/*        {relatedPosts ? (*/}
+      {/*          relatedPosts.map(*/}
+      {/*            (post, index) =>*/}
+      {/*              index < relatedLimit && (*/}
+      {/*                <Fragment>*/}
+      {/*                  <Col md={4}>*/}
+      {/*                    <Post post={post} />*/}
+      {/*                  </Col>*/}
+      {/*                </Fragment>*/}
+      {/*              )*/}
+      {/*          )*/}
+      {/*        ) : (*/}
+      {/*          <LoadingSkeleton />*/}
+      {/*        )}*/}
+      {/*      </Row>*/}
+      {/*      {relatedLimit < relatedPosts?.length && (*/}
+      {/*        <div className="d-flex justify-content-center">*/}
+      {/*          <button*/}
+      {/*            className="btn bg-yellow text-white"*/}
+      {/*            onClick={() => setRelatedLimit((prevState) => prevState * 2)}*/}
+      {/*          >*/}
+      {/*            Načíst další*/}
+      {/*          </button>*/}
+      {/*        </div>*/}
+      {/*      )}*/}
+      {/*    </SectionContent>*/}
+      {/*  </Section>*/}
+      {/*)}*/}
     </div>
   ) : (
     <LoadingSkeleton />
   );
 };
 
-MyComponent.propTypes = {
+RadyTipyDetail.propTypes = {
   radyTipy: PropTypes.object.isRequired,
   getAdvice: PropTypes.func.isRequired,
   removeAdvice: PropTypes.func.isRequired,
@@ -134,8 +163,6 @@ const mapStateToProps = (state) => ({
   radyTipy: state.radyTipy,
 });
 
-export default connect(mapStateToProps, {
-  getAdvice,
-  removeAdvice,
-  getRelatedAdvices,
-})(MyComponent);
+RadyTipyDetail.Layout = RadyTipyLayout;
+
+export default RadyTipyDetail;

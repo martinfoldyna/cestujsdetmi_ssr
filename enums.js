@@ -275,4 +275,15 @@ export default {
       },
     },
   },
+
+  URLS: {
+    objektInfoMini:
+      "objekt-infos-minified?_sort=druh_zapisu_value:DESC,createdAt:DESC",
+    lastMinute:
+      "objekt-infos-minified?_sort=druh_zapisu_value:DESC,createdAt:DESC&last_minute_popis_null=false&druh_zapisu_value=04_premium_gold",
+    radyTipy: "rady-a-tipies?_sort=createdAt:DESC",
+    newPublished: "objekt-infos-minified?_sort=createdAt:DESC&_limit=4",
+    webkamery: "webkameries?_limit=9",
+    objektyTypy: "objekty-typies?_sort=hodnota:ASC",
+  },
 };
