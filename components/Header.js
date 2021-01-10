@@ -45,7 +45,7 @@ const HeaderComponent = ({ user }) => {
   return (
     <header className={`main-header ${stickyUp ? "sticky" : ""}`}>
       <div className="hide-mobile">
-        <Container>
+        <Container style={{ maxWidth: "1220px" }}>
           <Row>
             <Col className="d-flex align-items-center hide-mobile p-0 ml-0">
               <button

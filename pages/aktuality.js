@@ -8,8 +8,9 @@ import HeadingWithIcon from "../layouts/HeadingWithIcon";
 import { HiNewspaper } from "react-icons/hi";
 import Article from "../components/cards/Article";
 import SideBar from "../layouts/Sidebar";
+import { fetchQuery } from "../helpers/fetch";
 
-const Aktuality = ({ objekty, getObjektyByParams }) => {
+const Aktuality = ({ objekty }) => {
   // How many objects are shown and at which number start api call query
   const [next, setNext] = useState(2);
 
@@ -18,22 +19,10 @@ const Aktuality = ({ objekty, getObjektyByParams }) => {
   const limit = 6;
 
   useEffect(() => {
-    if (!objekty) {
-      getObjektyByParams({
-        _start: 0,
-        _limit: limit,
-        typ_objektu: "ubytovani",
-      });
-    }
     setObjektyCount(() => countObjekty());
   }, []);
 
   const paginate = async () => {
-    await getObjektyByParams({
-      _start: next,
-      _limit: limit,
-      typ_objektu: "aktuality",
-    });
     setNext((prevState) => prevState + limit);
   };
 
@@ -86,8 +75,14 @@ Aktuality.propTypes = {
   getObjektyByParams: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  objekty: state.objekty.objekty,
-});
-
 export default Aktuality;
+
+export async function getStaticProps() {
+  try {
+    const objekty = await fetchQuery(`${enums.URLS.objektInfoMini}`);
+
+    return { props: { objekty } };
+  } catch (err) {
+    return { props: { notFound: true } };
+  }
+}
