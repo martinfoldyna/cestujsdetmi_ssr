@@ -24,10 +24,12 @@ const HeadingWithIcon = ({
             </div>
             {children}
           </Col>
-          <Col className="d-flex justify-content-center align-items-center hide-mobile">
-            <Icon
-              className={`heading-icon-big text-${background}-darken size-${icon_size}`}
-            />
+          <Col className="d-flex justify-content-center align-items-center">
+            <div className="hide-mobile">
+              <Icon
+                className={`heading-icon-big text-${background}-darken size-${icon_size}`}
+              />
+            </div>
           </Col>
         </Row>
         {/*</DesktopBreakpoint>*/}
