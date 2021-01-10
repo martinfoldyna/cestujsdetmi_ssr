@@ -163,10 +163,10 @@ const ObjektDetail = ({
   };
 
   const images =
-    objekt.galerie && objekt.galerie?.length > 0
-      ? objekt.galerie
-      : objekt.relativeGalerie && objekt.relativeGalerie?.length > 0
-      ? objekt.relativeGalerie
+    objekt?.galerie && objekt?.galerie?.length > 0
+      ? objekt?.galerie
+      : objekt?.relativeGalerie && objekt?.relativeGalerie?.length > 0
+      ? objekt?.relativeGalerie
       : [];
 
   // Initialize Mapbox marker

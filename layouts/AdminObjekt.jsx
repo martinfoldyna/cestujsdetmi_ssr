@@ -24,8 +24,8 @@ const AdminObjekt = ({ objekt }) => {
             <div className="img-wrapper">
               <Image
                 src={
-                  objekt.galerie && objekt.galerie.length > 0
-                    ? objekt.galerie[0].sm
+                  objekt?.galerie && objekt?.galerie.length > 0
+                    ? objekt?.galerie[0].sm
                     : "/img/placeholder.png"
                 }
                 layout="fill"

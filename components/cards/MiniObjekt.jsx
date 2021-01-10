@@ -19,8 +19,8 @@ const MyComponent = ({ objekt }) => {
       )}
       <img
         className="objekt-mini-image mt-1"
-        src={objekt.galerie[0].sm}
-        alt={objekt.galerie[0].popis ? objekt.galerie[0].popis : objekt.nazev}
+        src={objekt?.galerie[0].sm}
+        alt={objekt?.galerie[0].popis ? objekt.galerie[0].popis : objekt.nazev}
       />
     </div>
   ) : (

@@ -101,31 +101,33 @@ const HeaderComponent = ({ user }) => {
           </Row>
         </Container>
       </div>
-      <div className="hide-desktop d-flex justify-content-between header-wrapper">
-        <Link href="/">
-          <Image
-            src="/img/logo-small.svg"
-            alt="logo Cestuj s detmi"
-            className="cestuj-logo"
-            layout="intrinsic"
-            height={35}
-            width={126}
-            style={{ height: "80%" }}
-          />
-        </Link>
-        <div className="d-flex">
-          <button className="btn text-blue ghost">
-            {/*<Image src="/icons/search.svg" alt="search" layout="fill" />*/}
-            <BiSearch className="text-blue" />
-          </button>
-          <button className="btn text-blue ghost" onClick={toggleNav}>
-            <GiHamburgerMenu className="text-blue" />
-            {/*<Image
+      <div className="hide-desktop">
+        <div className="d-flex justify-content-between header-wrapper">
+          <Link href="/">
+            <Image
+              src="/img/logo-small.svg"
+              alt="logo Cestuj s detmi"
+              className="cestuj-logo"
+              layout="intrinsic"
+              height={35}
+              width={126}
+              style={{ height: "80%" }}
+            />
+          </Link>
+          <div className="d-flex">
+            <button className="btn text-blue ghost">
+              {/*<Image src="/icons/search.svg" alt="search" layout="fill" />*/}
+              <BiSearch className="text-blue" />
+            </button>
+            <button className="btn text-blue ghost" onClick={toggleNav}>
+              <GiHamburgerMenu className="text-blue" />
+              {/*<Image
               src="/icons/hamburger.svg"
               alt="hamburger menu"
               layout="fill"
             />*/}
-          </button>
+            </button>
+          </div>
         </div>
       </div>
       <Navbar

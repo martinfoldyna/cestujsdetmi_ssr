@@ -35,14 +35,14 @@ const Article = ({ article, background, useNextImg = true }) => {
               {useNextImg ? (
                 <Image
                   src={
-                    article.galerie && article.galerie.length > 0
+                    article?.galerie && article?.galerie.length > 0
                       ? article?.galerie[0].sm
                       : article?.relativeGalerie &&
-                        article.relativeGalerie.length > 0
-                      ? article.relativeGalerie[0].sm
+                        article?.relativeGalerie?.length > 0
+                      ? article?.relativeGalerie[0].sm
                       : "/img/placeholder.png"
                   }
-                  alt={article.galerie && article?.galerie[0].alternativeText}
+                  alt={article?.galerie && article?.galerie[0].alternativeText}
                   layout="fill"
                   objectFit="cover"
                   className="border-radius"
@@ -50,11 +50,11 @@ const Article = ({ article, background, useNextImg = true }) => {
               ) : (
                 <img
                   src={
-                    article.galerie && article.galerie.length > 0
+                    article?.galerie && article?.galerie?.length > 0
                       ? article?.galerie[0].sm
                       : "/img/placeholder.png"
                   }
-                  alt={article.galerie && article?.galerie[0].alternativeText}
+                  alt={article?.galerie && article?.galerie[0]?.alternativeText}
                 />
               )}
               {/*<img src={placeholder} alt="placeholder-image" />*/}
