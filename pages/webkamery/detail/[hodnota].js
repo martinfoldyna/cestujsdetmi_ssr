@@ -12,23 +12,56 @@ import {
 import LoadingSkeleton from "../../../layouts/LoadingSkeleton";
 import { Row, Col } from "react-grid-system";
 import Post from "../../../layouts/Post";
+import { fetchQuery } from "../../../helpers/fetch";
+import enums from "../../../enums";
+import WebcamsLayout from "../../../layouts/siteLayouts/WebcamsLayout";
 // import HeadTitle from "../../../layouts/HeadTitle";
+
+export async function getStaticPaths() {
+  const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
+  return {
+    paths: webcams.map((webcam) => ({
+      params: {
+        hodnota: webcam.hodnota,
+      },
+    })),
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const { hodnota } = params;
+
+  try {
+    const webcamQuery = await fetchQuery(
+      `${enums.URLS.webkamery}&hodnota=${hodnota}`
+    );
+    const webcam = webcamQuery[0];
+    return webcam ? { props: { webcam } } : { notFound: true };
+  } catch (err) {
+    console.log("error", err);
+    return { notFound: true };
+  }
+}
 
 const WebcamDetail = ({ webcam }) => {
   const router = useRouter();
   const { hodnota } = router.query;
+  const { isFallback } = useRouter();
 
-  const loadWebcam = () => {
-    if (hodnota) {
-      getWebcam(hodnota);
-    }
-  };
+  // const loadWebcam = () => {
+  //   if (hodnota) {
+  //     getWebcam(hodnota);
+  //   }
+  // };
+  //
+  // useEffect(() => {
+  //   loadWebcam();
+  // }, [hodnota]);
 
-  useEffect(() => {
-    loadWebcam();
-  }, [hodnota]);
-
-  return webcam ? (
+  return isFallback ? (
+    <LoadingSkeleton />
+  ) : (
     <>
       {/*<HeadTitle*/}
       {/*  title={webcam.page_title}*/}
@@ -68,36 +101,31 @@ const WebcamDetail = ({ webcam }) => {
           )}
         </SectionContent>
       </Section>
-      <Section className="realted-advices border-section">
-        <SectionHeading background="none">
-          <h2>Další webkamery</h2>
-        </SectionHeading>
-        <SectionContent>
-          <Row>
-            {webcams.map(
-              (webcam, index) =>
-                index < 9 && (
-                  <Col md={4}>
-                    <Post post={webcam} />
-                  </Col>
-                )
-            )}
-          </Row>
-        </SectionContent>
-      </Section>
+      {/*<Section className="realted-advices border-section">*/}
+      {/*  <SectionHeading background="none">*/}
+      {/*    <h2>Další webkamery</h2>*/}
+      {/*  </SectionHeading>*/}
+      {/*  <SectionContent>*/}
+      {/*    <Row>*/}
+      {/*      {webcams.map(*/}
+      {/*        (webcam, index) =>*/}
+      {/*          index < 9 && (*/}
+      {/*            <Col md={4}>*/}
+      {/*              <Post post={webcam} />*/}
+      {/*            </Col>*/}
+      {/*          )*/}
+      {/*      )}*/}
+      {/*    </Row>*/}
+      {/*  </SectionContent>*/}
+      {/*</Section>*/}
     </>
-  ) : (
-    <LoadingSkeleton />
   );
 };
 
-WebcamDetail.propTypes = {
-  webcams: PropTypes.object.isRequired,
-  getWebcam: PropTypes.func.isRequired,
-};
+WebcamDetail.Layout = WebcamsLayout;
 
-const mapStateToProps = (state) => ({
-  webcams: state.webcams,
-});
+WebcamDetail.propTypes = {
+  webcam: PropTypes.object.isRequired,
+};
 
 export default WebcamDetail;

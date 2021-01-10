@@ -15,7 +15,7 @@ import Post from "../../layouts/Post";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { MyLink } from "../../layouts/MyLink";
-import RadyTipyLayout from "../../layouts/RadyTipyLayout";
+import RadyTipyLayout from "../../layouts/siteLayouts/RadyTipyLayout";
 import { fetchQuery } from "../../helpers/fetch";
 
 export async function getStaticProps() {

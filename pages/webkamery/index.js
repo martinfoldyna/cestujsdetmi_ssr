@@ -12,6 +12,8 @@ import SideFilter from "../../components/cards/SideFilter";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchQuery } from "../../helpers/fetch";
 import enums from "../../enums";
+import WebcamsLayout from "../../layouts/siteLayouts/WebcamsLayout";
+import { objectToQueryString } from "../../helpers/helpers";
 
 export async function getStaticProps() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
@@ -19,9 +21,10 @@ export async function getStaticProps() {
   return { props: { webcams } };
 }
 
-const Webcams = ({ webcams, getAllWebcams, loadMoreWebcams, match }) => {
+const Webcams = ({ webcams, getAllWebcams, match }) => {
   const limit = 9;
   const [next, setNext] = useState(limit);
+  const [allWebcams, setAllWebcams] = useState(webcams);
 
   useEffect(() => {
     if (!webcams) {
@@ -30,62 +33,50 @@ const Webcams = ({ webcams, getAllWebcams, loadMoreWebcams, match }) => {
   }, []);
   console.log(match);
 
-  return (
-    <div>
-      {/*<HeadTitle title="Přehled webkamer" />*/}
-      <span className="breadcrumb">
-        <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Webkamery
-      </span>
+  const loadMoreWebcams = async () => {
+    try {
+      const nextWebcams = await fetchQuery(
+        `${enums.URLS.webkamery}&${objectToQueryString({
+          _limit: Math.floor(9),
+          _start: next,
+        })}`
+      );
 
-      <HeadingWithIcon
-        background="dark-purple"
-        heading="Webkamery"
-        icon={RiWebcamFill}
-      >
-        <p>
-          Ubytování, dovolená, víkendy s dětmi po Čechách i na Moravě. Najděte
-          si to správné ubytování, které Vám bude nejlépe vyhovovat. Hotely,
-          apartmány, penziony, chaty, chalupy, kempy, ubytování v soukromí, ale
-          třeba i na lodi. Dovolenou s dětmi v Čechách si užijete.
-        </p>
-      </HeadingWithIcon>
-      <div className="data-wrapper">
-        <Row>
-          <Col lg={2.5}>
-            <SideFilter fullPadding={true} color="purple" />
-            <SideCards />
+      if (nextWebcams && nextWebcams.length > 0) {
+        setAllWebcams((prevState) => [...prevState, ...nextWebcams]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return !webcams ? (
+    <LoadingSkeleton />
+  ) : (
+    <Row>
+      <Fragment>
+        {webcams?.map((webcam) => (
+          <Col md={4} key={webcam.id}>
+            <Post post={webcam} />
           </Col>
-          <Col lg={9.5}>
-            {!webcams ? (
-              <LoadingSkeleton />
-            ) : (
-              <Row>
-                <Fragment>
-                  {webcams?.map((webcam) => (
-                    <Col md={4} key={webcam.id}>
-                      <Post post={webcam} />
-                    </Col>
-                  ))}
-                  <div className="d-flex justify-content-center w-100 mt-1">
-                    <button
-                      className="btn bg-dark-purple text-white"
-                      onClick={() => {
-                        loadMoreWebcams({ _start: next, _limit: limit });
-                        setNext((prevState) => prevState + limit);
-                      }}
-                    >
-                      Načíst další
-                    </button>
-                  </div>
-                </Fragment>
-              </Row>
-            )}
-          </Col>
-        </Row>
-      </div>
-    </div>
+        ))}
+        <div className="d-flex justify-content-center w-100 mt-1">
+          <button
+            className="btn bg-dark-purple text-white"
+            onClick={() => {
+              loadMoreWebcams();
+              setNext((prevState) => prevState + limit);
+            }}
+          >
+            Načíst další
+          </button>
+        </div>
+      </Fragment>
+    </Row>
   );
 };
+
+Webcams.Layout = WebcamsLayout;
 
 Webcams.propTypes = {
   getAllWebcams: PropTypes.func.isRequired,

@@ -15,7 +15,6 @@ import { FirebaseConfig } from "../config/firebaseConfig";
 import Footer from "../layouts/Footer";
 import { fetchQuery } from "../helpers/fetch";
 import enums from "../enums";
-// firebase.initializeApp(FirebaseConfig);
 if (!firebase.apps.length) {
   firebase.initializeApp(FirebaseConfig);
 } else {

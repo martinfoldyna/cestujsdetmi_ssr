@@ -8,7 +8,7 @@ import { fetchQuery } from "../../helpers/fetch";
 import enums from "../../enums";
 import { objectToArray } from "../../helpers/helpers";
 import RadyTipy from "./index";
-import RadyTipyLayout from "../../layouts/RadyTipyLayout";
+import RadyTipyLayout from "../../layouts/siteLayouts/RadyTipyLayout";
 
 export async function getStaticPaths() {
   const categories = objectToArray(enums.RADY_TIPY.KATEGORIE);
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
         kategorie: category.key,
       },
     })),
-    fallback: false,
+    fallback: true,
   };
 }
 

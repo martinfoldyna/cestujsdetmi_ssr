@@ -5,40 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/layouts/siteLayouts/WebcamsLayout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/HomeRadyTipy.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HomeRadyTipy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LastMinute.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LastMinute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/NewPublished.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/NewPublished.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/LastMinuteSmall.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/LastMinuteSmall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/SideFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/SideFilter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/form/CustomDateRangePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/form/CustomDateRangePicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/listFilteredItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/listFilteredItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layouts/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/Post.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/RadyTipyLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/siteLayouts/RadyTipyLayout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/aktuality.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aktuality.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/o-portalu.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/o-portalu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/[kategorie].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/[kategorie].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tipy-na-vylety/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-vylety/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/webkamery/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/webkamery/detail/[hodnota].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/webkamery/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/webkamery/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/actions/objekty.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/actions/objekty.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducers/rootReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducers/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Colors.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Colors.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Variables.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,11 +66,11 @@
       <recent name="$PROJECT_DIR$/redux/actions" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/layouts/siteLayouts" />
       <recent name="$PROJECT_DIR$/pages/rady-a-tipy/detail" />
       <recent name="$PROJECT_DIR$/components/form" />
       <recent name="$PROJECT_DIR$/components/cards" />
       <recent name="$PROJECT_DIR$/pages/tipy-na-ubytovani/detail" />
-      <recent name="$PROJECT_DIR$/Layouts" />
     </key>
   </component>
   <component name="RunManager">

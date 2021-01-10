@@ -23,7 +23,7 @@ const Post = ({ post }) => {
       <div className="post">
         {(post.galerie || post.image_filename || post.obrazek) && (
           <div className="post-thumbnail-wrapper">
-            <Image
+            <img
               src={image}
               alt={
                 post.galerie && post.galerie[0]?.alternativeText

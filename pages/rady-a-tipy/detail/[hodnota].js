@@ -20,7 +20,7 @@ import { Row, Col } from "react-grid-system";
 import { objectToArray, objectToQueryString } from "../../../helpers/helpers";
 import enums from "../../../enums";
 import { fetchQuery } from "../../../helpers/fetch";
-import RadyTipyLayout from "../../../layouts/RadyTipyLayout";
+import RadyTipyLayout from "../../../layouts/siteLayouts/RadyTipyLayout";
 
 export async function getStaticPaths() {
   const fetchParams = {
@@ -35,7 +35,7 @@ export async function getStaticPaths() {
         hodnota: advice.hodnota,
       },
     })),
-    fallback: false,
+    fallback: true,
   };
 }
 

@@ -6,6 +6,8 @@ module.exports = {
       "exports.holidayinfo.cz",
       "www.webcamlive.cz",
       "www.holidayinfo.cz",
+      "sah.x3w.cz",
+      "webkamery.gc-system.cz",
     ],
   },
   webpack(config) {
