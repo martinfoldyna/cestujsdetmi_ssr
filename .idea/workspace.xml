@@ -5,37 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/context/GlobalContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/helpers/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/detail/[hodnota].js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/tipy-na-vylety/detail/[hodnota].js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/ObjednatObjektInfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helpers/objekty.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/auth/info/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/HomePageSections.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HomePageSections.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/HomeRadyTipy.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HomeRadyTipy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Navbar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/cards/Article.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/Article.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/cards/LastMinuteSmall.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/LastMinuteSmall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/listFilteredItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/listFilteredItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/cards/SideFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/SideFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/cards/SmallArticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/SmallArticle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/AdminObjekt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/AdminObjekt.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/HeadingWithIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/HeadingWithIcon.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/Post.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/SideCards.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/SideCards.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/aktuality.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aktuality.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/auth/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/auth/info/[name].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/info/[name].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/server-side.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tipy-na-ubytovani/detail/[value].js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tipy-na-vylety/detail.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/tipy-na-vylety/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-vylety/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/webkamery/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/webkamery/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Global.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Flex.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Flex.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/MediaQueries.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/MediaQueries.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +50,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1mZ0pPxKJg4bAb7jFAipW0EusuZ" />
   <component name="ProjectViewState">
@@ -73,7 +80,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$USER_HOME$/.nvm/versions/node/v12.10.0/lib/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -116,7 +123,7 @@
       <workItem from="1609685991383" duration="12951000" />
       <workItem from="1609761221148" duration="633000" />
       <workItem from="1609761882244" duration="21168000" />
-      <workItem from="1610294911511" duration="1074000" />
+      <workItem from="1610294911511" duration="12642000" />
     </task>
     <servers />
   </component>

@@ -41,6 +41,9 @@ const HomePageObjekt = ({
                       ? article?.galerie[0].sm
                       : article?.obrazek
                       ? article.obrazek.formats.small.url
+                      : article?.relativeGalerie &&
+                        article.relativeGalerie.length > 0
+                      ? article.relativeGalerie[0].sm
                       : "/img/placeholder.png"
                   }
                   alt={

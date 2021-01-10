@@ -276,6 +276,9 @@
   .main-nav {
     padding-top: 0;
     margin: 0;
+    flex: 2 0 auto;
+    align-items: center;
+    display: flex;
   }
 
   .main-nav ul {
@@ -374,10 +377,17 @@ and (orientation : portrait) {
   /* Styles */
 }
 
+@media only screen and (max-width: 1220px) {
+  .main-nav {
+    margin: 0 1em;
+  }
+}
+
 /* Desktops and laptops ----------- */
 @media only screen
 and (min-width : 1224px) {
   /* Styles */
+
 }
 
 /* Large screens ----------- */

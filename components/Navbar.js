@@ -40,7 +40,9 @@ const Navbar = ({ isSticky, open, onClose }) => {
             src="/img/logo-small.svg"
             alt="logo Cestuj s detmi"
             className="cestuj-logo"
-            layout="fill"
+            layout="intrinsic"
+            height={35}
+            width={126}
           />
           <button className="btn text-blue ghost" onClick={closeNav}>
             <CgClose style={{ fontSize: "1em" }} />
@@ -134,38 +136,36 @@ const Navbar = ({ isSticky, open, onClose }) => {
           </li>
         </ul>
       </nav>
-      <div className="hide-desktop">
-        <div className="buttons">
-          <div className="actions">
-            <button className="btn ghost text-black d-flex" onClick={closeNav}>
-              <AiFillHeart className="text-red btn-icon" />
-              Oblíbené položky
+      <div className="buttons hide-desktop">
+        <div className="actions">
+          <button className="btn ghost text-black d-flex" onClick={closeNav}>
+            <AiFillHeart className="text-red btn-icon" />
+            Oblíbené položky
+          </button>
+          <button className="btn ghost text-black d-flex" onClick={closeNav}>
+            <BiEnvelope className="text-blue btn-icon" />
+            Odběr newsletteru
+          </button>
+        </div>
+        <div className="d-flex links justify-content-between">
+          <MyLink href="/objekty" onClick={closeNav}>
+            <button
+              className="btn-small-logo d-flex align-items-center btn ghost text-blue"
+              style={{ marginLeft: "0" }}
+            >
+              <IoMdAdd className="btn-icon" />
+              Přidat objekt
             </button>
-            <button className="btn ghost text-black d-flex" onClick={closeNav}>
-              <BiEnvelope className="text-blue btn-icon" />
-              Odběr newsletteru
+          </MyLink>
+          <MyLink href="/auth/login" onClick={closeNav}>
+            <button
+              className="btn-small-logo d-flex align-items-center btn ghost text-blue"
+              style={{ marginRight: "0" }}
+            >
+              <FaRegUser className="btn-icon" />
+              Přihlášení
             </button>
-          </div>
-          <div className="d-flex links justify-content-between">
-            <MyLink href="/objekty" onClick={closeNav}>
-              <button
-                className="btn-small-logo d-flex align-items-center btn ghost text-blue"
-                style={{ marginLeft: "0" }}
-              >
-                <IoMdAdd className="btn-icon" />
-                Přidat objekt
-              </button>
-            </MyLink>
-            <MyLink href="/auth/login" onClick={closeNav}>
-              <button
-                className="btn-small-logo d-flex align-items-center btn ghost text-blue"
-                style={{ marginRight: "0" }}
-              >
-                <FaRegUser className="btn-icon" />
-                Přihlášení
-              </button>
-            </MyLink>
-          </div>
+          </MyLink>
         </div>
       </div>
     </div>

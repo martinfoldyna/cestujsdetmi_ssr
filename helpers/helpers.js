@@ -1,4 +1,8 @@
 import { transalteDiacChar } from "./translators";
+import { useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
+import { fetchQuery } from "./fetch";
+import enums from "../enums";
 
 /** Moves item in array up or down
  * @param arr
@@ -122,3 +126,5 @@ export const objectToQueryString = (object) => {
     return "";
   }
 };
+
+export const initCategories = async () => {};

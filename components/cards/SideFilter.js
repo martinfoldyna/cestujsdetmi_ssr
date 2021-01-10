@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Col, Row } from "react-grid-system";
 import CustomSelect from "../form/CustomSelect";
@@ -9,6 +9,8 @@ import enums from "../../enums";
 import { connect } from "react-redux";
 import { getCategories } from "../../redux/actions/objekty";
 import CustomDateRangePicker from "../form/CustomDateRangePicker";
+import { GlobalContext } from "../../context/GlobalContext";
+import { fetchQuery } from "../../helpers/fetch";
 
 const SideFilter = ({
   color,
@@ -121,7 +123,7 @@ const SideFilter = ({
 
   useEffect(() => {
     if (router) {
-      console.log(router.search);
+      console.log(router.query);
     }
   }, [router]);
 
@@ -129,8 +131,8 @@ const SideFilter = ({
     <div
       className={`filter-card ${
         fullPadding ||
-        !kategorie ||
-        !kategorie?.some((categoryItem) => kategorie.urceni === topic)
+        !global?.kategorie ||
+        !global?.kategorie?.some((categoryItem) => kategorie.urceni === topic)
           ? "full-padding"
           : ""
       } ${color ? `bg-light-${color}` : "bg-grey"}`}
@@ -184,12 +186,14 @@ const SideFilter = ({
           </div>
         </Col>
         <Col className="col p-0">
-          {kategorie &&
-            kategorie.find((categoryItem) => categoryItem.urceni === topic) && (
+          {global?.kategorie &&
+            global?.kategorie.find(
+              (categoryItem) => categoryItem.urceni === topic
+            ) && (
               <div className="categories">
                 <p className="filter-name">Kategorie</p>
                 <ul className="categories-list list-style-none p-0 mb-0">
-                  {kategorie.map(
+                  {global?.kategorie.map(
                     (categoryItem) =>
                       categoryItem.urceni === topic && (
                         <li

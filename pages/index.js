@@ -57,7 +57,6 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
 };
 
 Home.propTypes = {
-  getObjekty: PropTypes.func.isRequired,
   objekty: PropTypes.object.isRequired,
   radyTipy: PropTypes.object,
 };

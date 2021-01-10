@@ -2,7 +2,7 @@ import "../styles/globals.scss";
 // import {Provider} from "react-redux";
 // import store from "../redux/store";
 // import withRedux, {createWrapper} from "next-redux-wrapper"
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import App from "next/app";
 import { wrapper } from "../redux/store";
 import Header from "../components/Header";
@@ -16,6 +16,7 @@ import Footer from "../layouts/Footer";
 import { fetchQuery } from "../helpers/fetch";
 import enums from "../enums";
 import { GlobalContext } from "../context/GlobalContext";
+import { ca } from "react-date-range/dist/locale";
 if (!firebase.apps.length) {
   firebase.initializeApp(FirebaseConfig);
 } else {

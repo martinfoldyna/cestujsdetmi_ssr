@@ -47,7 +47,7 @@ const UserDashboard = () => {
                 .map((objekt) => {
                   return (
                     <Col sm={12} key={objekt.id} className="col">
-                      <AdminObjekt objekt={objekt} key={objekt.id} />
+                      <AdminObjekt objekt={objekt} />
                     </Col>
                   );
                 })}

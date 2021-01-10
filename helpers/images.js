@@ -2,6 +2,7 @@ import { imgCompressionOptions } from "../config/imageCompression";
 import imageCompression from "browser-image-compression";
 import { v4 } from "uuid";
 import firebase from "firebase";
+import axios from "axios";
 
 export const handleSingleCompression = async (file) => {
   const imageFile = file;
@@ -17,7 +18,7 @@ export const handleSingleCompression = async (file) => {
       ),
       imgCompressionOptions
     );
-    const compressedFileSM = await imageCompression(
+    /*const compressedFileSM = await imageCompression(
       new File(
         [file.slice(0, file.size, "image/png")],
         "sm_" + imageFile.name,
@@ -27,7 +28,7 @@ export const handleSingleCompression = async (file) => {
         ...imgCompressionOptions,
         maxSizeMB: 0.2,
       }
-    );
+    );*/
     console.log(
       "compressedFileLG instanceof Blob",
       compressedFileLG instanceof Blob
@@ -36,13 +37,14 @@ export const handleSingleCompression = async (file) => {
       `compressedFileLG size ${compressedFileLG.size / 1024 / 1024} MB`
     ); // smaller than maxSizeMB
 
-    console.log(
+    /*  console.log(
       `compressedFileSM size ${compressedFileSM.size / 1024 / 1024} MB`
     ); // smaller than maxSizeMB
+*/
+    //console.log({ lg: compressedFileLG, sm: compressedFileSM });
 
-    console.log({ lg: compressedFileLG, sm: compressedFileSM });
-
-    return { lg: compressedFileLG, sm: compressedFileSM };
+    // return { lg: compressedFileLG, sm: compressedFileSM };
+    return compressedFileLG;
   } catch (error) {
     return { error };
   }
@@ -66,16 +68,4 @@ export const handleMultipleCompression = async (files) => {
 
 // Upload images to database
 // Return uploaded image URL
-export const handleImageUpload = async (image, firebaseID = v4()) => {
-  try {
-    const res = await firebase
-      .storage()
-      .ref(`objekty/${firebaseID}/${image.name}`)
-      .put(image);
-    const url = await res.ref.getDownloadURL();
-
-    return url;
-  } catch (err) {
-    return { err, success: false };
-  }
-};
+export const handleImageUpload = async (images) => {};

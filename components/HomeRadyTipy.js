@@ -50,6 +50,7 @@ const RadyTipyHomepage = ({ posts }) => {
                 className={`category ${
                   (categoryIndex + 1) % 2 === 0 ? "bg-grey" : ""
                 }`}
+                key={categoryIndex}
               >
                 <Row className="m-0">
                   <Col>
@@ -147,8 +148,7 @@ const RadyTipyHomepage = ({ posts }) => {
 };
 
 RadyTipyHomepage.propTypes = {
-  radyTipy: PropTypes.object.isRequired,
-  getAdvices: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({

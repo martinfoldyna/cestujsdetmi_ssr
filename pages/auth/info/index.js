@@ -1,6 +1,6 @@
 import React from "react";
 import ObjednatObjektInfo from "../../../components/ObjednatObjektInfo";
 
-const UpdateObjekt = () => <ObjednatObjektInfo />;
+const CreateNewObjekt = () => <ObjednatObjektInfo />;
 
-export default UpdateObjekt;
+export default CreateNewObjekt;

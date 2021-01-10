@@ -40,11 +40,9 @@ const RadyTipy = ({ posts }) => {
               ?.map(
                 (post, index) =>
                   index < 9 && (
-                    <Fragment key={post.id}>
-                      <Col md={4} key={post.id}>
-                        <Post post={post} useNextImg={true} />
-                      </Col>
-                    </Fragment>
+                    <Col md={4} key={post.id}>
+                      <Post post={post} useNextImg={true} />
+                    </Col>
                   )
               )}
           </Row>

@@ -286,5 +286,6 @@ export default {
     newPublished: "objekt-infos-minified?_sort=createdAt:DESC&_limit=4",
     webkamery: "webkameries?_limit=9",
     objektyTypy: "objekty-typies?_sort=hodnota:ASC",
+    kategorie: "kategories",
   },
 };

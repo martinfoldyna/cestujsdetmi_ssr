@@ -106,17 +106,15 @@ const HomePageSections = ({ data, loading, topic, heading }) => {
                 })}
             </Col>
           </Row>
-          <Row>
-            <Col sm={12} style={{ textAlign: "right" }}>
-              <button className={`btn bg-${color} text-white`}>
-                <Link href={link.value}>
-                  <>
-                    Další {link.text} <RiArrowRightSLine />
-                  </>
-                </Link>
-              </button>
-            </Col>
-          </Row>
+          <button
+            className={`btn btn-small-logo bg-${color} text-white btn-homepage-detail`}
+          >
+            <Link href="/tipy-na-vylety" className="d-flex align-items-center">
+              <>
+                Další {link.text} <RiArrowRightSLine />
+              </>
+            </Link>
+          </button>
         </div>
       ) : (
         <Row className="justify-content-arround">

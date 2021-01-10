@@ -8,6 +8,8 @@ import Navbar from "./Navbar";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Image from "next/image";
+import { BiSearch } from "react-icons/bi";
+import { GiHamburgerMenu } from "react-icons/gi";
 const HeaderComponent = ({ user }) => {
   const [sticky, setSticky] = useState(false);
   const [stickyUp, setStickyUp] = useState(false);
@@ -99,28 +101,31 @@ const HeaderComponent = ({ user }) => {
           </Row>
         </Container>
       </div>
-      <div className="hide-desktop">
-        <div className="d-flex justify-content-between header-wrapper">
-          <Link href="/">
-            <Image
-              src="/img/logo-small.svg"
-              alt="logo Cestuj s detmi"
-              className="cestuj-logo"
+      <div className="hide-desktop d-flex justify-content-between header-wrapper">
+        <Link href="/">
+          <Image
+            src="/img/logo-small.svg"
+            alt="logo Cestuj s detmi"
+            className="cestuj-logo"
+            layout="intrinsic"
+            height={35}
+            width={126}
+            style={{ height: "80%" }}
+          />
+        </Link>
+        <div className="d-flex">
+          <button className="btn text-blue ghost">
+            {/*<Image src="/icons/search.svg" alt="search" layout="fill" />*/}
+            <BiSearch className="text-blue" />
+          </button>
+          <button className="btn text-blue ghost" onClick={toggleNav}>
+            <GiHamburgerMenu className="text-blue" />
+            {/*<Image
+              src="/icons/hamburger.svg"
+              alt="hamburger menu"
               layout="fill"
-            />
-          </Link>
-          <div className="d-flex">
-            <button className="btn text-blue ghost">
-              <Image src="/icons/search.svg" alt="search" layout="fill" />
-            </button>
-            <button className="btn text-blue ghost" onClick={toggleNav}>
-              <Image
-                src="/icons/hamburger.svg"
-                alt="hamburger menu"
-                layout="fill"
-              />
-            </button>
-          </div>
+            />*/}
+          </button>
         </div>
       </div>
       <Navbar

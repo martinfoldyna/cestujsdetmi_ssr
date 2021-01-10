@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import Link from "next/link";
 import { Col, Row } from "react-grid-system";
 import { BsFilter } from "react-icons/bs";
@@ -18,7 +18,8 @@ import SideCards from "../../layouts/SideCards";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchQuery } from "../../helpers/fetch";
 import { searchParamsToUrlQuery } from "next/dist/next-server/lib/router/utils/querystring";
-import { objectToQueryString } from "../../helpers/helpers";
+import { initCategories, objectToQueryString } from "../../helpers/helpers";
+import { GlobalContext } from "../../context/GlobalContext";
 
 export async function getStaticProps() {
   const limit = 6;

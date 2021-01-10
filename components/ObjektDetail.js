@@ -115,7 +115,7 @@ const ObjektDetail = ({
       ) {
         let translatedValue = translateEquipment(key);
         return (
-          <li className="d-flex align-items-center mb-1">
+          <li className="d-flex align-items-center mb-1" key={key}>
             <IoMdCheckmark className={`text-${color}`} />
             <p className="pl-1 m-0">{translatedValue}</p>
           </li>
@@ -161,6 +161,13 @@ const ObjektDetail = ({
     setLightboxImg(null);
     setShowLightBox(false);
   };
+
+  const images =
+    objekt.galerie && objekt.galerie?.length > 0
+      ? objekt.galerie
+      : objekt.relativeGalerie && objekt.relativeGalerie?.length > 0
+      ? objekt.relativeGalerie
+      : [];
 
   // Initialize Mapbox marker
   useEffect(() => {
@@ -244,8 +251,8 @@ const ObjektDetail = ({
                 </div>
               </div>
               <section className="objekt-detail-images mb-1 hide-mobile">
-                {objekt.galerie?.length > 0 &&
-                  objekt.galerie?.map((image, i) => {
+                {images?.length > 0 &&
+                  images?.map((image, i) => {
                     if (typeof image === "object") {
                       image.id = i;
                       if (i < 3) {
@@ -272,8 +279,7 @@ const ObjektDetail = ({
                             {i === 2 ? (
                               <div className="overlay">
                                 <p className="show-more">
-                                  +{objekt.galerie.length - 2}{" "}
-                                  <span>dalších</span>
+                                  +{images.length - 2} <span>dalších</span>
                                 </p>
                               </div>
                             ) : (
@@ -290,18 +296,18 @@ const ObjektDetail = ({
                   open={showLightBox}
                   clickedImage={lightboxImg}
                   onClose={closeLightbox}
-                  images={objekt?.galerie}
+                  images={images}
                 />
               </section>
               <section className="objekt-detail-images mb-1 hide-desktop">
-                {objekt?.galerie && objekt?.galerie?.length > 0 && (
+                {images && images?.length > 0 && (
                   <>
                     <div
                       className={`objekt-detail-image img-00`}
                       style={{
-                        backgroundImage: `url(${objekt.galerie[0]?.sm})`,
+                        backgroundImage: `url(${images[0]?.sm})`,
                       }}
-                      onClick={() => openLightbox(objekt.galerie[0])}
+                      onClick={() => openLightbox(images[0])}
                     >
                       <div className="overlay">
                         <div className="d-flex justify-content-between image-actions content-wrapper">
@@ -310,7 +316,7 @@ const ObjektDetail = ({
                             <span>Do oblíbených</span>
                           </div>
                           <div className="text-white">
-                            <span>+{objekt.galerie.length - 2} dalších</span>
+                            <span>+{images.length - 2} dalších</span>
                           </div>
                         </div>
                       </div>
@@ -576,8 +582,8 @@ const ObjektDetail = ({
                     </SectionHeading>
                     <SectionContent>
                       <ul className="operating-hours-timetable">
-                        {objekt.provozni_doba.map((doba) => (
-                          <li>
+                        {objekt.provozni_doba.map((doba, i) => (
+                          <li key={i}>
                             {doba.popis}: {doba.otevira_v} - {doba.zavira_v}
                           </li>
                         ))}

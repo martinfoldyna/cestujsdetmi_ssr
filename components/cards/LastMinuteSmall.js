@@ -35,7 +35,7 @@ const LastMinuteSmall = ({ lastMinute }) => {
 };
 
 LastMinuteSmall.propTypes = {
-  lastMinute: PropTypes.object.isRequired,
+  lastMinute: PropTypes.object,
 };
 
 export default LastMinuteSmall;

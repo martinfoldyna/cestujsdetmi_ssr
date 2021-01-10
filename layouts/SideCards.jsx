@@ -3,7 +3,7 @@ import OurSuggestions from "../components/cards/OurSuggestions";
 
 const SideCards = () => {
   return (
-    <div>
+    <div className="side-cards">
       <LastMinuteSmall />
       <OurSuggestions />
     </div>

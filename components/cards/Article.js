@@ -37,6 +37,9 @@ const Article = ({ article, background, useNextImg = true }) => {
                   src={
                     article.galerie && article.galerie.length > 0
                       ? article?.galerie[0].sm
+                      : article?.relativeGalerie &&
+                        article.relativeGalerie.length > 0
+                      ? article.relativeGalerie[0].sm
                       : "/img/placeholder.png"
                   }
                   alt={article.galerie && article?.galerie[0].alternativeText}

@@ -14,7 +14,7 @@ const SmallArticle = ({ article }) => {
     <Link href={generateURL}>
       <div className="small-article-card">
         <h3>{article.nazev}</h3>
-        {parse(article.zakladni_popis)}
+        {article.zakladni_popis && parse(article.zakladni_popis)}
       </div>
     </Link>
   ) : (

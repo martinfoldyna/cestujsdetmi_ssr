@@ -3,13 +3,7 @@ import Link from "next/link";
 import { Col, Row } from "react-grid-system";
 import { BsFilter } from "react-icons/bs";
 import { AiFillCompass } from "react-icons/ai";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {
-  getObjekty,
-  getObjektyByParams,
-  removeObjekty,
-} from "../../redux/actions/objekty";
 import ListFilteredItems from "../../components/listFilteredItems";
 import enums from "../../enums";
 import SideBar from "../../layouts/Sidebar";

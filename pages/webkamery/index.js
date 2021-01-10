@@ -57,7 +57,7 @@ const Webcams = ({ webcams, getAllWebcams, match }) => {
       <Fragment>
         {webcams?.map((webcam) => (
           <Col md={4} key={webcam.id}>
-            <Post post={webcam} />
+            <Post post={webcam} useNextImg={false} />
           </Col>
         ))}
         <div className="d-flex justify-content-center w-100 mt-1">
@@ -79,8 +79,8 @@ const Webcams = ({ webcams, getAllWebcams, match }) => {
 Webcams.Layout = WebcamsLayout;
 
 Webcams.propTypes = {
-  getAllWebcams: PropTypes.func.isRequired,
-  loadMoreWebcams: PropTypes.func.isRequired,
+  getAllWebcams: PropTypes.func,
+  loadMoreWebcams: PropTypes.func,
   webcams: PropTypes.object.isRequired,
 };
 
