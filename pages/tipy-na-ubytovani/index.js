@@ -33,7 +33,7 @@ export async function getStaticProps() {
     `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
   );
 
-  return { props: { objekty } };
+  return { props: { objekty }, revalidate: 30 };
 }
 
 const TipyNaUbytovani = ({ objekty, getObjektyByParams, removeObjekty }) => {

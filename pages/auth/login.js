@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
-import { loginUser, getUser } from "../../redux/actions/users";
+import { getUser } from "../../redux/actions/users";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import Input from "../../components/form/Input.js";
@@ -8,9 +8,14 @@ import { FaAt, FaChevronRight, FaLock } from "react-icons/fa";
 import { setToast } from "../../redux/actions/alerts";
 import { MyLink } from "../../layouts/MyLink";
 import { useRouter } from "next/router";
+import { loginUser } from "../../helpers/auth";
+import { GlobalContext } from "../../context/GlobalContext";
 
-const Login = ({ user }) => {
+const Login = ({ global }) => {
+  const userContext = useContext(GlobalContext).user;
+  const { user, setUser } = userContext;
   const router = useRouter();
+  console.log(user);
   const { register, handleSubmit, errors } = useForm();
   const [token, setToken] = useState(null);
 
@@ -18,9 +23,10 @@ const Login = ({ user }) => {
     setToken(sessionStorage.getItem("auth-token"));
   }, []);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    loginUser(data);
+    const { user } = await loginUser(data);
+    setUser(user);
   };
 
   useEffect(() => {

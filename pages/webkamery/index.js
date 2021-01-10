@@ -18,7 +18,7 @@ import { objectToQueryString } from "../../helpers/helpers";
 export async function getStaticProps() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
 
-  return { props: { webcams } };
+  return { props: { webcams }, revalidate: 60 };
 }
 
 const Webcams = ({ webcams, getAllWebcams, match }) => {

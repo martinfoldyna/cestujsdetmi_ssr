@@ -21,7 +21,7 @@ import { fetchQuery } from "../../helpers/fetch";
 export async function getStaticProps() {
   const posts = await fetchQuery(`${enums.URLS.radyTipy}`);
 
-  return { props: { posts } };
+  return { props: { posts }, revalidate: 60 };
 }
 
 const RadyTipy = ({ posts }) => {
@@ -42,7 +42,7 @@ const RadyTipy = ({ posts }) => {
                   index < 9 && (
                     <Fragment key={post.id}>
                       <Col md={4} key={post.id}>
-                        <Post post={post} />
+                        <Post post={post} useNextImg={true} />
                       </Col>
                     </Fragment>
                   )

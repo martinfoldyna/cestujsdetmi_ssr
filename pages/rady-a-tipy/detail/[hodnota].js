@@ -39,10 +39,9 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context) {
-  const post = await fetchQuery(
-    `${enums.URLS.radyTipy}&hodnota=${context.params.hodnota}`
-  );
+export async function getStaticProps({ params }) {
+  const { hodnota } = params;
+  const post = await fetchQuery(`${enums.URLS.radyTipy}&hodnota=${hodnota}`);
 
   return { props: { post: post[0] } };
 }
@@ -153,15 +152,8 @@ const RadyTipyDetail = ({
 };
 
 RadyTipyDetail.propTypes = {
-  radyTipy: PropTypes.object.isRequired,
-  getAdvice: PropTypes.func.isRequired,
-  removeAdvice: PropTypes.func.isRequired,
-  getRelatedAdvices: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  radyTipy: state.radyTipy,
-});
 
 RadyTipyDetail.Layout = RadyTipyLayout;
 

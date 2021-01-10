@@ -35,12 +35,7 @@ const LastMinuteSmall = ({ lastMinute }) => {
 };
 
 LastMinuteSmall.propTypes = {
-  objekty: PropTypes.object.isRequired,
-  getLastMinute: PropTypes.func.isRequired,
+  lastMinute: PropTypes.object.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  objekty: state.objekty,
-});
 
 export default LastMinuteSmall;

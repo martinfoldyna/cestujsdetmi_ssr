@@ -8,6 +8,7 @@ module.exports = {
       "www.holidayinfo.cz",
       "sah.x3w.cz",
       "webkamery.gc-system.cz",
+      "firebasestorage.googleapis.com",
     ],
   },
   webpack(config) {

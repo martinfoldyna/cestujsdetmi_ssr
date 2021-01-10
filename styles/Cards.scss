@@ -36,6 +36,7 @@
   font-size: 23px;
   transition: .2s all;
   text-align: left;
+  cursor: pointer;
 }
 
 .article-card .article-description {
@@ -324,6 +325,8 @@
 .admin-objekt {
   min-height: 360px;
   margin-top: 0 !important;
+  display: flex;
+  flex-direction: column;
 }
 
 .admin-objekt .img-wrapper{

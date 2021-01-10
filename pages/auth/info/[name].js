@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { CgListTree } from "react-icons/cg";
@@ -54,12 +54,12 @@ import LoadingSkeleton from "../../../layouts/LoadingSkeleton";
 import ConditionalWrapper from "../../../layouts/ConditionalWrapper";
 import HeadingWithIcon from "../../../layouts/HeadingWithIcon";
 import { useRouter } from "next/router";
+import { GlobalContext } from "../../../context/GlobalContext";
 
 const ObjednatObjektInfo = ({
   uploadObjekt,
   history,
   handleObjekt,
-  user,
   uploadingInProgress,
   kategorie,
   match,
@@ -69,6 +69,8 @@ const ObjednatObjektInfo = ({
   getSecondaryCategoriesWithParam,
 }) => {
   const router = useRouter();
+  const userContext = useContext(GlobalContext).user;
+  const { user } = userContext;
 
   const { plan, name } = router.query;
   registerLocale("cs", cs);

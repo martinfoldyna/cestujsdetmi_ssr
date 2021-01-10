@@ -4,7 +4,6 @@ import { Col, Row } from "react-grid-system";
 import Link from "next/link";
 import enums from "../enums";
 import { getObjektyByParams, countObjekty } from "../redux/actions/objekty";
-import { connect } from "react-redux";
 import HeadingWithIcon from "../layouts/HeadingWithIcon";
 import { HiNewspaper } from "react-icons/hi";
 import Article from "../components/cards/Article";

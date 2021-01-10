@@ -162,11 +162,6 @@ const ListFilteredItems = ({ objekty, typ_objektu }) => {
 
 ListFilteredItems.propTypes = {
   objekty: PropTypes.object.isRequired,
-  getObjektyByParams: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  objekty: state.objekty,
-});
 
 export default ListFilteredItems;

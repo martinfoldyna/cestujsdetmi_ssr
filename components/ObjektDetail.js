@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { HiHome, HiOutlineChevronRight, HiOutlineMail } from "react-icons/hi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiPhone, BiWifi } from "react-icons/bi";
@@ -161,18 +162,7 @@ const ObjektDetail = ({
     setShowLightBox(false);
   };
 
-  useEffect(() => {
-    getObjektByID(id);
-    // readArticle(objekt);
-    window.scrollTo(0, 0);
-  }, [id]);
-
-  useEffect(() => {
-    return function cleanUp() {
-      removeObjektInStorage();
-    };
-  }, []);
-
+  // Initialize Mapbox marker
   useEffect(() => {
     if (objekt) {
       console.log("GPS", objekt["dostupnost.mhd"]);
@@ -186,9 +176,9 @@ const ObjektDetail = ({
           longitude: parseFloat(objekt.dostupnost.gps?.lng),
         });
       }
-      if (objekt.adresa) {
-        getObjektyInOblast(objekt.adresa.oblast);
-      }
+      // if (objekt.adresa) {
+      //   getObjektyInOblast(objekt.adresa.oblast);
+      // }
     }
   }, [objekt]);
 
@@ -218,14 +208,13 @@ const ObjektDetail = ({
         {/*  <FiHome />*/}
         {/*</Link>*/}
         <Row>
-          <DesktopBreakpoint>
-            <Col md={2.5}>
-              <SideBar
-                topic={enums.TYP_OBJEKTU[objekt.typ_objektu].key}
-                color={color}
-              />
-            </Col>
-          </DesktopBreakpoint>
+          <Col md={2.5} className="hide-mobile">
+            <SideBar
+              topic={enums.TYP_OBJEKTU[objekt.typ_objektu].key}
+              color={color}
+            />
+          </Col>
+
           <Col md={9.5}>
             <section className="highlight-card bg-grey" id="top">
               <div className="objekt-detail-heading d-flex align-items-center justify-content-between mb-2">
@@ -254,89 +243,97 @@ const ObjektDetail = ({
                   </div>
                 </div>
               </div>
-              <section className="objekt-detail-images mb-1">
-                <DesktopBreakpoint>
-                  {objekt.galerie?.length > 0 &&
-                    objekt.galerie?.map((image, i) => {
-                      if (typeof image === "object") {
-                        image.id = i;
-                        if (i < 3) {
-                          return (
-                            <div key={i}>
-                              <div
-                                className={`objekt-detail-image img-0${i}`}
-                                style={{ backgroundImage: `url(${image.sm})` }}
-                                onClick={() => openLightbox(image)}
-                              >
-                                {i === 2 ? (
-                                  <div className="overlay">
-                                    <p className="show-more">
-                                      +{objekt.galerie.length - 2}{" "}
-                                      <span>dalších</span>
-                                    </p>
-                                  </div>
-                                ) : (
-                                  <div className="overlay  on-hover">
-                                    <FaSearchPlus className="enlarge-icon text-white" />
-                                  </div>
-                                )}
+              <section className="objekt-detail-images mb-1 hide-mobile">
+                {objekt.galerie?.length > 0 &&
+                  objekt.galerie?.map((image, i) => {
+                    if (typeof image === "object") {
+                      image.id = i;
+                      if (i < 3) {
+                        return (
+                          <div
+                            className={`objekt-detail-image img-0${i}`}
+                            style={{ backgroundImage: `url(${image.sm})` }}
+                            onClick={() => openLightbox(image)}
+                            key={i}
+                          >
+                            <Image
+                              src={image.sm}
+                              alt={
+                                image.alternativeText
+                                  ? image.alternativeText
+                                  : `${objekt.nazev} ${
+                                      (i < 10 ? "0" : "") + `${i}`
+                                    }`
+                              }
+                              layout="fill"
+                              objectFit="cover"
+                            />
+
+                            {i === 2 ? (
+                              <div className="overlay">
+                                <p className="show-more">
+                                  +{objekt.galerie.length - 2}{" "}
+                                  <span>dalších</span>
+                                </p>
                               </div>
-                            </div>
-                          );
-                        }
+                            ) : (
+                              <div className="overlay  on-hover">
+                                <FaSearchPlus className="enlarge-icon text-white" />
+                              </div>
+                            )}
+                          </div>
+                        );
                       }
-                    })}
-                  <Lightbox
-                    open={showLightBox}
-                    clickedImage={lightboxImg}
-                    onClose={closeLightbox}
-                    images={objekt?.galerie}
-                  />
-                </DesktopBreakpoint>
-                <MobileBreakpoint>
-                  {objekt?.galerie && objekt?.galerie?.length > 0 && (
-                    <>
-                      <div
-                        className={`objekt-detail-image img-00`}
-                        style={{
-                          backgroundImage: `url(${objekt.galerie[0]?.sm})`,
-                        }}
-                        onClick={() => openLightbox(objekt.galerie[0])}
-                      >
-                        <div className="overlay">
-                          <div className="d-flex justify-content-between image-actions content-wrapper">
-                            <div className="d-flex align-items-center text-white">
-                              <AiOutlineHeart className="text-white btn-icon" />
-                              <span>Do oblíbených</span>
-                            </div>
-                            <div className="text-white">
-                              <span>+{objekt.galerie.length - 2} dalších</span>
-                            </div>
+                    }
+                  })}
+                <Lightbox
+                  open={showLightBox}
+                  clickedImage={lightboxImg}
+                  onClose={closeLightbox}
+                  images={objekt?.galerie}
+                />
+              </section>
+              <section className="objekt-detail-images mb-1 hide-desktop">
+                {objekt?.galerie && objekt?.galerie?.length > 0 && (
+                  <>
+                    <div
+                      className={`objekt-detail-image img-00`}
+                      style={{
+                        backgroundImage: `url(${objekt.galerie[0]?.sm})`,
+                      }}
+                      onClick={() => openLightbox(objekt.galerie[0])}
+                    >
+                      <div className="overlay">
+                        <div className="d-flex justify-content-between image-actions content-wrapper">
+                          <div className="d-flex align-items-center text-white">
+                            <AiOutlineHeart className="text-white btn-icon" />
+                            <span>Do oblíbených</span>
+                          </div>
+                          <div className="text-white">
+                            <span>+{objekt.galerie.length - 2} dalších</span>
                           </div>
                         </div>
                       </div>
-                      <Lightbox
-                        open={showLightBox}
-                        clickedImage={lightboxImg}
-                        onClose={closeLightbox}
-                        images={objekt?.galerie}
-                      />
-                    </>
-                  )}
-                </MobileBreakpoint>
+                    </div>
+                    <Lightbox
+                      open={showLightBox}
+                      clickedImage={lightboxImg}
+                      onClose={closeLightbox}
+                      images={objekt?.galerie}
+                    />
+                  </>
+                )}
               </section>
 
-              <Row>
+              <Row className="m-0">
                 {objekt?.zakladni_popis && (
-                  <Col md={9} className="pr-0">
+                  <Col md={8.7} className="p-0">
                     <div className="objekt-detail-description">
                       <div className="text-wrapper">
                         <h2>Základní popis</h2>
                         <div>{parse(objekt?.zakladni_popis)}</div>
                       </div>
-                      <DesktopBreakpoint>
-                        {descriptionButtons}
-                      </DesktopBreakpoint>
+                      <div className="hide-mobile">{descriptionButtons}</div>
                     </div>
                   </Col>
                 )}
@@ -365,7 +362,7 @@ const ObjektDetail = ({
                         <span>Domácí mazlíčci</span>
                       </li>
                     </ul>
-                    <MobileBreakpoint>{descriptionButtons}</MobileBreakpoint>
+                    <div className="hide-desktop">{descriptionButtons}</div>
                   </div>
                 </Col>
               </Row>
@@ -398,7 +395,7 @@ const ObjektDetail = ({
                           onClick={() => setShownEquipment("vnitrni_vybaveni")}
                         >
                           Vnitřní
-                          <DesktopBreakpoint> vybavení</DesktopBreakpoint>
+                          <span className="hide-mobile"> vybavení</span>
                         </button>
                         <button
                           className={`btn-small-logo btn ${
@@ -408,7 +405,7 @@ const ObjektDetail = ({
                           }`}
                           onClick={() => setShownEquipment("vnejsi_vybaveni")}
                         >
-                          Vnější<DesktopBreakpoint> vybavení</DesktopBreakpoint>
+                          Vnější<span className="hide-mobile"> vybavení</span>
                         </button>
                       </div>
                     )}
@@ -698,11 +695,11 @@ const ObjektDetail = ({
 
 ObjektDetail.propTypes = {
   objekty: PropTypes.object.isRequired,
-  getObjektByID: PropTypes.func.isRequired,
-  getObjektyInOblast: PropTypes.func.isRequired,
-  addReview: PropTypes.func.isRequired,
-  loadObjektByOblast: PropTypes.func.isRequired,
-  removeObjektInStorage: PropTypes.func.isRequired,
+  getObjektByID: PropTypes.func,
+  getObjektyInOblast: PropTypes.func,
+  addReview: PropTypes.func,
+  loadObjektByOblast: PropTypes.func,
+  removeObjektInStorage: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

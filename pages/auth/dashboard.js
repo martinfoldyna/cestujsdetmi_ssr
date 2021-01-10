@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useContext } from "react";
 import { MyLink } from "../../layouts/MyLink";
 import { Col, Row } from "react-grid-system";
 import { BsPlus } from "react-icons/bs";
@@ -14,12 +14,16 @@ import Input from "../../components/form/Input.js";
 import { logoutUser, getUser } from "../../redux/actions/users";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { useRouter } from "next/router";
+import { GlobalContext } from "../../context/GlobalContext";
 
-const UserDashboard = ({ user }) => {
+const UserDashboard = () => {
   const router = useRouter();
-  useEffect(() => {
-    getUser();
-  }, []);
+  const userContext = useContext(GlobalContext).user;
+  const { user, setUser } = userContext;
+  console.log("dashboard_user", user);
+  const logoutUser = () => {
+    setUser(null);
+  };
 
   return user && user.objekty ? (
     <Fragment>

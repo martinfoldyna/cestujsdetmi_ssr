@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-grid-system";
 import { Section, SectionContent, SectionHeading } from "./Section";
-import { translateColor } from "../helpers/translators";
+import { translateColor, translateObjektPlan } from "../helpers/translators";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { MyLink } from "./MyLink";
 import Image from "next/image";
@@ -12,9 +12,15 @@ const AdminObjekt = ({ objekt }) => {
       <SectionHeading>
         <h2>{`${objekt.nazev}`}</h2>
       </SectionHeading>
-      <SectionContent className="mb-2">
-        <Row className="content-wrapper justify-content-arround pt-1 m-0">
-          <Col lg={4}>
+      <SectionContent
+        className="border-grey d-flex  mb-2"
+        style={{ flexDirection: "column", flex: 1 }}
+      >
+        <Row
+          className="content-wrapper justify-content-arround m-0 d-flex"
+          style={{ flex: 1 }}
+        >
+          <Col lg={4} className="p-0 m-1">
             <div className="img-wrapper">
               <Image
                 src={
@@ -24,6 +30,7 @@ const AdminObjekt = ({ objekt }) => {
                 }
                 layout="fill"
                 objectFit="cover"
+                className="border-radius"
               />
             </div>
           </Col>
@@ -37,11 +44,9 @@ const AdminObjekt = ({ objekt }) => {
                   <div style={{ padding: ".5em 1em" }}>
                     Aktuální zápis:{" "}
                     <span
-                      className={`text-${translateColor(
-                        objekt.druh_zapisu.key
-                      )}`}
+                      className={`text-${translateColor(objekt.druh_zapisu)}`}
                     >
-                      {objekt.druh_zapisu.value}
+                      {translateObjektPlan(objekt.druh_zapisu)}
                     </span>
                   </div>
                   <button className="btn btn-logo bg-blue text-white">
@@ -51,7 +56,7 @@ const AdminObjekt = ({ objekt }) => {
               ) : (
                 ""
               )}
-              <div className="d-flex justify-content-end buttons">
+              <div className="d-flex justify-content-between buttons">
                 <button className="btn btn-logo bg-blue text-white mr-2">
                   <MyLink
                     href={`/auth/info/${

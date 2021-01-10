@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-const Post = ({ post }) => {
+const Post = ({ post, useNextImg = true }) => {
   const router = useRouter();
   const image = post.image_filename
     ? `https://www.cestujsdetmi.cz/${post.image_filename}`
@@ -23,18 +23,32 @@ const Post = ({ post }) => {
       <div className="post">
         {(post.galerie || post.image_filename || post.obrazek) && (
           <div className="post-thumbnail-wrapper">
-            <img
-              src={image}
-              alt={
-                post.galerie && post.galerie[0]?.alternativeText
-                  ? post.galerie[0]?.alternativeText
-                  : post.obrazek
-                  ? post.obrazek.alternativeText
-                  : post.nazev
-              }
-              className="post-thumbnail"
-              layout="fill"
-            />
+            {useNextImg ? (
+              <Image
+                src={image}
+                alt={
+                  post.galerie && post.galerie[0]?.alternativeText
+                    ? post.galerie[0]?.alternativeText
+                    : post.nazev
+                }
+                layout="fill"
+                objectFit="cover"
+                className="border-radius"
+              />
+            ) : (
+              <img
+                src={image}
+                alt={
+                  post.galerie && post.galerie[0]?.alternativeText
+                    ? post.galerie[0]?.alternativeText
+                    : post.obrazek
+                    ? post.obrazek.alternativeText
+                    : post.nazev
+                }
+                className="post-thumbnail"
+                layout="fill"
+              />
+            )}
           </div>
         )}
         <h3 className="post-heading">{post.nazev}</h3>
