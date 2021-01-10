@@ -818,8 +818,16 @@ input[type=number] {
   margin-bottom: 1.5em;
 }
 
-.heading-icon-big {
+.heading-icon-big.size-large {
   font-size: 7em;
+}
+
+.heading-icon-big.size-medium {
+  font-size: 4em;
+}
+
+.heading-icon-big.size-small {
+  font-size: 2em;
 }
 
 .rady-tipy-homepage .section-content {

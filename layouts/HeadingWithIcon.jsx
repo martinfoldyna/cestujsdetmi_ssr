@@ -6,6 +6,7 @@ const HeadingWithIcon = ({
   background,
   text = "white",
   children,
+  icon_size = "large",
 }) => {
   const Icon = icon;
   return (
@@ -23,11 +24,11 @@ const HeadingWithIcon = ({
             </div>
             {children}
           </Col>
-          <div className="hide-mobile">
-            <Col className="d-flex justify-content-center align-items-center">
-              <Icon className={`heading-icon-big text-${background}-darken`} />
-            </Col>
-          </div>
+          <Col className="d-flex justify-content-center align-items-center hide-mobile">
+            <Icon
+              className={`heading-icon-big text-${background}-darken size-${icon_size}`}
+            />
+          </Col>
         </Row>
         {/*</DesktopBreakpoint>*/}
       </div>

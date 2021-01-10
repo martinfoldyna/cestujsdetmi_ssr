@@ -17,6 +17,7 @@ const OPortalu = () => {
         heading="Seznam objektů a nastavení účtu"
         background="red"
         icon={FaUser}
+        icon_size="medium"
       />
       <div className="data-wrapper">
         <Row>

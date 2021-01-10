@@ -15,6 +15,7 @@ const Kontakt = () => {
         background="blue"
         heading="Kontakt"
         icon={MdPermContactCalendar}
+        icon_size="medium"
       />
       <div className="data-wrapper">
         <Row>
