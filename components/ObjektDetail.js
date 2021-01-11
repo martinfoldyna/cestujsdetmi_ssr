@@ -37,7 +37,7 @@ const ObjektDetail = ({
   addReview,
   objekt,
   objektyInOblast,
-  getObjektyInOblast,
+  kategorie,
   removeObjektInStorage,
 }) => {
   const [viewport, setViewport] = useState({
@@ -219,6 +219,7 @@ const ObjektDetail = ({
             <SideBar
               topic={enums.TYP_OBJEKTU[objekt.typ_objektu].key}
               color={color}
+              kategorie={kategorie}
             />
           </Col>
 

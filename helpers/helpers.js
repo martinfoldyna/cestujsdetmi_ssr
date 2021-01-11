@@ -127,4 +127,10 @@ export const objectToQueryString = (object) => {
   }
 };
 
-export const initCategories = async () => {};
+export const initCategories = async (context) => {
+  const { setGlobal } = useContext(context).global;
+
+  const kategorie = await fetchQuery(enums.URLS.kategorie);
+
+  setGlobal(kategorie);
+};

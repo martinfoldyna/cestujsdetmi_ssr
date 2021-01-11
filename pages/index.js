@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default Home;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const [objekty, radyTipy, newPublished] = await Promise.all([
     fetchQuery(enums.URLS.objektInfoMini),
     fetchQuery(enums.URLS.radyTipy),

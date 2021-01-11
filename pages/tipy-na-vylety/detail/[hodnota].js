@@ -20,19 +20,24 @@ export async function getStaticProps({ params }) {
   const { hodnota } = params;
 
   try {
-    const objektQuery = await fetchQuery(
-      `${enums.URLS.objektInfo}?hodnota=${hodnota}`
-    );
+    const [objektQuery, kategorie] = await Promise.all([
+      fetchQuery(`${enums.URLS.objektInfo}?hodnota=${hodnota}`),
+      fetchQuery(`${enums.URLS.kategorie}`),
+    ]);
 
     const objekt = objektQuery[0];
 
-    return objekt ? { props: { objekt } } : { props: { notFound: true } };
+    return objekt
+      ? { props: { objekt, kategorie } }
+      : { props: { notFound: true } };
   } catch (err) {
     console.log(err);
     return { props: { notFound: true } };
   }
 }
 
-const VyletyDetail = ({ objekt }) => <ObjektDetail objekt={objekt} />;
+const VyletyDetail = ({ objekt, kategorie }) => (
+  <ObjektDetail objekt={objekt} kategorie={kategorie} />
+);
 
 export default VyletyDetail;

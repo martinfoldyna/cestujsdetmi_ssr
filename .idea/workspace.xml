@@ -6,6 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/cards/SideFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/SideFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/listFilteredItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/listFilteredItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tipy-na-ubytovani/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/detail/[hodnota].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tipy-na-vylety/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-vylety/detail/[hodnota].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tipy-na-vylety/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-vylety/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +106,7 @@
       <workItem from="1609761221148" duration="633000" />
       <workItem from="1609761882244" duration="21168000" />
       <workItem from="1610294911511" duration="15197000" />
-      <workItem from="1610388973909" duration="1863000" />
+      <workItem from="1610388973909" duration="6262000" />
     </task>
     <servers />
   </component>

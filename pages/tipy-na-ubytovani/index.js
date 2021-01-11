@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { Col, Row } from "react-grid-system";
 import { BsFilter } from "react-icons/bs";
@@ -30,18 +30,27 @@ export async function getStaticProps() {
     _start: 0,
   };
 
-  const objekty = await fetchQuery(
-    `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
-  );
+  const [objekty, kategorie] = await Promise.all([
+    fetchQuery(
+      `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
+    ),
+    fetchQuery(enums.URLS.kategorie),
+  ]);
 
-  return { props: { objekty }, revalidate: 30 };
+  return { props: { objekty, kategorie }, revalidate: 30 };
 }
 
-const TipyNaUbytovani = ({ objekty, getObjektyByParams, removeObjekty }) => {
+const TipyNaUbytovani = ({ objekty, kategorie, removeObjekty }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
   const [next, setNext] = useState(2);
+
+  const globalContext = useContext(GlobalContext).global;
+  const { global, setGlobal } = globalContext;
+  useEffect(() => {
+    setGlobal((prevState) => ({ ...prevState, ...kategorie }));
+  }, []);
 
   // Mobile only for filter showing
   const [openFilter, setOpenFilter] = useState(false);
@@ -76,7 +85,11 @@ const TipyNaUbytovani = ({ objekty, getObjektyByParams, removeObjekty }) => {
       <div className="data-wrapper">
         <Row>
           <Col md={2.5} className="hide-mobile">
-            <SideBar topic={enums.TYP_OBJEKTU.ubytovani.key} color="blue" />
+            <SideBar
+              topic={enums.TYP_OBJEKTU.ubytovani.key}
+              color="blue"
+              kategorie={kategorie}
+            />
           </Col>
           <Col>
             <div className="hide-desktop">
@@ -126,13 +139,9 @@ const TipyNaUbytovani = ({ objekty, getObjektyByParams, removeObjekty }) => {
 };
 
 TipyNaUbytovani.propTypes = {
-  objekty: PropTypes.object,
+  objekty: PropTypes.array,
   getObjektyByParams: PropTypes.func,
   removeObjekty: PropTypes.func,
 };
-
-const mapStateToProps = (state) => ({
-  objekty: state.objekty?.objekty,
-});
 
 export default TipyNaUbytovani;

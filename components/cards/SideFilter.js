@@ -28,12 +28,9 @@ const SideFilter = ({
   const beautifiedRegion = objectToArray(enums.REGION);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!kategorie) {
-  //     getCategories();
-  //   }
-  //   console.log(kategorie);
-  // }, [kategorie, getCategories]);
+  useEffect(() => {
+    console.log(kategorie);
+  }, [kategorie]);
 
   const cancelFilter = (e) => {
     if (e.target.classList.contains("selected")) {
@@ -131,8 +128,8 @@ const SideFilter = ({
     <div
       className={`filter-card ${
         fullPadding ||
-        !global?.kategorie ||
-        !global?.kategorie?.some((categoryItem) => kategorie.urceni === topic)
+        !kategorie ||
+        !kategorie?.some((categoryItem) => categoryItem.urceni === topic)
           ? "full-padding"
           : ""
       } ${color ? `bg-light-${color}` : "bg-grey"}`}
@@ -186,14 +183,12 @@ const SideFilter = ({
           </div>
         </Col>
         <Col className="col p-0">
-          {global?.kategorie &&
-            global?.kategorie.find(
-              (categoryItem) => categoryItem.urceni === topic
-            ) && (
+          {kategorie &&
+            kategorie.find((categoryItem) => categoryItem.urceni === topic) && (
               <div className="categories">
                 <p className="filter-name">Kategorie</p>
                 <ul className="categories-list list-style-none p-0 mb-0">
-                  {global?.kategorie.map(
+                  {kategorie.map(
                     (categoryItem) =>
                       categoryItem.urceni === topic && (
                         <li

@@ -43,13 +43,13 @@ const ListFilteredItems = ({ objekty, typ_objektu }) => {
   // };
 
   const paginate = async () => {
-    await getObjektyByParams({
+    /* await getObjektyByParams({
       ...fetchParams,
       method: "add",
       _start: next,
       _limit: limit,
     });
-    setNext((prevState) => prevState + limit);
+    setNext((prevState) => prevState + limit);*/
   };
 
   const filteredItems = () => {
@@ -118,16 +118,16 @@ const ListFilteredItems = ({ objekty, typ_objektu }) => {
     return filtered;
   };
 
-  useEffect(() => {
-    console.log(filter);
-    if (
-      !objekty ||
-      !objekty.some((objekt) => objekt.kategorie_value === typ_objektu)
-    ) {
-      getObjektyByParams({ ...fetchParams, kategorie_value: filter });
-    }
-    countAllObjekty({ kategorie_value: filter });
-  }, [filter, mesto, kraj, oblast]);
+  // useEffect(() => {
+  //   console.log(filter);
+  //   if (
+  //     !objekty ||
+  //     !objekty.some((objekt) => objekt.kategorie_value === typ_objektu)
+  //   ) {
+  //     //getObjektyByParams({ ...fetchParams, kategorie_value: filter });
+  //   }
+  //   countAllObjekty({ kategorie_value: filter });
+  // }, [filter, mesto, kraj, oblast]);
 
   return !objekty ? (
     <LoadingSkeleton />
@@ -161,7 +161,7 @@ const ListFilteredItems = ({ objekty, typ_objektu }) => {
 };
 
 ListFilteredItems.propTypes = {
-  objekty: PropTypes.object.isRequired,
+  objekty: PropTypes.array.isRequired,
 };
 
 export default ListFilteredItems;

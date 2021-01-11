@@ -166,14 +166,14 @@ input[type=number] {
 }
 
 .main-nav .nav-item a{
+  display: -webkit-flex;
+  display: -webkit-box;
   text-decoration: none;
   font-weight: 700;
   color: black;
   margin: 0 auto;
   display: flex;
-  -webkit-text-fill-color: black;
-  display: -webkit-flex;
-  display: -webkit-box;
+
   align-items: center;
 }
 

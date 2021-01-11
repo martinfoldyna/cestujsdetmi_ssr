@@ -22,14 +22,17 @@ export async function getStaticProps() {
     _start: 0,
   };
 
-  const objekty = await fetchQuery(
-    `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
-  );
+  const [objekty, kategorie] = await Promise.all([
+    fetchQuery(
+      `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
+    ),
+    fetchQuery(enums.URLS.kategorie),
+  ]);
 
-  return { props: { objekty }, revalidate: 30 };
+  return { props: { objekty, kategorie }, revalidate: 30 };
 }
 
-const TipyNaVylety = ({ objekty }) => {
+const TipyNaVylety = ({ objekty, kategorie }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
@@ -75,7 +78,11 @@ const TipyNaVylety = ({ objekty }) => {
       <div className="data-wrapper">
         <Row>
           <Col md={2.5} className="hide-mobile">
-            <SideBar topic={enums.TYP_OBJEKTU.zabava.key} color="orange" />
+            <SideBar
+              topic={enums.TYP_OBJEKTU.zabava.key}
+              color="orange"
+              kategorie={kategorie}
+            />
           </Col>
           <Col>
             <div className="hide-desktop">
@@ -146,8 +153,8 @@ const TipyNaVylety = ({ objekty }) => {
 
 TipyNaVylety.propTypes = {
   objekty: PropTypes.object.isRequired,
-  getObjektyByParams: PropTypes.func.isRequired,
-  removeObjekty: PropTypes.func.isRequired,
+  getObjektyByParams: PropTypes.func,
+  removeObjekty: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

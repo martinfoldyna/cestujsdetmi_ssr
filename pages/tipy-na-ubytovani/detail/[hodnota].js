@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import ObjektDetail from "../../../components/ObjektDetail";
 import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
+import { objectToQueryString } from "../../../helpers/helpers";
 
 export async function getStaticPaths() {
   const objects = await fetchQuery(`${enums.URLS.objektInfoMini}`);
@@ -20,19 +21,24 @@ export async function getStaticProps({ params }) {
   const { hodnota } = params;
 
   try {
-    const objektQuery = await fetchQuery(
-      `${enums.URLS.objektInfo}?hodnota=${hodnota}`
-    );
+    const [objektQuery, kategorie] = await Promise.all([
+      fetchQuery(`${enums.URLS.objektInfo}?hodnota=${hodnota}`),
+      fetchQuery(`${enums.URLS.kategorie}`),
+    ]);
 
     const objekt = objektQuery[0];
 
-    return objekt ? { props: { objekt } } : { props: { notFound: true } };
+    return objekt
+      ? { props: { objekt, kategorie } }
+      : { props: { notFound: true } };
   } catch (err) {
     console.log(err);
     return { props: { notFound: true } };
   }
 }
 
-const UbytovaniDetail = ({ objekt }) => <ObjektDetail objekt={objekt} />;
+const UbytovaniDetail = ({ objekt, kategorie }) => (
+  <ObjektDetail objekt={objekt} kategorie={kategorie} />
+);
 
 export default UbytovaniDetail;
