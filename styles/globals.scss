@@ -171,6 +171,9 @@ input[type=number] {
   color: black;
   margin: 0 auto;
   display: flex;
+  -webkit-text-fill-color: black;
+  display: -webkit-flex;
+  display: -webkit-box;
   align-items: center;
 }
 
