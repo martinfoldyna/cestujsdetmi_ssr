@@ -73,9 +73,12 @@ const mapDispatchToProps = (dispatch) => ({
 export default Home;
 
 export async function getServerSideProps() {
-  const objekty = await fetchQuery(enums.URLS.objektInfoMini);
-  const radyTipy = await fetchQuery(enums.URLS.radyTipy);
-  const newPublished = await fetchQuery(enums.URLS.newPublished);
+  const [objekty, radyTipy, newPublished] = await Promise.all([
+    fetchQuery(enums.URLS.objektInfoMini),
+    fetchQuery(enums.URLS.radyTipy),
+    fetchQuery(enums.URLS.newPublished),
+  ]);
+  console.log(objekty);
   return {
     props: {
       objekty,
