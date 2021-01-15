@@ -186,7 +186,9 @@ const ObjednatObjektInfo = ({
       console.log("accepted", onDropAccepted);
       console.log("rejected", onDropRejected);
       for (let [index, file] of acceptedFiles.entries()) {
-        const compressedImage = await handleSingleCompression(file);
+        console.log("file", file);
+        let compressedImage = await handleSingleCompression(file);
+        compressedImage.preview = file.preview;
         setPreviewImages((prevState) => {
           /*const newImage = {
             sm: URL.createObjectURL(compressedImage.sm),
@@ -263,9 +265,7 @@ const ObjednatObjektInfo = ({
           <div
             style={{
               backgroundImage: `url(${
-                image.sm && image.lg
-                  ? image.sm
-                  : "../public/img/placeholder.png"
+                image.preview ? image.preview : "../public/img/placeholder.png"
               })`,
             }}
             className="image-container"
@@ -376,14 +376,18 @@ const ObjednatObjektInfo = ({
         infoFinal.vnejsi_vybaveni = {
           ...infoFinal.vnejsi_vybaveni,
           ...{
-            [key.replace("outside_", "")]: data[key],
+            [key.replace("outside_", "")]: Array.isArray(data[key])
+              ? data[key].indexOf("on") > 0
+              : data[key],
           },
         };
       } else if (key.includes("inside_")) {
         infoFinal.vnitrni_vybaveni = {
           ...infoFinal.vnitrni_vybaveni,
           ...{
-            [key.replace("inside_", "")]: data[key],
+            [key.replace("inside_", "")]: Array.isArray(data[key])
+              ? data[key].indexOf("on") > 0
+              : data[key],
           },
         };
       } else if (key.includes("accessibility_")) {
@@ -556,12 +560,22 @@ const ObjednatObjektInfo = ({
   }, []);
 
   useEffect(() => {
-    setPreviewImages(
-      objekt?.galerie?.map((image, index) => ({
+    setPreviewImages((prevState) => {
+      let newImages = objekt?.galerie?.map((image, index) => ({
         ...image,
         id: index,
-      }))
-    );
+      }));
+      if (objekt?.relative_galerie) {
+        newImages = [
+          ...newImages,
+          objekt.relative_galerie.map((image, index) => ({
+            ...image,
+            id: `relative_${index}`,
+          })),
+        ];
+      }
+      return newImages;
+    });
     console.log(objekt?.galerie);
   }, [objekt?.galerie]);
 

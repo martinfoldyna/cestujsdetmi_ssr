@@ -6,6 +6,7 @@ import enums from "../../enums";
 import { IoMdPin } from "react-icons/io";
 import Image from "next/image";
 import { Row, Col } from "react-grid-system";
+import { fetchQuery } from "../../helpers/fetch";
 
 const Article = ({ article, background, useNextImg = true }) => {
   const parentRef = useRef(null);
@@ -42,7 +43,11 @@ const Article = ({ article, background, useNextImg = true }) => {
                       ? article?.relativeGalerie[0].sm
                       : "/img/placeholder.png"
                   }
-                  alt={article?.galerie && article?.galerie[0].alternativeText}
+                  alt={
+                    article?.galerie
+                      ? article?.galerie[0]?.alternativeText
+                      : article.nazev
+                  }
                   layout="fill"
                   objectFit="cover"
                   className="border-radius"

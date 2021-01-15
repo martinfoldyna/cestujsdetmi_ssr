@@ -27,9 +27,16 @@ export async function getStaticProps({ params }) {
     ]);
 
     const objekt = objektQuery[0];
+    let related = [];
+    if (objekt?.adresa_oblast) {
+      related = await fetchQuery(
+        `${enums.URLS.objektInfo}?adresa_oblast=${objekt.adresa_oblast}`
+      );
+      console.log(related);
+    }
 
     return objekt
-      ? { props: { objekt, kategorie } }
+      ? { props: { objekt, kategorie, related } }
       : { props: { notFound: true } };
   } catch (err) {
     console.log(err);
@@ -37,8 +44,8 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const UbytovaniDetail = ({ objekt, kategorie }) => (
-  <ObjektDetail objekt={objekt} kategorie={kategorie} />
+const UbytovaniDetail = ({ objekt, kategorie, related }) => (
+  <ObjektDetail objekt={objekt} kategorie={kategorie} related={related} />
 );
 
 export default UbytovaniDetail;

@@ -1,10 +1,12 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import ObjektDetail from "../../../components/ObjektDetail";
 import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
 
 export async function getStaticPaths() {
   const objects = await fetchQuery(`${enums.URLS.objektInfoMini}`);
+  const related = await fetchQuery(`${enums.URLS.objektInfoMini}&tags_in`);
 
   return {
     paths: objects.map((object) => ({
@@ -36,8 +38,8 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const VyletyDetail = ({ objekt, kategorie }) => (
-  <ObjektDetail objekt={objekt} kategorie={kategorie} />
-);
+const VyletyDetail = ({ objekt, kategorie }) => {
+  return <ObjektDetail objekt={objekt} kategorie={kategorie} />;
+};
 
 export default VyletyDetail;

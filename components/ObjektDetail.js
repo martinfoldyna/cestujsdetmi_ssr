@@ -31,15 +31,9 @@ import MiniObjekt from "./cards/MiniObjekt";
 import SideBar from "../layouts/Sidebar";
 import enums from "../enums";
 import { MyLink } from "../layouts/MyLink";
+import { fetchQuery } from "../helpers/fetch";
 
-const ObjektDetail = ({
-  getObjektByID,
-  addReview,
-  objekt,
-  objektyInOblast,
-  kategorie,
-  removeObjektInStorage,
-}) => {
+const ObjektDetail = ({ addReview, objekt, kategorie }) => {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: 500,
@@ -61,6 +55,7 @@ const ObjektDetail = ({
   const [selectedStar, setSelectedStar] = useState(null);
   const [shownEquipment, setShownEquipment] = useState("vnitrni_vybaveni");
   const [color, setColor] = useState("blue");
+  const [related, setRelated] = useState(null);
 
   // If objekt has zero equipment selected as true -> false is set, when equipment element is found as true in map function
   const [noEquipemnt, setNoEquipemnt] = useState(true);
@@ -123,6 +118,18 @@ const ObjektDetail = ({
       }
     });
   };
+
+  const fetchRelated = async () => {
+    const related = await fetchQuery(
+      `objekt-infos?adresa_oblast_value=${objekt.adresa_oblast_value}`
+    );
+
+    setRelated(related);
+  };
+
+  useEffect(() => {
+    fetchRelated();
+  }, [objekt]);
 
   const descriptionButtons = (
     <div className="d-flex buttons">
@@ -602,7 +609,9 @@ const ObjektDetail = ({
                 ref={mapRef}
                 {...viewport}
                 onViewportChange={(nextViewport) => setViewport(nextViewport)}
-                mapboxApiAccessToken={REACT_APP_MAPBOX_API_ACCESS_TOKEN}
+                mapboxApiAccessToken={
+                  process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
+                }
                 scrollZoom={false}
                 className="mapbox"
                 style={{ maxWidth: "100%", width: "auto" }}
@@ -674,14 +683,14 @@ const ObjektDetail = ({
                 )}
               </SectionContent>
             </Section>
-            {objektyInOblast && (
+            {related && related.length > 0 && (
               <Section className="border-section">
                 <SectionHeading background="none">
                   <h2>Další tipy na ubytování v této oblasti</h2>
                 </SectionHeading>
                 <SectionContent>
                   <Row>
-                    {objektyInOblast.map(
+                    {related.map(
                       (objektItem) =>
                         objektItem.id !== objekt.id && (
                           <Col md={6} lg={4} key={objekt.id}>

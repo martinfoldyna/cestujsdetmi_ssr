@@ -9,6 +9,8 @@ module.exports = {
       "sah.x3w.cz",
       "webkamery.gc-system.cz",
       "firebasestorage.googleapis.com",
+      "www.ceske-sjezdovky.cz",
+      "image.unet.cz",
     ],
   },
   webpack(config) {

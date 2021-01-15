@@ -52,7 +52,7 @@ const RadyTipyKategorie = ({ radyTipy }) => {
 RadyTipyKategorie.Layout = RadyTipyLayout;
 
 RadyTipyKategorie.propTypes = {
-  radyTipy: PropTypes.object.isRequired,
+  radyTipy: PropTypes.array.isRequired,
 };
 
 export default RadyTipyKategorie;

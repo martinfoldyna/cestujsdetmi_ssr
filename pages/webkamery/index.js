@@ -21,7 +21,7 @@ export async function getStaticProps() {
   return { props: { webcams }, revalidate: 60 };
 }
 
-const Webcams = ({ webcams, getAllWebcams, match }) => {
+const Webcams = ({ webcams, getAllWebcams }) => {
   const limit = 9;
   const [next, setNext] = useState(limit);
   const [allWebcams, setAllWebcams] = useState(webcams);
@@ -31,15 +31,11 @@ const Webcams = ({ webcams, getAllWebcams, match }) => {
       getAllWebcams();
     }
   }, []);
-  console.log(match);
 
   const loadMoreWebcams = async () => {
     try {
       const nextWebcams = await fetchQuery(
-        `${enums.URLS.webkamery}&${objectToQueryString({
-          _limit: Math.floor(9),
-          _start: next,
-        })}`
+        `webkameries?_limit=${limit}&_start=${next}`
       );
 
       if (nextWebcams && nextWebcams.length > 0) {
@@ -55,7 +51,7 @@ const Webcams = ({ webcams, getAllWebcams, match }) => {
   ) : (
     <Row>
       <Fragment>
-        {webcams?.map((webcam) => (
+        {allWebcams?.map((webcam) => (
           <Col md={4} key={webcam.id}>
             <Post post={webcam} useNextImg={false} />
           </Col>

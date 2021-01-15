@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getWebcam } from "../../../redux/actions/webcams";
@@ -48,16 +48,19 @@ const WebcamDetail = ({ webcam }) => {
   const router = useRouter();
   const { hodnota } = router.query;
   const { isFallback } = useRouter();
+  const [related, setRelated] = useState(null);
 
-  // const loadWebcam = () => {
-  //   if (hodnota) {
-  //     getWebcam(hodnota);
-  //   }
-  // };
-  //
-  // useEffect(() => {
-  //   loadWebcam();
-  // }, [hodnota]);
+  const loadWebcam = async () => {
+    const fetchRelated = await fetchQuery(
+      `webkameries?_limit=9&_id_ne=${webcam.id}`
+    );
+    console.log(fetchRelated?.length);
+    setRelated(fetchRelated);
+  };
+
+  useEffect(() => {
+    loadWebcam();
+  }, [hodnota]);
 
   return isFallback ? (
     <LoadingSkeleton />
@@ -101,23 +104,26 @@ const WebcamDetail = ({ webcam }) => {
           )}
         </SectionContent>
       </Section>
-      {/*<Section className="realted-advices border-section">*/}
-      {/*  <SectionHeading background="none">*/}
-      {/*    <h2>Další webkamery</h2>*/}
-      {/*  </SectionHeading>*/}
-      {/*  <SectionContent>*/}
-      {/*    <Row>*/}
-      {/*      {webcams.map(*/}
-      {/*        (webcam, index) =>*/}
-      {/*          index < 9 && (*/}
-      {/*            <Col md={4}>*/}
-      {/*              <Post post={webcam} />*/}
-      {/*            </Col>*/}
-      {/*          )*/}
-      {/*      )}*/}
-      {/*    </Row>*/}
-      {/*  </SectionContent>*/}
-      {/*</Section>*/}
+      {related && (
+        <Section className="realted-advices border-section">
+          <SectionHeading background="none">
+            <h2>Další webkamery</h2>
+          </SectionHeading>
+          <SectionContent>
+            <Row>
+              {related.map(
+                (relatedWebcam, index) =>
+                  index < 9 &&
+                  relatedWebcam.id !== webcam.id && (
+                    <Col md={4}>
+                      <Post post={relatedWebcam} />
+                    </Col>
+                  )
+              )}
+            </Row>
+          </SectionContent>
+        </Section>
+      )}
     </>
   );
 };

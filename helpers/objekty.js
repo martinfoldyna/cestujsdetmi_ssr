@@ -7,8 +7,12 @@ export const objektUpload = async (data, images) => {
 
       const uploadImages = Array.isArray(images) ? images : [images];
 
-      for (let image in uploadImages) {
-        formData.append("files", image, image.name);
+      console.log(data);
+
+      for (let image of uploadImages) {
+        console.log(image);
+        formData.append(`files.${image.name}`, image, image.name);
+        formData.append("field", "galerie");
         /*formData.append(
           "fileInfo",
           `{"alternativeText":"${image.alternativeText}","name":"${image.name}"}`
@@ -22,7 +26,13 @@ export const objektUpload = async (data, images) => {
       formData.append("data", JSON.stringify(data));
 
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos`
+        `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       return { data: res.data, success: true };
