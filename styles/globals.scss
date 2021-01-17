@@ -435,10 +435,12 @@ input[type=number] {
 
 .section .heading-with-icons  h2 {
   font-size: $font-size-heading-sections;
+  margin: 1em 0;
 }
 
 .section-content,
 .section .heading-with-icons {
+
   padding: 0 1em;
 }
 
@@ -481,7 +483,7 @@ input[type=number] {
 }
 
 .objekty-heading {
-  padding: .7em 1.5em;
+  padding: 0.7em 1.5em 1em;
   border-radius: $border-radius;
 }
 

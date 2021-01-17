@@ -24,7 +24,7 @@ const HeadingWithIcon = ({
             </div>
             {children}
           </Col>
-          <Col className="d-flex justify-content-center align-items-center">
+          <Col className="d-flex justify-content-end align-items-center">
             <div className="hide-mobile">
               <Icon
                 className={`heading-icon-big text-${background}-darken size-${icon_size}`}
