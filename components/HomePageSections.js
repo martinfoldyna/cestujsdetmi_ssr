@@ -8,7 +8,7 @@ import Link from "next/link";
 import { translateColor } from "../helpers/translators";
 import LoadingSkeleton from "../layouts/LoadingSkeleton";
 import HomePageObjekt from "../layouts/HomePageObjekt";
-import { MyLink } from "../layouts/MyLink";
+import MyLink from "../layouts/MyLink";
 
 const HomePageSections = ({ data, loading, topic, heading }) => {
   const [link, setLink] = useState({ value: "", text: "" });

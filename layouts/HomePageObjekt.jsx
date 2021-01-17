@@ -41,14 +41,14 @@ const HomePageObjekt = ({
                       ? article?.galerie[0].sm
                       : article?.obrazek
                       ? article.obrazek.formats.small.url
-                      : article?.relativeGalerie &&
-                        article.relativeGalerie.length > 0
-                      ? article.relativeGalerie[0].sm
+                      : article?.relative_galerie &&
+                        article.relative_galerie.length > 0
+                      ? article.relative_galerie[0].sm
                       : "/img/placeholder.png"
                   }
                   alt={
-                    article?.galerie && article.galerie[0].alternativeText
-                      ? article.galere[0].alternativeText
+                    article?.galerie && article?.galerie[0]?.alternativeText
+                      ? article.galerie[0].alternativeText
                       : article.nazev
                   }
                   className="img border-radius"

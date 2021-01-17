@@ -3,12 +3,12 @@ import LoadingSkeleton from "../../layouts/LoadingSkeleton";
 import { IoMdPin } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
+import enums from "../../enums";
 
-const MyComponent = ({ objekt }) => {
-  console.log(objekt);
+const MiniObjekt = ({ objekt }) => {
   return objekt ? (
     <div className="objekt-mini">
-      {objekt?.galerie || objekt?.relativeGalerie ? (
+      {objekt?.galerie || objekt?.relative_galerie ? (
         <div className="image-wrapper" style={{ position: "relative" }}>
           <Image
             className="objekt-mini-image mt-1"
@@ -21,10 +21,8 @@ const MyComponent = ({ objekt }) => {
                 : "/img/placeholder.png"
             }
             alt={
-              objekt.relative_galerie[0]
-                ? objekt.nazev
-                : objekt?.galerie[0].popis
-                ? objekt.galerie[0].popis
+              objekt.relative_galerie && objekt.relative_galerie?.length > 0
+                ? objekt?.relative_galerie[0].popis
                 : objekt.nazev
             }
             layout="fill"
@@ -39,7 +37,13 @@ const MyComponent = ({ objekt }) => {
         </Link>
         {objekt.adresa && (
           <div className="d-flex">
-            <IoMdPin className="text-blue" />
+            <IoMdPin
+              className={`text-${
+                objekt.hlavni_kategorie === enums.KATEGORIE.ZABAVA
+                  ? "orange"
+                  : "blue"
+              }`}
+            />
             <p style={{ fontSize: "12px" }} className="m-0">
               {objekt.nazev}, {objekt.adresa.ulice}, {objekt.adresa.mesto}
             </p>
@@ -52,6 +56,6 @@ const MyComponent = ({ objekt }) => {
   );
 };
 
-MyComponent.propTypes = {};
+MiniObjekt.propTypes = {};
 
-export default MyComponent;
+export default MiniObjekt;

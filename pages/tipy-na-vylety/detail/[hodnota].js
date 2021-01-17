@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import ObjektDetail from "../../../components/ObjektDetail";
 import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
+import { Container } from "react-grid-system";
 
 export async function getStaticPaths() {
   const objects = await fetchQuery(`${enums.URLS.objektInfoMini}`);
@@ -39,7 +40,11 @@ export async function getStaticProps({ params }) {
 }
 
 const VyletyDetail = ({ objekt, kategorie }) => {
-  return <ObjektDetail objekt={objekt} kategorie={kategorie} />;
+  return (
+    <Container style={{ maxWidth: "1220px" }}>
+      <ObjektDetail objekt={objekt} kategorie={kategorie} />
+    </Container>
+  );
 };
 
 export default VyletyDetail;

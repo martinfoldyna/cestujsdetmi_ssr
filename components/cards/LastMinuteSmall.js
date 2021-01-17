@@ -37,9 +37,11 @@ const LastMinuteSmall = ({ background }) => {
             <>
               <div className="d-flex align-items-center small-card-heading">
                 <FaTag className="icon text-red" />
-                <h4>Last minute</h4>
+                <h3>Last minute</h3>
               </div>
-              <h4 className="card-heading">{lastMinute[selectedLM].nazev}</h4>
+              <h3 className="card-heading m-0">
+                {lastMinute[selectedLM].nazev}
+              </h3>
               <p>{lastMinute[selectedLM].last_minute_popis}</p>
             </>
           </Link>
@@ -50,7 +52,7 @@ const LastMinuteSmall = ({ background }) => {
 };
 
 LastMinuteSmall.propTypes = {
-  lastMinute: PropTypes.object,
+  lastMinute: PropTypes.array,
 };
 
 export default LastMinuteSmall;

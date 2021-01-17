@@ -119,6 +119,8 @@ input[type=number] {
 
 .heading-with-icons h2 {
   font-weight: 600;
+  margin-top: .5em;
+  margin-bottom: .5em;
 }
 
 .arrow-heading {
@@ -169,7 +171,7 @@ input[type=number] {
   display: -webkit-flex;
   display: -webkit-box;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 600;
   color: black;
   margin: 0 auto;
   display: flex;
@@ -182,7 +184,7 @@ input[type=number] {
   background-size: cover;
   background-repeat: no-repeat;
   display: block;
-  height: 50vh;
+  height: 35vh;
   width: 100vw;
   background-position: right;
   position: relative;
@@ -200,14 +202,13 @@ input[type=number] {
   z-index: 2;
 }
 
-.hero h2 {
+.hero h1 {
   margin-top: 0;
-  text-align: center;
-  font-size: 38px;
+  font-size: 46px;
 }
 
 .hero .content-wrapper p {
-  font-size: 26px;
+
 }
 
 .hero  .wrapper {
@@ -226,7 +227,8 @@ input[type=number] {
 }
 
 .hero .wrapper .d-flex .description {
-  width: 50%;
+  width: 80%;
+  font-size: 22px;
 }
 
 .hero .wrapper h2 {
@@ -247,13 +249,21 @@ input[type=number] {
   position: relative;
 }
 
+.search-bar .d-flex {
+  align-items: stretch !important;
+}
+
+.main-header .search-bar {
+  width: 25%;
+}
+
 .search-bar input {
   border: 0;
   padding: 1.5em;
   width: 320px;
   overflow: hidden;
   font-size: 12px;
-  border-radius: $border-radius;
+  border-radius: $border-radius 0 0 $border-radius;
 }
 
 .search-bar input:focus {
@@ -261,9 +271,11 @@ input[type=number] {
 }
 
 .search-bar-button {
-  height: 100%;
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
-  transform: translateX(-100%);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .hero .content-wrapper p {
@@ -315,7 +327,6 @@ input[type=number] {
   margin: 1.5em 0;
   padding: 1em 2em;
   border-radius: $border-radius;
-  background: linear-gradient(95.4deg, #EDF7FB 4.51%, #FFFFFF 95.88%), #F6F6F6;
 }
 
 .map-component .margin-wrapper {
@@ -325,12 +336,6 @@ input[type=number] {
 .map-component .heading-with-icons{
   margin-top: 1.2em;
   margin-bottom: .5em;
-}
-
-.map-component .heading-with-icons h2{
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: $font-size-heading-sections;
 }
 
 .map-component .map-description {
@@ -476,7 +481,7 @@ input[type=number] {
 }
 
 .objekty-heading {
-  padding: 1em 2.5%;
+  padding: .7em 1.5em;
   border-radius: $border-radius;
 }
 
@@ -487,6 +492,8 @@ input[type=number] {
 
 .objekty-heading p {
   margin-left: 4em;
+  margin-bottom: .5em;
+  margin-top: .5em;
 }
 
 .breadcrumb {
@@ -920,6 +927,11 @@ input[type=number] {
 
 .side-cards {
   order: 2;
+}
+
+.side-cards h3,
+.last-minute-small h3 {
+  font-weight: 600;
 }
 
 @import "MediaQueries";

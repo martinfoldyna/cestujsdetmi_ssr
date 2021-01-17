@@ -35,12 +35,11 @@ const MyApp = ({ Component, pageProps }) => {
       value={{ user: { user, setUser }, global: { global, setGlobal } }}
     >
       <Header />
-      <Hero />
-      <Container style={{ maxWidth: "1220px" }}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </Container>
+      {/*<Container style={{ maxWidth: "1220px" }}>*/}
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+      {/*</Container>*/}
       <Footer />
     </GlobalContext.Provider>
   );

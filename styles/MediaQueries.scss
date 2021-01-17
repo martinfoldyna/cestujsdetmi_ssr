@@ -125,8 +125,13 @@
     display: block;
   }
 
+  .article-card .w-100 > div {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   .article-card .img-wrapper {
-    max-height: 22vh;
+    height: 20vh;
     margin-bottom: 1em;
   }
 
@@ -145,6 +150,11 @@
 
   .article-card .content-wrapper {
     margin-left: 0;
+  }
+
+  .post {
+    margin-top: .5em;
+    margin-bottom: .5em;
   }
 
   .header-wrapper {

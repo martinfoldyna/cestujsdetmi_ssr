@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { AiFillBulb } from "react-icons/ai";
 import { RiArrowRightSLine } from "react-icons/ri";
-import { MyLink } from "../layouts/MyLink";
+import MyLink from "../layouts/MyLink";
 import { SectionContent, Section, SectionHeading } from "../layouts/Section";
 import { Col, Row } from "react-grid-system";
 import HomePageObjekt from "../layouts/HomePageObjekt";

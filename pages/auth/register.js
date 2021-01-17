@@ -10,7 +10,7 @@ import { FaAt, FaLock, FaUser } from "react-icons/fa";
 import { GiHouse } from "react-icons/gi";
 import { MdLocationCity } from "react-icons/md";
 import { TiSortNumerically } from "react-icons/ti";
-import { MyLink } from "../../layouts/MyLink";
+import MyLink from "../../layouts/MyLink";
 
 const Register = ({ user }) => {
   const { handleSubmit, register, errors, watch } = useForm();

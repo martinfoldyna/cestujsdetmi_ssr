@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import Input from "../../components/form/Input.js";
 import { FaAt, FaChevronRight, FaLock } from "react-icons/fa";
 import { setToast } from "../../redux/actions/alerts";
-import { MyLink } from "../../layouts/MyLink";
+import MyLink from "../../layouts/MyLink";
 import { useRouter } from "next/router";
 import { loginUser } from "../../helpers/auth";
 import { GlobalContext } from "../../context/GlobalContext";

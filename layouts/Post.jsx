@@ -51,11 +51,15 @@ const Post = ({ post, useNextImg = true }) => {
             )}
           </div>
         )}
-        <h3 className="post-heading">{post.nazev}</h3>
-        <p className="post-description">
-          {post.perex ? trimString(post.perex, 18) : trimString(post.popis, 18)}
-          ...
-        </p>
+        <div>
+          <h3 className="post-heading">{post.nazev}</h3>
+          <p className="post-description">
+            {post.perex
+              ? trimString(post.perex, 18)
+              : trimString(post.popis, 18)}
+            ...
+          </p>
+        </div>
       </div>
     </Link>
   );

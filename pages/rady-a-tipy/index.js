@@ -14,7 +14,7 @@ import { objectToArray, objectToQueryString } from "../../helpers/helpers";
 import Post from "../../layouts/Post";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
-import { MyLink } from "../../layouts/MyLink";
+import MyLink from "../../layouts/MyLink";
 import RadyTipyLayout from "../../layouts/siteLayouts/RadyTipyLayout";
 import { fetchQuery } from "../../helpers/fetch";
 
@@ -66,14 +66,9 @@ const RadyTipy = ({ posts }) => {
 };
 
 RadyTipy.propTypes = {
-  radyTipy: PropTypes.object.isRequired,
-  getAdvices: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
 RadyTipy.Layout = RadyTipyLayout;
-
-const mapStateToProps = (state) => ({
-  radyTipy: state.radyTipy,
-});
 
 export default RadyTipy;

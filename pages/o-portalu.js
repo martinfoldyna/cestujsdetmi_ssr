@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row } from "react-grid-system";
+import { Col, Container, Row } from "react-grid-system";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { Section, SectionContent, SectionHeading } from "../layouts/Section";
@@ -8,7 +8,7 @@ import HeadingWithIcon from "../layouts/HeadingWithIcon";
 
 const OPortalu = () => {
   return (
-    <div>
+    <Container style={{ maxWidth: "1220px" }}>
       <span className="breadcrumb">
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;O portálu
       </span>
@@ -21,13 +21,13 @@ const OPortalu = () => {
       />
       <div className="data-wrapper">
         <Row>
-          <Col md={2.5}>
+          <Col md={2.5} className="sidebar">
             <SideCards />
           </Col>
-          <Col>
+          <Col className="content">
             <Section className="border-section mt-0">
               <SectionHeading background="none">
-                <h1>Vize portálu Cestuj s dětmi.cz</h1>
+                <h2>Vize portálu Cestuj s dětmi.cz</h2>
               </SectionHeading>
               <SectionContent>
                 <div>
@@ -87,7 +87,7 @@ const OPortalu = () => {
           </Col>
         </Row>
       </div>
-    </div>
+    </Container>
   );
 };
 

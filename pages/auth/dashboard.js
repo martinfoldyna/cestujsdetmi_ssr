@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { MyLink } from "../../layouts/MyLink";
+import MyLink from "../../layouts/MyLink";
 import { Col, Row } from "react-grid-system";
 import { BsPlus } from "react-icons/bs";
 import { GiHouse } from "react-icons/gi";
@@ -57,7 +57,7 @@ const UserDashboard = () => {
                   className="btn-logo d-flex align-items-center btn bg-blue text-white m-0-auto"
                 >
                   <BsPlus className="btn-icon" />
-                  Přidat další objekt
+                  <span>Přidat další objekt</span>
                 </button>
               </MyLink>
             </Row>
@@ -119,7 +119,7 @@ const UserDashboard = () => {
                           className="btn-logo d-flex align-items-center btn bg-blue text-white mr-2"
                         >
                           <FaSave className="btn-icon" />
-                          Uložit změny
+                          <span>Uložit změny</span>
                         </button>
                       </Row>
                     </form>

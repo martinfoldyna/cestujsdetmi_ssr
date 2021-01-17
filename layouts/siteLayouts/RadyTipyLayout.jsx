@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment, useState } from "react";
 import Link from "next/link";
-import { Col, Row } from "react-grid-system";
+import { Col, Row, Container } from "react-grid-system";
 import { AiFillBulb } from "react-icons/ai";
 import SideCards from "../SideCards";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import enums from "../../enums";
 import { objectToArray } from "../../helpers/helpers";
 import HeadingWithIcon from "./../HeadingWithIcon";
-import { MyLink } from "../MyLink";
+import MyLink from "../MyLink";
 
 export async function getStaticProps() {
   console.log("inStaticProps");
@@ -39,7 +39,7 @@ const RadyTipyLayout = ({ post, getAdvices, children }) => {
   };
 
   return (
-    <div>
+    <Container style={{ maxWidth: "1220px" }}>
       <span className="breadcrumb">
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;
         {post ? (
@@ -141,17 +141,8 @@ const RadyTipyLayout = ({ post, getAdvices, children }) => {
           <Col lg={9.5}>{children}</Col>
         </Row>
       </div>
-    </div>
+    </Container>
   );
 };
-
-RadyTipyLayout.propTypes = {
-  radyTipy: PropTypes.object.isRequired,
-  getAdvices: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  radyTipy: state.radyTipy,
-});
 
 export default RadyTipyLayout;

@@ -2,7 +2,7 @@
 
 .article-card,
 .tipy-na-ubytovani-home-card .article-card{
-  margin: 1.5em 0 2em;
+  margin: 1.5em 0 1em;
   text-align: justify;
   padding: 1em;
   border-radius: $border-radius;
@@ -279,7 +279,7 @@
 }
 
 .last-minute-small {
-  padding: 1.7em 1.5em;
+  padding: 1.2em 1.1em;
 }
 
 .last-minute-small .card-heading,
@@ -289,6 +289,10 @@
 
 .last-minute-small .card-heading {
   font-size: 18px;
+}
+
+h3.suggestion-post-heading {
+  text-decoration: underline;
 }
 
 

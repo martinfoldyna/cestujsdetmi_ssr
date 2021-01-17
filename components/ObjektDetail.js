@@ -30,7 +30,7 @@ import CityPin from "../public/cityPin";
 import MiniObjekt from "./cards/MiniObjekt";
 import SideBar from "../layouts/Sidebar";
 import enums from "../enums";
-import { MyLink } from "../layouts/MyLink";
+import MyLink from "../layouts/MyLink";
 import { fetchQuery } from "../helpers/fetch";
 
 const ObjektDetail = ({ addReview, objekt, kategorie }) => {
@@ -172,8 +172,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
   const images =
     objekt?.galerie && objekt?.galerie?.length > 0
       ? objekt?.galerie
-      : objekt?.relativeGalerie && objekt?.relativeGalerie?.length > 0
-      ? objekt?.relativeGalerie
+      : objekt?.relative_galerie && objekt?.relative_galerie?.length > 0
+      ? objekt?.relative_galerie
       : [];
 
   // Initialize Mapbox marker
@@ -224,7 +224,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
         <Row>
           <Col md={2.5} className="hide-mobile">
             <SideBar
-              topic={enums.TYP_OBJEKTU[objekt.typ_objektu].key}
+              topic={enums.TYP_OBJEKTU[objekt.typ_objektu]}
               color={color}
               kategorie={kategorie}
             />

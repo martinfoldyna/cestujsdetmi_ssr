@@ -3,7 +3,7 @@ import { Row, Col } from "react-grid-system";
 import { Section, SectionContent, SectionHeading } from "./Section";
 import { translateColor, translateObjektPlan } from "../helpers/translators";
 import { HiOutlineChevronRight } from "react-icons/hi";
-import { MyLink } from "./MyLink";
+import MyLink from "./MyLink";
 import Image from "next/image";
 
 const AdminObjekt = ({ objekt }) => {

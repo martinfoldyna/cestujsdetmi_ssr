@@ -9,7 +9,7 @@ import Highlighted from "../layouts/Highlighted";
 import HomePageSections from "../components/HomePageSections";
 import PropTypes from "prop-types";
 import { getNewPublished, getObjekty } from "../redux/actions/objekty";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import HomeRadyTipy from "../components/HomeRadyTipy";
 import LastMinute from "../components/LastMinute";
 import NewPublished from "../components/NewPublished";
@@ -17,6 +17,7 @@ import { wrapper } from "../redux/store";
 import { bindActionCreators } from "redux";
 import { fetchQuery } from "../helpers/fetch";
 import enums from "../enums";
+import { GlobalContext } from "../context/GlobalContext";
 
 const Home = ({ objekty, radyTipy, newPublished }) => {
   const fetchData = () => {
@@ -37,20 +38,23 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
       </Head>
 
       <main style={{ position: "relative" }}>
-        <Map />
+        <Hero />
+        <Container style={{ maxWidth: "1220px" }}>
+          <Map />
 
-        <div className="homepage">
-          <Highlighted data={objekty} />
-          <HomePageSections
-            topic="aktuality"
-            heading="Aktuality"
-            data={objekty}
-          />
-          <HomeRadyTipy posts={radyTipy} />
-          <LastMinute />
-          <HomePageSections topic="nejctenejsi" data={objekty} />
-          <NewPublished newPublished={newPublished} />
-        </div>
+          <div className="homepage">
+            <Highlighted data={objekty} />
+            <HomePageSections
+              topic="aktuality"
+              heading="Aktuality"
+              data={objekty}
+            />
+            <HomeRadyTipy posts={radyTipy} />
+            <LastMinute />
+            <HomePageSections topic="nejctenejsi" data={objekty} />
+            <NewPublished newPublished={newPublished} />
+          </div>
+        </Container>
       </main>
     </div>
   );

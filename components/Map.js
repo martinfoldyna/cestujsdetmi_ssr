@@ -100,7 +100,7 @@ const Map = () => {
   useEffect(() => {}, [selectedTrip]);
 
   return (
-    <section className="map-component">
+    <section className="map-component bg-grey">
       <Container>
         <Row>
           <Col md={6} className="d-flex">

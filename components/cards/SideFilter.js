@@ -129,7 +129,7 @@ const SideFilter = ({
       className={`filter-card ${
         fullPadding ||
         !kategorie ||
-        !kategorie?.some((categoryItem) => categoryItem.urceni === topic)
+        !kategorie?.some((categoryItem) => categoryItem.urceni === topic.key)
           ? "full-padding"
           : ""
       } ${color ? `bg-light-${color}` : "bg-grey"}`}
@@ -184,13 +184,15 @@ const SideFilter = ({
         </Col>
         <Col className="col p-0">
           {kategorie &&
-            kategorie.find((categoryItem) => categoryItem.urceni === topic) && (
+            kategorie.find(
+              (categoryItem) => categoryItem.urceni === topic.key
+            ) && (
               <div className="categories">
                 <p className="filter-name">Kategorie</p>
                 <ul className="categories-list list-style-none p-0 mb-0">
                   {kategorie.map(
                     (categoryItem) =>
-                      categoryItem.urceni === topic && (
+                      categoryItem.urceni === topic.key && (
                         <li
                           className={`d-flex justify-content-between align-items-center ${color} ${
                             router.pathname.split("/").pop() ===
@@ -200,7 +202,12 @@ const SideFilter = ({
                           }`}
                           key={categoryItem.id}
                         >
-                          <Link href={`${router.url}/${categoryItem.hodnota}`}>
+                          <Link
+                            href={{
+                              pathname: `/${topic.url}/[filterKategorie]`,
+                              query: { filterKategorie: categoryItem.hodnota },
+                            }}
+                          >
                             {categoryItem.nazev}
                           </Link>
                           {/*<Checkbox*/}

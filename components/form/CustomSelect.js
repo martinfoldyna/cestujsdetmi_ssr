@@ -72,11 +72,7 @@ const CustomSelect = ({
   return (
     <>
       <div className="custom-select-wrapper" ref={wrapperRef}>
-        <div
-          className={`custom-select border-${color}  ${
-            selectState ? "open" : ""
-          }`}
-        >
+        <div className={`custom-select  ${selectState ? "open" : ""}`}>
           <div
             className="custom-select__trigger "
             onClick={() => setSelectState((prevState) => !prevState)}

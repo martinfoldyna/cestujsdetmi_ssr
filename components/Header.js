@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-grid-system";
 import { IoMdAdd } from "react-icons/io";
-import { FaRegUser, FaRegHeart } from "react-icons/fa";
+import {
+  FaRegUser,
+  FaRegHeart,
+  FaEnvelope,
+  FaRegEnvelope,
+  FaSearch,
+} from "react-icons/fa";
 import Link from "next/link";
-import { MyLink } from "../layouts/MyLink";
+import MyLink from "../layouts/MyLink";
 import Navbar from "./Navbar";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
+import SmallButton from "../layouts/SmallButton";
 const HeaderComponent = ({ user }) => {
   const [sticky, setSticky] = useState(false);
   const [stickyUp, setStickyUp] = useState(false);
@@ -45,60 +52,134 @@ const HeaderComponent = ({ user }) => {
   return (
     <header className={`main-header ${stickyUp ? "sticky" : ""}`}>
       <div className="hide-mobile">
-        <Container style={{ maxWidth: "1220px" }}>
-          <Row>
-            <Col className="d-flex align-items-center hide-mobile p-0 ml-0">
-              <button
-                className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"
-                style={{ marginRight: "0" }}
-              >
-                <FaRegHeart className="btn-icon" />
-                Oblíbené
-              </button>
-            </Col>
-            <Col className="d-flex align-items-center justify-content-center cestuj-logo-wrapper p-0">
-              <MyLink href="/">
-                <Image
-                  src="/img/logo-big-flat.svg"
-                  alt="logo Cestuj s detmi"
-                  className="cestuj-logo hide-mobile"
-                  layout="fill"
-                />
-              </MyLink>
-            </Col>
-            <Col className="d-flex align-items-center justify-content-end hide-mobile p-0">
-              <Link href="/objekty">
-                <button
-                  className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"
-                  style={{ marginLeft: "0" }}
+        <Container>
+          {/*<Row>*/}
+          {/*  <Col className="d-flex align-items-center hide-mobile p-0 ml-0">*/}
+          {/*    <button*/}
+          {/*      className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"*/}
+          {/*      style={{ marginRight: "0" }}*/}
+          {/*    >*/}
+          {/*      <FaRegHeart className="btn-icon" />*/}
+          {/*      Oblíbené*/}
+          {/*    </button>*/}
+          {/*  </Col>*/}
+          {/*  <Col className="d-flex align-items-center justify-content-center cestuj-logo-wrapper p-0">*/}
+          {/*    <MyLink href="/">*/}
+          {/*      <Image*/}
+          {/*        src="/img/logo-big-flat.svg"*/}
+          {/*        alt="logo Cestuj s detmi"*/}
+          {/*        className="cestuj-logo hide-mobile"*/}
+          {/*        layout="fill"*/}
+          {/*      />*/}
+          {/*    </MyLink>*/}
+          {/*  </Col>*/}
+          {/*  <Col className="d-flex align-items-center justify-content-end hide-mobile p-0">*/}
+          {/*    <Link href="/objekty">*/}
+          {/*      <button*/}
+          {/*        className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"*/}
+          {/*        style={{ marginLeft: "0" }}*/}
+          {/*      >*/}
+          {/*        <IoMdAdd className="btn-icon" />*/}
+          {/*        Přidat objekt*/}
+          {/*      </button>*/}
+          {/*    </Link>*/}
+          {/*    {user ? (*/}
+          {/*      <Link href="/auth/dashboard">*/}
+          {/*        <button*/}
+          {/*          className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"*/}
+          {/*          style={{ marginRight: "0" }}*/}
+          {/*        >*/}
+          {/*          <FaRegUser className="btn-icon" />*/}
+          {/*          {user.email}*/}
+          {/*        </button>*/}
+          {/*      </Link>*/}
+          {/*    ) : (*/}
+          {/*      <Link href="/auth/login">*/}
+          {/*        <button*/}
+          {/*          className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"*/}
+          {/*          style={{ marginRight: "0" }}*/}
+          {/*        >*/}
+          {/*          <FaRegUser className="btn-icon" />*/}
+          {/*          Přihlášení*/}
+          {/*        </button>*/}
+          {/*      </Link>*/}
+          {/*    )}*/}
+          {/*  </Col>*/}
+          {/*</Row>*/}
+          <div className="d-flex justify-content-between align-items-center">
+            <MyLink href="/">
+              <Image src="/cestuj_big.svg" height={47} width={270} />
+            </MyLink>
+            <div className="d-flex align-items-center justify-content-end">
+              <div className="search-bar">
+                <div className="d-flex align-items-center justify-content-end">
+                  <input
+                    type="text"
+                    placeholder="Povězte nám, co hledáte"
+                    className="bg-grey"
+                  />
+                  <button className="btn bg-grey search-bar-button">
+                    <FaSearch className="text-blue" />
+                  </button>
+                </div>
+              </div>
+              <Link href="/oblibene">
+                {/*<button className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost mr-0">*/}
+                {/*  <FaRegHeart className="btn-icon text-red" />*/}
+                {/*  <span>Oblíbené</span>*/}
+                {/*</button>*/}
+                <SmallButton
+                  color="grey"
+                  ghost
+                  icon={FaRegHeart}
+                  iconColor="red"
                 >
-                  <IoMdAdd className="btn-icon" />
-                  Přidat objekt
-                </button>
+                  Oblíbené
+                </SmallButton>
               </Link>
-              {user ? (
-                <Link href="/auth/dashboard">
-                  <button
-                    className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"
-                    style={{ marginRight: "0" }}
-                  >
-                    <FaRegUser className="btn-icon" />
-                    {user.email}
-                  </button>
-                </Link>
-              ) : (
-                <Link href="/auth/login">
-                  <button
-                    className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"
-                    style={{ marginRight: "0" }}
-                  >
-                    <FaRegUser className="btn-icon" />
-                    Přihlášení
-                  </button>
-                </Link>
-              )}
-            </Col>
-          </Row>
+              {/*<button className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost mr-0">*/}
+              {/*  <FaRegEnvelope className="btn-icon text-blue" />*/}
+              {/*  <span>Odběr newsletteru</span>*/}
+              {/*</button>*/}
+              <SmallButton
+                color="grey"
+                ghost
+                icon={FaRegEnvelope}
+                iconColor="blue"
+              >
+                Odběr newsletteru
+              </SmallButton>
+              <Link href="/objekty">
+                {/*<button*/}
+                {/*  className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost"*/}
+                {/*  style={{ marginLeft: "0" }}*/}
+                {/*>*/}
+                {/*  <IoMdAdd className="btn-icon text-blue" />*/}
+                {/*  <span>Přidat objekt</span>*/}
+                {/*</button>*/}
+                <SmallButton color="grey" ghost icon={IoMdAdd} iconColor="blue">
+                  Přidat objekt
+                </SmallButton>
+              </Link>
+              <Link href="/auth/login">
+                {/*<button*/}
+                {/*  className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost"*/}
+                {/*  style={{ marginRight: "0" }}*/}
+                {/*>*/}
+                {/*  <FaRegUser className="btn-icon text-blue" />*/}
+                {/*  <span>Přihlášení</span>*/}
+                {/*</button>*/}
+                <SmallButton
+                  color="grey"
+                  ghost
+                  icon={FaRegUser}
+                  iconColor="blue"
+                >
+                  Přihlášení
+                </SmallButton>
+              </Link>
+            </div>
+          </div>
         </Container>
       </div>
       <div className="hide-desktop">

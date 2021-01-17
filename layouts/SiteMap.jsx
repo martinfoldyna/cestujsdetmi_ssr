@@ -14,12 +14,14 @@ const SiteMap = () => {
             style={{ position: "relative" }}
           >
             <div className="d-flex align-items-center">
-              <Image
-                src="/img/cestuj-small-icon.svg"
-                alt="malé logo Cestujsdětmi.cz"
-                layout="fill"
-              />
-              <h3>Cestuj s dětmi</h3>
+              <div className="image-wrapper">
+                <Image
+                  src="/cestuj_big.svg"
+                  alt="malé logo Cestujsdětmi.cz"
+                  height={47}
+                  width={270}
+                />
+              </div>
             </div>
             <div className="d-flex">
               <button className="btn btn-logo ghost">

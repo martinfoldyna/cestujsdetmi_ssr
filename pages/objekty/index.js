@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { getAllObjectTypes } from "../../redux/actions/objekty";
 import PropTypes from "prop-types";
 import SideCards from "../../layouts/SideCards";
-import { MyLink } from "../../layouts/MyLink";
+import MyLink from "../../layouts/MyLink";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchQuery } from "../../helpers/fetch";
 import enums from "../../enums";

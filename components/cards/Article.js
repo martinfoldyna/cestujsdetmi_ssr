@@ -27,10 +27,10 @@ const Article = ({ article, background, useNextImg = true }) => {
       <div
         className={`article-card d-flex align-items-center ${
           background && `bg-${background}`
-        }`}
+        } ${!!background ? "border-grey" : ""}`}
         ref={parentRef}
       >
-        <Row className="w-100">
+        <Row className="w-100 m-0">
           <Col sm={4}>
             <div className="img-wrapper">
               {useNextImg ? (
@@ -38,9 +38,9 @@ const Article = ({ article, background, useNextImg = true }) => {
                   src={
                     article?.galerie && article?.galerie.length > 0
                       ? article?.galerie[0].sm
-                      : article?.relativeGalerie &&
-                        article?.relativeGalerie?.length > 0
-                      ? article?.relativeGalerie[0].sm
+                      : article?.relative_galerie &&
+                        article?.relative_galerie?.length > 0
+                      ? article?.relative_galerie[0].sm
                       : "/img/placeholder.png"
                   }
                   alt={
