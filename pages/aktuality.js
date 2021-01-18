@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Col, Row } from "react-grid-system";
+import { Col, Container, Row } from "react-grid-system";
 import Link from "next/link";
 import enums from "../enums";
 import { getObjektyByParams, countObjekty } from "../redux/actions/objekty";
@@ -27,7 +27,7 @@ const Aktuality = ({ objekty }) => {
   };
 
   return (
-    <div>
+    <Container style={{ maxWidth: "1220px" }}>
       <span className="breadcrumb">
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Aktuality
       </span>
@@ -66,7 +66,7 @@ const Aktuality = ({ objekty }) => {
           </Col>
         </Row>
       </div>
-    </div>
+    </Container>
   );
 };
 

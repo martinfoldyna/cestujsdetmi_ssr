@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/HeadingWithIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/HeadingWithIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/aktuality.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aktuality.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Form.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Form.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +105,8 @@
       <workItem from="1610542478688" duration="21214000" />
       <workItem from="1610878111558" duration="3167000" />
       <workItem from="1610884717649" duration="277000" />
-      <workItem from="1610906518481" duration="1526000" />
+      <workItem from="1610906518481" duration="2664000" />
+      <workItem from="1610979812217" duration="175000" />
     </task>
     <servers />
   </component>
