@@ -3,6 +3,7 @@ import { Row, Col } from "react-grid-system";
 import Link from "next/link";
 import Image from "next/image";
 import { FaEnvelope, FaFacebookSquare } from "react-icons/fa";
+import MyLink from "./MyLink";
 
 const SiteMap = () => {
   return (
@@ -23,15 +24,20 @@ const SiteMap = () => {
                 />
               </div>
             </div>
-            <div className="d-flex">
-              <button className="btn btn-logo ghost">
-                Odběr newsletteru{" "}
-                <FaEnvelope className="text-blue btn-icon right" />
-              </button>
-              <button className="btn btn-logo ghost">
-                Sledujte nás na{" "}
-                <FaFacebookSquare className="text-blue btn-icon right" />
-              </button>
+            <div className="d-flex align-items-center">
+              <MyLink href="/newsletter">
+                <button className="btn btn-logo ghost">
+                  Odběr newsletteru{" "}
+                  <FaEnvelope className="text-blue btn-icon right" />
+                </button>
+              </MyLink>
+
+              <MyLink href="https://www.facebook.com/cestujsdetmi.cz/">
+                <button className="btn btn-logo ghost">
+                  Sledujte nás na{" "}
+                  <FaFacebookSquare className="text-blue btn-icon right" />
+                </button>
+              </MyLink>
             </div>
           </div>
           <Row>

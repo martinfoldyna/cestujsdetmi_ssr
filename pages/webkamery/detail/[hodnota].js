@@ -71,7 +71,7 @@ const WebcamDetail = ({ webcam }) => {
       {/*  description={webcam.page_description}*/}
       {/*/>*/}
 
-      <Section className="border-section mt-0 webcam-detail">
+      <Section className="mt-0 webcam-detail">
         {/*<SectionHeading background="none">*/}
         {/*  <h2>{webcam.nazev}</h2>*/}
         {/*</SectionHeading>*/}
@@ -105,8 +105,8 @@ const WebcamDetail = ({ webcam }) => {
         </SectionContent>
       </Section>
       {related && (
-        <Section className="realted-advices border-section">
-          <SectionHeading background="none">
+        <Section className="realted-advices">
+          <SectionHeading background="grey">
             <h2>Další webkamery</h2>
           </SectionHeading>
           <SectionContent>

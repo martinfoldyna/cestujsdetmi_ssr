@@ -25,13 +25,13 @@ const OPortalu = () => {
             <SideCards />
           </Col>
           <Col className="content">
-            <Section className="border-section mt-0">
-              <SectionHeading background="none">
+            <Section className=" mt-0">
+              <SectionHeading>
                 <h2>Vize portálu Cestuj s dětmi.cz</h2>
               </SectionHeading>
               <SectionContent>
                 <div>
-                  <p>
+                  <p className="mt-0">
                     Úkolem portálu Cestuj s dětmi.cz je vytvoření rozsáhlé
                     nabídky možností, jak plnohodnotně strávit více času s
                     našimi ratolestmi a zároveň nabídnout rodinám s dětmi i

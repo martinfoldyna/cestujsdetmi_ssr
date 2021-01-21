@@ -94,7 +94,6 @@ input[type=number] {
 .footer {
   background-color: #434343;
   color: #8D8D8D;
-  margin-top: 3em;
 }
 
 .footer-wrapper {
@@ -454,10 +453,13 @@ input[type=number] {
 }
 
 .section-content {
+  padding-top: 1em;
   padding-bottom: 2em;
   border: 1px solid $grey;
   background-color: #fff;
 }
+
+.section .section-content .content-wrapper:first-child {margin-top: 0}
 
 .section.highlighted .section-content {
   background-color: transparent;
@@ -727,7 +729,7 @@ input[type=number] {
 
 .border-section .section-content {
   border: none;
-  padding: 0 2em 2em;
+  //padding: 0 2em 2em;
 }
 
 .objekt-mini-heading {

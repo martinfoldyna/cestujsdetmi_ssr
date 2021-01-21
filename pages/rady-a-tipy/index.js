@@ -28,8 +28,8 @@ const RadyTipy = ({ posts }) => {
   const router = useRouter();
 
   return objectToArray(enums.RADY_TIPY.KATEGORIE).map((categoryItem) => (
-    <Section className="border-section mt-0" key={categoryItem.key}>
-      <SectionHeading background="none">
+    <Section className=" mt-0" key={categoryItem.key}>
+      <SectionHeading background="grey">
         <h2>{categoryItem.value}</h2>
       </SectionHeading>
       <SectionContent>

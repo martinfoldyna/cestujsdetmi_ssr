@@ -6,22 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/HomePageSections.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HomePageSections.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LastMinute.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LastMinute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/NewPublished.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/NewPublished.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/Article.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/Article.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/OurSuggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/OurSuggestions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/listFilteredItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/listFilteredItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/Highlighted.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/Highlighted.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/Section.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/Section.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/SiteMap.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/SiteMap.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/kontakt.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/kontakt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/o-portalu.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/o-portalu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/objekty/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/objekty/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/webkamery/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/webkamery/detail/[hodnota].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Form.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Form.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Global.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Variables.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +114,7 @@
       <workItem from="1610884717649" duration="277000" />
       <workItem from="1610906518481" duration="2664000" />
       <workItem from="1610979812217" duration="1076000" />
-      <workItem from="1611222515348" duration="3662000" />
+      <workItem from="1611222515348" duration="6119000" />
     </task>
     <servers />
   </component>

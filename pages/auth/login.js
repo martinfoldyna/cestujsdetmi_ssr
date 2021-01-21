@@ -48,7 +48,7 @@ const Login = ({ global }) => {
   return (
     <Fragment>
       <div className="d-flex justify-content-center">
-        <div className="login-card border-grey">
+        <div className="login-card bg-white border-radius">
           <div className="p-1">
             <h3 className="mt-0 mb-1">
               {adminLogin

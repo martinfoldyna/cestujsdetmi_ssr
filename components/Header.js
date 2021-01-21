@@ -53,59 +53,6 @@ const HeaderComponent = ({ user }) => {
     <header className={`main-header ${stickyUp ? "sticky" : ""}`}>
       <div className="hide-mobile">
         <Container>
-          {/*<Row>*/}
-          {/*  <Col className="d-flex align-items-center hide-mobile p-0 ml-0">*/}
-          {/*    <button*/}
-          {/*      className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"*/}
-          {/*      style={{ marginRight: "0" }}*/}
-          {/*    >*/}
-          {/*      <FaRegHeart className="btn-icon" />*/}
-          {/*      Oblíbené*/}
-          {/*    </button>*/}
-          {/*  </Col>*/}
-          {/*  <Col className="d-flex align-items-center justify-content-center cestuj-logo-wrapper p-0">*/}
-          {/*    <MyLink href="/">*/}
-          {/*      <Image*/}
-          {/*        src="/img/logo-big-flat.svg"*/}
-          {/*        alt="logo Cestuj s detmi"*/}
-          {/*        className="cestuj-logo hide-mobile"*/}
-          {/*        layout="fill"*/}
-          {/*      />*/}
-          {/*    </MyLink>*/}
-          {/*  </Col>*/}
-          {/*  <Col className="d-flex align-items-center justify-content-end hide-mobile p-0">*/}
-          {/*    <Link href="/objekty">*/}
-          {/*      <button*/}
-          {/*        className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"*/}
-          {/*        style={{ marginLeft: "0" }}*/}
-          {/*      >*/}
-          {/*        <IoMdAdd className="btn-icon" />*/}
-          {/*        Přidat objekt*/}
-          {/*      </button>*/}
-          {/*    </Link>*/}
-          {/*    {user ? (*/}
-          {/*      <Link href="/auth/dashboard">*/}
-          {/*        <button*/}
-          {/*          className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"*/}
-          {/*          style={{ marginRight: "0" }}*/}
-          {/*        >*/}
-          {/*          <FaRegUser className="btn-icon" />*/}
-          {/*          {user.email}*/}
-          {/*        </button>*/}
-          {/*      </Link>*/}
-          {/*    ) : (*/}
-          {/*      <Link href="/auth/login">*/}
-          {/*        <button*/}
-          {/*          className="btn-small-logo d-flex align-items-center btn outline-blue text-blue ghost"*/}
-          {/*          style={{ marginRight: "0" }}*/}
-          {/*        >*/}
-          {/*          <FaRegUser className="btn-icon" />*/}
-          {/*          Přihlášení*/}
-          {/*        </button>*/}
-          {/*      </Link>*/}
-          {/*    )}*/}
-          {/*  </Col>*/}
-          {/*</Row>*/}
           <div className="d-flex justify-content-between align-items-center">
             <MyLink href="/">
               <Image src="/cestuj_big.svg" height={47} width={270} />
@@ -123,7 +70,7 @@ const HeaderComponent = ({ user }) => {
                   </button>
                 </div>
               </div>
-              <Link href="/oblibene">
+              <MyLink href="/oblibene">
                 {/*<button className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost mr-0">*/}
                 {/*  <FaRegHeart className="btn-icon text-red" />*/}
                 {/*  <span>Oblíbené</span>*/}
@@ -136,20 +83,22 @@ const HeaderComponent = ({ user }) => {
                 >
                   Oblíbené
                 </SmallButton>
-              </Link>
+              </MyLink>
               {/*<button className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost mr-0">*/}
               {/*  <FaRegEnvelope className="btn-icon text-blue" />*/}
               {/*  <span>Odběr newsletteru</span>*/}
               {/*</button>*/}
-              <SmallButton
-                color="grey"
-                ghost
-                icon={FaRegEnvelope}
-                iconColor="blue"
-              >
-                Odběr newsletteru
-              </SmallButton>
-              <Link href="/objekty">
+              <MyLink href="/newsletter">
+                <SmallButton
+                  color="grey"
+                  ghost
+                  icon={FaRegEnvelope}
+                  iconColor="blue"
+                >
+                  Odběr newsletteru
+                </SmallButton>
+              </MyLink>
+              <MyLink href="/objekty">
                 {/*<button*/}
                 {/*  className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost"*/}
                 {/*  style={{ marginLeft: "0" }}*/}
@@ -160,8 +109,8 @@ const HeaderComponent = ({ user }) => {
                 <SmallButton color="grey" ghost icon={IoMdAdd} iconColor="blue">
                   Přidat objekt
                 </SmallButton>
-              </Link>
-              <Link href="/auth/login">
+              </MyLink>
+              <MyLink href="/auth/login">
                 {/*<button*/}
                 {/*  className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost"*/}
                 {/*  style={{ marginRight: "0" }}*/}
@@ -177,14 +126,14 @@ const HeaderComponent = ({ user }) => {
                 >
                   Přihlášení
                 </SmallButton>
-              </Link>
+              </MyLink>
             </div>
           </div>
         </Container>
       </div>
       <div className="hide-desktop">
         <div className="d-flex justify-content-between header-wrapper">
-          <Link href="/">
+          <MyLink href="/">
             <Image
               src="/img/logo-small.svg"
               alt="logo Cestuj s detmi"
@@ -194,7 +143,7 @@ const HeaderComponent = ({ user }) => {
               width={126}
               style={{ height: "80%" }}
             />
-          </Link>
+          </MyLink>
           <div className="d-flex">
             <button className="btn text-blue ghost">
               {/*<Image src="/icons/search.svg" alt="search" layout="fill" />*/}

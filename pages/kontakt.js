@@ -25,12 +25,12 @@ const Kontakt = () => {
               <SideCards />
             </Col>
             <Col className="content">
-              <Section className="border-section mt-0">
-                <SectionHeading background="none">
+              <Section className="mt-0">
+                <SectionHeading>
                   <h2>Martina Procházková</h2>
                 </SectionHeading>
                 <SectionContent>
-                  <p>MP Agency</p>
+                  <p className="mt-0">MP Agency</p>
                   <p>Provozovatel portálů</p>
                   <ul className="list-style-none pl-0">
                     <li>
@@ -76,12 +76,12 @@ const Kontakt = () => {
                   </p>
                 </SectionContent>
               </Section>
-              <Section className="border-section">
-                <SectionHeading background="none">
+              <Section>
+                <SectionHeading>
                   <h2>Libuše Farská</h2>
                 </SectionHeading>
                 <SectionContent>
-                  <p>Editorka</p>
+                  <p className="mt-0">Editorka</p>
                   <ul className="pl-0 list-style-none">
                     <li>
                       Email:{" "}
@@ -96,12 +96,12 @@ const Kontakt = () => {
                   </ul>
                 </SectionContent>
               </Section>
-              <Section className="border-section">
-                <SectionHeading background="none">
+              <Section>
+                <SectionHeading>
                   <h2>Webmaster portálu</h2>
                 </SectionHeading>
                 <SectionContent>
-                  <p>Správce a administrátor</p>
+                  <p className="mt-0">Správce a administrátor</p>
                   <a href="mailto:webmaster@cestujsdetmi.cz">
                     webmaster@cestujsdetmi.cz
                   </a>
