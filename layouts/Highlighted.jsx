@@ -8,7 +8,7 @@ import HomePageObjekt from "./HomePageObjekt";
 
 const Highlighted = ({ data }) => {
   return (
-    <div className="section bg-grey">
+    <div className="section highlighted bg-grey">
       <Row className="justify-content-arround m-0">
         <Col lg={6} className="bg-grey">
           <div className="heading-with-icons d-flex align-items-center">

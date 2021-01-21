@@ -32,6 +32,10 @@ body {
   margin: 0;
 }
 
+main {
+  background-color: #EFEFEF;
+}
+
 body {
   font-family: $font-family-montserrat;
   min-height: 100vh;
@@ -172,7 +176,7 @@ input[type=number] {
   display: -webkit-box;
   text-decoration: none;
   font-weight: 600;
-  color: black;
+  color: $heading-black;
   margin: 0 auto;
   display: flex;
 
@@ -444,9 +448,23 @@ input[type=number] {
   padding: 0 1em;
 }
 
+.section-heading {
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
 .section-content {
   padding-bottom: 2em;
-  border: 1px solid $grey
+  border: 1px solid $grey;
+  background-color: #fff;
+}
+
+.section.highlighted .section-content {
+  background-color: transparent;
+}
+
+.main-header button {
+  color: $heading-black;
 }
 
 .section-content .row {

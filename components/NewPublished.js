@@ -14,7 +14,7 @@ const NewPublished = ({ newPublished }) => {
 
   return (
     <div className="section new-published">
-      <Row className="justify-content-arround new-published-heading bg-grey m-0">
+      <Row className="section-heading justify-content-arround new-published-heading bg-grey m-0">
         <Col md={12} className="text-align-right">
           <div className="heading-with-icons d-flex align-items-center">
             <RiPushpin2Fill

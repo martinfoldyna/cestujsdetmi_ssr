@@ -24,10 +24,17 @@ const Article = ({ article, background, useNextImg = true }) => {
         article?.hodnota
       }`}
     >
+      {/* WAS: */}
+      {/*<div*/}
+      {/*    className={`article-card d-flex align-items-center ${*/}
+      {/*        background && `bg-${background}`*/}
+      {/*    } ${!!background ? "border-grey" : ""}`}*/}
+      {/*    ref={parentRef}*/}
+      {/*>*/}
       <div
         className={`article-card d-flex align-items-center ${
           background && `bg-${background}`
-        } ${!!background ? "border-grey" : ""}`}
+        }`}
         ref={parentRef}
       >
         <Row className="w-100 m-0">

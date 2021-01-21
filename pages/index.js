@@ -37,25 +37,25 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={{ position: "relative" }}>
-        <Hero />
-        <Container style={{ maxWidth: "1220px" }}>
-          <Map />
+      {/*<main style={{ position: "relative" }}>*/}
+      <Hero />
+      <Container style={{ maxWidth: "1220px" }}>
+        <Map />
 
-          <div className="homepage">
-            <Highlighted data={objekty} />
-            <HomePageSections
-              topic="aktuality"
-              heading="Aktuality"
-              data={objekty}
-            />
-            <HomeRadyTipy posts={radyTipy} />
-            <LastMinute />
-            <HomePageSections topic="nejctenejsi" data={objekty} />
-            <NewPublished newPublished={newPublished} />
-          </div>
-        </Container>
-      </main>
+        <div className="homepage">
+          <Highlighted data={objekty} />
+          <HomePageSections
+            topic="aktuality"
+            heading="Aktuality"
+            data={objekty}
+          />
+          <HomeRadyTipy posts={radyTipy} />
+          <LastMinute />
+          <HomePageSections topic="nejctenejsi" data={objekty} />
+          <NewPublished newPublished={newPublished} />
+        </div>
+      </Container>
+      {/*</main>*/}
     </div>
   );
 };

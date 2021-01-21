@@ -67,7 +67,7 @@ const HomePageSections = ({ data, loading, topic, heading }) => {
 
   return (
     <section className={`section`} style={{ marginTop: "2em" }}>
-      <Row className="justify-content-arround bg-grey m-0">
+      <Row className="justify-content-arround bg-grey m-0 section-heading">
         <Col md={12}>
           <div className="heading-with-icons">{generateHeading(topic)}</div>
         </Col>

@@ -9,7 +9,7 @@ import { getLastMinute } from "../redux/actions/objekty";
 const LastMinute = ({}) => {
   return (
     <section className="section">
-      <Row className="justify-content-arround bg-grey m-0 row">
+      <Row className="section-heading justify-content-arround bg-grey m-0 row">
         <Col md={12} className="m-0 col">
           <div className="heading-with-icons d-flex align-items-center">
             <RiPushpin2Fill

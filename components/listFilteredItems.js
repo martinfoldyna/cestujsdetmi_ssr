@@ -137,7 +137,9 @@ const ListFilteredItems = ({ objekty, typ_objektu }) => {
         <div key={objekt.id}>
           <Article
             article={objekt}
-            background={`${(index + 1) % 2 === 0 && index > 0 && "grey"}`}
+            background={`${
+              (index + 1) % 2 === 0 && index > 0 ? "grey" : "white"
+            }`}
           />
         </div>
       ))}

@@ -195,7 +195,6 @@ const Map = () => {
               options={beautifiedKraj}
               onChange={onKrajChange}
               value={clicked}
-              color={color}
             />
           </Col>
           <Col md={2} className="pl-0">
@@ -206,7 +205,6 @@ const Map = () => {
               placeholder="Oblast"
               options={beautifiedRegion}
               onChange={(e) => setOblast(e.key)}
-              color={color}
             />
           </Col>
           <Col md={1} className="pl-0">

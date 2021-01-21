@@ -105,7 +105,7 @@ const ObjektyOverview = ({ objektyTypy }) => {
       <Row className="justify-content-between">
         <Col>
           <div className="objekty">
-            <h3 className="font-weight-600 section-hedaing">
+            <h3 className="font-weight-600 section-heading">
               Pokud chcete vybrat formu prezentace, nejdříve se{" "}
               <MyLink href="/auth/register" className="text-blue">
                 registrujte
@@ -131,7 +131,7 @@ const ObjektyOverview = ({ objektyTypy }) => {
             </Row>
           </div>
           {objektyTypy && <ObjektyTable objektyTypy={objektyTypy} />}
-          <h3 className="font-weight-600 section-hedaing">Vysvětlivky</h3>
+          <h3 className="font-weight-600 section-heading">Vysvětlivky</h3>
           <Row>
             <Col md={6} style={{ marginBottom: "2em" }} className="pl-0">
               <div className="plan-card">

@@ -36,9 +36,11 @@ const MyApp = ({ Component, pageProps }) => {
     >
       <Header />
       {/*<Container style={{ maxWidth: "1220px" }}>*/}
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <main style={{ position: "relative" }}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </main>
       {/*</Container>*/}
       <Footer />
     </GlobalContext.Provider>

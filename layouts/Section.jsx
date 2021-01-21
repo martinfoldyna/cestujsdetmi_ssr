@@ -19,7 +19,7 @@ export const SectionHeading = ({
 }) => {
   return (
     <Row
-      className={`justify-content-arround ${
+      className={`section-heading justify-content-arround ${
         background !== "none" ? `bg-${background}` : ""
       } m-0`}
     >
