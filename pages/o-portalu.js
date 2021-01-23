@@ -31,7 +31,7 @@ const OPortalu = () => {
               </SectionHeading>
               <SectionContent>
                 <div>
-                  <p className="mt-0">
+                  <p>
                     Úkolem portálu Cestuj s dětmi.cz je vytvoření rozsáhlé
                     nabídky možností, jak plnohodnotně strávit více času s
                     našimi ratolestmi a zároveň nabídnout rodinám s dětmi i

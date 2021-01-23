@@ -13,7 +13,7 @@ const AdminObjekt = ({ objekt }) => {
         <h2>{`${objekt.nazev}`}</h2>
       </SectionHeading>
       <SectionContent
-        className="border-grey d-flex  mb-2"
+        className="bg-white d-flex  mb-2"
         style={{ flexDirection: "column", flex: 1 }}
       >
         <Row

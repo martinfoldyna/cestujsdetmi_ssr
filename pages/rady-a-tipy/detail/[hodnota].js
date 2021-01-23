@@ -5,19 +5,10 @@ import {
   SectionHeading,
   SectionContent,
 } from "../../../layouts/Section";
-import { connect } from "react-redux";
-import {
-  getAdvice,
-  removeAdvice,
-  getRelatedAdvices,
-} from "../../../redux/actions/radyTipy";
 import { useRouter } from "next/router";
 import LoadingSkeleton from "../../../layouts/LoadingSkeleton";
 import parse from "html-react-parser";
 import { BsClock } from "react-icons/bs";
-import Post from "../../../layouts/Post";
-import { Row, Col } from "react-grid-system";
-import { objectToArray, objectToQueryString } from "../../../helpers/helpers";
 import enums from "../../../enums";
 import { fetchQuery } from "../../../helpers/fetch";
 import RadyTipyLayout from "../../../layouts/siteLayouts/RadyTipyLayout";
@@ -75,8 +66,8 @@ const RadyTipyDetail = ({
 
   return post ? (
     <div>
-      <Section className="border-section mt-0 post-detail">
-        <SectionHeading background="none">
+      <Section className="mt-0 post-detail">
+        <SectionHeading background="grey">
           <h2>{post.nazev}</h2>
           <div className="d-flex align-items-center date">
             <BsClock className="text-yellow btn-icon" />

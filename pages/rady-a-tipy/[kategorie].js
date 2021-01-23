@@ -9,6 +9,7 @@ import enums from "../../enums";
 import { objectToArray } from "../../helpers/helpers";
 import RadyTipy from "./index";
 import RadyTipyLayout from "../../layouts/siteLayouts/RadyTipyLayout";
+import NewsArticle from "../../layouts/newsArticle";
 
 export async function getStaticPaths() {
   const categories = objectToArray(enums.RADY_TIPY.KATEGORIE);
@@ -35,13 +36,20 @@ const RadyTipyKategorie = ({ radyTipy }) => {
   return radyTipy ? (
     <div>
       {radyTipy.map((post, index) => (
-        <HomePageObjekt
-          article={post}
-          topic="rady-a-tipy"
-          key={post.id}
-          number_of_words={50}
-          className={(index + 1) % 2 === 0 ? "bg-grey" : ""}
-        />
+        <>
+          <HomePageObjekt
+            article={post}
+            topic="rady-a-tipy"
+            key={post.id}
+            number_of_words={50}
+            className={`hide-mobile ${
+              (index + 1) % 2 === 0 ? "bg-grey" : "bg-white"
+            }`}
+          />
+          <div className="hide-desktop">
+            <NewsArticle article={post} key={post.id} />
+          </div>
+        </>
       ))}
     </div>
   ) : (

@@ -107,6 +107,7 @@ input[type=number] {
   margin-top: 0;
 }
 
+
 .wrapper {
   max-width: 1310px !important;
 }
@@ -453,8 +454,8 @@ input[type=number] {
 }
 
 .section-content {
-  padding-top: 1em;
-  padding-bottom: 2em;
+  padding: .5em calc(1em + 15px) 2em;
+
   border: 1px solid $grey;
   background-color: #fff;
 }
@@ -520,7 +521,7 @@ input[type=number] {
 
 .breadcrumb {
   display: block;
-  padding: 2em 0;
+  padding: 1em 0;
   color: #666666;
   //font-size: .8em;
 }

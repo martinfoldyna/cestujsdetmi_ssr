@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import MyLink from "../../layouts/MyLink";
-import { Col, Row } from "react-grid-system";
+import { Col, Row, Container } from "react-grid-system";
 import { BsPlus } from "react-icons/bs";
 import { GiHouse } from "react-icons/gi";
 import { MdLocationCity } from "react-icons/md";
@@ -26,7 +26,7 @@ const UserDashboard = () => {
   };
 
   return user && user.objekty ? (
-    <Fragment>
+    <Container style={{ maxWidth: "1220px" }}>
       <span className="breadcrumb">
         <MyLink href="/">Úvodní stránka</MyLink>&nbsp;/&nbsp;Administrace
       </span>
@@ -162,7 +162,7 @@ const UserDashboard = () => {
           </Col>
         </Row>
       </div>
-    </Fragment>
+    </Container>
   ) : (
     // <Redirect href="/auth/login" />
     <p className="text-red">Not authorized</p>

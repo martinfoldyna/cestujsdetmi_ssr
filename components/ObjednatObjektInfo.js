@@ -616,36 +616,7 @@ const ObjednatObjektInfo = ({
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Registrace - nabídka
         možností
       </span>
-      {/*<div className="objekty-heading bg-blue text-white mb-2">*/}
-      {/*  <Row>*/}
-      {/*    <Col md={9}>*/}
-      {/*      <div className="heading-with-icons d-flex align-items-center">*/}
-      {/*        {objekt ? (*/}
-      {/*          <>*/}
-      {/*            <BiDetail*/}
-      {/*              className="text-white icon-heading"*/}
-      {/*              style={{ marginRight: ".5em" }}*/}
-      {/*            />*/}
-      {/*            <h2>{objekt?.nazev} - detail objektu</h2>*/}
-      {/*          </>*/}
-      {/*        ) : (*/}
-      {/*          <>*/}
-      {/*            <FaPlus*/}
-      {/*              className="text-white icon-heading"*/}
-      {/*              style={{ marginRight: ".5em" }}*/}
-      {/*            />*/}
-      {/*            <h2>Administrace - Přídání nového objektu</h2>*/}
-      {/*          </>*/}
-      {/*        )}*/}
-      {/*      </div>*/}
-      {/*    </Col>*/}
-      {/*    <DesktopBreakpoint>*/}
-      {/*      <Col className="d-flex justify-content-end align-items-center">*/}
-      {/*        <img src={home} alt="Dům" style={{ height: "80px" }} />*/}
-      {/*      </Col>*/}
-      {/*    </DesktopBreakpoint>*/}
-      {/*  </Row>*/}
-      {/*</div>*/}
+
       <HeadingWithIcon
         background="blue"
         heading={
@@ -654,6 +625,7 @@ const ObjednatObjektInfo = ({
             : "Administrace - Přídání nového objektu"
         }
         icon={objekt ? BiDetail : FaPlus}
+        icon_size="medium"
       />
 
       {/*{user && (*/}

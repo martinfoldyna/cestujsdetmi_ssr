@@ -56,6 +56,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
   const [shownEquipment, setShownEquipment] = useState("vnitrni_vybaveni");
   const [color, setColor] = useState("blue");
   const [related, setRelated] = useState(null);
+  const [outerEquipmentLength, setOuterEquipmentLength] = useState(0);
+  const [innerEquipmentLength, setInnerEquipmentLength] = useState(0);
 
   // If objekt has zero equipment selected as true -> false is set, when equipment element is found as true in map function
   const [noEquipemnt, setNoEquipemnt] = useState(true);
@@ -89,11 +91,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
   //   }
   // };
 
-  useEffect(() => {
-    if (objekt) {
-      setColor(translateColor(objekt.typ_objektu));
-    }
-  }, [objekt]);
+  useEffect(() => {}, [objekt]);
 
   // dynamically renders equipment section
   const equipment = () => {
@@ -128,7 +126,29 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
   };
 
   useEffect(() => {
-    fetchRelated();
+    if (objekt) {
+      fetchRelated();
+      setColor(translateColor(objekt.typ_objektu));
+
+      setInnerEquipmentLength(objekt.vnitrni_vybaveni?.length);
+      setOuterEquipmentLength(objekt.vnejsi_vybaveni?.length);
+
+      // Init mapbox
+      console.log("GPS", objekt["dostupnost.mhd"]);
+      if (
+        objekt.dostupnost?.gps &&
+        objekt.dostupnost.gps.lat &&
+        objekt.dostupnost.gps.lng
+      ) {
+        setMarker({
+          latitude: parseFloat(objekt.dostupnost.gps?.lat),
+          longitude: parseFloat(objekt.dostupnost.gps?.lng),
+        });
+      }
+      // if (objekt.adresa) {
+      //   getObjektyInOblast(objekt.adresa.oblast);
+      // }
+    }
   }, [objekt]);
 
   const descriptionButtons = (
@@ -154,6 +174,62 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
     </div>
   );
 
+  const generateEquipmentTable = (equipment) => {
+    const ignoreKeys = ["_id", "id", "__v"];
+    const equipmentKeys = Object.keys(equipment)
+      .filter((key) => ignoreKeys.indexOf(key) < 0)
+      .filter((key) => equipment[key]);
+    if (equipmentKeys && equipmentKeys.length > 0) {
+      const dividedLength = Math.round(equipmentKeys?.length / 3);
+      console.log("Divider", Math.round(equipmentKeys.length / dividedLength));
+      let finalEquipment = [];
+
+      for (let i = 0; i <= equipmentKeys.length; i += dividedLength) {
+        finalEquipment.push(equipmentKeys.slice(i, i + dividedLength));
+      }
+
+      console.log(finalEquipment);
+      return (
+        <Row>
+          {finalEquipment.map(
+            (item) =>
+              item.length > 0 && (
+                <Col md={12 / finalEquipment.length}>
+                  <ul className="list-style-none pl-0">
+                    {objekt &&
+                      shownEquipment &&
+                      item.map((key, index) => {
+                        if (
+                          equipment[key] &&
+                          typeof equipment[key] === "boolean"
+                        ) {
+                          let translatedValue = translateEquipment(key);
+                          if (noEquipemnt) {
+                            setNoEquipemnt(false);
+                          }
+
+                          return (
+                            <li
+                              className="d-flex align-items-center mb-1"
+                              key={key}
+                            >
+                              <IoMdCheckmark className={"text-" + color} />
+                              <p className="pl-1 m-0">{translatedValue}</p>
+                            </li>
+                          );
+                        }
+                      })}
+                  </ul>
+                </Col>
+              )
+          )}
+        </Row>
+      );
+    } else {
+      return " ";
+    }
+  };
+
   const [marker, setMarker] = useState({
     latitude: 50.7301,
     longitude: 15.1761383,
@@ -175,26 +251,6 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
       : objekt?.relative_galerie && objekt?.relative_galerie?.length > 0
       ? objekt?.relative_galerie
       : [];
-
-  // Initialize Mapbox marker
-  useEffect(() => {
-    if (objekt) {
-      console.log("GPS", objekt["dostupnost.mhd"]);
-      if (
-        objekt.dostupnost?.gps &&
-        objekt.dostupnost.gps.lat &&
-        objekt.dostupnost.gps.lng
-      ) {
-        setMarker({
-          latitude: parseFloat(objekt.dostupnost.gps?.lat),
-          longitude: parseFloat(objekt.dostupnost.gps?.lng),
-        });
-      }
-      // if (objekt.adresa) {
-      //   getObjektyInOblast(objekt.adresa.oblast);
-      // }
-    }
-  }, [objekt]);
 
   return !objekt ? (
     <LoadingSkeleton />
@@ -258,55 +314,57 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                   </div>
                 </div>
               </div>
-              <section className="objekt-detail-images mb-1 hide-mobile">
-                {images?.length > 0 &&
-                  images?.map((image, i) => {
-                    if (typeof image === "object") {
-                      image.id = i;
-                      if (i < 3) {
-                        return (
-                          <div
-                            className={`objekt-detail-image img-0${i}`}
-                            style={{ backgroundImage: `url(${image.sm})` }}
-                            onClick={() => openLightbox(image)}
-                            key={i}
-                          >
-                            <Image
-                              src={image.sm}
-                              alt={
-                                image.alternativeText
-                                  ? image.alternativeText
-                                  : `${objekt.nazev} ${
-                                      (i < 10 ? "0" : "") + `${i}`
-                                    }`
-                              }
-                              layout="fill"
-                              objectFit="cover"
-                            />
+              <div className="hide-mobile">
+                <section className="objekt-detail-images mb-1">
+                  {images?.length > 0 &&
+                    images?.map((image, i) => {
+                      if (typeof image === "object") {
+                        image.id = i;
+                        if (i < 3) {
+                          return (
+                            <div
+                              className={`objekt-detail-image img-0${i}`}
+                              style={{ backgroundImage: `url(${image.sm})` }}
+                              onClick={() => openLightbox(image)}
+                              key={i}
+                            >
+                              <Image
+                                src={image.sm}
+                                alt={
+                                  image.alternativeText
+                                    ? image.alternativeText
+                                    : `${objekt.nazev} ${
+                                        (i < 10 ? "0" : "") + `${i}`
+                                      }`
+                                }
+                                layout="fill"
+                                objectFit="cover"
+                              />
 
-                            {i === 2 ? (
-                              <div className="overlay">
-                                <p className="show-more">
-                                  +{images.length - 2} <span>dalších</span>
-                                </p>
-                              </div>
-                            ) : (
-                              <div className="overlay  on-hover">
-                                <FaSearchPlus className="enlarge-icon text-white" />
-                              </div>
-                            )}
-                          </div>
-                        );
+                              {i === 2 ? (
+                                <div className="overlay">
+                                  <p className="show-more">
+                                    +{images.length - 2} <span>dalších</span>
+                                  </p>
+                                </div>
+                              ) : (
+                                <div className="overlay  on-hover">
+                                  <FaSearchPlus className="enlarge-icon text-white" />
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
                       }
-                    }
-                  })}
-                <Lightbox
-                  open={showLightBox}
-                  clickedImage={lightboxImg}
-                  onClose={closeLightbox}
-                  images={images}
-                />
-              </section>
+                    })}
+                  <Lightbox
+                    open={showLightBox}
+                    clickedImage={lightboxImg}
+                    onClose={closeLightbox}
+                    images={images}
+                  />
+                </section>
+              </div>
               <section className="objekt-detail-images mb-1 hide-desktop">
                 {images && images?.length > 0 && (
                   <>
@@ -382,8 +440,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
               </Row>
             </section>
             {objekt?.podrobny_popis && (
-              <Section className="border-section">
-                <SectionHeading background="none">
+              <Section>
+                <SectionHeading>
                   <h2>Podrobný popis</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -394,8 +452,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
             {!objekt.vnitrni_vybaveni && !objekt.vnejsi_vybaveni ? (
               ""
             ) : (
-              <Section className="border-section">
-                <SectionHeading background="none">
+              <Section>
+                <SectionHeading>
                   <div className="d-flex justify-content-between align-items-center">
                     <h2>Vybavení</h2>
                     {!noEquipemnt && (
@@ -404,12 +462,12 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                           className={`btn-small-logo btn ${
                             shownEquipment === "vnitrni_vybaveni"
                               ? `bg-${color} text-white`
-                              : `"outline-${color} text-${color}`
+                              : `outline-${color} text-${color}`
                           }`}
                           onClick={() => setShownEquipment("vnitrni_vybaveni")}
                         >
                           Vnitřní
-                          <span className="hide-mobile"> vybavení</span>
+                          <span className="hide-mobile">&nbsp;vybavení</span>
                         </button>
                         <button
                           className={`btn-small-logo btn ${
@@ -419,37 +477,16 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                           }`}
                           onClick={() => setShownEquipment("vnejsi_vybaveni")}
                         >
-                          Vnější<span className="hide-mobile"> vybavení</span>
+                          Vnější
+                          <span className="hide-mobile">&nbsp;vybavení</span>
                         </button>
                       </div>
                     )}
                   </div>
                 </SectionHeading>
                 <SectionContent>
-                  <ul className="list-style-none pl-0">
-                    {objekt &&
-                      shownEquipment &&
-                      Object.keys(objekt[shownEquipment]).map((key) => {
-                        if (
-                          objekt[shownEquipment][key] &&
-                          typeof objekt[shownEquipment][key] === "boolean"
-                        ) {
-                          let translatedValue = translateEquipment(key);
-                          if (noEquipemnt) {
-                            setNoEquipemnt(false);
-                          }
-                          return (
-                            <li
-                              className="d-flex align-items-center mb-1"
-                              key={key}
-                            >
-                              <IoMdCheckmark className={"text-" + color} />
-                              <p className="pl-1 m-0">{translatedValue}</p>
-                            </li>
-                          );
-                        }
-                      })}
-                  </ul>
+                  {objekt[shownEquipment] &&
+                    generateEquipmentTable(objekt[shownEquipment])}
                   {noEquipemnt && (
                     <p>Tento objekt neposkytl informace o jejich vybavení</p>
                   )}
@@ -457,8 +494,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
               </Section>
             )}
             {objekt.zajimavosti && (
-              <Section className="border-section">
-                <SectionHeading background="none">
+              <Section>
+                <SectionHeading>
                   <h2>Zajímavosti v okolí</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -471,8 +508,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
               </Section>
             )}
             {objekt.dostupnost && (
-              <Section className="border-section">
-                <SectionHeading background="none">
+              <Section>
+                <SectionHeading>
                   <h2>Dostupnost</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -507,37 +544,10 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                 </SectionContent>
               </Section>
             )}
-            {/*<section>*/}
-            {/*  <h2>Galerie</h2>*/}
-            {/*  <div className="d-flex">*/}
-            {/*    /!*<div*!/*/}
-            {/*    /!*  style={{*!/*/}
-            {/*    /!*    width: "20vw",*!/*/}
-            {/*    /!*    height: "40vh",*!/*/}
-            {/*    /!*    borderRadius: "4px",*!/*/}
-            {/*    /!*    display: "block",*!/*/}
-            {/*    /!*    backgroundSize: "cover",*!/*/}
-            {/*    /!*    backgroundPosition: "center",*!/*/}
-            {/*    /!*    backgroundImage: `url(${objekt?.nahledovy_obrazek})`,*!/*/}
-            {/*    /!*  }}*!/*/}
-            {/*    /!*/
-            /*/}
-                      {/*    <LazyLoadImage*/}
-            {/*      alt={objekt?.objekt_info?.hodnota}*/}
-            {/*      src={objekt?.nahledovy_obrazek}*/}
-            {/*      style={{*/}
-            {/*        width: "20vw",*/}
-            {/*        height: "40vh",*/}
-            {/*        borderRadius: "4px",*/}
-            {/*        objectFit: "cover",*/}
-            {/*      }}*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*</section>*/}
             <Row className="row">
               <Col className="col">
-                <Section className="border-section objekt-detail-contacts">
-                  <SectionHeading background="none">
+                <Section className="objekt-detail-contacts">
+                  <SectionHeading>
                     <h2>Kontakt</h2>
                   </SectionHeading>
                   <SectionContent>
@@ -584,8 +594,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
               </Col>
               {objekt.provozni_doba && objekt.provozni_doba.length > 0 && (
                 <Col md={4}>
-                  <Section className="border-section">
-                    <SectionHeading background="none">
+                  <Section>
+                    <SectionHeading>
                       <h2>Provozní doba</h2>
                     </SectionHeading>
                     <SectionContent>
@@ -601,8 +611,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                 </Col>
               )}
             </Row>
-            <Section className="border-section">
-              <SectionHeading background="none">
+            <Section>
+              <SectionHeading>
                 <h2>Mapa</h2>
               </SectionHeading>
               <ReactMapGL
@@ -624,8 +634,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                 </Marker>
               </ReactMapGL>
             </Section>
-            <Section className="border-section">
-              <SectionHeading background="none">
+            <Section>
+              <SectionHeading>
                 <h2>Recenze</h2>
               </SectionHeading>
               <SectionContent>
@@ -684,8 +694,8 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
               </SectionContent>
             </Section>
             {related && related.length > 0 && (
-              <Section className="border-section">
-                <SectionHeading background="none">
+              <Section>
+                <SectionHeading>
                   <h2>Další tipy na ubytování v této oblasti</h2>
                 </SectionHeading>
                 <SectionContent>

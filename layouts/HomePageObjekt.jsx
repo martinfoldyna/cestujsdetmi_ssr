@@ -23,7 +23,7 @@ const HomePageObjekt = ({
   const isNews = () => article?.kategorie === "aktuality";
 
   return article ? (
-    <div className={`${topic}-home-card ${className}`}>
+    <div className={`${topic}-home-card ${className} border-radius`}>
       <Link href={`/${topic}/detail/${article?.hodnota}`}>
         <div
           className={`article-card article-homepage-card d-flex align-items-center ${
@@ -53,7 +53,10 @@ const HomePageObjekt = ({
                   }
                   className="img border-radius"
                   objectFit="cover"
-                  layout="fill"
+                  // layout="fill"
+                  layout="responsive"
+                  width={6}
+                  height={2}
                 />
                 {/*<img src={placeholder} alt="placeholder-image" />*/}
               </div>

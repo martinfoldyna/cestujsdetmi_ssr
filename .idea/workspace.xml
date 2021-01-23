@@ -5,16 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/layouts/newsArticle.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/newsletter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/SiteMap.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/SiteMap.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/kontakt.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/kontakt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ObjednatObjektInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjednatObjektInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/AdminObjekt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/AdminObjekt.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/info/[name].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/info/[name].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/info/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/info/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/o-portalu.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/o-portalu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/objekty/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/objekty/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/webkamery/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/webkamery/detail/[hodnota].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/[kategorie].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/[kategorie].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
@@ -114,7 +117,7 @@
       <workItem from="1610884717649" duration="277000" />
       <workItem from="1610906518481" duration="2664000" />
       <workItem from="1610979812217" duration="1076000" />
-      <workItem from="1611222515348" duration="6119000" />
+      <workItem from="1611222515348" duration="17461000" />
     </task>
     <servers />
   </component>
