@@ -143,9 +143,11 @@
     padding: 0 15px 15px;
   }
 
-  .section-content, .section .heading-with-icons,
-  .rady-tipy-homepage .section-content .category {
-    padding: 0;
+  .section .heading-with-icons,
+  .rady-tipy-homepage .section-content .category,
+  .homepage .section-content{
+    padding: 0 0 .5em;
+
   }
 
   .article-card .content-wrapper {

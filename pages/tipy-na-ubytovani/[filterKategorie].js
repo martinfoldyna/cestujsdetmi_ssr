@@ -19,6 +19,7 @@ import {
   searchParamsToQueryString,
 } from "../../helpers/helpers";
 import { GlobalContext } from "../../context/GlobalContext";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   const kategorie = await fetchQuery(
@@ -66,6 +67,7 @@ const TipyNaUbytovaniKategorie = ({ objekty, kategorie, removeObjekty }) => {
 
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [translatedCategory, setTranslatedCategory] = useState("");
   // How many objects are shown and at which number start api call query
   const [next, setNext] = useState(2);
 
@@ -80,74 +82,87 @@ const TipyNaUbytovaniKategorie = ({ objekty, kategorie, removeObjekty }) => {
     _start: 0,
   };
 
+  useEffect(() => {}, []);
+
   return (
-    <Container className="main-container">
-      <span className="breadcrumb">
-        <Link href="/">Úvodní stránka</Link>
-        &nbsp;/&nbsp;Ubytování a dovolená
-      </span>
+    <>
+      <Head>
+        <title>
+          Ubytování a dovolená s dětmi -{" "}
+          {enums.KATEGORIE.UBYTOVANI[filterKategorie]?.value.toLowerCase()} |
+          Cestuj s dětmi.cz
+        </title>
+      </Head>
+      <Container className="main-container">
+        <span className="breadcrumb">
+          <Link href="/">Úvodní stránka</Link>
+          &nbsp;/&nbsp;Ubytování a dovolená
+        </span>
 
-      <HeadingWithIcon
-        background="blue"
-        heading={enums.KATEGORIE.UBYTOVANI[filterKategorie]?.value}
-        icon={HiHome}
-        icon_size="medium"
-      >
-        <p>Naše tipy na ubytování a dovolenou</p>
-      </HeadingWithIcon>
-      <div className="data-wrapper">
-        <Row>
-          <Col md={2.5} className="hide-mobile">
-            <SideBar
-              topic={enums.TYP_OBJEKTU.ubytovani}
-              color="blue"
-              kategorie={kategorie}
-            />
-          </Col>
-          <Col>
-            <div className="hide-desktop">
-              <div
-                className={`d-flex ${
-                  openFilter ? "justify-content-between" : "justify-content-end"
-                }`}
-              >
-                {openFilter && (
-                  <button
-                    className="btn btn-small-logo bg-blue text-white m-0"
-                    onClick={() => setOpenFilter(false)}
-                  >
-                    Zavřít filtr
-                  </button>
-                )}
-                <button
-                  className="btn btn-small-logo ghost m-0"
-                  onClick={() => setOpenFilter(true)}
+        <HeadingWithIcon
+          background="blue"
+          heading={enums.KATEGORIE.UBYTOVANI[filterKategorie]?.value}
+          icon={HiHome}
+          icon_size="medium"
+        >
+          <p>Naše tipy na ubytování a dovolenou</p>
+        </HeadingWithIcon>
+        <div className="data-wrapper">
+          <Row>
+            <Col md={2.5} className="hide-mobile">
+              <SideBar
+                topic={enums.TYP_OBJEKTU.ubytovani}
+                color="blue"
+                kategorie={kategorie}
+              />
+            </Col>
+            <Col>
+              <div className="hide-desktop">
+                <div
+                  className={`d-flex ${
+                    openFilter
+                      ? "justify-content-between"
+                      : "justify-content-end"
+                  }`}
                 >
-                  Upřesnit parametry{" "}
-                  <BsFilter className="text-blue btn-icon right" />
-                </button>
+                  {openFilter && (
+                    <button
+                      className="btn btn-small-logo bg-blue text-white m-0"
+                      onClick={() => setOpenFilter(false)}
+                    >
+                      Zavřít filtr
+                    </button>
+                  )}
+                  <button
+                    className="btn btn-small-logo ghost m-0"
+                    onClick={() => setOpenFilter(true)}
+                  >
+                    Upřesnit parametry{" "}
+                    <BsFilter className="text-blue btn-icon right" />
+                  </button>
+                </div>
+                {openFilter && (
+                  <SideFilter topic={enums.TYP_OBJEKTU.ubytovani.key} />
+                )}
               </div>
-              {openFilter && (
-                <SideFilter topic={enums.TYP_OBJEKTU.ubytovani.key} />
-              )}
-            </div>
 
-            <ListFilteredItems
-              region={selectedRegion}
-              city={selectedCity}
-              typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
-              objekty={objekty}
-            />
+              <ListFilteredItems
+                region={selectedRegion}
+                city={selectedCity}
+                typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
+                objekty={objekty}
+              />
 
-            <div className="hide-desktop">
-              <div className="mt-1">
-                <SideCards />
+              <div className="hide-desktop">
+                <div className="mt-1">
+                  <SideCards />
+                </div>
               </div>
-            </div>
-          </Col>
-        </Row>
-      </div>
-    </Container>
+            </Col>
+          </Row>
+        </div>
+      </Container>
+    </>
   );
 };
 

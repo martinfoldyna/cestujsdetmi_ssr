@@ -33,8 +33,21 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>
+          Dovolená a výlety s dětmi - Cestuj s dětmi.cz | Cestuj s dětmi.cz
+        </title>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="Poradíme kam na výlet a dovolenou s dětmi v Čechách, na Moravě i Slezku. Oblíbený a přehledný cestovatelský a ubytovací portál Cestuj s dětmi.cz."
+        />
+        <meta
+          name="keywords"
+          content="výlety,dovolená,s dětmi,v čechách,víkendy,zábava,kam na výlet,ubytování,na Moravě,kam s dětmi,"
+        />
+        <meta name="author" content="monium.cz" />
+        <meta name="robots" content="index, follow" />
+        <meta charSet="utf-8" />
       </Head>
 
       <Hero />

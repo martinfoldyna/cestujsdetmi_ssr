@@ -67,6 +67,12 @@ const TipyNaUbytovani = ({ objekty, kategorie, removeObjekty }) => {
 
   return (
     <>
+      <Head>
+        <title>Ubytování a dovolená s dětmi | Cestuj s dětmi.cz</title>
+        <meta name="description" content="Ubytování a dovolená s dětmi" />
+        <meta name="keywords" content="Ubytování a dovolená s dětmi" />
+        <meta name="robots" content="index, follow" />
+      </Head>
       <Container className="main-container">
         <span className="breadcrumb">
           <Link href="/">Úvodní stránka</Link>
