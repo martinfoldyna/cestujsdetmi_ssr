@@ -13,7 +13,7 @@ const WebcamsLayout = ({ children }) => {
   const { hodnota } = router.query;
 
   return (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <span className="breadcrumb">
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;
         {hodnota ? (

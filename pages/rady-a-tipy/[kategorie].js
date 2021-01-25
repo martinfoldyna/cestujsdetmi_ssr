@@ -9,7 +9,7 @@ import enums from "../../enums";
 import { objectToArray } from "../../helpers/helpers";
 import RadyTipy from "./index";
 import RadyTipyLayout from "../../layouts/siteLayouts/RadyTipyLayout";
-import NewsArticle from "../../layouts/newsArticle";
+import MobileNewsArticle from "../../layouts/MobileNewsArticle";
 
 export async function getStaticPaths() {
   const categories = objectToArray(enums.RADY_TIPY.KATEGORIE);
@@ -34,20 +34,28 @@ export async function getStaticProps(context) {
 
 const RadyTipyKategorie = ({ radyTipy }) => {
   return radyTipy ? (
-    <div>
+    <div className="p-1 bg-white border-radius mb-1">
       {radyTipy.map((post, index) => (
         <>
-          <HomePageObjekt
-            article={post}
-            topic="rady-a-tipy"
-            key={post.id}
-            number_of_words={50}
-            className={`hide-mobile ${
-              (index + 1) % 2 === 0 ? "bg-grey" : "bg-white"
-            }`}
-          />
-          <div className="hide-desktop">
-            <NewsArticle article={post} key={post.id} />
+          <div key={post.id}>
+            <div className="hide-mobile">
+              <HomePageObjekt
+                article={post}
+                topic="rady-a-tipy"
+                key={post.id}
+                number_of_words={50}
+                className={`hide-mobile ${
+                  (index + 1) % 2 === 0 ? "bg-grey" : "bg-white"
+                }`}
+              />
+            </div>
+            <div className="hide-desktop">
+              <MobileNewsArticle
+                article={post}
+                key={post.id}
+                background={index - (1 % 2) === 0 ? "grey" : "white"}
+              />
+            </div>
           </div>
         </>
       ))}

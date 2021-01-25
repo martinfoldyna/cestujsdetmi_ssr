@@ -11,7 +11,7 @@ import {
 } from "../../../layouts/Section";
 import LoadingSkeleton from "../../../layouts/LoadingSkeleton";
 import { Row, Col } from "react-grid-system";
-import Post from "../../../layouts/Post";
+import VerticalPost from "../../../layouts/VerticalPost";
 import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
 import WebcamsLayout from "../../../layouts/siteLayouts/WebcamsLayout";
@@ -116,7 +116,7 @@ const WebcamDetail = ({ webcam }) => {
                   index < 9 &&
                   relatedWebcam.id !== webcam.id && (
                     <Col md={4}>
-                      <Post post={relatedWebcam} />
+                      <VerticalPost post={relatedWebcam} />
                     </Col>
                   )
               )}

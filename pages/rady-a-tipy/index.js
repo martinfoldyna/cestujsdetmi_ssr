@@ -10,8 +10,11 @@ import PropTypes from "prop-types";
 import { getAdvices } from "../../redux/actions/radyTipy";
 import { connect } from "react-redux";
 import enums from "../../enums";
-import { objectToArray, objectToQueryString } from "../../helpers/helpers";
-import Post from "../../layouts/Post";
+import {
+  objectToArray,
+  searchParamsToQueryString,
+} from "../../helpers/helpers";
+import VerticalPost from "../../layouts/VerticalPost";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import MyLink from "../../layouts/MyLink";
@@ -41,7 +44,7 @@ const RadyTipy = ({ posts }) => {
                 (post, index) =>
                   index < 9 && (
                     <Col md={4} key={post.id}>
-                      <Post post={post} useNextImg={true} />
+                      <VerticalPost post={post} useNextImg={true} />
                     </Col>
                   )
               )}

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import ObjektDetail from "../../../components/ObjektDetail";
 import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
-import { objectToQueryString } from "../../../helpers/helpers";
+import { searchParamsToQueryString } from "../../../helpers/helpers";
 import { Container } from "react-grid-system";
 import React from "react";
 
@@ -47,7 +47,7 @@ export async function getStaticProps({ params }) {
 }
 
 const UbytovaniDetail = ({ objekt, kategorie, related }) => (
-  <Container style={{ maxWidth: "1220px" }}>
+  <Container className="main-container">
     <ObjektDetail objekt={objekt} kategorie={kategorie} related={related} />
   </Container>
 );

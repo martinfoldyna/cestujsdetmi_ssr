@@ -114,7 +114,7 @@ const RadyTipyDetail = ({
       {/*              index < relatedLimit && (*/}
       {/*                <Fragment>*/}
       {/*                  <Col md={4}>*/}
-      {/*                    <Post post={post} />*/}
+      {/*                    <VerticalPost post={post} />*/}
       {/*                  </Col>*/}
       {/*                </Fragment>*/}
       {/*              )*/}

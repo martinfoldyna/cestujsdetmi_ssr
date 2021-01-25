@@ -8,7 +8,7 @@ import React from "react";
 
 const Kontakt = () => {
   return (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <div className="contact">
         <span className="breadcrumb">
           <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Kontakt

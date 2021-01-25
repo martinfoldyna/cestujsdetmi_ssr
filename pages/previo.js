@@ -60,7 +60,7 @@ const Previo = () => {
   }, []);
 
   return (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <h1>{previoObjekt?.name[0]}</h1>
       <Section className="border-section">
         <SectionHeading background="none">

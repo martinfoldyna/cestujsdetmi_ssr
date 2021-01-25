@@ -26,6 +26,14 @@ export const fetchObjekty = async () => {
   );
 };
 
+export const fetchPromo = async (setState) => {
+  const fetchedPromo = await fetchQuery(`rady-a-tipies?promo=true`);
+
+  console.log("promo", fetchedPromo);
+
+  setState(fetchedPromo);
+};
+
 export const getMedia = (media) => {
   const imageUrl = media.url.startsWith("/")
     ? fetchQuery(media.url)

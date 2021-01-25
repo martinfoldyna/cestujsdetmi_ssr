@@ -82,6 +82,10 @@ input[type=number] {
   margin: 0 auto;
 }
 
+.main-container {
+  max-width: 1220px !important;
+}
+
 .sticky{
   position: fixed;
   top: 0;
@@ -100,6 +104,7 @@ input[type=number] {
   max-width: 1220px;
   margin: 0 auto;
   height: 120px;
+  padding: 0 2em;
 
 }
 
@@ -442,7 +447,6 @@ input[type=number] {
   margin: 1em 0;
 }
 
-.section-content,
 .section .heading-with-icons {
 
   padding: 0 1em;

@@ -101,158 +101,156 @@ const Map = () => {
 
   return (
     <section className="map-component bg-grey">
-      <Container>
-        <Row>
-          <Col md={6} className="d-flex">
-            <div>
-              <div className="heading-with-icons d-flex align-items-center">
-                <FaMapMarkerAlt
-                  className={`text-white icon-heading bg-${color}`}
-                  style={{ marginRight: "1em" }}
-                />
-                <h2 className="d-flex align-items-center">
-                  Zvolte si lokaci na mapě
-                </h2>
-              </div>
-              <div className="margin-wrapper">
-                <p className="map-description">
-                  Chtěli byste na dovolenou nebo na výlet? <br />
-                  Zvolte si druh mapky kliknutím na tlačítko.
-                </p>
-                <div className="map-buttons d-flex">
-                  <button
-                    className={`btn ${
-                      selectedTrip
-                        ? `outline-blue text-blue`
-                        : "bg-blue text-white"
-                    }`}
-                    onClick={() => {
-                      setSelectedTrip(false);
-                      setColor("blue");
-                    }}
-                  >
-                    <span className="hide-mobile">Ubytování a dovolená</span>
-                    <span className="hide-desktop">Dovolená</span>
-                  </button>
-                  <button
-                    className={`btn ${
-                      selectedTrip
-                        ? "bg-orange text-white"
-                        : "outline-orange text-orange"
-                    }`}
-                    onClick={() => {
-                      setSelectedTrip(true);
-                      setColor("orange");
-                    }}
-                  >
-                    <span className="hide-mobile"> Výlety a zábava</span>
-                    <span className="hide-desktop"> Výlety</span>
-                  </button>
-                </div>
-                <a
-                  href="mailto:kontakt@cestujsdetmi.cz"
-                  className={`text-${color} mt-2 d-flex align-items-center font-weight-600 hide-mobile`}
-                >
-                  <FiSend />
-                  &nbsp; Zaslat nezvávaznou nabídku
-                </a>
-              </div>
+      <Row>
+        <Col md={6} className="d-flex">
+          <div>
+            <div className="heading-with-icons d-flex align-items-center">
+              <FaMapMarkerAlt
+                className={`text-white icon-heading bg-${color}`}
+                style={{ marginRight: "1em" }}
+              />
+              <h2 className="d-flex align-items-center">
+                Zvolte si lokaci na mapě
+              </h2>
             </div>
-          </Col>
-          <Col md={6} className="d-flex justify-content-center">
-            {regionMap ? (
-              <VectorMap
-                {...czechRepubilcRegions}
-                {...mapProps}
-                className={`map map-${color}`}
-              />
-            ) : (
-              <VectorMap
-                {...czechRepubilc}
-                {...mapProps}
-                className={`map map-${color}`}
-              />
-            )}
-            {(hovered && hovered.key && hovered.value) ||
-            (clicked && clicked.value && clicked.key) ? (
-              <div className="badge-location">
-                {/* When user clicks disable hover value */}
-                <p className="m-0">
-                  {clicked && clicked.value && clicked.key
-                    ? clicked.value
-                    : hovered.value}
-                </p>
+            <div className="margin-wrapper">
+              <p className="map-description">
+                Chtěli byste na dovolenou nebo na výlet? <br />
+                Zvolte si druh mapky kliknutím na tlačítko.
+              </p>
+              <div className="map-buttons d-flex">
+                <button
+                  className={`btn ${
+                    selectedTrip
+                      ? `outline-blue text-blue`
+                      : "bg-blue text-white"
+                  }`}
+                  onClick={() => {
+                    setSelectedTrip(false);
+                    setColor("blue");
+                  }}
+                >
+                  <span className="hide-mobile">Ubytování a dovolená</span>
+                  <span className="hide-desktop">Dovolená</span>
+                </button>
+                <button
+                  className={`btn ${
+                    selectedTrip
+                      ? "bg-orange text-white"
+                      : "outline-orange text-orange"
+                  }`}
+                  onClick={() => {
+                    setSelectedTrip(true);
+                    setColor("orange");
+                  }}
+                >
+                  <span className="hide-mobile"> Výlety a zábava</span>
+                  <span className="hide-desktop"> Výlety</span>
+                </button>
               </div>
-            ) : (
-              ""
-            )}
-          </Col>
-        </Row>
-        <Row className="align-items-center m-0 ml-3 map-filters">
-          <Col md={2} className="pl-0">
-            <CustomSelect
-              placeholder="Kraj"
-              options={beautifiedKraj}
-              onChange={onKrajChange}
-              value={clicked}
+              <a
+                href="mailto:kontakt@cestujsdetmi.cz"
+                className={`text-${color} mt-2 d-flex align-items-center font-weight-600 hide-mobile`}
+              >
+                <FiSend />
+                &nbsp; Zaslat nezvávaznou nabídku
+              </a>
+            </div>
+          </div>
+        </Col>
+        <Col md={6} className="d-flex justify-content-center">
+          {regionMap ? (
+            <VectorMap
+              {...czechRepubilcRegions}
+              {...mapProps}
+              className={`map map-${color}`}
             />
-          </Col>
-          <Col md={2} className="pl-0">
-            <CustomSelect placeholder="Město" color={color} />
-          </Col>
-          <Col md={2} className="pl-0">
-            <CustomSelect
-              placeholder="Oblast"
-              options={beautifiedRegion}
-              onChange={(e) => setOblast(e.key)}
+          ) : (
+            <VectorMap
+              {...czechRepubilc}
+              {...mapProps}
+              className={`map map-${color}`}
             />
-          </Col>
-          <Col md={1} className="pl-0">
-            <div className="hide-mobile">
+          )}
+          {(hovered && hovered.key && hovered.value) ||
+          (clicked && clicked.value && clicked.key) ? (
+            <div className="badge-location">
+              {/* When user clicks disable hover value */}
+              <p className="m-0">
+                {clicked && clicked.value && clicked.key
+                  ? clicked.value
+                  : hovered.value}
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
+        </Col>
+      </Row>
+      <Row className="align-items-center m-0 ml-3 map-filters">
+        <Col md={2} className="pl-0">
+          <CustomSelect
+            placeholder="Kraj"
+            options={beautifiedKraj}
+            onChange={onKrajChange}
+            value={clicked}
+          />
+        </Col>
+        <Col md={2} className="pl-0">
+          <CustomSelect placeholder="Město" color={color} />
+        </Col>
+        <Col md={2} className="pl-0">
+          <CustomSelect
+            placeholder="Oblast"
+            options={beautifiedRegion}
+            onChange={(e) => setOblast(e.key)}
+          />
+        </Col>
+        <Col md={1} className="pl-0">
+          <div className="hide-mobile">
+            <button
+              className={`btn bg-${color} text-white`}
+              onClick={submitLocation}
+            >
+              <FaSearch />
+            </button>
+          </div>
+          <div className="hide-desktop">
+            <div className="d-flex justify-content-between">
+              <button className={`btn ghost text-${color} p-0`}>
+                upřesnit požadavky
+              </button>
               <button
                 className={`btn bg-${color} text-white`}
                 onClick={submitLocation}
               >
-                <FaSearch />
+                Vyhledat
               </button>
             </div>
-            <div className="hide-desktop">
-              <div className="d-flex justify-content-between">
-                <button className={`btn ghost text-${color} p-0`}>
-                  upřesnit požadavky
-                </button>
-                <button
-                  className={`btn bg-${color} text-white`}
-                  onClick={submitLocation}
-                >
-                  Vyhledat
-                </button>
-              </div>
-            </div>
-          </Col>
-          {/*<Col>*/}
-          <div className="hide-mobile">
-            <>
-              <Col className="d-flex justify-content-between align-items-center pl-0 hide-mobile">
-                <a
-                  href="mailto:kontakt@cestujsdetmi.cz"
-                  className={`text-${color} font-weight-600`}
-                >
-                  upřesnit požadavky
-                </a>
-              </Col>
-              <Col>
-                <button
-                  className={`text-${color} btn bg-white p-0`}
-                  onClick={() => setRegionMap((prevState) => !prevState)}
-                >
-                  přepnout mapu
-                </button>
-              </Col>
-            </>
           </div>
-        </Row>
-      </Container>
+        </Col>
+        {/*<Col>*/}
+        <div className="hide-mobile">
+          <>
+            <Col className="d-flex justify-content-between align-items-center pl-0 hide-mobile">
+              <a
+                href="mailto:kontakt@cestujsdetmi.cz"
+                className={`text-${color} font-weight-600`}
+              >
+                upřesnit požadavky
+              </a>
+            </Col>
+            <Col>
+              <button
+                className={`text-${color} btn bg-white p-0`}
+                onClick={() => setRegionMap((prevState) => !prevState)}
+              >
+                přepnout mapu
+              </button>
+            </Col>
+          </>
+        </div>
+      </Row>
     </section>
   );
 };

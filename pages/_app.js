@@ -35,7 +35,7 @@ const MyApp = ({ Component, pageProps }) => {
       value={{ user: { user, setUser }, global: { global, setGlobal } }}
     >
       <Header />
-      {/*<Container style={{ maxWidth: "1220px" }}>*/}
+      {/*<Container className="main-container">*/}
       <main style={{ position: "relative" }}>
         <Layout>
           <Component {...pageProps} />

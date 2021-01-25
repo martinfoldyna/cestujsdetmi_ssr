@@ -8,7 +8,7 @@ import HeadingWithIcon from "../layouts/HeadingWithIcon";
 
 const OPortalu = () => {
   return (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <span className="breadcrumb">
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;O portálu
       </span>

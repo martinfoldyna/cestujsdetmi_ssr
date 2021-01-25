@@ -4,7 +4,7 @@ import { AiFillBulb } from "react-icons/ai";
 import { FaNewspaper } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { Row, Col, Container } from "react-grid-system";
-import Objekt from "../../components/cards/Objekt";
+import ObjektOverviewItem from "../../components/cards/ObjektOverviewItem";
 import ObjektyTable from "../../components/ObjektyTable";
 import { connect } from "react-redux";
 import { getAllObjectTypes } from "../../redux/actions/objekty";
@@ -33,7 +33,7 @@ const ObjektyOverview = ({ objektyTypy }) => {
 
     return dataKeysUnsorted.map((key) => (
       <Col md={6} style={{ marginBottom: "2em" }} key={objektyTypy[key].id}>
-        <Objekt data={objektyTypy[key]} />
+        <ObjektOverviewItem data={objektyTypy[key]} />
       </Col>
     ));
   };
@@ -44,7 +44,7 @@ const ObjektyOverview = ({ objektyTypy }) => {
 
   return (
     <>
-      <Container style={{ maxWidth: "1220px" }}>
+      <Container className="main-container">
         <span className="breadcrumb">
           <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Registrace - nabídka
           možností
@@ -118,7 +118,7 @@ const ObjektyOverview = ({ objektyTypy }) => {
                   <Fragment>
                     {generateObjekty()}
                     <Col md={6} style={{ marginBottom: "2em" }}>
-                      <Objekt
+                      <ObjektOverviewItem
                         data={{
                           nazev: "Previo",
                           cena: "Zdarma",

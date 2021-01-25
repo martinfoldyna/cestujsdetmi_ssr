@@ -31,7 +31,7 @@ const HomePageObjekt = ({
           }`}
         >
           <Row className="w-100 m-0">
-            <Col md={5} className="p-0">
+            <Col md={4} className="p-0">
               <div className="img-wrapper mr-1">
                 <Image
                   src={
@@ -53,15 +53,14 @@ const HomePageObjekt = ({
                   }
                   className="img border-radius"
                   objectFit="cover"
-                  // layout="fill"
-                  layout="responsive"
-                  width={6}
-                  height={2}
+                  layout="fill"
+                  // width={6}
+                  // height={3}
                 />
                 {/*<img src={placeholder} alt="placeholder-image" />*/}
               </div>
             </Col>
-            <Col sm={7} className="p-0">
+            <Col sm={8} className="p-0">
               <div className="content-wrapper">
                 <h3
                   className="article-heading"

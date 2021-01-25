@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-const Post = ({ post, useNextImg = true }) => {
+const VerticalPost = ({ post, useNextImg = true }) => {
   const router = useRouter();
   const image = post.image_filename
     ? `https://www.cestujsdetmi.cz/${post.image_filename}`
@@ -65,4 +65,4 @@ const Post = ({ post, useNextImg = true }) => {
   );
 };
 
-export default Post;
+export default VerticalPost;

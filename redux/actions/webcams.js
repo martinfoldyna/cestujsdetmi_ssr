@@ -6,7 +6,7 @@ import {
   GET_WEBCAMS_ERROR,
   START_LOADING,
 } from "./types";
-import { objectToQueryString } from "../../helpers/helpers";
+import { searchParamsToQueryString } from "../../helpers/helpers";
 
 export const getAllWebcams = () => async (dispatch) => {
   try {
@@ -41,7 +41,7 @@ export const loadMoreWebcams = (props) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
 
-    const queryString = objectToQueryString(props);
+    const queryString = searchParamsToQueryString(props);
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/webkameries?${queryString}`
     );

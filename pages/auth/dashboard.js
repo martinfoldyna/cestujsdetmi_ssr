@@ -26,7 +26,7 @@ const UserDashboard = () => {
   };
 
   return user && user.objekty ? (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <span className="breadcrumb">
         <MyLink href="/">Úvodní stránka</MyLink>&nbsp;/&nbsp;Administrace
       </span>

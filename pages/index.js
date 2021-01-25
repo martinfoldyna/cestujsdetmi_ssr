@@ -37,9 +37,8 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/*<main style={{ position: "relative" }}>*/}
       <Hero />
-      <Container style={{ maxWidth: "1220px" }}>
+      <Container className="main-container">
         <Map />
 
         <div className="homepage">
@@ -55,7 +54,6 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
           <NewPublished newPublished={newPublished} />
         </div>
       </Container>
-      {/*</main>*/}
     </div>
   );
 };
@@ -65,15 +63,6 @@ Home.propTypes = {
   radyTipy: PropTypes.object,
 };
 
-const mapStateToProps = (state) => ({
-  objekty: state.objekty,
-  radyTipy: state.radyTipy,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getObjekty: bindActionCreators(getObjekty, dispatch),
-});
-
 export default Home;
 
 export async function getStaticProps() {
@@ -82,7 +71,6 @@ export async function getStaticProps() {
     fetchQuery(enums.URLS.radyTipy),
     fetchQuery(enums.URLS.newPublished),
   ]);
-  console.log(objekty);
   return {
     props: {
       objekty,

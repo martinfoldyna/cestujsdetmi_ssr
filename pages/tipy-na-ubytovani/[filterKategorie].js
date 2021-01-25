@@ -14,7 +14,10 @@ import SideCards from "../../layouts/SideCards";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchQuery } from "../../helpers/fetch";
 import { searchParamsToUrlQuery } from "next/dist/next-server/lib/router/utils/querystring";
-import { initCategories, objectToQueryString } from "../../helpers/helpers";
+import {
+  initCategories,
+  searchParamsToQueryString,
+} from "../../helpers/helpers";
 import { GlobalContext } from "../../context/GlobalContext";
 
 export async function getStaticPaths() {
@@ -48,7 +51,7 @@ export async function getStaticProps({ params }) {
 
   const [objekty, kategorie] = await Promise.all([
     fetchQuery(
-      `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
+      `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
     ),
     fetchQuery(enums.URLS.kategorie),
   ]);
@@ -78,7 +81,7 @@ const TipyNaUbytovaniKategorie = ({ objekty, kategorie, removeObjekty }) => {
   };
 
   return (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <span className="breadcrumb">
         <Link href="/">Úvodní stránka</Link>
         &nbsp;/&nbsp;Ubytování a dovolená

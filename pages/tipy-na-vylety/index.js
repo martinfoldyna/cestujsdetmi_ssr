@@ -11,7 +11,7 @@ import SideFilter from "../../components/cards/SideFilter";
 import SideCards from "../../layouts/SideCards";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchQuery } from "../../helpers/fetch";
-import { objectToQueryString } from "../../helpers/helpers";
+import { searchParamsToQueryString } from "../../helpers/helpers";
 import Head from "next/head";
 
 export async function getStaticProps() {
@@ -25,7 +25,7 @@ export async function getStaticProps() {
 
   const [objekty, kategorie] = await Promise.all([
     fetchQuery(
-      `${enums.URLS.objektInfoMini}&${objectToQueryString(fetchParams)}`
+      `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
     ),
     fetchQuery(enums.URLS.kategorie),
   ]);
@@ -64,7 +64,7 @@ const TipyNaVylety = ({ objekty, kategorie }) => {
           Tipy kam na výlet s dětmi v Čechách i na Moravě | Cestujsdetmi.cz
         </title>
       </Head>
-      <Container style={{ maxWidth: "1220px" }}>
+      <Container className="main-container">
         <span className="breadcrumb">
           <Link href="/">Úvodní stránka</Link>
           &nbsp;/&nbsp;Výlety s dětmi

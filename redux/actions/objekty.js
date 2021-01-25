@@ -22,7 +22,7 @@ import axios from "axios";
 import { v4 } from "uuid";
 import { handleImageUpload } from "../../helpers/images";
 // import { setToast } from "./alerts";
-import { objectToQueryString } from "../../helpers/helpers";
+import { searchParamsToQueryString } from "../../helpers/helpers";
 
 // GET: Fetch all objects
 export const getObjekty = () => async (dispatch) => {
@@ -97,7 +97,7 @@ export const countObjekty = async (fetchParam) => {
   try {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos/count${
-        fetchParam ? "?" + objectToQueryString(fetchParam) : ""
+        fetchParam ? "?" + searchParamsToQueryString(fetchParam) : ""
       }`
     );
     return res.data;
@@ -117,7 +117,7 @@ export const getObjektyByParams = (params) => async (dispatch) => {
     const { method } = params;
     dispatch({ type: START_LOADING });
     // Stringify function params to string for API call
-    let paramString = objectToQueryString(params);
+    let paramString = searchParamsToQueryString(params);
     console.log(paramString);
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos-minified?_sort=druh_zapisu:DESC,createdAt:DESC&${paramString}`
@@ -253,7 +253,7 @@ export const handleObjekt = (data, images, type, id, history) => async (
       );
 
       // dispatch(
-      //   setToast(`Objekt ${data.nazev && data.nazev} byl upraven `, "success")
+      //   setToast(`ObjektOverviewItem ${data.nazev && data.nazev} byl upraven `, "success")
       // );
       dispatch({ type: OBJEKT_UPDATED, payload: res });
       history.push("/auth/dashboard");
@@ -269,7 +269,7 @@ export const handleObjekt = (data, images, type, id, history) => async (
       );
 
       // dispatch(
-      //   setToast(`Objekt ${data.nazev && data.nazev} byl vytvořen `, "success")
+      //   setToast(`ObjektOverviewItem ${data.nazev && data.nazev} byl vytvořen `, "success")
       // );
       dispatch({ type: OBJEKT_UPLOADED, payload: res });
     }

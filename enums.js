@@ -175,6 +175,11 @@ export default {
       key: "aktualita",
       value: "Aktualita",
     },
+    radyTipy: {
+      key: "rady-a-tipy",
+      value: "Rady a tipy",
+      url: "rady-a-tipy",
+    },
   },
   DRUH_ZAPISU: {
     standard: {

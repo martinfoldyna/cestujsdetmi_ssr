@@ -98,7 +98,7 @@ export const trimString = (string, words_number = 21) => {
  * @param {Object} object
  * @returns {string}
  */
-export const objectToQueryString = (object) => {
+export const searchParamsToQueryString = (object) => {
   if (typeof object === "object") {
     let returnString = "";
     const paramKeys = Object.keys(object);

@@ -41,7 +41,7 @@ export async function getStaticProps({ params }) {
 
 const VyletyDetail = ({ objekt, kategorie }) => {
   return (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <ObjektDetail objekt={objekt} kategorie={kategorie} />
     </Container>
   );

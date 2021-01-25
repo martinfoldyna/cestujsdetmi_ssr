@@ -6,7 +6,7 @@ import enums from "../enums";
 import { getObjektyByParams, countObjekty } from "../redux/actions/objekty";
 import HeadingWithIcon from "../layouts/HeadingWithIcon";
 import { HiNewspaper } from "react-icons/hi";
-import Article from "../components/cards/Article";
+import Objekt from "../components/cards/Objekt";
 import SideBar from "../layouts/Sidebar";
 import { fetchQuery } from "../helpers/fetch";
 
@@ -27,7 +27,7 @@ const Aktuality = ({ objekty }) => {
   };
 
   return (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <span className="breadcrumb">
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Aktuality
       </span>
@@ -49,9 +49,9 @@ const Aktuality = ({ objekty }) => {
           <Col>
             <div className="filtered-objects">
               {objekty?.map((objekt, index) => (
-                <Article
+                <Objekt
                   key={objekt.id}
-                  article={{
+                  objekt={{
                     ...objekt,
                     ...{
                       kategorie: "aktuality",

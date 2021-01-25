@@ -39,7 +39,7 @@ const RadyTipyLayout = ({ post, getAdvices, children }) => {
   };
 
   return (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <span className="breadcrumb">
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;
         {post ? (

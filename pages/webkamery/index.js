@@ -6,14 +6,14 @@ import { Row, Col } from "react-grid-system";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
 import Link from "next/link";
 import { RiWebcamFill } from "react-icons/ri";
-import Post from "../../layouts/Post";
+import VerticalPost from "../../layouts/VerticalPost";
 import SideCards from "../../layouts/SideCards";
 import SideFilter from "../../components/cards/SideFilter";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchQuery } from "../../helpers/fetch";
 import enums from "../../enums";
 import WebcamsLayout from "../../layouts/siteLayouts/WebcamsLayout";
-import { objectToQueryString } from "../../helpers/helpers";
+import { searchParamsToQueryString } from "../../helpers/helpers";
 
 export async function getStaticProps() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
@@ -53,7 +53,7 @@ const Webcams = ({ webcams, getAllWebcams }) => {
       <Fragment>
         {allWebcams?.map((webcam) => (
           <Col md={4} key={webcam.id}>
-            <Post post={webcam} useNextImg={false} />
+            <VerticalPost post={webcam} useNextImg={false} />
           </Col>
         ))}
         <div className="d-flex justify-content-center w-100 mt-1">

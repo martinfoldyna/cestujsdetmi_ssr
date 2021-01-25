@@ -38,7 +38,7 @@ const Register = ({ user }) => {
   return user ? (
     "Not authorized"
   ) : (
-    <Container style={{ maxWidth: "1220px" }}>
+    <Container className="main-container">
       <Section className="m-0 pt-1 pb-1">
         <SectionHeading background="grey">
           <h2>Registrace</h2>

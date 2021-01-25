@@ -1,7 +1,25 @@
+import React, { useEffect, useState } from "react";
 import { MdFlag } from "react-icons/md";
 import { Section, SectionHeading, SectionContent } from "../../layouts/Section";
+import { fetchPromo, fetchQuery } from "../../helpers/fetch";
+import parse from "html-react-parser";
+import { trimString } from "../../helpers/helpers";
+import MyLink from "../../layouts/MyLink";
 
 const OurSuggestions = () => {
+  const [promo, setPromo] = useState(null);
+  const [promoIndex, setPromoIndex] = useState(0);
+
+  useEffect(() => {
+    fetchPromo(setPromo);
+  }, []);
+
+  useEffect(() => {
+    if (promo) {
+      setPromoIndex(Math.floor(Math.random() * promo.length));
+    }
+  }, [promo]);
+
   return (
     <div>
       <Section className="border-radius">
@@ -20,15 +38,32 @@ const OurSuggestions = () => {
         </SectionContent>
       </Section>
       <Section>
-        <div className="bg-white last-minute-small">
-          <h3 className="m-0 suggestion-post-heading">
-            Rodinná výstava - Skřítci a trpaslíci
-          </h3>
-          <p>
-            Letohrádek Mitrovských na Starém Brně připravil na podzimní měsíce
-            originální rodinnou výstavu Skřítci a trpaslíci.
-          </p>
-        </div>
+        {promo && (
+          <MyLink href={`/rady-a-tipy/detail/${promo[promoIndex].hodnota}`}>
+            <div className="bg-white last-minute-small">
+              <h3 className="m-0 suggestion-post-heading">
+                {promo[promoIndex].nazev}
+              </h3>
+              {promo[promoIndex].perex ? (
+                <p>{parse(trimString(promo[promoIndex].perex, 21))}</p>
+              ) : promo[promoIndex]?.zakladni_popis ||
+                promo[promoIndex]?.text ? (
+                <p>
+                  {parse(
+                    trimString(
+                      promo[promoIndex]?.zakladni_popis ||
+                        promo[promoIndex]?.text,
+                      21
+                    )
+                  )}
+                  ...
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
+          </MyLink>
+        )}
       </Section>
     </div>
   );
