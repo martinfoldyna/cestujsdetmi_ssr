@@ -13,8 +13,6 @@ const MobileNewsArticle = ({
   background,
   index,
 }) => {
-  console.log(article);
-  console.log(index);
   return (
     <MyLink href={`/rady-a-tipy/detail/${article?.hodnota}`}>
       <div

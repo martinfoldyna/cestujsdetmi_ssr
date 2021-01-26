@@ -27,8 +27,17 @@ export const fetchPrevio = async (path, params = null) => {
   try {
     const xmlifyParams = (params) => {
       let xmlString = "";
+      console.log(params);
       for (let param in params) {
-        xmlString += `<${param}>${params[param]}</${param}>`;
+        if (typeof params[param] === "object") {
+          xmlString += `<${param}>`;
+          for (let subParam in params[param]) {
+            xmlString += `<${subParam}>${params[param][subParam]}</${subParam}>`;
+          }
+          xmlString += `</${param}>`;
+        } else {
+          xmlString += `<${param}>${params[param]}</${param}>`;
+        }
       }
 
       return xmlString;
@@ -37,8 +46,7 @@ export const fetchPrevio = async (path, params = null) => {
       <request>
         <login>${process.env.NEXT_PUBLIC_PREVIO_LOGIN}</login>
         <password>${process.env.NEXT_PUBLIC_PREVIO_PASSWORD}</password>
-        <limit>
-        <limit>20</limit></limit>
+        ${params ? xmlifyParams(params) : ""}
       </request>`;
     console.log(xmlSring);
     const response = await axios.post(
@@ -47,11 +55,11 @@ export const fetchPrevio = async (path, params = null) => {
       { headers: { "Content-Type": "text/xml" } }
     );
 
-    console.log("received response");
     const jsonData = await parseXml(response.data);
 
-    console.log("parsing string");
-    return { success: true, data: jsonData.hotels?.hotel };
+    console.log(jsonData);
+
+    return { success: true, data: jsonData.hotels };
   } catch (err) {
     console.log(err);
     throw err;

@@ -142,7 +142,6 @@ export const parseXml = (xml) => {
       if (err) {
         reject(err);
       }
-      console.log(result);
       resolve(result);
     });
   });

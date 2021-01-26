@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/OurSuggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/OurSuggestions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/fetch.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/MobileNewsArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/MobileNewsArticle.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +108,7 @@
       <workItem from="1610884717649" duration="277000" />
       <workItem from="1610906518481" duration="2664000" />
       <workItem from="1610979812217" duration="1076000" />
-      <workItem from="1611222515348" duration="44747000" />
+      <workItem from="1611222515348" duration="47529000" />
     </task>
     <servers />
   </component>

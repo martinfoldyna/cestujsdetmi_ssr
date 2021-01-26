@@ -181,14 +181,12 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
       .filter((key) => equipment[key]);
     if (equipmentKeys && equipmentKeys.length > 0) {
       const dividedLength = Math.round(equipmentKeys?.length / 3);
-      console.log("Divider", Math.round(equipmentKeys.length / dividedLength));
       let finalEquipment = [];
 
       for (let i = 0; i <= equipmentKeys.length; i += dividedLength) {
         finalEquipment.push(equipmentKeys.slice(i, i + dividedLength));
       }
 
-      console.log(finalEquipment);
       return (
         <Row>
           {finalEquipment.map(
