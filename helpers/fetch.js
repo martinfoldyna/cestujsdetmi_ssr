@@ -1,4 +1,7 @@
 import enums from "../enums";
+import axios from "axios";
+import { parseString } from "xml2js";
+import { parseXml } from "./helpers";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -16,7 +19,43 @@ export const fetchQuery = async (path, params = null) => {
     return data;
   } catch (err) {
     console.log(err);
-    return err;
+    throw err;
+  }
+};
+
+export const fetchPrevio = async (path, params = null) => {
+  try {
+    const xmlifyParams = (params) => {
+      let xmlString = "";
+      for (let param in params) {
+        xmlString += `<${param}>${params[param]}</${param}>`;
+      }
+
+      return xmlString;
+    };
+    const xmlSring = `<?xml version="1.0"?>
+      <request>
+        <login>${process.env.NEXT_PUBLIC_PREVIO_LOGIN}</login>
+        <password>${process.env.NEXT_PUBLIC_PREVIO_PASSWORD}</password>
+        <limit>
+        <limit>20</limit></limit>
+      </request>`;
+    console.log(xmlSring);
+    const response = await axios.post(
+      `http://api.previo.cz/x1/${path}`,
+      xmlSring,
+      { headers: { "Content-Type": "text/xml" } }
+    );
+
+    console.log("received response");
+    const jsonData = await parseXml(response.data);
+
+    console.log("parsing string");
+    return { success: true, data: jsonData.hotels?.hotel };
+  } catch (err) {
+    console.log(err);
+    throw err;
+    return [];
   }
 };
 

@@ -28,42 +28,42 @@ const OurSuggestions = () => {
           <h3>Naše tipy</h3>
         </SectionHeading>
         <SectionContent className="bg-white last-minute-small mb-1">
-          <h3 className="m-0 suggestion-post-heading">Chateau St. Havelno</h3>
-          <p>
-            Apart Hotel v Jablonci nad Nisou je rodinné a moderní ubytování s
-            vyhlášenou restaurací v blízkosti krásné jablonecké přehrady,
-            plaveckého bazénu s aquaparkem a městské sportovní haly. Ideální
-            poloha pro dovolenou s dětmi a to jak v létě tak v zimě.
-          </p>
-        </SectionContent>
-      </Section>
-      <Section>
-        {promo && (
-          <MyLink href={`/rady-a-tipy/detail/${promo[promoIndex].hodnota}`}>
-            <div className="bg-white last-minute-small">
-              <h3 className="m-0 suggestion-post-heading">
-                {promo[promoIndex].nazev}
-              </h3>
-              {promo[promoIndex].perex ? (
-                <p>{parse(trimString(promo[promoIndex].perex, 21))}</p>
-              ) : promo[promoIndex]?.zakladni_popis ||
-                promo[promoIndex]?.text ? (
-                <p>
-                  {parse(
-                    trimString(
-                      promo[promoIndex]?.zakladni_popis ||
-                        promo[promoIndex]?.text,
-                      21
-                    )
-                  )}
-                  ...
-                </p>
-              ) : (
-                ""
-              )}
+          <div className="suggestion-article">
+            <h3 className="m-0 suggestion-post-heading">Chateau St. Havelno</h3>
+            <p>
+              Apart Hotel v Jablonci nad Nisou je rodinné a moderní ubytování s
+              vyhlášenou restaurací v blízkosti krásné jablonecké přehrady,
+              plaveckého bazénu s aquaparkem a městské sportovní haly. Ideální
+              poloha pro dovolenou s dětmi a to jak v létě tak v zimě.
+            </p>
+          </div>
+          {promo && (
+            <div className="suggestion-article">
+              <MyLink href={`/rady-a-tipy/detail/${promo[promoIndex].hodnota}`}>
+                <h3 className="m-0 suggestion-post-heading">
+                  {promo[promoIndex].nazev}
+                </h3>
+                {promo[promoIndex].perex ? (
+                  <p>{parse(trimString(promo[promoIndex].perex, 21))}</p>
+                ) : promo[promoIndex]?.zakladni_popis ||
+                  promo[promoIndex]?.text ? (
+                  <p>
+                    {parse(
+                      trimString(
+                        promo[promoIndex]?.zakladni_popis ||
+                          promo[promoIndex]?.text,
+                        21
+                      )
+                    )}
+                    ...
+                  </p>
+                ) : (
+                  ""
+                )}
+              </MyLink>
             </div>
-          </MyLink>
-        )}
+          )}
+        </SectionContent>
       </Section>
     </div>
   );

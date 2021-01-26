@@ -402,3 +402,21 @@ h3.suggestion-post-heading {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   font-weight: normal;
 }
+
+.suggestion-article {
+  position: relative;
+}
+
+.suggestion-article::before {
+  position: absolute;
+  top: -.5em;
+  left: 0;
+  right: 0;
+  height: 2px;
+  content: "";
+  background-color: $grey;
+}
+
+.suggestion-article:first-of-type:before {
+  display: none;
+}

@@ -52,10 +52,15 @@ const HeaderComponent = ({ user }) => {
   return (
     <header className={`main-header ${stickyUp ? "sticky" : ""}`}>
       <div className="hide-mobile">
-        <Container>
+        <Container className="main-container">
           <div className="d-flex justify-content-between align-items-center">
             <MyLink href="/">
-              <Image src="/cestuj_big.svg" height={47} width={270} />
+              <Image
+                src="/cestuj_big.svg"
+                height={47}
+                width={270}
+                alt="logo cestuj s dětmi"
+              />
             </MyLink>
             <div className="d-flex align-items-center justify-content-end">
               <div className="search-bar">

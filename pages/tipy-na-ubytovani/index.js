@@ -12,7 +12,7 @@ import SideBar from "../../layouts/Sidebar";
 import SideFilter from "../../components/cards/SideFilter";
 import SideCards from "../../layouts/SideCards";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
-import { fetchQuery } from "../../helpers/fetch";
+import { fetchPrevio, fetchQuery } from "../../helpers/fetch";
 import { searchParamsToUrlQuery } from "next/dist/next-server/lib/router/utils/querystring";
 import {
   initCategories,
@@ -30,17 +30,25 @@ export async function getStaticProps() {
     _start: 0,
   };
 
-  const [objekty, kategorie] = await Promise.all([
+  const [objekty, previoObjekty, kategorie] = await Promise.all([
     fetchQuery(
       `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
     ),
+    fetchPrevio("hotels/search", { limit: 10 }),
     fetchQuery(enums.URLS.kategorie),
   ]);
 
-  return { props: { objekty, kategorie }, revalidate: 30 };
+  return {
+    props: {
+      objekty,
+      kategorie,
+      previo: previoObjekty?.success ? previoObjekty?.data : [],
+    },
+    revalidate: 30,
+  };
 }
 
-const TipyNaUbytovani = ({ objekty, kategorie, removeObjekty }) => {
+const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
   const router = useRouter();
 
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -129,14 +137,18 @@ const TipyNaUbytovani = ({ objekty, kategorie, removeObjekty }) => {
                   <SideFilter topic={enums.TYP_OBJEKTU.ubytovani.key} />
                 )}
               </div>
-
               <ListFilteredItems
                 region={selectedRegion}
                 city={selectedCity}
                 typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
                 objekty={objekty}
               />
-
+              <ul>
+                {previo.map((previoObjekt) => (
+                  <li>{previoObjekt.name}</li>
+                ))}
+              </ul>
+              Celkem: {previo?.length}
               <div className="hide-desktop">
                 <div className="mt-1">
                   <SideCards />
