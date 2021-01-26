@@ -9,7 +9,7 @@ import { HiNewspaper } from "react-icons/hi";
 import Objekt from "../components/cards/Objekt";
 import SideBar from "../layouts/Sidebar";
 import { fetchQuery } from "../helpers/fetch";
-import { Head } from "next/document";
+import Head from "next/head";
 
 const Aktuality = ({ objekty }) => {
   // How many objects are shown and at which number start api call query

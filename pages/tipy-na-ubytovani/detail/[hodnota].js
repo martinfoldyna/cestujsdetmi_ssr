@@ -34,7 +34,6 @@ export async function getStaticProps({ params }) {
       related = await fetchQuery(
         `${enums.URLS.objektInfo}?adresa_oblast=${objekt.adresa_oblast}`
       );
-      console.log(related);
     }
 
     return objekt

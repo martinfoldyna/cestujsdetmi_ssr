@@ -57,8 +57,6 @@ export const fetchPrevio = async (path, params = null) => {
 
     const jsonData = await parseXml(response.data);
 
-    console.log(jsonData);
-
     return { success: true, data: jsonData.hotels };
   } catch (err) {
     console.log(err);

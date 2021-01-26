@@ -25,7 +25,6 @@ const ObjektyTable = ({ objektyTypy }) => {
     let dataKeys = [];
     if (objektyTypy) {
       let dataKeysUnsorted = Object.keys(objektyTypy);
-      console.log(dataKeysUnsorted.find((key) => key === "standard"));
       dataKeys[0] = dataKeysUnsorted.find((key) => key === "standard");
       dataKeys[1] = dataKeysUnsorted.find((key) => key === "optimal");
       dataKeys[2] = dataKeysUnsorted.find((key) => key === "premium");

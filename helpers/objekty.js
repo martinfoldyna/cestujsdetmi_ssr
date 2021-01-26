@@ -7,8 +7,6 @@ export const objektUpload = async (data, images) => {
 
       const uploadImages = Array.isArray(images) ? images : [images];
 
-      console.log(data);
-
       for (let image of uploadImages) {
         console.log(image);
         formData.append(`files.${image.name}`, image, image.name);

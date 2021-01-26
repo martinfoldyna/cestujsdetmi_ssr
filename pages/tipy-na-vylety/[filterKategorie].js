@@ -18,8 +18,6 @@ export async function getStaticPaths() {
     `${enums.URLS.kategorie}?urceni=${enums.TYP_OBJEKTU.ubytovani.key}`
   );
 
-  console.log(kategorie);
-
   return {
     paths: kategorie.map((category) => ({
       params: {
