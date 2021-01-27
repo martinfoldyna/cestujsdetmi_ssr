@@ -30,10 +30,11 @@ export async function getStaticProps() {
     _start: 0,
   };
 
-  const [objekty, kategorie] = await Promise.all([
+  const [objekty, previoObjekty, kategorie] = await Promise.all([
     fetchQuery(
       `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
     ),
+    fetchPrevio("hotels/search", { limit: { limit: 20 } }),
     fetchQuery(enums.URLS.kategorie),
   ]);
 
@@ -41,6 +42,7 @@ export async function getStaticProps() {
     props: {
       objekty,
       kategorie,
+      previo: previoObjekty?.success ? previoObjekty?.data : [],
     },
     revalidate: 30,
   };
@@ -145,13 +147,13 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
                 typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
                 objekty={objekty}
               />
-              {/*<ul>*/}
-              {/*  {previo.hotel?.map((previoObjekt) => (*/}
-              {/*    <li>{previoObjekt.name}</li>*/}
-              {/*  ))}*/}
-              {/*</ul>*/}
-              {/*Celkem: {previo?.hotel?.length} <br />*/}
-              {/*Celkový počet hotelů na previo: {previo?.foundHotels}*/}
+              <ul>
+                {previo.hotel?.map((previoObjekt) => (
+                  <li>{previoObjekt.name}</li>
+                ))}
+              </ul>
+              Celkem: {previo?.hotel?.length} <br />
+              Celkový počet hotelů na previo: {previo?.foundHotels}
               <div className="hide-desktop">
                 <div className="mt-1">
                   <SideCards />

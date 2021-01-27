@@ -23,11 +23,10 @@ export const fetchQuery = async (path, params = null) => {
   }
 };
 
-export const fetchPrevio = async (path, params = null) => {
+export const fetchPrevio = async (path, params = null, xml = "") => {
   try {
     const xmlifyParams = (params) => {
       let xmlString = "";
-      console.log(params);
       for (let param in params) {
         if (typeof params[param] === "object") {
           xmlString += `<${param}>`;
@@ -42,25 +41,39 @@ export const fetchPrevio = async (path, params = null) => {
 
       return xmlString;
     };
+
+    // XML request
     const xmlSring = `<?xml version="1.0"?>
       <request>
         <login>${process.env.NEXT_PUBLIC_PREVIO_LOGIN}</login>
         <password>${process.env.NEXT_PUBLIC_PREVIO_PASSWORD}</password>
         ${params ? xmlifyParams(params) : ""}
+        ${xml ? xml : ""}
       </request>`;
-    console.log(xmlSring);
+
+    // Previo api call, to allow CORS in development add cors-anywhere domain before previo url
     const response = await axios.post(
-      `http://api.previo.cz/x1/${path}`,
+      `${
+        process.env.NODE_ENV === "development"
+          ? "https://cors-anywhere.herokuapp.com/"
+          : ""
+      }${process.env.NEXT_PUBLIC_PREVIO_API_URL}/${path}`,
       xmlSring,
-      { headers: { "Content-Type": "text/xml" } }
+      {
+        headers: {
+          "Content-Type": "text/xml",
+          "Access-Control-Allow-Origin": "*",
+          origin: "http://localhost:3000",
+        },
+      }
     );
 
+    // Conver xml string to JSON
     const jsonData = await parseXml(response.data);
 
-    return { success: true, data: jsonData.hotels };
+    return { success: true, data: jsonData };
   } catch (err) {
     console.log(err);
-    throw err;
     return [];
   }
 };

@@ -69,6 +69,8 @@ const CustomSelect = ({
     setSelectState((prevState) => !prevState);
   };
 
+  useEffect(() => {}, [value]);
+
   return (
     <>
       <div className="custom-select-wrapper" ref={wrapperRef}>

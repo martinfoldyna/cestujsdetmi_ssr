@@ -496,8 +496,9 @@ input[type=number] {
 }
 
 .new-published-content {
-  background-color: $yellow;
-  //border-radius: $border-radius;
+  background-color: $green;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
   padding: 1em;
   //padding: 0 2em;
 }
@@ -960,6 +961,25 @@ input[type=number] {
 .last-minute-small h3 {
   font-weight: 600;
   margin: .5em 0;
+}
+
+.filter-badge {
+  padding: .5em .8em;
+  margin: 0 .5em;
+  color: #fff;
+  border-radius: 4px;
+  font-size: .75em;
+  //font-weight: 600;
+  transition: .4s;
+}
+
+.filter-badge:hover {
+  background-color: $danger;
+  cursor: pointer;
+}
+
+.filter-badge:first-of-type {
+  margin-left: 0;
 }
 
 @import "MediaQueries";

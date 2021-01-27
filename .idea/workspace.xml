@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/components/PrevioObjektDetail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/previo/[id].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ObjektyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektyTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/NewPublished.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/NewPublished.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/cards/SideFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/SideFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/form/CustomSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/form/CustomSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/listFilteredItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/listFilteredItems.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/fetch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/objekty.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/objekty.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/NewsArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/NewsArticle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/aktuality.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aktuality.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tipy-na-ubytovani/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/detail/[hodnota].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tipy-na-vylety/[filterKategorie].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-vylety/[filterKategorie].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tipy-na-ubytovani/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +113,7 @@
       <workItem from="1610884717649" duration="277000" />
       <workItem from="1610906518481" duration="2664000" />
       <workItem from="1610979812217" duration="1076000" />
-      <workItem from="1611222515348" duration="48179000" />
+      <workItem from="1611222515348" duration="69511000" />
     </task>
     <servers />
   </component>

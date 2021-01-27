@@ -18,7 +18,7 @@ const NewPublished = ({ newPublished }) => {
         <Col md={12} className="text-align-right">
           <div className="heading-with-icons d-flex align-items-center">
             <RiPushpin2Fill
-              className="text-white icon-heading bg-yellow"
+              className="text-white icon-heading bg-green"
               style={{ marginRight: "1em" }}
             />
             <h2>Nově zařazeno na portál</h2>
@@ -28,7 +28,7 @@ const NewPublished = ({ newPublished }) => {
 
       <Row className="justify-content-arround">
         <Col md={12}>
-          <div className="new-published-content text-white">
+          <div className="new-published-content text-white bg-green p-1">
             <Row className="row">
               {newPublished ? (
                 newPublished?.map((article) => (

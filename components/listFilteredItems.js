@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { connect } from "react-redux";
 import LoadingSkeleton from "../layouts/LoadingSkeleton";
 import Objekt from "./cards/Objekt";
 import { countObjekty, getObjektyByParams } from "../redux/actions/objekty";
 import enums from "../enums";
 import { fetchQuery } from "../helpers/fetch";
-import { searchParamsToQueryString } from "../helpers/helpers";
-import VerticalPost from "../layouts/VerticalPost";
-import HomePageObjekt from "../layouts/HomePageObjekt";
-import MobileNewsArticle from "../layouts/MobileNewsArticle";
+import { objectToArray, searchParamsToQueryString } from "../helpers/helpers";
 import PromoArticle from "../layouts/PromoArticle";
+import { route } from "next/dist/next-server/server/router";
+import { FaWindowClose } from "react-icons/fa";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { IoClose } from "react-icons/io5";
+import { translateColor } from "../helpers/translators";
 
 const ListFilteredItems = ({ objekty, typ_objektu }) => {
   const router = useRouter();
@@ -162,11 +164,63 @@ const ListFilteredItems = ({ objekty, typ_objektu }) => {
     return filtered;
   };
 
-  return !objekty ? (
+  const renderFilterBadgeValue = (queryKey) => {
+    let value;
+    switch (queryKey) {
+      case "kraj":
+        value = objectToArray(enums.KRAJ).find(
+          (kraj) => kraj.key === router.query[queryKey]
+        ).value;
+        value += " kraj";
+        break;
+      case "oblast":
+        value = objectToArray(enums.REGION).find(
+          (oblast) => oblast.key === router.query[queryKey]
+        ).value;
+        break;
+      default:
+        value = "";
+    }
+
+    return value;
+  };
+
+  const removeFilterValue = (key) => {
+    const { query } = router;
+
+    const queryKeys = Object.keys(query);
+
+    const newKeys = queryKeys.filter((queryKey) => queryKey !== key);
+    const newQuery = { ...newKeys.map((key) => ({ [key]: query[key] })) }[0];
+    console.log("filtered keys", newQuery);
+
+    router.push({
+      pathname: router.pathname,
+      query: newQuery,
+    });
+  };
+
+  return !listObjects ? (
     <LoadingSkeleton />
   ) : (
     <div className="filtered-objects">
-      {objekty
+      {router.query && (
+        <div className="filter–badges d-flex">
+          {Object.keys(router.query).map((key) => (
+            <span
+              className={`filter-badge d-flex align-items-center bg-${translateColor(
+                typ_objektu
+              )}`}
+              onClick={() => removeFilterValue(key)}
+            >
+              <IoClose className="icon" />
+              {renderFilterBadgeValue(key)}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {listObjects
         ?.sort((a, b) => a.druh_zapisu - b.druh_zapisu)
         .map((objekt, index) => {
           const currentIndex = index === 0 ? 0 : index + 1;

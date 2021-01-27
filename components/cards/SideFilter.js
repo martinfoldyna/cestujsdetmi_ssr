@@ -6,15 +6,11 @@ import Router, { useRouter } from "next/router";
 import Link from "next/link";
 import { objectToArray } from "../../helpers/helpers";
 import enums from "../../enums";
-import { connect } from "react-redux";
-import { getCategories } from "../../redux/actions/objekty";
 import CustomDateRangePicker from "../form/CustomDateRangePicker";
-import { GlobalContext } from "../../context/GlobalContext";
-import { fetchQuery } from "../../helpers/fetch";
 
 const SideFilter = ({
   color,
-  kategorie,
+  kategorie = [],
   // getCategories,
   topic,
   dateRange = false,
@@ -35,7 +31,7 @@ const SideFilter = ({
   const cancelFilter = (e) => {
     if (e.target.classList.contains("selected")) {
       e.target.classList.remove("selected");
-      Router.push(router.pathname);
+      router.push(router.pathname);
     }
   };
 
@@ -43,16 +39,21 @@ const SideFilter = ({
     return new URLSearchParams(router.search);
   };
 
-  const onRegionsSelect = (region) => {
-    const query = queryParams();
+  const onRegionsSelect = (param) => {
+    // const query = queryParams();
 
-    setSelectedRegion(region);
-    console.log(router.search);
-    // const queryString = `${
-    //   query && (query.includes("?") || query.includes("=")) ? "&" : "?"
-    // }kraj=`;
-    Router.push(router.pathname + "?kraj=" + region.key);
-    // getCitiesInRegion(region.value);
+    const paramKey = Object.keys(param);
+    setSelectedRegion(param[paramKey]);
+
+    let query =
+      Object.keys(router.query).length > 0
+        ? { ...router.query, [paramKey]: param[paramKey] }
+        : { [paramKey]: param[paramKey] };
+
+    router.push({
+      pathname: router.pathname,
+      query,
+    });
   };
 
   const onCitySelect = (city) => {
@@ -75,7 +76,7 @@ const SideFilter = ({
       !categoryQuery?.includes(category.hodnota)
     ) {
       // Check if if a) query parameter is empty or b) if the value is already added.
-      Router.push({
+      router.push({
         pathname: router.url,
         search: `?kategorie=${categoryQuery ? `${categoryQuery},` : ""}${
           category.hodnota
@@ -99,7 +100,7 @@ const SideFilter = ({
             })
             .join(",")
         : categoryQuery.replace(category.hodnota, "");
-      Router.push({
+      router.push({
         pathname: router.url,
         search: queryString?.length > 0 && `?kategorie=${queryString}`,
       });
@@ -119,10 +120,13 @@ const SideFilter = ({
   };
 
   useEffect(() => {
-    if (router) {
+    if (router.query) {
       console.log(router.query);
+      console.log(
+        beautifiedKraj.find((kraj) => kraj.key === router.query.kraj)
+      );
     }
-  }, [router]);
+  }, [router.query]);
 
   return (
     <div
@@ -142,9 +146,16 @@ const SideFilter = ({
               <Col md={12}>
                 <CustomSelect
                   options={beautifiedKraj}
-                  onChange={onRegionsSelect}
+                  onChange={(kraj) => onRegionsSelect({ kraj: kraj.key })}
                   placeholder="Kraj"
                   color={color}
+                  value={
+                    router.query.kraj
+                      ? beautifiedKraj.find(
+                          (kraj) => kraj.key === router.query.kraj
+                        )
+                      : null
+                  }
                 />
               </Col>
             </Row>
@@ -152,9 +163,10 @@ const SideFilter = ({
               <Col md={12} className="p-0">
                 <CustomSelect
                   options={beautifiedRegion}
-                  onChange={onCitySelect}
+                  onChange={(oblast) => onRegionsSelect({ oblast: oblast.key })}
                   placeholder="Oblast"
                   color={color}
+                  value={router.query.oblast}
                 />
               </Col>
             </Row>

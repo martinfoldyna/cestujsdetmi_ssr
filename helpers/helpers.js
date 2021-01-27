@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import { fetchQuery } from "./fetch";
 import enums from "../enums";
-import { parseString } from "xml2js";
+import xml2js from "xml2js";
 
 /** Moves item in array up or down
  * @param arr
@@ -137,8 +137,10 @@ export const initCategories = async (context) => {
 };
 
 export const parseXml = (xml) => {
+  const parser = new xml2js.Parser({ explicitArray: false });
+
   return new Promise((resolve, reject) => {
-    parseString(xml, (err, result) => {
+    parser.parseString(xml, (err, result) => {
       if (err) {
         reject(err);
       }
