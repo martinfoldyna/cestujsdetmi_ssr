@@ -7,10 +7,11 @@ import { Col, Container, Row } from "react-grid-system";
 import SideFilter from "../../components/cards/SideFilter";
 import SideCards from "../SideCards";
 
-const WebcamsLayout = ({ children }) => {
+const WebcamsLayout = ({ children, ...pageProps }) => {
   const router = useRouter();
-  console.log(router);
   const { hodnota } = router.query;
+
+  console.log(pageProps);
 
   return (
     <Container className="main-container">
@@ -18,7 +19,8 @@ const WebcamsLayout = ({ children }) => {
         <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;
         {hodnota ? (
           <>
-            <Link href="/webkamery">Webkamery</Link>&nbsp;/&nbsp;{hodnota}
+            <Link href="/webkamery">Webkamery</Link>&nbsp;/&nbsp;Detail
+            webkamery
           </>
         ) : (
           "Webkamery"

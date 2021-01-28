@@ -2,7 +2,9 @@
 .form-item input.inputText:focus ~ .floating-label,
 .form-item textarea.inputText:focus ~ .floating-label,
 .form-item input.inputText:not(:focus):valid ~ .floating-label,
-.form-item textarea.inputText:not(:focus):valid ~ .floating-label {
+.form-item textarea.inputText:not(:focus):valid ~ .floating-label,
+.form-item.forShow input.inputText ~ .floating-label,
+.date-form-item.forShow input.inputText ~ .floating-label {
   transform: scale3d(0.7,0.7,1);
   top: 5px;
 }

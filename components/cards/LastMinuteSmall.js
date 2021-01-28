@@ -31,9 +31,7 @@ const LastMinuteSmall = ({ background }) => {
             background ? `bg-${background} border-grey` : "bg-grey"
           } last-minute-small mb-1`}
         >
-          <Link
-            href={`/tipy-na-ubytovani/detail/${lastMinute[selectedLM].hodnota}`}
-          >
+          <Link href={`/ubytovani/detail/${lastMinute[selectedLM].hodnota}`}>
             <>
               <div className="d-flex align-items-center small-card-heading">
                 <FaTag className="icon text-red" />

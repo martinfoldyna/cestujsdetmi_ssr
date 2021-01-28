@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-grid-system";
 import { AiFillBulb } from "react-icons/ai";
 import { BiBookContent } from "react-icons/bi";
@@ -10,8 +10,9 @@ import LoadingSkeleton from "../layouts/LoadingSkeleton";
 import HomePageObjekt from "../layouts/HomePageObjekt";
 import MyLink from "../layouts/MyLink";
 
-const HomePageSections = ({ data, loading, topic, heading }) => {
-  const [link, setLink] = useState({ value: "", text: "" });
+const HomePageSections = ({ data, loading, topic }) => {
+  const [link, setLink] = useState({ href: null, text: null });
+  const [heading, setHeading] = useState("");
   const color = translateColor(topic);
 
   const generateHeading = (topic) => {
@@ -19,6 +20,10 @@ const HomePageSections = ({ data, loading, topic, heading }) => {
     let link = null;
     switch (topic) {
       case "aktuality":
+        setLink({
+          text: "aktaulity",
+          href: "aktuality",
+        });
         headingHTML = (
           <MyLink href="/aktuality" className="d-flex align-items-center">
             <>
@@ -45,6 +50,10 @@ const HomePageSections = ({ data, loading, topic, heading }) => {
         );
         break;
       case "rady_tipy":
+        setLink({
+          text: "rady a tipy",
+          href: "rady-a-tipy",
+        });
         headingHTML = (
           <MyLink href="/rady-a-tipy" className="d-flex align-items-center">
             <>
@@ -65,11 +74,15 @@ const HomePageSections = ({ data, loading, topic, heading }) => {
     return headingHTML;
   };
 
+  useEffect(() => {
+    setHeading(() => generateHeading(topic));
+  }, []);
+
   return (
     <section className={`section`} style={{ marginTop: "2em" }}>
       <Row className="justify-content-arround bg-grey m-0 section-heading">
         <Col md={12}>
-          <div className="heading-with-icons">{generateHeading(topic)}</div>
+          <div className="heading-with-icons">{heading}</div>
         </Col>
       </Row>
       {data ? (
@@ -106,15 +119,21 @@ const HomePageSections = ({ data, loading, topic, heading }) => {
                 })}
             </Col>
           </Row>
-          <button
-            className={`btn btn-small-logo bg-${color} text-white btn-homepage-detail`}
-          >
-            <Link href="/tipy-na-vylety" className="d-flex align-items-center">
-              <>
-                Další {link.text} <RiArrowRightSLine />
-              </>
-            </Link>
-          </button>
+          {link.href && link.text && (
+            <button
+              className={`btn btn-small-logo bg-${color} text-white btn-homepage-detail`}
+            >
+              <MyLink
+                href={`/${link.href}`}
+                className="d-flex align-items-center"
+              >
+                <>
+                  Další {link.text}&nbsp;
+                  <RiArrowRightSLine />
+                </>
+              </MyLink>
+            </button>
+          )}
         </div>
       ) : (
         <Row className="justify-content-arround">

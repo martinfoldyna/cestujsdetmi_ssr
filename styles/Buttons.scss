@@ -11,6 +11,10 @@
   display: block;
 }
 
+.btn:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
 .btn:focus {
   outline: none;
 }
@@ -88,6 +92,12 @@
   position: absolute;
   bottom: -1em;
   right: 1em;
+}
+
+.btn-homepage-detail.center {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
 }
 
 .btn-icon.right {

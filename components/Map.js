@@ -73,7 +73,7 @@ const Map = () => {
 
   const submitLocation = () => {
     router.push({
-      pathname: selectedTrip ? "/tipy-na-vylety" : "/tipy-na-ubytovani",
+      pathname: selectedTrip ? "/vylety" : "/ubytovani/",
       search: `?kraj=${kraj}&mesto=${mesto}&oblast=${oblast}`,
     });
   };

@@ -12,6 +12,7 @@ import { BsClock } from "react-icons/bs";
 import enums from "../../../enums";
 import { fetchQuery } from "../../../helpers/fetch";
 import RadyTipyLayout from "../../../layouts/siteLayouts/RadyTipyLayout";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   const fetchParams = {
@@ -65,7 +66,13 @@ const RadyTipyDetail = ({
   // }, []);
 
   return post ? (
-    <div>
+    <>
+      <Head>
+        <title>{post.nazev} | Cestuj s dětmi.cz</title>
+        <meta name="description" content={post.page_description} />
+        <meta name="keywords" content={post.page_keywords} />
+        <meta name="robots" content="index, follow" />
+      </Head>
       <Section className="mt-0 post-detail">
         <SectionHeading background="grey">
           <h2>{post.nazev}</h2>
@@ -101,42 +108,7 @@ const RadyTipyDetail = ({
           <div className="content-wrapper">{post.text && parse(post.text)}</div>
         </SectionContent>
       </Section>
-      {/*{post?.page_keywords && (*/}
-      {/*  <Section className="realted-advices border-section">*/}
-      {/*    <SectionHeading background="none">*/}
-      {/*      <h2>Související články</h2>*/}
-      {/*    </SectionHeading>*/}
-      {/*    <SectionContent>*/}
-      {/*      <Row>*/}
-      {/*        {relatedPosts ? (*/}
-      {/*          relatedPosts.map(*/}
-      {/*            (post, index) =>*/}
-      {/*              index < relatedLimit && (*/}
-      {/*                <Fragment>*/}
-      {/*                  <Col md={4}>*/}
-      {/*                    <VerticalPost post={post} />*/}
-      {/*                  </Col>*/}
-      {/*                </Fragment>*/}
-      {/*              )*/}
-      {/*          )*/}
-      {/*        ) : (*/}
-      {/*          <LoadingSkeleton />*/}
-      {/*        )}*/}
-      {/*      </Row>*/}
-      {/*      {relatedLimit < relatedPosts?.length && (*/}
-      {/*        <div className="d-flex justify-content-center">*/}
-      {/*          <button*/}
-      {/*            className="btn bg-yellow text-white"*/}
-      {/*            onClick={() => setRelatedLimit((prevState) => prevState * 2)}*/}
-      {/*          >*/}
-      {/*            Načíst další*/}
-      {/*          </button>*/}
-      {/*        </div>*/}
-      {/*      )}*/}
-      {/*    </SectionContent>*/}
-      {/*  </Section>*/}
-      {/*)}*/}
-    </div>
+    </>
   ) : (
     <LoadingSkeleton />
   );

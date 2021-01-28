@@ -10,7 +10,7 @@ import { objectToArray } from "../../helpers/helpers";
 import RadyTipy from "./index";
 import RadyTipyLayout from "../../layouts/siteLayouts/RadyTipyLayout";
 import MobileNewsArticle from "../../layouts/MobileNewsArticle";
-
+import Head from "next/head";
 export async function getStaticPaths() {
   const categories = objectToArray(enums.RADY_TIPY.KATEGORIE);
 
@@ -33,10 +33,18 @@ export async function getStaticProps(context) {
 }
 
 const RadyTipyKategorie = ({ radyTipy }) => {
+  const router = useRouter();
+  const { kategorie } = router.query;
+
   return radyTipy ? (
-    <div className="p-1 bg-white border-radius mb-1">
-      {radyTipy.map((post, index) => (
-        <>
+    <>
+      <Head>
+        {/*   TODO: Přidat description    */}
+        <title>{enums.RADY_TIPY.KATEGORIE[kategorie].value}</title>
+        <meta name="robots" content="index, follow" />
+      </Head>
+      <div className="border-radius mb-1">
+        {radyTipy.map((post, index) => (
           <div key={post.id}>
             <div className="hide-mobile">
               <HomePageObjekt
@@ -57,9 +65,9 @@ const RadyTipyKategorie = ({ radyTipy }) => {
               />
             </div>
           </div>
-        </>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   ) : (
     <LoadingSkeleton />
   );

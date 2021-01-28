@@ -176,7 +176,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
       <div className="objekt-detail">
         <span className="breadcrumb">
           <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;
-          <MyLink href="/tipy-na-ubytovani" className={"text-" + color}>
+          <MyLink href="/ubytovani" className={"text-" + color}>
             Ubytování a dovolená
           </MyLink>
           &nbsp;/&nbsp;
@@ -230,7 +230,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                           return (
                             <div
                               className={`objekt-detail-image img-0${i}`}
-                              style={{ backgroundImage: `url(${image.url})` }}
                               onClick={() => openLightbox(image)}
                               key={i}
                             >
@@ -276,11 +275,18 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                   <>
                     <div
                       className={`objekt-detail-image img-00`}
-                      style={{
-                        backgroundImage: `url(${images[0]?.url})`,
-                      }}
-                      // onClick={() => openLightbox(images[0])}
+                      onClick={() => openLightbox(images[0])}
                     >
+                      <Image
+                        src={images[0].sm}
+                        alt={
+                          images[0].alternativeText
+                            ? images[0].alternativeText
+                            : `${objekt.nazev}`
+                        }
+                        layout="fill"
+                        objectFit="cover"
+                      />
                       <div className="overlay">
                         <div className="d-flex justify-content-between image-actions content-wrapper">
                           <div className="d-flex align-items-center text-white">

@@ -1,22 +1,15 @@
 import "../styles/globals.scss";
-// import {Provider} from "react-redux";
-// import store from "../redux/store";
-// import withRedux, {createWrapper} from "next-redux-wrapper"
+import "react-datepicker/dist/react-datepicker.css";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import React, { useContext, useState } from "react";
-import App from "next/app";
-import { wrapper } from "../redux/store";
 import Header from "../components/Header";
-import Hero from "../components/Hero";
-import { Container } from "react-grid-system";
 import EmptyLayout from "../layouts/EmptyLayout";
-import Link from "next/link";
 import firebase from "firebase";
 import { FirebaseConfig } from "../config/firebaseConfig";
 import Footer from "../layouts/Footer";
-import { fetchQuery } from "../helpers/fetch";
-import enums from "../enums";
 import { GlobalContext } from "../context/GlobalContext";
-import { ca } from "react-date-range/dist/locale";
+
 if (!firebase.apps.length) {
   firebase.initializeApp(FirebaseConfig);
 } else {

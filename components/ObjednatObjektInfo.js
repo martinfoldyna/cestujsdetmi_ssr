@@ -17,7 +17,7 @@ import {
 } from "react-icons/fa";
 import { BsFillPlusCircleFill, BsPlus } from "react-icons/bs";
 import { MdCloudUpload, MdLocationCity } from "react-icons/md";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp, IoMdCheckmark } from "react-icons/io";
 import { BiDetail } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { Row, Col } from "react-grid-system";
@@ -82,7 +82,7 @@ const ObjednatObjektInfo = ({
   const [priceLIStartDate, setPriceLIStartDate] = useState(new Date());
   const [priceLIEndDate, setPriceLIEndDate] = useState(null);
   const [priceLIDescription, setPriceLIDescription] = useState("");
-  const [priceLIPrice, setPriceLIPrice] = useState("");
+  const [priceLIPrice, setPriceLIPrice] = useState(-1);
 
   const [saleItemStartDate, setSaleItemStartDate] = useState(new Date());
   const [saleItemEndDate, setSaleItemEndDate] = useState(null);
@@ -242,67 +242,77 @@ const ObjednatObjektInfo = ({
 
   const thumbnails = previewImages
     ?.sort((a, b) => (a.id > b.id ? 1 : -1))
-    .map((image, i) => (
-      <Row
-        key={image.id}
-        className={`objekt-image mt-2 mb-2 ${
-          i === 0 ? "objekt-image-thumbnail" : ""
-        }`}
-      >
-        <Col md={1} className="align-self-center reorder text-black">
-          <IoIosArrowUp
-            onClick={() =>
-              setPreviewImages((prevState) => arrayMove(prevState, i, i + 1))
-            }
-          />
-          <IoIosArrowDown
-            onClick={() =>
-              setPreviewImages((prevState) => arrayMove(prevState, i, i - 1))
-            }
-          />
-        </Col>
-        <Col md={3}>
-          <div
-            style={{
-              backgroundImage: `url(${
-                image.preview ? image.preview : "../public/img/placeholder.png"
-              })`,
-            }}
-            className="image-container"
-            onClick={() => openLightBox(image)}
-          >
-            <div className="overlay">
-              <FaSearchPlus className="enlarge-icon text-white" />
+    .map((image, i) => {
+      console.log("image", image);
+      return (
+        <Row
+          key={image.id}
+          className={`objekt-image mt-2 mb-2 ${
+            i === 0 ? "objekt-image-thumbnail" : ""
+          }`}
+        >
+          <Col md={1} className="align-self-center reorder text-black">
+            <IoIosArrowUp
+              onClick={() =>
+                setPreviewImages((prevState) => arrayMove(prevState, i, i + 1))
+              }
+            />
+            <IoIosArrowDown
+              onClick={() =>
+                setPreviewImages((prevState) => arrayMove(prevState, i, i - 1))
+              }
+            />
+          </Col>
+          <Col md={3}>
+            <div
+              style={{
+                backgroundImage: `url(${
+                  image.preview
+                    ? image.preview
+                    : "../public/img/placeholder.png"
+                })`,
+              }}
+              className="image-container"
+              onClick={() => openLightBox(image)}
+            >
+              <div className="overlay">
+                <FaSearchPlus className="enlarge-icon text-white" />
+              </div>
             </div>
-          </div>
-          {/*<img src={image.preview} style={{ width: "100%" }} />*/}
-        </Col>
-        <Col className="align-self-center">
-          <Input
-            name="image-name"
-            text="Popis obrázku"
-            onChange={(e) => (previewImages[i].description = e.target.value)}
-          />
-          {i === 0 && <p>Tento obrázek se bude zobrazovat i jako náheldový</p>}
-        </Col>
-        <Col md={1} className="align-self-center">
-          <BsPlus
-            className="cancel-filter-icon text-black"
-            onClick={() =>
-              setPreviewImages((prevState) =>
-                prevState.filter(
-                  (filterImage, index) => filterImage.id !== image.id
+            {/*<img src={image.preview} style={{ width: "100%" }} />*/}
+          </Col>
+          <Col className="align-self-center">
+            <Input
+              name="image-name"
+              text="Popis obrázku"
+              onChange={(e) => (previewImages[i].description = e.target.value)}
+            />
+            {i === 0 && (
+              <p>Tento obrázek se bude zobrazovat i jako náheldový</p>
+            )}
+          </Col>
+          <Col md={1} className="align-self-center">
+            <BsPlus
+              className="cancel-filter-icon text-black"
+              onClick={() =>
+                setPreviewImages((prevState) =>
+                  prevState.filter(
+                    (filterImage, index) => filterImage.id !== image.id
+                  )
                 )
-              )
-            }
-          />
-        </Col>
-      </Row>
-    ));
+              }
+            />
+          </Col>
+        </Row>
+      );
+    });
 
-  const StartDateCustomInput = ({ value, onClick, ...rest }) => (
+  const StartDateCustomInput = ({ value, onClick, forShow, ...rest }) => (
     <>
-      <div className="m-0" onClick={onClick}>
+      <div
+        className={`date-form-item m-0 ${forShow ? "forShow" : ""}`}
+        onClick={onClick}
+      >
         <input
           type="text"
           className={`inputText pr-0 ${
@@ -322,9 +332,12 @@ const ObjednatObjektInfo = ({
     </>
   );
 
-  const EndDateCustomInput = ({ value, onClick, ...rest }) => (
+  const EndDateCustomInput = ({ value, onClick, forShow, ...rest }) => (
     <>
-      <div className="form-item m-0" onClick={onClick}>
+      <div
+        className={`form-item m-0 ${forShow ? "forShow" : ""}`}
+        onClick={onClick}
+      >
         <input
           type="text"
           className={`inputText ${
@@ -450,11 +463,20 @@ const ObjednatObjektInfo = ({
     const objektContactInfo = JSON.parse(localStorage.getItem("objekt_info"));
 
     if (objekt) {
-      const { success } = await objektUpload(infoFinal, previewImages);
+      const { success } = await objektUpload(
+        infoFinal,
+        previewImages,
+        "update",
+        objekt._id
+      );
 
       console.log(success);
     } else {
-      const { success } = await objektUpload(infoFinal, previewImages);
+      const { success } = await objektUpload(
+        infoFinal,
+        previewImages,
+        "create"
+      );
 
       console.log(success);
 
@@ -492,7 +514,7 @@ const ObjednatObjektInfo = ({
 
   // Chek if category has any secondary categories
   const checkSecondaryCategories = (mainCategory = selectedMainCategory) => {
-    const foundSecondaryCategories = kategorie.find(
+    const foundSecondaryCategories = kategorie?.find(
       (item) => item.hodnota === mainCategory.key
     )?.podkategorie;
 
@@ -513,22 +535,24 @@ const ObjednatObjektInfo = ({
             <div style={{ width: "50%" }}>
               <StartDateCustomInput
                 value={moment(item.datum_zacatku).format("DD.MM.YYYY")}
+                forShow
                 disabled
               />
             </div>
             <div>
               <EndDateCustomInput
                 value={moment(item.datum_konce).format("DD.MM.YYYY")}
+                forShow
                 disabled
               />
             </div>
           </div>
         </Col>
         <Col md={4}>
-          <Input value={item.popis} text="Popis" disabled />
+          <Input value={item.popis} text="Popis" disabled className="forShow" />
         </Col>
         <Col md={3}>
-          <Input value={item.cena} text="Cena" disabled />
+          <Input value={item.cena} text="Cena" disabled className="forShow" />
         </Col>
         <Col>
           <button
@@ -560,16 +584,17 @@ const ObjednatObjektInfo = ({
   }, []);
 
   useEffect(() => {
+    console.log(objekt);
+
     setPreviewImages((prevState) => {
       let newImages = objekt?.galerie?.map((image, index) => ({
-        ...image,
+        preview: image.formats.small.url,
         id: index,
-      }));
+      }))[0];
       if (objekt?.relative_galerie) {
         newImages = [
-          ...newImages,
-          objekt.relative_galerie.map((image, index) => ({
-            ...image,
+          ...objekt.relative_galerie.map((image, index) => ({
+            preview: image.sm ? image.sm : image,
             id: `relative_${index}`,
           })),
         ];
@@ -2108,7 +2133,7 @@ const ObjednatObjektInfo = ({
                       }}
                     />
                   </Col>
-                  <Col md={4}>
+                  <Col md={3}>
                     <label htmlFor="pricelist_cena" className="text-black">
                       &nbsp;
                     </label>
@@ -2119,6 +2144,38 @@ const ObjednatObjektInfo = ({
                       value={priceLIPrice}
                       onChange={(e) => checkInputNumber(e, setPriceLIPrice)}
                     />
+                  </Col>
+                  <Col md={1}>
+                    <label htmlFor="pricelist_cena" className="text-black">
+                      &nbsp;
+                    </label>
+                    <button
+                      className="btn bg-blue w-100"
+                      disabled={
+                        priceLIDescription.length === 0 ||
+                        !priceLIEndDate ||
+                        !priceLIPrice?.length < 0
+                      }
+                      onClick={() => {
+                        setPriceList((prevState) => {
+                          const finalItem = {
+                            datum_zacatku: priceLIStartDate,
+                            datum_konce: priceLIEndDate,
+                            popis: priceLIDescription,
+                            cena: priceLIPrice,
+                          };
+                          return prevState
+                            ? [...prevState, finalItem]
+                            : [finalItem];
+                        });
+                        setPriceLIStartDate(new Date());
+                        setPriceLIEndDate(null);
+                        setPriceLIPrice("");
+                        setPriceLIDescription("");
+                      }}
+                    >
+                      <IoMdCheckmark className="text-white" />
+                    </button>
                   </Col>
                 </Row>
 
@@ -2284,6 +2341,7 @@ const ObjednatObjektInfo = ({
                       <div style={{ width: "50%" }}>
                         <StartDateCustomInput
                           value={item.datum_zacatku}
+                          className="forShow"
                           disabled
                         />
                       </div>
@@ -2293,7 +2351,7 @@ const ObjednatObjektInfo = ({
                     </div>
                   </Col>
                   <Col md={4}>
-                    <Input value={item.popis} text="Popis" disabled />
+                    <Input value={item.popis} text="Popis" disabled forShow />
                   </Col>
                   <Col>
                     <button
@@ -2319,7 +2377,7 @@ const ObjednatObjektInfo = ({
                       </label>
                       <Input
                         type="time"
-                        text="Čas otevření"
+                        text="Otevření"
                         name="openingHoursStart"
                         required
                         defaultValue="00:00"
@@ -2335,7 +2393,7 @@ const ObjednatObjektInfo = ({
                       <div className="form-item m-0">
                         <Input
                           type="time"
-                          text="Čas zavření"
+                          text="Zavření"
                           name="openingHoursEnd"
                           required
                           defaultValue="00:00"

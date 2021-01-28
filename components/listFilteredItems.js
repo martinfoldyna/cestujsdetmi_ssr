@@ -56,7 +56,8 @@ const ListFilteredItems = ({ objekty, typ_objektu }) => {
   useEffect(() => {
     console.log("query", router.query);
 
-    if (router.query) {
+    if (Object.keys(router.query)?.length > 0) {
+      console.log("Fetching objects");
       if (kraj) fetchParams = { ...fetchParams, adresa_kraj: kraj };
       if (mesto) fetchParams = { ...fetchParams, adresa_mesto: mesto };
       if (oblast) fetchParams = { ...fetchParams, adresa_oblast: oblast };

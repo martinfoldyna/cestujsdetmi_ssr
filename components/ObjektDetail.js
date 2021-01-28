@@ -258,11 +258,11 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
         <span className="breadcrumb">
           <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;
           {objekt.typ_objektu === "ubytovani" ? (
-            <MyLink href="/tipy-na-ubytovani" className={"text-" + color}>
+            <MyLink href="/ubytovani" className={"text-" + color}>
               Ubytování a dovolená
             </MyLink>
           ) : objekt.typ_objektu === "zabava" ? (
-            <MyLink href="/tipy-na-vylety" className={"text-" + color}>
+            <MyLink href="/vylety" className={"text-" + color}>
               Výlety s dětmi
             </MyLink>
           ) : (
@@ -322,7 +322,6 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                           return (
                             <div
                               className={`objekt-detail-image img-0${i}`}
-                              style={{ backgroundImage: `url(${image.sm})` }}
                               onClick={() => openLightbox(image)}
                               key={i}
                             >
@@ -368,11 +367,18 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                   <>
                     <div
                       className={`objekt-detail-image img-00`}
-                      style={{
-                        backgroundImage: `url(${images[0]?.sm})`,
-                      }}
                       onClick={() => openLightbox(images[0])}
                     >
+                      <Image
+                        src={images[0].sm}
+                        alt={
+                          images[0].alternativeText
+                            ? images[0].alternativeText
+                            : `${objekt.nazev}`
+                        }
+                        layout="fill"
+                        objectFit="cover"
+                      />
                       <div className="overlay">
                         <div className="d-flex justify-content-between image-actions content-wrapper">
                           <div className="d-flex align-items-center text-white">

@@ -5,9 +5,9 @@ const SmallArticle = ({ article }) => {
   const generateURL = `${
     article.typ_objektu &&
     (article.typ_objektu === "ubytovani"
-      ? "/tipy-na-ubytovani"
+      ? "/ubytovani"
       : article.typ_objektu === "zabava" || article.typ_objektu === "vylety"
-      ? "/tipy-na-vylety"
+      ? "/vylety"
       : "")
   }/detail/${article.id}`;
   return article ? (

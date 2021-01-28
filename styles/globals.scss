@@ -608,6 +608,7 @@ input[type=number] {
 
 .data-wrapper {
   margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .category-item {
@@ -980,6 +981,15 @@ input[type=number] {
 
 .filter-badge:first-of-type {
   margin-left: 0;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.note {
+  font-size: .7em;
+  color: $dark-grey
 }
 
 @import "MediaQueries";

@@ -1,19 +1,15 @@
 import React, { useEffect, Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { getAllWebcams, loadMoreWebcams } from "../../redux/actions/webcams";
 import { Row, Col } from "react-grid-system";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
-import Link from "next/link";
-import { RiWebcamFill } from "react-icons/ri";
 import VerticalPost from "../../layouts/VerticalPost";
-import SideCards from "../../layouts/SideCards";
-import SideFilter from "../../components/cards/SideFilter";
-import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchQuery } from "../../helpers/fetch";
 import enums from "../../enums";
 import WebcamsLayout from "../../layouts/siteLayouts/WebcamsLayout";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { searchParamsToQueryString } from "../../helpers/helpers";
+import { Section, SectionContent } from "../../layouts/Section";
 
 export async function getStaticProps() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
@@ -21,16 +17,20 @@ export async function getStaticProps() {
   return { props: { webcams }, revalidate: 60 };
 }
 
-const Webcams = ({ webcams, getAllWebcams }) => {
+const Webcams = ({ webcams }) => {
+  const router = useRouter();
+  const { query } = router;
+  const { kraj, mesto, oblast } = query;
+
   const limit = 9;
   const [next, setNext] = useState(limit);
   const [allWebcams, setAllWebcams] = useState(webcams);
 
   useEffect(() => {
-    if (!webcams) {
-      getAllWebcams();
+    if (Object.keys(query) > 0) {
+      loadFilteredWebcams();
     }
-  }, []);
+  }, [query]);
 
   const loadMoreWebcams = async () => {
     try {
@@ -46,42 +46,66 @@ const Webcams = ({ webcams, getAllWebcams }) => {
     }
   };
 
+  const loadFilteredWebcams = async () => {
+    let fetchParams = { _limit: limit, _start: next };
+    if (Object.keys(router.query)?.length > 0) {
+      console.log("Fetching objects");
+      if (kraj) fetchParams = { ...fetchParams, adresa_kraj: kraj };
+      if (mesto) fetchParams = { ...fetchParams, adresa_mesto: mesto };
+      if (oblast) fetchParams = { ...fetchParams, adresa_oblast: oblast };
+      const webcams = await fetchQuery(
+        `webkameries?${searchParamsToQueryString(fetchParams)}`
+      );
+      setAllWebcams(webcams);
+    } else {
+    }
+  };
+
   return !webcams ? (
     <LoadingSkeleton />
   ) : (
-    <Row>
-      <Fragment>
-        {allWebcams?.map((webcam) => (
-          <Col md={4} key={webcam.id}>
-            <VerticalPost post={webcam} useNextImg={false} />
-          </Col>
-        ))}
-        <div className="d-flex justify-content-center w-100 mt-1">
-          <button
-            className="btn bg-dark-purple text-white"
-            onClick={() => {
-              loadMoreWebcams();
-              setNext((prevState) => prevState + limit);
-            }}
-          >
-            Načíst další
-          </button>
-        </div>
-      </Fragment>
-    </Row>
+    <>
+      <Head>
+        <title>Webkamery v Čechách a na Moravě | Cestuj s dětmi.cz</title>
+        <meta
+          name="description"
+          content="Webkamery a webové kamery na vybraných místech v čechách. Online záběry z atraktivních míst po celé ČR. "
+        />
+        <meta
+          name="keywords"
+          content="webkamery,webové kamery,online kamery,Čechy,ski areály,města"
+        />
+        <meta name="robots" content="index, follow" />
+      </Head>
+
+      <Row className="mr-0 bg-white pt-1 position-relative border-radius">
+        <>
+          {allWebcams?.map((webcam) => (
+            <Col md={4} key={webcam.id}>
+              <VerticalPost post={webcam} useNextImg={false} />
+            </Col>
+          ))}
+          <div className="d-flex justify-content-center w-100 mt-1">
+            <button
+              className="btn btn-small-logo btn-homepage-detail center bg-dark-purple text-white"
+              onClick={() => {
+                loadMoreWebcams();
+                setNext((prevState) => prevState + limit);
+              }}
+            >
+              Načíst další
+            </button>
+          </div>
+        </>
+      </Row>
+    </>
   );
 };
 
 Webcams.Layout = WebcamsLayout;
 
 Webcams.propTypes = {
-  getAllWebcams: PropTypes.func,
-  loadMoreWebcams: PropTypes.func,
-  webcams: PropTypes.object.isRequired,
+  webcams: PropTypes.array.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  webcams: state.webcams,
-});
 
 export default Webcams;

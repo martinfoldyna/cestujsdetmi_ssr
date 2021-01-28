@@ -46,13 +46,17 @@ const VerticalPost = ({ post, useNextImg = true }) => {
                     : post.nazev
                 }
                 className="post-thumbnail"
-                layout="fill"
               />
             )}
           </div>
         )}
         <div>
-          <h3 className="post-heading">{post.nazev}</h3>
+          <h3 className="post-heading">
+            {post.nazev.includes("Webkamera - ") ||
+            post.nazev.includes("Webkamery - ")
+              ? post.nazev.replace(/Webkamera - |Webkamery - /gi, "")
+              : post.nazev}
+          </h3>
           <p className="post-description">
             {post.perex
               ? trimString(post.perex, 18)

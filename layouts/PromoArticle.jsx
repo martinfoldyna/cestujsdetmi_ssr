@@ -35,6 +35,7 @@ const PromoArticle = ({
                     ? article.relative_galerie[0].sm
                     : "/img/placeholder.png"
                 }
+                alt={article?.nazev}
                 layout="fill"
                 objectFit="cover"
                 className="border-radius"

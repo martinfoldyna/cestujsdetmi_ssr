@@ -10,6 +10,7 @@ import MyLink from "../../layouts/MyLink";
 import { useRouter } from "next/router";
 import { loginUser } from "../../helpers/auth";
 import { GlobalContext } from "../../context/GlobalContext";
+import Inquiry from "../../layouts/inquiry";
 
 const Login = ({ global }) => {
   const userContext = useContext(GlobalContext).user;
@@ -120,6 +121,7 @@ const Login = ({ global }) => {
           </div>
         </div>
       </div>
+      <Inquiry />
     </Fragment>
   );
 };

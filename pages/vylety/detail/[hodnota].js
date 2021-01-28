@@ -4,6 +4,7 @@ import ObjektDetail from "../../../components/ObjektDetail";
 import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
 import { Container } from "react-grid-system";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   const objects = await fetchQuery(`${enums.URLS.objektInfoMini}`);
@@ -41,9 +42,16 @@ export async function getStaticProps({ params }) {
 
 const VyletyDetail = ({ objekt, kategorie }) => {
   return (
-    <Container className="main-container">
-      <ObjektDetail objekt={objekt} kategorie={kategorie} />
-    </Container>
+    <>
+      <Head>
+        <title>{objekt.nazev} | Cestuj s dětmi.cz</title>
+        <meta name="description" content={objekt.page_description} />
+        <meta name="robots" content="index, follow" />
+      </Head>
+      <Container className="main-container">
+        <ObjektDetail objekt={objekt} kategorie={kategorie} />
+      </Container>
+    </>
   );
 };
 

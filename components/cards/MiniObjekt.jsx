@@ -32,7 +32,7 @@ const MiniObjekt = ({ objekt }) => {
         ""
       )}
       <div className="data">
-        <Link href={`/tipy-na-ubytovani/detail/${objekt.id}/#top`}>
+        <Link href={`/ubytovani/detail/${objekt.id}/#top`}>
           <h3 className="objekt-mini-heading mb-1">{objekt.nazev}</h3>
         </Link>
         {objekt.adresa && (

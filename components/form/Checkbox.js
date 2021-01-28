@@ -2,7 +2,10 @@ import React, { Fragment } from "react";
 import enums from "../../enums";
 
 const Checkbox = React.forwardRef(
-  ({ text, name, errors, checked, type = "radio", ...rest }, ref) => {
+  (
+    { text, name, errors, checked, removeErr = false, type = "radio", ...rest },
+    ref
+  ) => {
     return (
       <Fragment>
         <div className="form-item">
@@ -22,11 +25,13 @@ const Checkbox = React.forwardRef(
             />
           </label>
         </div>
-        <div className="error-wrapper">
-          <p className="error-message">
-            {errors && errors[name] ? errors[name].message : ""}
-          </p>
-        </div>
+        {!removeErr && (
+          <div className="error-wrapper">
+            <p className="error-message">
+              {errors && errors[name] ? errors[name].message : ""}
+            </p>
+          </div>
+        )}
       </Fragment>
     );
   }

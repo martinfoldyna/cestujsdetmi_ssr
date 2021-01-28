@@ -5,6 +5,7 @@ import { HiHome } from "react-icons/hi";
 import Link from "next/link";
 import LoadingSkeleton from "./LoadingSkeleton";
 import HomePageObjekt from "./HomePageObjekt";
+import MyLink from "./MyLink";
 
 const Highlighted = ({ data }) => {
   return (
@@ -31,15 +32,15 @@ const Highlighted = ({ data }) => {
                 })}
               <div className="text-align-right">
                 <button className="btn btn-small-logo btn-homepage-detail bg-blue text-white">
-                  <Link
-                    href="/tipy-na-ubytovani"
+                  <MyLink
+                    href="/ubytovani"
                     className="d-flex align-items-center"
                   >
                     <>
                       Další ubytování{" "}
                       <RiArrowRightSLine style={{ marginLeft: ".5em" }} />
                     </>
-                  </Link>
+                  </MyLink>
                 </button>
               </div>
             </div>
@@ -73,15 +74,12 @@ const Highlighted = ({ data }) => {
                   })}
               </div>
               <button className="btn btn-small-logo bg-orange text-white btn-homepage-detail">
-                <Link
-                  href="/tipy-na-vylety"
-                  className="d-flex align-items-center"
-                >
+                <MyLink href="/vylety" className="d-flex align-items-center">
                   <>
                     Další tipy na výlety{" "}
                     <RiArrowRightSLine style={{ marginLeft: ".5em" }} />
                   </>
-                </Link>
+                </MyLink>
               </button>
             </>
           ) : (

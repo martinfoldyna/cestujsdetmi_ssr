@@ -30,6 +30,7 @@ const MobileNewsArticle = ({
               ? article.relative_galerie[0].sm
               : "/img/placeholder.png"
           }
+          alt={article.nazev}
           width={110}
           height={100}
           objectFit="cover"

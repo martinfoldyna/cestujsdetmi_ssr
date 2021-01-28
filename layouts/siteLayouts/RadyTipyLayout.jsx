@@ -10,10 +10,6 @@ import { objectToArray } from "../../helpers/helpers";
 import HeadingWithIcon from "./../HeadingWithIcon";
 import MyLink from "../MyLink";
 
-export async function getStaticProps() {
-  console.log("inStaticProps");
-}
-
 const RadyTipyLayout = ({ post, getAdvices, children }) => {
   const router = useRouter();
   const [category, setCategory] = useState("");

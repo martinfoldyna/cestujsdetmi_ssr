@@ -1,29 +1,46 @@
 import axios from "axios";
 
-export const objektUpload = async (data, images) => {
+export const objektUpload = async (data, images, type, id) => {
   try {
-    if (images && images.length > 0) {
-      const formData = new FormData();
+    const formData = new FormData();
 
+    if (images && images.length > 0) {
       const uploadImages = Array.isArray(images) ? images : [images];
 
       for (let image of uploadImages) {
         console.log(image);
-        formData.append(`files.${image.name}`, image, image.name);
-        formData.append("field", "galerie");
+        if (image instanceof Blob) {
+          formData.append(`files.galerie.${image.name}`, image, image.name);
+          formData.append("field", "galerie");
+        }
         /*formData.append(
           "fileInfo",
           `{"alternativeText":"${image.alternativeText}","name":"${image.name}"}`
         );*/
       }
+    }
 
-      if (data.objekty) {
-        delete data.objekty;
-      }
+    if (data.objekty) {
+      delete data.objekty;
+    }
 
-      formData.append("data", JSON.stringify(data));
+    formData.append("data", JSON.stringify(data));
 
-      const res = await axios.post(
+    let res;
+
+    if (type === "update") {
+      res = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            authorization: `Bearer ${sessionStorage.getItem("auth-token")}`,
+          },
+        }
+      );
+    } else {
+      res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos`,
         formData,
         {
@@ -32,9 +49,9 @@ export const objektUpload = async (data, images) => {
           },
         }
       );
-
-      return { data: res.data, success: true };
     }
+
+    return { data: res.data, success: true };
   } catch (err) {
     console.log(err);
     return { err, success: false };

@@ -65,7 +65,7 @@ const Navbar = ({ isSticky, open, onClose }) => {
           </li>
           <li className="nav-item">
             <MyLink
-              href="/tipy-na-ubytovani"
+              href="/ubytovani"
               className="link-blue link-coloured"
               onClick={closeNav}
             >
@@ -77,7 +77,7 @@ const Navbar = ({ isSticky, open, onClose }) => {
           </li>
           <li className="nav-item">
             <MyLink
-              href="/tipy-na-vylety"
+              href="/vylety"
               className="link-orange link-coloured"
               onClick={closeNav}
             >

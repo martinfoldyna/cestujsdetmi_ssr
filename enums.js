@@ -164,12 +164,12 @@ export default {
     ubytovani: {
       key: "ubytovani",
       value: "Ubytování",
-      url: "tipy-na-ubytovani",
+      url: "ubytovani",
     },
     zabava: {
       key: "zabava",
       value: "Zábava",
-      url: "tipy-na-vylety",
+      url: "vylety",
     },
     aktualita: {
       key: "aktualita",

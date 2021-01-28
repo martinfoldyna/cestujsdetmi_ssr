@@ -63,6 +63,15 @@ const TipyNaVylety = ({ objekty, kategorie }) => {
         <title>
           Tipy kam na výlet s dětmi v Čechách i na Moravě | Cestujsdetmi.cz
         </title>
+        <meta
+          name="description"
+          content="Tipy kam na výlet s dětmi v Čechách i na Moravě"
+        />
+        <meta
+          name="keywords"
+          content="Tipy kam na výlet s dětmi v Čechách i na Moravě"
+        />
+        <meta name="robots" content="index, follow" />
       </Head>
       <Container className="main-container">
         <span className="breadcrumb">

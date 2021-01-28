@@ -15,7 +15,7 @@ import VerticalPost from "../../../layouts/VerticalPost";
 import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
 import WebcamsLayout from "../../../layouts/siteLayouts/WebcamsLayout";
-// import HeadTitle from "../../../layouts/HeadTitle";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
@@ -60,6 +60,7 @@ const WebcamDetail = ({ webcam }) => {
 
   useEffect(() => {
     loadWebcam();
+    console.log(webcam);
   }, [hodnota]);
 
   return isFallback ? (
@@ -70,6 +71,15 @@ const WebcamDetail = ({ webcam }) => {
       {/*  title={webcam.page_title}*/}
       {/*  description={webcam.page_description}*/}
       {/*/>*/}
+      <Head>
+        <title>{webcam.nazev} | Cestuj s dětmi.cz</title>
+        <meta name="description" content={webcam.page_description} />
+        <meta
+          name="keywords"
+          content={`webkamery,webové kamery,online kamery,Čechy,ski areály,města, ${webcam.nazev}`}
+        />
+        <meta name="robots" content="index, follow" />
+      </Head>
 
       <Section className="mt-0 webcam-detail">
         {/*<SectionHeading background="none">*/}

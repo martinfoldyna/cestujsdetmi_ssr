@@ -2,14 +2,21 @@ import React from "react";
 import { Row, Col } from "react-grid-system";
 import { Section, SectionContent, SectionHeading } from "./Section";
 import { translateColor, translateObjektPlan } from "../helpers/translators";
-import { HiOutlineChevronRight } from "react-icons/hi";
+import { HiHome, HiOutlineChevronRight } from "react-icons/hi";
 import MyLink from "./MyLink";
 import Image from "next/image";
+import enums from "../enums";
+import { AiFillCompass } from "react-icons/ai";
 
 const AdminObjekt = ({ objekt }) => {
   return (
     <Section className="admin-objekt">
-      <SectionHeading>
+      <SectionHeading className="d-flex align-items-center">
+        {objekt.typ_objektu === enums.TYP_OBJEKTU.ubytovani.key ? (
+          <HiHome className="text-blue link-icon" />
+        ) : (
+          <AiFillCompass className="text-orange link-icon" />
+        )}
         <h2>{`${objekt.nazev}`}</h2>
       </SectionHeading>
       <SectionContent
@@ -30,6 +37,7 @@ const AdminObjekt = ({ objekt }) => {
                     ? objekt?.galerie[0].sm
                     : "/img/placeholder.png"
                 }
+                alt={objekt.nazev}
                 layout="fill"
                 objectFit="cover"
                 className="border-radius"

@@ -2,7 +2,6 @@
 
 .article-card {
   margin: 1.5em 0 1em;
-  text-align: justify;
   padding: 1em;
   border-radius: $border-radius;
   transition: .5s all;
@@ -12,9 +11,6 @@
   display: flex;
 }
 
-.article-card {
-
-}
 
 .news-article {
   position: relative;
@@ -224,7 +220,7 @@
   margin-top: 0;
 }
 
-.filter-card .filter-name {
+.filter-name {
   font-weight: 600;
 }
 
@@ -374,6 +370,14 @@ h3.suggestion-post-heading {
   height: 100%;
 }
 
+.admin-objekt .section-heading .heading-with-icons {
+  padding: 0 .5em;
+}
+
+.admin-objekt .section-heading .link-icon {
+  font-size: 1.5em;
+}
+
 .admin-user-info .row .form-item {
   margin-bottom: 1em;
 }
@@ -419,4 +423,33 @@ h3.suggestion-post-heading {
 
 .suggestion-article:first-of-type:before {
   display: none;
+}
+
+.inquiry-card.section {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.inquiry-card .section-heading {
+  text-align: center;
+  padding-top: 2em;
+  padding-bottom: 1em;
+}
+
+.inquiry-card.section .heading-with-icons h2 {
+  margin-bottom: 0em;
+  margin-top: 0em;
+}
+
+.inquiry-card .form-item {
+  margin-bottom: 1em;
+}
+
+.inquiry-card textarea.inputText {
+  height: 30vh;
+}
+
+.inquiry-card .submit {
+  margin: 0 auto;
 }

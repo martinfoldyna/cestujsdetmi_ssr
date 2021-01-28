@@ -47,10 +47,10 @@ const SiteMap = () => {
                   <b>Navigace</b>
                 </li>
                 <li>
-                  <Link href="/tipy-na-ubytovani">Hledám ubytování</Link>
+                  <Link href="/ubytovani">Hledám ubytování</Link>
                 </li>
                 <li>
-                  <Link href="/tipy-na-vylety">Hledám zábavu pro děti</Link>
+                  <Link href="/vylety">Hledám zábavu pro děti</Link>
                 </li>
                 <li>
                   <Link href="/rad-tipy">Rady a tipy na cesty s dětmi</Link>

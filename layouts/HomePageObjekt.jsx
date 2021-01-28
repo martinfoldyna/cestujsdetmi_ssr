@@ -11,7 +11,7 @@ const HomePageObjekt = ({
   background,
   number_of_words = 21,
   className,
-  topic = "tipy-na-ubytovani",
+  topic = "ubytovani",
 }) => {
   const [imageHeight, setImgHeight] = useState(0);
   const parentRef = useRef(null);
@@ -46,6 +46,7 @@ const HomePageObjekt = ({
                       ? article.relative_galerie[0].sm
                       : "/img/placeholder.png"
                   }
+                  quality={50}
                   alt={
                     article?.galerie && article?.galerie[0]?.alternativeText
                       ? article.galerie[0].alternativeText
