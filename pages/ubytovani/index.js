@@ -12,7 +12,11 @@ import SideBar from "../../layouts/Sidebar";
 import SideFilter from "../../components/cards/SideFilter";
 import SideCards from "../../layouts/SideCards";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
-import { fetchPrevio, fetchQuery } from "../../helpers/fetch";
+import {
+  fetchAllPrevioHotels,
+  fetchPrevio,
+  fetchQuery,
+} from "../../helpers/fetch";
 import { searchParamsToUrlQuery } from "next/dist/next-server/lib/router/utils/querystring";
 import {
   initCategories,
@@ -34,7 +38,7 @@ export async function getStaticProps() {
     fetchQuery(
       `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
     ),
-    fetchPrevio("hotels/search", { limit: { limit: 20 } }),
+    fetchAllPrevioHotels(10),
     fetchQuery(enums.URLS.kategorie),
   ]);
 

@@ -1,30 +1,13 @@
 import React from "react";
-import { fetchPrevio } from "../../../helpers/fetch";
+import { fetchAllPrevioHotels, fetchPrevio } from "../../../helpers/fetch";
 import PropTypes from "prop-types";
 import PrevioObjektDetail from "../../../components/PrevioObjektDetail";
 
 export async function getStaticPaths() {
-  const xml = `<limit>10</limit>
-    <filter>
-        <in>
-            <field>collaboration</field>
-            <value>active</value>
-        </in>
-        <in>
-            <field>couId</field>
-            <value>1</value>
-        </in>
-    </filter>
-    <order>
-        
-        <by>name</by>
-        <desc>false</desc>
-    </order>`;
-
-  const previoObjects = await fetchPrevio(`hotels/search`, {}, xml);
+  const previoObjects = await fetchAllPrevioHotels(100);
 
   return {
-    paths: previoObjects.data.hotels.hotel.map((hotel) => ({
+    paths: previoObjects.data?.hotels.hotel.map((hotel) => ({
       params: {
         id: hotel.hotId,
       },

@@ -362,6 +362,15 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                 </SectionContent>
               </Section>
             )}
+            <iframe
+              src={`https://booking.previo.cz/?hotId=${id}&lang=cs&showTabs=reservation,stay,pricelist,occupancy,checkin`}
+              frameBorder="0"
+              width="100%"
+              height="2000"
+              name="previo-booking-iframe"
+              id="previo-booking-iframe"
+              allowTransparency="true"
+            />
 
             <Section>
               <SectionHeading>

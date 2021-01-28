@@ -23,7 +23,62 @@ export const fetchQuery = async (path, params = null) => {
   }
 };
 
-export const fetchPrevio = async (path, params = null, xml = "") => {
+export const fetchAllPrevioHotels = async (limit = 10) => {
+  try {
+    const xmlSring = `<?xml version="1.0"?>
+      <request>
+        <login>${process.env.NEXT_PUBLIC_PREVIO_LOGIN}</login>
+        <password>${process.env.NEXT_PUBLIC_PREVIO_PASSWORD}</password>
+        <limit><limit>${limit}</limit></limit>
+        <filter>
+          <in>
+              <field>collaboration</field>
+              <value>active</value>
+          </in>
+          <in>
+              <field>couId</field>
+              <value>1</value>
+          </in>
+        </filter>
+        <order>
+            <by>name</by>
+            <desc>false</desc>
+        </order>
+      </request>`;
+
+    // Previo api call, to allow CORS in development add cors-anywhere domain before previo url
+    const response = await axios.post(
+      `${
+        process.env.NODE_ENV === "development"
+          ? "https://cors-anywhere.herokuapp.com/"
+          : ""
+      }${process.env.NEXT_PUBLIC_PREVIO_API_URL}/${path}`,
+      xmlSring,
+      {
+        headers: {
+          "Content-Type": "text/xml",
+          "Access-Control-Allow-Origin": "*",
+          origin: "http://localhost:3000",
+        },
+      }
+    );
+
+    // Conver xml string to JSON
+    const jsonData = await parseXml(response.data);
+
+    return { success: true, data: jsonData };
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export const fetchPrevio = async (
+  path,
+  params = null,
+  xml = "",
+  listCollaborative
+) => {
   try {
     const xmlifyParams = (params) => {
       let xmlString = "";
@@ -49,6 +104,16 @@ export const fetchPrevio = async (path, params = null, xml = "") => {
         <password>${process.env.NEXT_PUBLIC_PREVIO_PASSWORD}</password>
         ${params ? xmlifyParams(params) : ""}
         ${xml ? xml : ""}
+        ${
+          listCollaborative
+            ? `<filter>
+                <in>
+                    <field>collaboration</field>
+                    <value>active</value>
+                </in>
+            </filter>`
+            : ""
+        }
       </request>`;
 
     // Previo api call, to allow CORS in development add cors-anywhere domain before previo url
