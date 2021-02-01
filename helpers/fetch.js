@@ -46,8 +46,8 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
   try {
     const xmlSring = `<?xml version="1.0"?>
       <request>
-        <login>${process.env.PREVIO_LOGIN}</login>
-        <password>${process.env.PREVIO_PASSWORD}</password>
+        <login>${process.env.NEXT_PUBLIC_PREVIO_LOGIN}</login>
+        <password>${process.env.NEXT_PUBLIC_PREVIO_PASSWORD}</password>
         <limit><limit>${limit}</limit></limit>
         <filter>
           <in>
@@ -68,7 +68,7 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
         process.env.NODE_ENV === "development"
           ? "https://cors-anywhere.herokuapp.com/"
           : ""
-      }${process.env.PREVIO_API_URL}/hotels/search`,
+      }${process.env.NEXT_PUBLIC_PREVIO_API_URL}/hotels/search`,
       xmlSring,
       {
         headers: {
@@ -117,8 +117,8 @@ export const fetchPrevio = async (
     // XML request
     const xmlSring = `<?xml version="1.0"?>
       <request>
-        <login>${process.env.PREVIO_LOGIN}</login>
-        <password>${process.env.PREVIO_PASSWORD}</password>
+        <login>${process.env.NEXT_PUBLIC_PREVIO_LOGIN}</login>
+        <password>${process.env.NEXT_PUBLIC_PREVIO_PASSWORD}</password>
         ${params ? xmlifyParams(params) : ""}
         ${xml ? xml : ""}
         ${
@@ -139,7 +139,7 @@ export const fetchPrevio = async (
         process.env.NODE_ENV === "development"
           ? "https://cors-anywhere.herokuapp.com/"
           : ""
-      }${process.env.PREVIO_API_URL}/${path}`,
+      }${process.env.NEXT_PUBLIC_PREVIO_API_URL}/${path}`,
       xmlSring,
       {
         headers: {
