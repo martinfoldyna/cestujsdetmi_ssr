@@ -107,6 +107,10 @@
     flex: 1 1 auto;
   }
 
+  .map-component .row {
+    margin: 0;
+  }
+
   .map-component .badge-location {
     right: auto;
     transform: translateX(-50%);
@@ -114,7 +118,7 @@
   }
 
   .main-header {
-    margin-bottom: 1em;
+    margin-bottom: .5em;
   }
 
   .main-header.sticky {
@@ -399,6 +403,9 @@ and (orientation : portrait) {
 @media only screen
 and (min-width : 1224px) {
   /* Styles */
+  .map-filter .col {
+    padding-left: 0;
+  }
 
 }
 

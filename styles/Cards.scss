@@ -1,7 +1,7 @@
 @import "Variables";
 
 .article-card {
-  margin: 1.5em 0 1em;
+  margin: 0;
   padding: 1em;
   border-radius: $border-radius;
   transition: .5s all;
@@ -11,6 +11,15 @@
   display: flex;
 }
 
+.article-card::after {
+  position: absolute;
+  left: 1em;
+  right: 1em;
+  bottom: 0;
+  background-color: $grey;
+  height: 1px;
+  content: "";
+}
 
 .news-article {
   position: relative;
@@ -324,10 +333,6 @@ h3.suggestion-post-heading {
 
 .small-card-heading h4{
   margin: 0;
-}
-
-.article-card:nth-of-type(2){
-  background-color: $grey;
 }
 
 .article-card .article-location svg {

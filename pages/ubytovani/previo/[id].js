@@ -7,8 +7,6 @@ import { objectToArray } from "../../../helpers/helpers";
 export async function getStaticPaths() {
   const previoObjects = await fetchAllPrevioHotels(100);
 
-  console.log(previoObjects);
-
   return {
     paths: previoObjects?.data?.map((hotel) => ({
       params: {

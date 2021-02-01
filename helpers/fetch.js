@@ -54,7 +54,11 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
               <field>collaboration</field>
               <value>active</value>
           </in>
+          <in>
+              <field>couId</field>
+              <value>1</value>
           
+          </in>
         </filter>
         <order>
             <by>name</by>

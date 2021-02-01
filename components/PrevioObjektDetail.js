@@ -256,6 +256,8 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
         : objekt.photogallery?.gallery?.photos.photo
     );
 
+    console.log(objekt);
+
     // if (objekt.gps) {
     //   setViewport((prevState) => {
     //     return {
@@ -567,7 +569,13 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                       </li>
                       <li className={"d-flex align-items-center text-" + color}>
                         <HiOutlineMail className="icon" />
-                        <a href={`mailto:${objekt.address.mail.address}`}>
+                        <a
+                          href={`mailto:${
+                            objekt.address.mail.address.length > 1
+                              ? objekt.address.mail.address[0]
+                              : objekt.address.mail.address
+                          }`}
+                        >
                           {objekt.address.mail.address}
                         </a>
                       </li>

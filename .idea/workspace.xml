@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/components/cards/PrevioObjekt.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/PrevioObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/PrevioObjektDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/listFilteredItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/listFilteredItems.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/fetch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/MediaQueries.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/MediaQueries.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +116,7 @@
       <workItem from="1611843920697" duration="11038000" />
       <workItem from="1611949370098" duration="599000" />
       <workItem from="1611999023220" duration="12432000" />
-      <workItem from="1612171443796" duration="17392000" />
+      <workItem from="1612171443796" duration="20689000" />
     </task>
     <servers />
   </component>

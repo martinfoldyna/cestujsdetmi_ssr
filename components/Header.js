@@ -54,11 +54,11 @@ const HeaderComponent = ({ user }) => {
       <div className="hide-mobile">
         <Container className="main-container">
           <div className="d-flex justify-content-between align-items-center">
-            <MyLink href="/">
+            <MyLink href="/" className="d-flex align-items-center">
               <Image
                 src="/cestuj_big.svg"
-                height={47}
-                width={270}
+                height={35}
+                width={220}
                 alt="logo cestuj s dětmi"
               />
             </MyLink>

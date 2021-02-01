@@ -206,7 +206,7 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
   return !listObjects ? (
     <LoadingSkeleton />
   ) : (
-    <div className="filtered-objects">
+    <div className="filtered-objects bg-white border-radius">
       {router.query && (
         <div className="filter–badges d-flex">
           {Object.keys(router.query).map((key) => (
@@ -231,13 +231,7 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
 
           return (
             <>
-              <Objekt
-                objekt={objekt}
-                key={objekt.id}
-                background={`${
-                  (index + 1) % 2 === 0 && index > 0 ? "grey" : "white"
-                }`}
-              />
+              <Objekt objekt={objekt} key={objekt.id} background="white" />
               {index > 0 &&
               (index + 1) % 4 === 0 &&
               promo &&

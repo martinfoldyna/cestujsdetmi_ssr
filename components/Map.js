@@ -100,8 +100,8 @@ const Map = () => {
   useEffect(() => {}, [selectedTrip]);
 
   return (
-    <section className="map-component bg-grey">
-      <Row>
+    <section className="map-component bg-white">
+      <Row className="row">
         <Col md={6} className="d-flex">
           <div>
             <div className="heading-with-icons d-flex align-items-center">
@@ -187,8 +187,8 @@ const Map = () => {
           )}
         </Col>
       </Row>
-      <Row className="align-items-center m-0 ml-3 map-filters">
-        <Col md={2} className="pl-0">
+      <Row className="align-items-center m-0 ml-3 map-filters row">
+        <Col md={2} className="col">
           <CustomSelect
             placeholder="Kraj"
             options={beautifiedKraj}
@@ -196,17 +196,17 @@ const Map = () => {
             value={clicked}
           />
         </Col>
-        <Col md={2} className="pl-0">
+        <Col md={2} className="col">
           <CustomSelect placeholder="Město" color={color} />
         </Col>
-        <Col md={2} className="pl-0">
+        <Col md={2} className="col">
           <CustomSelect
             placeholder="Oblast"
             options={beautifiedRegion}
             onChange={(e) => setOblast(e.key)}
           />
         </Col>
-        <Col md={1} className="pl-0">
+        <Col md={1} className="col">
           <div className="hide-mobile">
             <button
               className={`btn bg-${color} text-white`}
