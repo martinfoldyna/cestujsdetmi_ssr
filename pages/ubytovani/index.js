@@ -43,8 +43,6 @@ export async function getStaticProps() {
     fetchQuery(enums.URLS.kategorie),
   ]);
 
-  console.log(previoObjekty);
-
   return {
     props: {
       objekty,

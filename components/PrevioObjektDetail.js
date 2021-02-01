@@ -580,17 +580,15 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                           href={`tel:${objekt.address.phone.number}`}
                           className="text-black"
                         >
-                          {objekt.address.phone.number?.trim()}
+                          {objekt.address.phone.number}
                         </a>
                       </li>
                       {objekt.address && (
                         <li className={"text-" + color}>
                           <p className="m-0 d-flex align-items-center">
                             <FiMapPin className="icon" />
-                            {objekt.address.name.trim()},{" "}
-                            {objekt.address.street.trim()},{" "}
-                            {objekt.address.city.trim()},{" "}
-                            {objekt.address.country.trim()}
+                            {objekt.address.name}, {objekt.address.street},{" "}
+                            {objekt.address.city}, {objekt.address.country}
                           </p>
                         </li>
                       )}
