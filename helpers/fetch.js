@@ -64,13 +64,18 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
 
     // Previo api call, to allow CORS in development add cors-anywhere domain before previo url
     const response = await axios.post(
-      `https://cors-anywhere.herokuapp.com/${process.env.PREVIO_API_URL}/hotels/search`,
+      `${
+        process.env.NODE_ENV === "development"
+          ? "https://cors-anywhere.herokuapp.com/"
+          : ""
+      }${process.env.PREVIO_API_URL}/hotels/search`,
       xmlSring,
       {
         headers: {
           "Content-Type": "text/xml",
           "Access-Control-Allow-Origin": "*",
-          origin: "http://localhost:3000",
+          "Access-Control-Allow-Headers":
+            "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
         },
       }
     );
