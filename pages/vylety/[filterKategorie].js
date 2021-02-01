@@ -49,7 +49,7 @@ export async function getStaticProps({ params }) {
     fetchQuery(enums.URLS.kategorie),
   ]);
 
-  return { props: { objekty, kategorie }, revalidate: 30 };
+  return { props: { objekty, kategorie }, revalidate: 3600 };
 }
 
 const TipyNaVyletyKategorie = ({ objekty, kategorie }) => {

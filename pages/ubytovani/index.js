@@ -51,7 +51,7 @@ export async function getStaticProps() {
       kategorie,
       previo: previoObjekty?.success ? previoObjekty?.data : [],
     },
-    revalidate: 30,
+    revalidate: 3600,
   };
 }
 

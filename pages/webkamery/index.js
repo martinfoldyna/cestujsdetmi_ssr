@@ -14,7 +14,7 @@ import { Section, SectionContent } from "../../layouts/Section";
 export async function getStaticProps() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
 
-  return { props: { webcams }, revalidate: 60 };
+  return { props: { webcams }, revalidate: 3600 };
 }
 
 const Webcams = ({ webcams }) => {

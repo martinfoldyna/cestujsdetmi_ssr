@@ -46,18 +46,15 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
   try {
     const xmlSring = `<?xml version="1.0"?>
       <request>
-        <login>${process.env.NEXT_PUBLIC_PREVIO_LOGIN}</login>
-        <password>${process.env.NEXT_PUBLIC_PREVIO_PASSWORD}</password>
+        <login>${process.env.PREVIO_LOGIN}</login>
+        <password>${process.env.PREVIO_PASSWORD}</password>
         <limit><limit>${limit}</limit></limit>
         <filter>
           <in>
               <field>collaboration</field>
               <value>active</value>
           </in>
-          <in>
-              <field>couId</field>
-              <value>1</value>
-          </in>
+          
         </filter>
         <order>
             <by>name</by>
@@ -67,7 +64,7 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
 
     // Previo api call, to allow CORS in development add cors-anywhere domain before previo url
     const response = await axios.post(
-      `https://cors-anywhere.herokuapp.com/${process.env.NEXT_PUBLIC_PREVIO_API_URL}/hotels/search`,
+      `https://cors-anywhere.herokuapp.com/${process.env.PREVIO_API_URL}/hotels/search`,
       xmlSring,
       {
         headers: {

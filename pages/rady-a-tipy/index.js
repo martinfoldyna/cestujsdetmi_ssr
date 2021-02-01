@@ -19,7 +19,7 @@ import Head from "next/head";
 export async function getStaticProps() {
   const posts = await fetchQuery(`${enums.URLS.radyTipy}`);
 
-  return { props: { posts }, revalidate: 60 };
+  return { props: { posts }, revalidate: 3600 };
 }
 
 const RadyTipy = ({ posts }) => {

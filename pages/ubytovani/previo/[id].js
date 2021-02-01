@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   console.log(previoObjects);
 
   return {
-    paths: previoObjects.data?.hotels.hotel.map((hotel) => ({
+    paths: previoObjects?.data?.hotels.hotel.map((hotel) => ({
       params: {
         id: hotel.hotId,
       },
@@ -33,7 +33,7 @@ export async function getStaticProps({ params }) {
       photogallery: { ...photogallery?.data.photogalleries },
     };
 
-    return { props: { objekt } };
+    return { props: { objekt }, revalidate: 3600 };
   } catch (err) {
     console.log(err);
     return { props: { notFound: true } };

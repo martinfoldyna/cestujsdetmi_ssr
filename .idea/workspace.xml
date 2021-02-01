@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/api/fetchPrevio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/PrevioObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/PrevioObjektDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/Objekt.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/Objekt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/enums.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/fetch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/ubytovani/[filterKategorie].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/[filterKategorie].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/ObjektDetail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/ObjektDetail.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/vylety/[filterKategorie].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/[filterKategorie].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/vylety/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/webkamery/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/webkamery/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +116,7 @@
       <workItem from="1611843920697" duration="11038000" />
       <workItem from="1611949370098" duration="599000" />
       <workItem from="1611999023220" duration="12432000" />
-      <workItem from="1612171443796" duration="2963000" />
+      <workItem from="1612171443796" duration="4657000" />
     </task>
     <servers />
   </component>
