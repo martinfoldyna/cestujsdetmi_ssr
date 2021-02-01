@@ -11,6 +11,7 @@ module.exports = {
       "firebasestorage.googleapis.com",
       "www.ceske-sjezdovky.cz",
       "image.unet.cz",
+      "files.previo.cz",
     ],
   },
   webpack(config) {

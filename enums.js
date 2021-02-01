@@ -293,4 +293,38 @@ export default {
     objektyTypy: "objekty-typies?_sort=hodnota:ASC",
     kategorie: "kategories",
   },
+  PREVIO: {
+    PROPERTIES: {
+      sluzby_a_vybaveni: {
+        key: "sluzby_a_vybaveni",
+        value: "Služby a vybavení",
+        buttonValue: "Obecné",
+      },
+      sport: {
+        key: "sport",
+        value: "Sport",
+        buttonValue: "Sport",
+      },
+      okoli_a_volny_cas: {
+        key: "okoli_a_volny_cas",
+        value: "Okolí a volný čas",
+        buttonValue: "Volný čas",
+      },
+      gastronomie: {
+        key: "gastronomie",
+        value: "Gastronomie",
+        buttonValue: "Gastronomie",
+      },
+      lazne_a_wellness: {
+        key: "lazne_a_wellness",
+        value: "Lázně a wellness",
+        buttonValue: "Wellness",
+      },
+      catering: {
+        key: "catering",
+        value: "Catering",
+        buttonValue: "Catering",
+      },
+    },
+  },
 };

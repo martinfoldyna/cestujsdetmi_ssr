@@ -5,18 +5,37 @@ import { parseXml } from "./helpers";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export const fetchQuery = async (path, params = null) => {
+export const fetchQuery = async (path, params = null, apiUrl = baseUrl) => {
   try {
     let url;
     if (params !== null) {
-      url = `${baseUrl}/${path}/${params}`;
+      url = `${apiUrl}/${path}/${params}`;
     } else {
-      url = `${baseUrl}/${path}`;
+      url = `${apiUrl}/${path}`;
     }
 
     const response = await fetch(`${url}`);
     const data = await response.json();
     return data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const fetchXML = async (path, params = null) => {
+  try {
+    let url;
+    if (params !== null) {
+      url = `http://localhost:3333/api/${path}/${params}`;
+    } else {
+      url = `http://localhost:3333/api/${path}`;
+    }
+
+    const response = await fetch(`http://localhost:3333/api/fetchPrevio`);
+    const data = await response.text();
+    const dataAsJson = await parseXml(data);
+    return dataAsJson;
   } catch (err) {
     console.log(err);
     throw err;
@@ -48,11 +67,7 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
 
     // Previo api call, to allow CORS in development add cors-anywhere domain before previo url
     const response = await axios.post(
-      `${
-        process.env.NODE_ENV === "development"
-          ? "https://cors-anywhere.herokuapp.com/"
-          : ""
-      }${process.env.NEXT_PUBLIC_PREVIO_API_URL}/${path}`,
+      `https://cors-anywhere.herokuapp.com/${process.env.NEXT_PUBLIC_PREVIO_API_URL}/hotels/search`,
       xmlSring,
       {
         headers: {
@@ -65,11 +80,11 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
 
     // Conver xml string to JSON
     const jsonData = await parseXml(response.data);
+    console.log("jsonData", jsonData);
 
     return { success: true, data: jsonData };
   } catch (err) {
     console.log(err);
-    return [];
   }
 };
 

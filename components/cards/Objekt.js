@@ -19,9 +19,11 @@ const Objekt = ({ objekt, background, useNextImg = true }) => {
 
   const isNews = objekt.kategorie === "aktuality";
 
+  console.log(objekt?.typ_objektu);
+
   return (
     <Link
-      href={`/${enums.TYP_OBJEKTU[objekt?.typ_objektu].url}/detail/${
+      href={`/${enums.TYP_OBJEKTU[objekt?.typ_objektu]?.url}/detail/${
         objekt?.hodnota
       }`}
     >

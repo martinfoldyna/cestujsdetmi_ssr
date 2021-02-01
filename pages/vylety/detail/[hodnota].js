@@ -44,8 +44,8 @@ const VyletyDetail = ({ objekt, kategorie }) => {
   return (
     <>
       <Head>
-        <title>{objekt.nazev} | Cestuj s dětmi.cz</title>
-        <meta name="description" content={objekt.page_description} />
+        <title>{objekt?.nazev} | Cestuj s dětmi.cz</title>
+        <meta name="description" content={objekt?.page_description} />
         <meta name="robots" content="index, follow" />
       </Head>
       <Container className="main-container">

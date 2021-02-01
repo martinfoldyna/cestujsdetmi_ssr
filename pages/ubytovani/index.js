@@ -16,6 +16,7 @@ import {
   fetchAllPrevioHotels,
   fetchPrevio,
   fetchQuery,
+  fetchXML,
 } from "../../helpers/fetch";
 import { searchParamsToUrlQuery } from "next/dist/next-server/lib/router/utils/querystring";
 import {
@@ -41,6 +42,8 @@ export async function getStaticProps() {
     fetchAllPrevioHotels(10),
     fetchQuery(enums.URLS.kategorie),
   ]);
+
+  console.log(previoObjekty);
 
   return {
     props: {

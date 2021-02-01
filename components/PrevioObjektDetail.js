@@ -22,12 +22,15 @@ import { Container } from "react-grid-system";
 import { FiMapPin } from "react-icons/fi";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 import CityPin from "../public/cityPin";
+import { objectToArray } from "../helpers/helpers";
 
 const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
   const router = useRouter();
   const { id } = router.query;
   const [hotelProperties, setProperties] = useState(null);
   const [images, setImages] = useState(null);
+  const [selectedPropertyGroup, setPropertyGroup] = useState("");
+  const enumsArr = objectToArray(enums.PREVIO.PROPERTIES);
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -43,7 +46,34 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
       lanId: 1,
     });
 
-    setProperties(properties.data);
+    console.log(properties);
+
+    const finalProperties = {};
+
+    properties.data.hotelProperties.group.forEach((propertyGroup) => {
+      const groupValue = enumsArr.find(
+        (enumProperty) => enumProperty.value === propertyGroup.name
+      );
+      const groupProperties = propertyGroup.properties.property;
+      finalProperties[groupValue?.key] = objectToArray(
+        groupProperties
+      ).filter((property) =>
+        objekt.properties.hopId.find(
+          (objectHopId) => objectHopId === property.hopId
+        )
+      );
+    });
+
+    enumsArr.forEach((enumItem) => {
+      if (finalProperties[enumItem.key].length === 0)
+        delete finalProperties[enumItem.key];
+    });
+
+    console.log(finalProperties);
+
+    setPropertyGroup(Object.keys(finalProperties)[0]);
+
+    setProperties(finalProperties);
   };
 
   const mapRef = useRef();
@@ -92,44 +122,70 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
 
   const generateEquipmentTable = (properties) => {
     if (properties && properties.length > 0) {
-      const translatedProperties = properties.map((property) => {
-        hotelProperties.find();
-      });
+      const equipmentKeys = properties.map((property) => property.hopId);
+
+      const dividedLength = Math.round(equipmentKeys?.length / 3);
+      console.log("length", equipmentKeys.length);
+      console.log("divided", dividedLength);
+
+      let finalEquipment = [];
+
+      let nthTime = 0;
+
+      // Split properties (hotel equipment) into three arays -> displayed in three columns
+      for (let i = 0; i <= equipmentKeys.length; i += dividedLength) {
+        // Calculate which one of the three arrays are we in
+        nthTime += 1;
+
+        // If it's the final array
+        if (nthTime === 3) {
+          // Create the third array
+          finalEquipment.push(equipmentKeys.slice(i, i + dividedLength));
+
+          // Add the overflow items into first array (first column) to avoid creating fourth array => fourth column
+          finalEquipment[0] = [
+            ...finalEquipment[0],
+            ...equipmentKeys.slice(i + dividedLength, equipmentKeys.length),
+          ];
+          break;
+        } else {
+          finalEquipment.push(equipmentKeys.slice(i, i + dividedLength));
+        }
+      }
+      console.log(finalEquipment);
 
       return (
         <Row>
-          {finalEquipment.map(
-            (item) =>
-              item.length > 0 && (
-                <Col md={12 / finalEquipment.length}>
-                  <ul className="list-style-none pl-0">
-                    {objekt &&
-                      shownEquipment &&
-                      item.map((key, index) => {
-                        if (
-                          equipment[key] &&
-                          typeof equipment[key] === "boolean"
-                        ) {
-                          let translatedValue = translateEquipment(key);
-                          if (noEquipemnt) {
-                            setNoEquipemnt(false);
-                          }
-
+          {finalEquipment
+            .filter((item) => item.length > 0)
+            .map(
+              (item) =>
+                item.length > 0 && (
+                  <Col md={12 / finalEquipment.length}>
+                    <ul className="list-style-none pl-0">
+                      {objekt &&
+                        selectedPropertyGroup &&
+                        item.map((key, index) => {
                           return (
                             <li
                               className="d-flex align-items-center mb-1"
                               key={key}
                             >
                               <IoMdCheckmark className={"text-" + color} />
-                              <p className="pl-1 m-0">{translatedValue}</p>
+                              <p className="pl-1 m-0">
+                                {
+                                  properties.find(
+                                    (property) => property.hopId === key
+                                  ).name
+                                }
+                              </p>
                             </li>
                           );
-                        }
-                      })}
-                  </ul>
-                </Col>
-              )
-          )}
+                        })}
+                    </ul>
+                  </Col>
+                )
+            )}
         </Row>
       );
     } else {
@@ -137,13 +193,40 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
     }
   };
 
+  const generatePropertyButtons = () => {
+    const keys = Object.keys(hotelProperties);
+
+    console.log(keys);
+
+    return keys.map((key) => {
+      const thisEnum = enumsArr.find((enumItem) => enumItem.key === key);
+
+      return (
+        <button
+          className={`btn ml-1 ${
+            selectedPropertyGroup === key
+              ? "bg-blue text-white"
+              : "bg-white text-blue border-blue"
+          }`}
+          onClick={() => setPropertyGroup(thisEnum.key)}
+        >
+          {thisEnum.buttonValue}
+        </button>
+      );
+    });
+  };
+
   const descriptionButtons = (
     <div className="d-flex buttons">
       <button
         className={`btn-small-logo d-flex align-items-center ml-0 btn bg-${color} text-white`}
       >
-        Ceník
-        <HiOutlineChevronRight className="btn-icon right" />
+        <a href="#previo-booking-iframe">
+          <>
+            Ceník
+            <HiOutlineChevronRight className="btn-icon right" />
+          </>
+        </a>
       </button>
       {/*<button*/}
       {/*  className={`btn-small-logo d-flex align-items-center btn bg-${color} text-white`}*/}
@@ -156,8 +239,22 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
 
   useEffect(() => {
     fetchProperties();
-    console.log("objekt in detail", objekt);
-    setImages(() => objekt.photogallery.gallery.photos);
+    console.log(
+      "objekt in detail",
+      objekt.photogallery.gallery?.length > 1
+        ? objekt.photogallery?.gallery?.find(
+            (gallery) => gallery.profile === "true"
+          )?.photos?.photo
+        : objekt.photogallery?.gallery?.photos.photo
+    );
+
+    setImages(() =>
+      objekt.photogallery.gallery?.length > 1
+        ? objekt.photogallery?.gallery?.find(
+            (gallery) => gallery.profile === "true"
+          )?.photos?.photo
+        : objekt.photogallery?.gallery?.photos.photo
+    );
 
     // if (objekt.gps) {
     //   setViewport((prevState) => {
@@ -230,7 +327,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                           return (
                             <div
                               className={`objekt-detail-image img-0${i}`}
-                              onClick={() => openLightbox(image)}
                               key={i}
                             >
                               <Image
@@ -244,6 +340,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                                 }
                                 layout="fill"
                                 objectFit="cover"
+                                quality={50}
                               />
 
                               {i === 2 ? (
@@ -273,19 +370,15 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
               <section className="objekt-detail-images mb-1 hide-desktop">
                 {images && images?.length > 0 && (
                   <>
-                    <div
-                      className={`objekt-detail-image img-00`}
-                      onClick={() => openLightbox(images[0])}
-                    >
+                    <div className={`objekt-detail-image img-00`}>
                       <Image
-                        src={images[0].sm}
+                        src={images[0].url}
                         alt={
-                          images[0].alternativeText
-                            ? images[0].alternativeText
-                            : `${objekt.nazev}`
+                          images[0].label ? images[0].label : `${objekt.nazev}`
                         }
                         layout="fill"
                         objectFit="cover"
+                        quality={50}
                       />
                       <div className="overlay">
                         <div className="d-flex justify-content-between image-actions content-wrapper">
@@ -363,19 +456,23 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
               </Section>
             )}
             <iframe
-              src={`https://booking.previo.cz/?hotId=${id}&lang=cs&showTabs=reservation,stay,pricelist,occupancy,checkin`}
+              src={`https://booking.previo.cz/?hotId=${id}&hideTabs=review-map`}
               frameBorder="0"
               width="100%"
-              height="2000"
+              height="820"
               name="previo-booking-iframe"
               id="previo-booking-iframe"
               allowTransparency="true"
+              scrolling="true"
             />
 
             <Section>
-              <SectionHeading>
+              <SectionHeading background="white">
                 <div className="d-flex justify-content-between align-items-center">
                   <h2>Vybavení</h2>
+                  <div className="d-flex">
+                    {hotelProperties && generatePropertyButtons()}
+                  </div>
                   {/*{objekt.properties && (*/}
                   {/*  <div className="d-flex align-items-center">*/}
                   {/*    <button*/}
@@ -405,7 +502,10 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                 </div>
               </SectionHeading>
               <SectionContent>
-                {/*{objekt.properties && generateEquipmentTable(objekt.properties)}*/}
+                {hotelProperties &&
+                  generateEquipmentTable(
+                    hotelProperties[selectedPropertyGroup]
+                  )}
                 {!objekt.properties && (
                   <p>Tento objekt neposkytl informace o jejich vybavení</p>
                 )}
