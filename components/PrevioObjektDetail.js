@@ -577,7 +577,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                       >
                         <BiPhone className="icon" />
                         <a
-                          href={`tel:${objekt.address.phone.number?.trim()}`}
+                          href={`tel:${objekt.address.phone.number}`}
                           className="text-black"
                         >
                           {objekt.address.phone.number?.trim()}

@@ -160,8 +160,6 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
                   <li>{previoObjekt.name}</li>
                 ))}
               </ul>
-              Celkem: {previo?.hotel?.length} <br />
-              Celkový počet hotelů na previo: {previo?.foundHotels}
               <div className="hide-desktop">
                 <div className="mt-1">
                   <SideCards />
