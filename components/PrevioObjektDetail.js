@@ -299,7 +299,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                     style={{ marginRight: ".5em", fontSize: "2.5em" }}
                   />
 
-                  <div>
+                  <div className="d-flex">
                     <h1 className="m-0">{objekt?.name}</h1>
                     <div className="rating d-flex">
                       <div
@@ -312,9 +312,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                         {/*<BsStarHalf />*/}
                         {objekt.classification.stars}
                       </div>
-                      <span className="text-grey rating-counter ml-1">
-                        (48 hodnocení)
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -449,7 +446,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
             </section>
             {objekt?.descriptions?.longDescription && (
               <Section>
-                <SectionHeading>
+                <SectionHeading background="white">
                   <h2>Podrobný popis</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -515,7 +512,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
             </Section>
             {(objekt.dostupnost || objekt.gps) && (
               <Section>
-                <SectionHeading>
+                <SectionHeading background="white">
                   <h2>Dostupnost</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -556,7 +553,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
             <Row className="row">
               <Col className="col">
                 <Section className="objekt-detail-contacts">
-                  <SectionHeading>
+                  <SectionHeading background="white">
                     <h2>Kontakt</h2>
                   </SectionHeading>
                   <SectionContent>
@@ -569,13 +566,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                       </li>
                       <li className={"d-flex align-items-center text-" + color}>
                         <HiOutlineMail className="icon" />
-                        <a
-                          href={`mailto:${
-                            objekt.address.mail.address.length > 1
-                              ? objekt.address.mail.address[0]
-                              : objekt.address.mail.address
-                          }`}
-                        >
+                        <a href={`mailto:${objekt.address.mail.address}`}>
                           {objekt.address.mail.address}
                         </a>
                       </li>
@@ -586,10 +577,10 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                       >
                         <BiPhone className="icon" />
                         <a
-                          href={`tel:${objekt.address.phone.number[0]?.trim()}`}
+                          href={`tel:${objekt.address.phone.number?.trim()}`}
                           className="text-black"
                         >
-                          {objekt.address.phone.number[0]?.trim()}
+                          {objekt.address.phone.number?.trim()}
                         </a>
                       </li>
                       {objekt.address && (
@@ -610,7 +601,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
               {objekt.provozni_doba && objekt.provozni_doba.length > 0 && (
                 <Col md={4}>
                   <Section>
-                    <SectionHeading>
+                    <SectionHeading background="white">
                       <h2>Provozní doba</h2>
                     </SectionHeading>
                     <SectionContent>
@@ -627,7 +618,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
               )}
             </Row>
             <Section>
-              <SectionHeading>
+              <SectionHeading background="white">
                 <h2>Mapa</h2>
               </SectionHeading>
               {renderMap()}

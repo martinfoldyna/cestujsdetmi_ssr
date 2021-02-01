@@ -6,7 +6,7 @@ export const Section = ({ className, children }) => {
 
 export const SectionContent = ({ children, ...rest }) => {
   return (
-    <div className="section-content border-grey" {...rest}>
+    <div className="section-content" {...rest}>
       {children}
     </div>
   );

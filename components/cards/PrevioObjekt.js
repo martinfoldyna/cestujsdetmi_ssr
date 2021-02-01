@@ -68,6 +68,8 @@ const PrevioObjekt = ({ objekt, background }) => {
               <div className="article-description">
                 {objekt.descriptions && objekt.descriptions.shortDescription ? (
                   parse(trimString(objekt.descriptions.shortDescription, 40))
+                ) : objekt.descriptions.longDescription ? (
+                  parse(trimString(objekt.descriptions.longDescription, 40))
                 ) : (
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.

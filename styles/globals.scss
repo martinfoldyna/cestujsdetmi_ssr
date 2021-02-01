@@ -460,7 +460,7 @@ input[type=number] {
 .section-content {
   padding: .5em calc(1em + 15px) 2em;
 
-  border: 1px solid $grey;
+  //border: 1px solid $grey;
   background-color: #fff;
 }
 
@@ -764,6 +764,10 @@ input[type=number] {
 
 .objekt-detail .highlight-card {
   padding: 2em;
+}
+
+.highlight-card .stars {
+  margin-left: .5em;
 }
 
 .sitemap {
