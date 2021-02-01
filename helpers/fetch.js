@@ -76,15 +76,31 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers":
             "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          "x-requested-with": "localhost:3333",
         },
       }
     );
 
     // Conver xml string to JSON
     const jsonData = await parseXml(response.data);
-    console.log("jsonData", jsonData);
+    // const results = await Promise.all(
+    //   jsonData.hotels.hotel.map(async (hotel) => {
+    //     const photogallery = await fetchPrevio("hotel/getPhotogalleries", {
+    //       hotId: hotel.hotId,
+    //     });
+    //
+    //     return {
+    //       ...hotel,
+    //       gallery: photogallery.data.photogalleries?.gallery.find(
+    //         (gallery) => gallery.profile === "true"
+    //       )?.photos?.photo,
+    //     };
+    //   })
+    // );
 
-    return { success: true, data: jsonData };
+    // console.log("previo", results);
+
+    return { success: true, data: jsonData.hotels.hotel };
   } catch (err) {
     console.log(err);
   }
@@ -145,7 +161,9 @@ export const fetchPrevio = async (
         headers: {
           "Content-Type": "text/xml",
           "Access-Control-Allow-Origin": "*",
-          origin: "http://localhost:3000",
+          "Access-Control-Allow-Headers":
+            "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          origin: "localhost:3333",
         },
       }
     );

@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   console.log(previoObjects);
 
   return {
-    paths: previoObjects?.data?.hotels.hotel.map((hotel) => ({
+    paths: previoObjects?.data?.map((hotel) => ({
       params: {
         id: hotel.hotId,
       },

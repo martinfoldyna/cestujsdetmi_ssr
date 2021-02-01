@@ -14,8 +14,10 @@ import { FaWindowClose } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import { translateColor } from "../helpers/translators";
+import PrevioObjektDetail from "./PrevioObjektDetail";
+import PrevioObjekt from "./cards/PrevioObjekt";
 
-const ListFilteredItems = ({ objekty, typ_objektu }) => {
+const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
   const router = useRouter();
   const { kraj, mesto, oblast } = router.query;
 
@@ -251,6 +253,9 @@ const ListFilteredItems = ({ objekty, typ_objektu }) => {
             </>
           );
         })}
+      {previoObjekty?.map((objekt, index) => (
+        <PrevioObjekt objekt={objekt} />
+      ))}
       {objekty && objekty.length === 0 && objektyCount === 0 && (
         <p>Omlouvám se, ale tato kategorie neobsahuje žádné objekty.</p>
       )}

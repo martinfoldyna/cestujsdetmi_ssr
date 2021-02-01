@@ -2,13 +2,14 @@ import "../styles/globals.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import EmptyLayout from "../layouts/EmptyLayout";
 import firebase from "firebase";
 import { FirebaseConfig } from "../config/firebaseConfig";
 import Footer from "../layouts/Footer";
 import { GlobalContext } from "../context/GlobalContext";
+import { fetchPrevio } from "../helpers/fetch";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(FirebaseConfig);
@@ -22,6 +23,17 @@ const MyApp = ({ Component, pageProps }) => {
   const [user, setUser] = useState(null);
 
   const Layout = Component.Layout || EmptyLayout;
+
+  const fetchGlobalData = async () => {
+    console.log("Set context values");
+    const hotelProperties = await fetchPrevio("system/getHotelProperties");
+    console.log(hotelProperties);
+    setGlobal(hotelProperties);
+  };
+
+  useEffect(() => {
+    fetchGlobalData();
+  }, []);
 
   return (
     <GlobalContext.Provider

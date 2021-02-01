@@ -49,7 +49,7 @@ export async function getStaticProps() {
     props: {
       objekty,
       kategorie,
-      previo: previoObjekty?.success ? previoObjekty?.data : [],
+      previo: previoObjekty?.success ? previoObjekty.data : [],
     },
     revalidate: 3600,
   };
@@ -153,6 +153,7 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
                 city={selectedCity}
                 typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
                 objekty={objekty}
+                previoObjekty={previo}
               />
               <ul>
                 {previo.hotel?.map((previoObjekt) => (
