@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/helpers/api/init-middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/previo/hotelProperties.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/PrevioObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/PrevioObjektDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/fetch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/MediaQueries.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/MediaQueries.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/aktuality.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aktuality.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,11 +71,11 @@
       <recent name="$PROJECT_DIR$/redux/reducers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/helpers/api" />
       <recent name="$PROJECT_DIR$/layouts/siteLayouts" />
       <recent name="$PROJECT_DIR$/pages/rady-a-tipy/detail" />
       <recent name="$PROJECT_DIR$/components/form" />
       <recent name="$PROJECT_DIR$/components/cards" />
-      <recent name="$PROJECT_DIR$/pages/tipy-na-ubytovani/detail" />
     </key>
   </component>
   <component name="RunManager">
@@ -115,7 +116,7 @@
       <workItem from="1611999023220" duration="12432000" />
       <workItem from="1612171443796" duration="25677000" />
       <workItem from="1612276243846" duration="76000" />
-      <workItem from="1612297094291" duration="2748000" />
+      <workItem from="1612297094291" duration="6804000" />
     </task>
     <servers />
   </component>

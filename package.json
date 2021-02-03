@@ -13,6 +13,7 @@
     "@tinymce/tinymce-react": "^3.8.4",
     "axios": "^0.21.1",
     "browser-image-compression": "^1.0.13",
+    "cors": "^2.8.5",
     "firebase": "^8.2.1",
     "html-react-parser": "^1.1.1",
     "moment": "^2.29.1",

@@ -8,10 +8,17 @@ import HeadingWithIcon from "../layouts/HeadingWithIcon";
 import { HiNewspaper } from "react-icons/hi";
 import Objekt from "../components/cards/Objekt";
 import SideBar from "../layouts/Sidebar";
-import { fetchQuery } from "../helpers/fetch";
+import { fetchQuery, fetcLoaclApi } from "../helpers/fetch";
 import Head from "next/head";
+import { searchParamsToQueryString } from "../helpers/helpers";
 
-const Aktuality = ({ objekty }) => {
+export async function getStaticProps() {
+  const news = await fetchQuery(`rss`);
+
+  return { props: { news }, revalidate: 3600 };
+}
+
+const Aktuality = ({ news }) => {
   // How many objects are shown and at which number start api call query
   const [next, setNext] = useState(2);
 
@@ -19,9 +26,7 @@ const Aktuality = ({ objekty }) => {
   // How many objects per page to show
   const limit = 6;
 
-  useEffect(() => {
-    setObjektyCount(() => countObjekty());
-  }, []);
+  console.log(news);
 
   const paginate = async () => {
     setNext((prevState) => prevState + limit);
@@ -62,22 +67,22 @@ const Aktuality = ({ objekty }) => {
             </Col>
             <Col>
               <div className="filtered-objects">
-                {objekty?.map((objekt, index) => (
-                  <Objekt
-                    key={objekt.id}
-                    objekt={{
-                      ...objekt,
-                      ...{
-                        kategorie: "aktuality",
-                        date_from: new Date(2020, 11, 24),
-                        date_to: new Date(2020, 11, 31),
-                      },
-                    }}
-                    background={`${
-                      (index + 1) % 2 === 0 && index > 0 && "grey"
-                    }`}
-                  />
-                ))}
+                {/*{objekty?.map((objekt, index) => (*/}
+                {/*  <Objekt*/}
+                {/*    key={objekt.id}*/}
+                {/*    objekt={{*/}
+                {/*      ...objekt,*/}
+                {/*      ...{*/}
+                {/*        kategorie: "aktuality",*/}
+                {/*        date_from: new Date(2020, 11, 24),*/}
+                {/*        date_to: new Date(2020, 11, 31),*/}
+                {/*      },*/}
+                {/*    }}*/}
+                {/*    background={`${*/}
+                {/*      (index + 1) % 2 === 0 && index > 0 && "grey"*/}
+                {/*    }`}*/}
+                {/*  />*/}
+                {/*))}*/}
               </div>
             </Col>
           </Row>
@@ -87,19 +92,4 @@ const Aktuality = ({ objekty }) => {
   );
 };
 
-Aktuality.propTypes = {
-  objekty: PropTypes.object.isRequired,
-  getObjektyByParams: PropTypes.func.isRequired,
-};
-
 export default Aktuality;
-
-export async function getStaticProps() {
-  try {
-    const objekty = await fetchQuery(`${enums.URLS.objektInfoMini}`);
-
-    return { props: { objekty } };
-  } catch (err) {
-    return { props: { notFound: true } };
-  }
-}

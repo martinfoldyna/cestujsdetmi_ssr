@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { fetchPrevio } from "../helpers/fetch";
+import { fetchPrevio, fetcLoaclApi } from "../helpers/fetch";
 import Link from "next/link";
 import MyLink from "../layouts/MyLink";
 import { Col, Row } from "react-grid-system";
@@ -42,9 +42,10 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
   });
 
   const fetchProperties = async () => {
-    const properties = await fetchPrevio("system/getHotelProperties", {
-      lanId: 1,
-    });
+    const properties = await fetcLoaclApi("previo/hotelProperties");
+
+    console.log("localData", properties);
+    setProperties(properties.data.hotelProperties.group);
 
     console.log(properties);
 
@@ -68,8 +69,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
       if (finalProperties[enumItem.key]?.length === 0)
         delete finalProperties[enumItem.key];
     });
-
-    console.log(finalProperties);
 
     setPropertyGroup(Object.keys(finalProperties)[0]);
 
@@ -125,8 +124,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
       const equipmentKeys = properties.map((property) => property.hopId);
 
       const dividedLength = Math.round(equipmentKeys?.length / 3);
-      console.log("length", equipmentKeys.length);
-      console.log("divided", dividedLength);
 
       let finalEquipment = [];
 
@@ -152,7 +149,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
           finalEquipment.push(equipmentKeys.slice(i, i + dividedLength));
         }
       }
-      console.log(finalEquipment);
 
       return (
         <Row>
@@ -196,8 +192,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
   const generatePropertyButtons = () => {
     const keys = Object.keys(hotelProperties);
 
-    console.log(keys);
-
     return keys.map((key) => {
       const thisEnum = enumsArr.find((enumItem) => enumItem.key === key);
 
@@ -208,9 +202,9 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
               ? "bg-blue text-white"
               : "bg-white text-blue border-blue"
           }`}
-          onClick={() => setPropertyGroup(thisEnum.key)}
+          onClick={() => setPropertyGroup(thisEnum?.key)}
         >
-          {thisEnum.buttonValue}
+          {thisEnum?.buttonValue}
         </button>
       );
     });
@@ -239,14 +233,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
 
   useEffect(() => {
     fetchProperties();
-    console.log(
-      "objekt in detail",
-      objekt.photogallery.gallery?.length > 1
-        ? objekt.photogallery?.gallery?.find(
-            (gallery) => gallery.profile === "true"
-          )?.photos?.photo
-        : objekt.photogallery?.gallery?.photos.photo
-    );
 
     setImages(() =>
       objekt.photogallery.gallery?.length > 1
@@ -255,8 +241,6 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
           )?.photos?.photo
         : objekt.photogallery?.gallery?.photos.photo
     );
-
-    console.log(objekt);
 
     // if (objekt.gps) {
     //   setViewport((prevState) => {

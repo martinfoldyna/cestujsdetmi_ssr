@@ -15,8 +15,10 @@ export const fetchQuery = async (path, params = null, apiUrl = baseUrl) => {
     }
 
     const response = await fetch(`${url}`);
+    console.log(response);
     const data = await response.json();
     return data;
+    // return "";
   } catch (err) {
     console.log(err);
     throw err;
@@ -151,6 +153,7 @@ export const fetchPrevio = async (
             </filter>`
             : ""
         }
+        <lanId>1</lanId>
       </request>`;
 
     // Previo api call, to allow CORS in development add cors-anywhere domain before previo url
@@ -194,4 +197,13 @@ export const getMedia = (media) => {
     ? fetchQuery(media.url)
     : media.url;
   return imageUrl;
+};
+
+export const fetcLoaclApi = async (path) => {
+  let url = `${process.env.NEXT_PUBLIC_LOCAL_API_ROUTE}/${path}`;
+  console.log(url);
+  const response = await fetch(`${url}`);
+  const data = await response.json();
+
+  return data;
 };
