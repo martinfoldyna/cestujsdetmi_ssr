@@ -2,6 +2,7 @@ import enums from "../enums";
 import axios from "axios";
 import { parseString } from "xml2js";
 import { parseXml } from "./helpers";
+import Router from "next/router";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -15,7 +16,6 @@ export const fetchQuery = async (path, params = null, apiUrl = baseUrl) => {
     }
 
     const response = await fetch(`${url}`);
-    console.log(response);
     const data = await response.json();
     return data;
     // return "";
@@ -70,11 +70,7 @@ export const fetchAllPrevioHotels = async (limit = 10) => {
 
     // Previo api call, to allow CORS in development add cors-anywhere domain before previo url
     const response = await axios.post(
-      `${
-        process.env.NODE_ENV === "development"
-          ? "https://cors-anywhere.herokuapp.com/"
-          : ""
-      }${process.env.NEXT_PUBLIC_PREVIO_API_URL}/hotels/search`,
+      `${process.env.NEXT_PUBLIC_PREVIO_API_URL}/hotels/search`,
       xmlSring,
       {
         headers: {
@@ -197,13 +193,4 @@ export const getMedia = (media) => {
     ? fetchQuery(media.url)
     : media.url;
   return imageUrl;
-};
-
-export const fetcLoaclApi = async (path) => {
-  let url = `${process.env.NEXT_PUBLIC_LOCAL_API_ROUTE}/${path}`;
-  console.log(url);
-  const response = await fetch(`${url}`);
-  const data = await response.json();
-
-  return data;
 };

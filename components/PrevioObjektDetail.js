@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { fetchPrevio, fetcLoaclApi } from "../helpers/fetch";
+import { fetchPrevio, fetchQuery, fetcLoaclApi } from "../helpers/fetch";
 import Link from "next/link";
 import MyLink from "../layouts/MyLink";
 import { Col, Row } from "react-grid-system";
@@ -42,9 +42,8 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
   });
 
   const fetchProperties = async () => {
-    const properties = await fetcLoaclApi("previo/hotelProperties");
+    const properties = await fetchQuery("previo/hotelProperties");
 
-    console.log("localData", properties);
     setProperties(properties.data.hotelProperties.group);
 
     console.log(properties);
@@ -155,9 +154,9 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
           {finalEquipment
             .filter((item) => item.length > 0)
             .map(
-              (item) =>
+              (item, index) =>
                 item.length > 0 && (
-                  <Col md={12 / finalEquipment.length}>
+                  <Col md={12 / finalEquipment.length} key={index}>
                     <ul className="list-style-none pl-0">
                       {objekt &&
                         selectedPropertyGroup &&

@@ -1,11 +1,15 @@
 import React from "react";
-import { fetchAllPrevioHotels, fetchPrevio } from "../../../helpers/fetch";
+import {
+  fetchAllPrevioHotels,
+  fetchPrevio,
+  fetchQuery,
+} from "../../../helpers/fetch";
 import PropTypes from "prop-types";
 import PrevioObjektDetail from "../../../components/PrevioObjektDetail";
 import { objectToArray } from "../../../helpers/helpers";
 
 export async function getStaticPaths() {
-  const previoObjects = await fetchAllPrevioHotels(100);
+  const previoObjects = await fetchQuery("previo/hotels/100");
 
   return {
     paths: previoObjects?.data?.map((hotel) => ({
@@ -21,9 +25,9 @@ export async function getStaticProps({ params }) {
   const { id } = params;
 
   try {
-    const [objektQuery, photogallery, hotelProperties] = await Promise.all([
-      fetchPrevio("hotel/get", { hotId: id }),
-      fetchPrevio("hotel/getPhotogalleries", { hotId: id }),
+    const [objektQuery, photogallery] = await Promise.all([
+      fetchQuery(`previo/fetch/hotel%2Fget?hotId=${id}`),
+      fetchQuery(`previo/fetch/hotel%2FgetPhotogalleries?hotId=${id}`),
     ]);
 
     const objekt = {
