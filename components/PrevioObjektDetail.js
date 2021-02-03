@@ -50,7 +50,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
 
     const finalProperties = {};
 
-    properties.data.hotelProperties.group.forEach((propertyGroup) => {
+    properties.data?.hotelProperties.group.forEach((propertyGroup) => {
       const groupValue = enumsArr.find(
         (enumProperty) => enumProperty.value === propertyGroup.name
       );
@@ -65,7 +65,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
     });
 
     enumsArr.forEach((enumItem) => {
-      if (finalProperties[enumItem.key].length === 0)
+      if (finalProperties[enumItem.key]?.length === 0)
         delete finalProperties[enumItem.key];
     });
 

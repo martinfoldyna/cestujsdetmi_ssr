@@ -260,8 +260,7 @@
 /* Smartphones and Tablets ----------- */
 @media (max-width: 1024px) {
   /* Styles */
-  .nav-container.hide-nav,
-  .nav-container.sticky{
+  .nav-container.hide-nav {
     right: -100%;
     left: 100%;
   }
@@ -356,6 +355,9 @@
     transform: translateX(-50%);
     background-color: #C4C4C4;
   }
+  .homepage .article-homepage-card {
+    padding: 1em 0;
+  }
 }
 
 /* Smartphones (landscape) ----------- */
@@ -397,6 +399,16 @@ and (orientation : portrait) {
   .main-nav {
     margin: 0 1em;
   }
+.hero .wrapper{
+  position: absolute;
+  top: 50%;
+  left: 2em;
+  transform: translate(0, -50%);
+  z-index: 100;
+  color: #fff;
+  height: 100%;
+  width: calc(100% - 4em);
+}
 }
 
 /* Desktops and laptops ----------- */
@@ -404,6 +416,11 @@ and (orientation : portrait) {
 and (min-width : 1224px) {
   /* Styles */
   .map-filter .col {
+    padding-left: 0;
+  }
+
+
+  .ubytovani .col-pl-0 {
     padding-left: 0;
   }
 

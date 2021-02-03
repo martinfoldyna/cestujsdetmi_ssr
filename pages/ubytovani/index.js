@@ -108,7 +108,7 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
             ale třeba i na lodi. Dovolenou s dětmi v Čechách si užijete.
           </p>
         </HeadingWithIcon>
-        <div className="data-wrapper">
+        <div className="data-wrapper ubytovani">
           <Row>
             <Col md={2.5} className="hide-mobile">
               <SideBar
@@ -117,7 +117,7 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
                 kategorie={kategorie}
               />
             </Col>
-            <Col>
+            <Col className=".col-pl-0">
               <div className="hide-desktop">
                 <div
                   className={`d-flex ${
