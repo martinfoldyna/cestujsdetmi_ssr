@@ -458,12 +458,20 @@ input[type=number] {
 }
 
 .section-content {
-  padding: .5em calc(1em + 15px) 2em;
+  //padding: .5em calc(1em + 15px) 2em;
+  padding: .5em 30px 2em;
 
   //border: 1px solid $grey;
   background-color: #fff;
 }
 
+.section-content p:first-of-type {
+  margin-top: 0;
+}
+
+.section .heading-with-icons h2 {
+  margin-bottom: 0.5em;
+}
 .section .section-content .content-wrapper:first-child {margin-top: 0}
 
 .section.highlighted .section-content {
@@ -994,6 +1002,22 @@ input[type=number] {
 .note {
   font-size: .7em;
   color: $dark-grey
+}
+
+.equipment-buttons .btn {
+  height: 100%;
+  white-space: nowrap;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.equipment-buttons::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.equipment-buttons {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 

@@ -32,6 +32,9 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
   const [selectedPropertyGroup, setPropertyGroup] = useState("");
   const enumsArr = objectToArray(enums.PREVIO.PROPERTIES);
 
+  const [showLightBox, setShowLightBox] = useState(false);
+  const [lightboxImg, setLightboxImg] = useState(null);
+
   const [viewport, setViewport] = useState({
     width: "100%",
     height: 500,
@@ -253,6 +256,16 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
     // }
   }, [id]);
 
+  const openLightbox = (image) => {
+    setLightboxImg(image);
+    setShowLightBox(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImg(null);
+    setShowLightBox(false);
+  };
+
   return (
     <Container className="main-container">
       <div className="objekt-detail">
@@ -310,6 +323,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                             <div
                               className={`objekt-detail-image img-0${i}`}
                               key={i}
+                              onClick={() => openLightbox(image)}
                             >
                               <Image
                                 src={image.url}
@@ -341,18 +355,21 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                         }
                       }
                     })}
-                  {/*<Lightbox*/}
-                  {/*  open={showLightBox}*/}
-                  {/*  clickedImage={lightboxImg}*/}
-                  {/*  onClose={closeLightbox}*/}
-                  {/*  images={images}*/}
-                  {/*/>*/}
+                  <Lightbox
+                    open={showLightBox}
+                    clickedImage={lightboxImg}
+                    onClose={closeLightbox}
+                    images={images}
+                  />
                 </section>
               </div>
               <section className="objekt-detail-images mb-1 hide-desktop">
                 {images && images?.length > 0 && (
                   <>
-                    <div className={`objekt-detail-image img-00`}>
+                    <div
+                      className={`objekt-detail-image img-00`}
+                      onClick={() => openLightbox(images[0])}
+                    >
                       <Image
                         src={images[0].url}
                         alt={
@@ -374,12 +391,12 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                         </div>
                       </div>
                     </div>
-                    {/*<Lightbox*/}
-                    {/*  open={showLightBox}*/}
-                    {/*  clickedImage={lightboxImg}*/}
-                    {/*  onClose={closeLightbox}*/}
-                    {/*  images={objekt?.gallery}*/}
-                    {/*/>*/}
+                    <Lightbox
+                      open={showLightBox}
+                      clickedImage={lightboxImg}
+                      onClose={closeLightbox}
+                      images={images}
+                    />
                   </>
                 )}
               </section>
@@ -452,35 +469,12 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
               <SectionHeading background="white">
                 <div className="d-flex justify-content-between align-items-center">
                   <h2>Vybavení</h2>
-                  <div className="d-flex">
+                  <div
+                    className="d-flex ml-1 equipment-buttons align-items-center"
+                    style={{ overflow: "scroll" }}
+                  >
                     {hotelProperties && generatePropertyButtons()}
                   </div>
-                  {/*{objekt.properties && (*/}
-                  {/*  <div className="d-flex align-items-center">*/}
-                  {/*    <button*/}
-                  {/*      className={`btn-small-logo btn ${*/}
-                  {/*        shownEquipment === "vnitrni_vybaveni"*/}
-                  {/*          ? `bg-${color} text-white`*/}
-                  {/*          : `outline-${color} text-${color}`*/}
-                  {/*      }`}*/}
-                  {/*      onClick={() => setShownEquipment("vnitrni_vybaveni")}*/}
-                  {/*    >*/}
-                  {/*      Vnitřní*/}
-                  {/*      <span className="hide-mobile">&nbsp;vybavení</span>*/}
-                  {/*    </button>*/}
-                  {/*    <button*/}
-                  {/*      className={`btn-small-logo btn ${*/}
-                  {/*        shownEquipment === "vnejsi_vybaveni"*/}
-                  {/*          ? `bg-${color} text-white`*/}
-                  {/*          : `outline-${color} text-${color}`*/}
-                  {/*      }`}*/}
-                  {/*      onClick={() => setShownEquipment("vnejsi_vybaveni")}*/}
-                  {/*    >*/}
-                  {/*      Vnější*/}
-                  {/*      <span className="hide-mobile">&nbsp;vybavení</span>*/}
-                  {/*    </button>*/}
-                  {/*  </div>*/}
-                  {/*)}*/}
                 </div>
               </SectionHeading>
               <SectionContent>

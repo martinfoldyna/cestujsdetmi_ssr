@@ -7,9 +7,10 @@
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/PrevioObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/PrevioObjektDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/fetch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/previo/hotelProperties.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/lightbox/Lightbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/lightbox/Lightbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/lightbox/LightboxItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/lightbox/LightboxItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +114,7 @@
       <workItem from="1611999023220" duration="12432000" />
       <workItem from="1612171443796" duration="25677000" />
       <workItem from="1612276243846" duration="76000" />
-      <workItem from="1612297094291" duration="12874000" />
+      <workItem from="1612297094291" duration="16013000" />
     </task>
     <servers />
   </component>

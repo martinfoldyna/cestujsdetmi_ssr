@@ -1,9 +1,8 @@
-import React, { Fragment, useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Col, Container, Row } from "react-grid-system";
 import { BsFilter } from "react-icons/bs";
 import { HiHome } from "react-icons/hi";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import ListFilteredItems from "../../components/listFilteredItems";
@@ -12,18 +11,8 @@ import SideBar from "../../layouts/Sidebar";
 import SideFilter from "../../components/cards/SideFilter";
 import SideCards from "../../layouts/SideCards";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
-import {
-  fetchAllPrevioHotels,
-  fetchPrevio,
-  fetchQuery,
-  fetchXML,
-} from "../../helpers/fetch";
-import { searchParamsToUrlQuery } from "next/dist/next-server/lib/router/utils/querystring";
-import {
-  initCategories,
-  searchParamsToQueryString,
-} from "../../helpers/helpers";
-import { GlobalContext } from "../../context/GlobalContext";
+import { fetchAllPrevioHotels, fetchQuery } from "../../helpers/fetch";
+import { searchParamsToQueryString } from "../../helpers/helpers";
 import Head from "next/head";
 
 export async function getStaticProps() {
@@ -61,10 +50,10 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
   // How many objects are shown and at which number start api call query
   const [next, setNext] = useState(2);
 
-  const globalContext = useContext(GlobalContext).global;
-  const { global, setGlobal } = globalContext;
+  // const globalContext = useContext(GlobalContext)?.global;
+  // const { global, setGlobal } = globalContext;
   useEffect(() => {
-    setGlobal((prevState) => ({ ...prevState, ...kategorie }));
+    // setGlobal((prevState) => ({ ...prevState, ...kategorie }));
 
     if (previo) {
       console.log(previo);

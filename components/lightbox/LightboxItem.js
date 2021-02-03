@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const LightboxItem = ({ image, onImageLoaded, ...rest }) => {
   return (
     <div className="lightbox-item" {...rest}>
@@ -5,8 +7,14 @@ const LightboxItem = ({ image, onImageLoaded, ...rest }) => {
         <>
           <img
             className="lightbox-image"
-            src={image.lg ? image.lg : image.preview}
-            alt={image.description}
+            src={image.lg ? image.lg : image.url ? image.url : image.preview}
+            alt={
+              image.description
+                ? image.description
+                : image.label
+                ? image.label
+                : `Obrázek hotelu`
+            }
             onLoad={onImageLoaded}
           />{" "}
           {image.description && (

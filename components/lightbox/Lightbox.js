@@ -19,7 +19,6 @@ const Lightbox = ({ open, images, clickedImage, onClose, ...rest }) => {
         } else return image;
       })
     );
-    console.log("images", images);
   };
 
   const previousImage = () => {
@@ -32,7 +31,6 @@ const Lightbox = ({ open, images, clickedImage, onClose, ...rest }) => {
       });
       return foundItem ? foundItem : prevState;
     });
-    console.log("images", images);
   };
 
   const onMouseDown = (e) => {
@@ -66,7 +64,7 @@ const Lightbox = ({ open, images, clickedImage, onClose, ...rest }) => {
   return currentImage ? (
     <Modal
       {...props}
-      center={false}
+      center={true}
       onClose={onClose}
       closeOnEsc={true}
       closeOnOverlayClick={true}
