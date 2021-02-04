@@ -73,7 +73,7 @@ const Objekt = ({ objekt, background, useNextImg = true }) => {
               {/*<img src={placeholder} alt="placeholder-image" />*/}
               {isNews && (
                 <div className="article-date-range">
-                  <p>
+                  <p className="bg-purple">
                     <Moment format="DD.MM.YY">{objekt.date_from}</Moment> -{" "}
                     <Moment format="DD.MM.YY">{objekt.date_to}</Moment>
                   </p>

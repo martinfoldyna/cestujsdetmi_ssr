@@ -265,6 +265,18 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
           </button>
         </div>
       )}
+      {previoObjekty.length > 0 && (
+        <div className="d-flex justify-content-center">
+          <button
+            className={`btn bg-${
+              typ_objektu === enums.TYP_OBJEKTU.zabava.key ? "orange" : "blue"
+            } text-white`}
+            onClick={paginate}
+          >
+            Načíst další
+          </button>
+        </div>
+      )}
     </div>
   );
 };

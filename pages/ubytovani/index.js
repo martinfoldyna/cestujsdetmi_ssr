@@ -49,18 +49,52 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
   const [next, setNext] = useState(2);
+  const [previoHotels, setPrevioHotels] = useState(previo);
 
   // const globalContext = useContext(GlobalContext)?.global;
   // const { global, setGlobal } = globalContext;
-  useEffect(() => {
-    // setGlobal((prevState) => ({ ...prevState, ...kategorie }));
 
+  /**
+   * Fetch profile photo gallery for each previo hotel
+   */
+  const fetchGalleries = async () => {
+    const finalHotels = [];
+
+    for (let hotel of previo) {
+      // API call
+      const galleryResponse = await fetchQuery(
+        `previo/fetch/hotel%2FgetPhotogalleries?hotId=${hotel.hotId}`
+      );
+
+      // Find the only profile gallery (Previo provide multiple galleries)
+      const gallery =
+        galleryResponse.data?.photogalleries.gallery.length > 1
+          ? galleryResponse.data?.photogalleries.gallery?.find(
+              (gallery) => gallery.profile === "true"
+            )?.photos?.photo
+          : galleryResponse.data?.photogalleries.gallery?.photos.photo;
+
+      finalHotels.push({
+        ...hotel,
+        photogallery: gallery.sort(
+          (a, b) => parseInt(a.order) - parseInt(b.order)
+        ),
+      });
+    }
+
+    console.log(finalHotels);
+
+    // Assign all hotels with photo galleries to previoHotels state
+    setPrevioHotels(finalHotels);
+  };
+
+  useEffect(() => {
     if (previo) {
-      console.log(previo);
+      fetchGalleries();
     }
   }, []);
 
-  // Mobile only for filter showing
+  // Mobile only for displaying filter
   const [openFilter, setOpenFilter] = useState(false);
   // How many objects per page to show
   const limit = 6;
@@ -140,13 +174,8 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
                 city={selectedCity}
                 typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
                 objekty={objekty}
-                previoObjekty={previo}
+                previoObjekty={previoHotels}
               />
-              <ul>
-                {previo.hotel?.map((previoObjekt) => (
-                  <li>{previoObjekt.name}</li>
-                ))}
-              </ul>
               <div className="hide-desktop">
                 <div className="mt-1">
                   <SideCards />

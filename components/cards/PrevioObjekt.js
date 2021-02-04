@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Row, Col } from "react-grid-system";
 import { fetchQuery } from "../../helpers/fetch";
 import { trimString } from "../../helpers/helpers";
+import { AiFillDollarCircle } from "react-icons/ai";
 
 const PrevioObjekt = ({ objekt, background }) => {
   return (
@@ -27,33 +28,35 @@ const PrevioObjekt = ({ objekt, background }) => {
             <div className="img-wrapper">
               <Image
                 src={
-                  objekt?.gallery && objekt?.gallery.length > 0
-                    ? objekt.gallery.url
+                  objekt?.photogallery?.length > 0
+                    ? objekt.photogallery[0].url
                     : "/img/placeholder.png"
                 }
                 alt={
-                  objekt?.galerie
-                    ? objekt?.galerie[0]?.alternativeText
+                  objekt?.photogallery?.length > 0 &&
+                  objekt?.photogallery[0].label?.length > 0
+                    ? objekt?.photogallery[0]?.label
                     : objekt.nazev
                 }
                 layout="fill"
                 objectFit="cover"
                 className="border-radius"
               />
+              <span>
+                <AiFillDollarCircle /> Hotel s přímou rezervací
+              </span>
+
+              <div className="article-date-range">
+                <p className="bg-blue d-flex align-items-center">
+                  <AiFillDollarCircle className="icon" /> Hotel s přímou
+                  rezervací
+                </p>
+              </div>
             </div>
           </Col>
           <Col sm={8}>
             <div className="content-wrapper">
-              <h3
-                className="article-heading"
-                // className={
-                //   color
-                //     ? `text-${color}`
-                //     : `text-${translateColor(objekt.kategorie)}`
-                // }
-              >
-                {objekt?.name}
-              </h3>
+              <h3 className="article-heading">{objekt?.name}</h3>
 
               {objekt?.address &&
                 objekt?.address.name &&
