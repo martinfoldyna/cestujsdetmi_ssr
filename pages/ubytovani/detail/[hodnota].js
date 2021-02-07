@@ -5,6 +5,7 @@ import enums from "../../../enums";
 import { searchParamsToQueryString } from "../../../helpers/helpers";
 import { Container } from "react-grid-system";
 import React from "react";
+import { useSession } from "next-auth/client";
 
 export async function getStaticPaths() {
   const objects = await fetchQuery(`${enums.URLS.objektInfoMini}`);
@@ -45,10 +46,19 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const UbytovaniDetail = ({ objekt, kategorie, related }) => (
-  <Container className="main-container">
-    <ObjektDetail objekt={objekt} kategorie={kategorie} related={related} />
-  </Container>
-);
+const UbytovaniDetail = ({ objekt, kategorie, related }) => {
+  const [session] = useSession();
+
+  return (
+    <Container className="main-container">
+      <ObjektDetail
+        objekt={objekt}
+        kategorie={kategorie}
+        related={related}
+        user={session?.user}
+      />
+    </Container>
+  );
+};
 
 export default UbytovaniDetail;

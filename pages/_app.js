@@ -10,6 +10,9 @@ import { FirebaseConfig } from "../config/firebaseConfig";
 import Footer from "../layouts/Footer";
 import { GlobalContext } from "../context/GlobalContext";
 import { fetchPrevio } from "../helpers/fetch";
+import { Provider } from "next-auth/client";
+import { Router } from "next/router";
+import { parseCookies } from "nookies";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(FirebaseConfig);
@@ -24,32 +27,48 @@ const MyApp = ({ Component, pageProps }) => {
 
   const Layout = Component.Layout || EmptyLayout;
 
-  const fetchGlobalData = async () => {
-    console.log("Set context values");
-    const hotelProperties = await fetchPrevio("system/getHotelProperties");
-    console.log(hotelProperties);
-    setGlobal(hotelProperties);
-  };
-
-  useEffect(() => {
-    fetchGlobalData();
-  }, []);
-
   return (
-    <GlobalContext.Provider
-      value={{ user: { user, setUser }, global: { global, setGlobal } }}
-    >
-      <Header />
-      {/*<Container className="main-container">*/}
-      <main style={{ position: "relative" }}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </main>
-      {/*</Container>*/}
-      <Footer />
-    </GlobalContext.Provider>
+    <Provider session={pageProps.session}>
+      <GlobalContext.Provider
+        value={{ user: { user, setUser }, global: { global, setGlobal } }}
+      >
+        <Header />
+        {/*<Container className="main-container">*/}
+        <main style={{ position: "relative" }}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </main>
+        {/*</Container>*/}
+        <Footer />
+      </GlobalContext.Provider>
+    </Provider>
   );
+};
+
+const redirectUser = (ctx, location) => {
+  if (ctx.req) {
+    ctx.res.writeHead(302, { Location: location });
+    ctx.res.end();
+  } else {
+    Router.push(location);
+  }
+};
+
+MyApp.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {};
+
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+
+  // if (!pageProps.session) {
+  //   if (ctx.pathname === "/user") {
+  //     redirectUser(ctx, "/auth/login");
+  //   }
+  // }
+
+  return { pageProps };
 };
 
 export default MyApp;

@@ -265,7 +265,7 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
           </button>
         </div>
       )}
-      {previoObjekty.length > 0 && (
+      {previoObjekty?.length > 0 && (
         <div className="d-flex justify-content-center">
           <button
             className={`btn bg-${

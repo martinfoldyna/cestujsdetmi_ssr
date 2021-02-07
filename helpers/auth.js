@@ -6,9 +6,9 @@ export const loginUser = async (credentials) => {
       credentials
     );
 
-    sessionStorage.setItem("auth-token", res.data.jwt);
+    // sessionStorage.setItem("auth-token", res.data.jwt);
 
-    return { user: res.data.user };
+    return res.data;
   } catch (error) {
     return { notFound: true, error };
   }

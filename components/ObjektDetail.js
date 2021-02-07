@@ -6,7 +6,7 @@ import { HiHome, HiOutlineChevronRight, HiOutlineMail } from "react-icons/hi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiPhone, BiWifi } from "react-icons/bi";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
-import { FaDog, FaGlobeAmericas, FaSearchPlus } from "react-icons/fa";
+import { FaDog, FaGlobeAmericas, FaHeart, FaSearchPlus } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { IoMdCheckmark } from "react-icons/io";
 import { RiCupLine, RiParkingBoxLine } from "react-icons/ri";
@@ -32,8 +32,10 @@ import SideBar from "../layouts/Sidebar";
 import enums from "../enums";
 import MyLink from "../layouts/MyLink";
 import { fetchQuery } from "../helpers/fetch";
+import { addToFavorite, removeFromFavorite } from "../helpers/user";
+import { useSession } from "next-auth/client";
 
-const ObjektDetail = ({ addReview, objekt, kategorie }) => {
+const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: 500,
@@ -287,30 +289,59 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
           <Col md={9.5}>
             <section className="highlight-card bg-grey" id="top">
               <div className="objekt-detail-heading d-flex align-items-center justify-content-between mb-2">
-                <div className="d-flex align-items-center">
-                  <HiHome
-                    className={"text-" + color}
-                    style={{ marginRight: ".5em", fontSize: "2.5em" }}
-                  />
+                <div>
+                  <div className="d-flex align-items-center">
+                    <HiHome
+                      className={"text-" + color}
+                      style={{ marginRight: ".5em", fontSize: "2.5em" }}
+                    />
 
-                  <div>
-                    <h1 className="m-0">{objekt?.nazev}</h1>
-                    <div className="rating d-flex">
-                      <div
-                        className={`text-${color} stars d-flex align-self-end`}
-                      >
-                        <BsStarFill />
-                        <BsStarFill />
-                        <BsStarFill />
-                        <BsStarFill />
-                        <BsStarHalf />
+                    <div>
+                      <h1 className="m-0">{objekt?.nazev}</h1>
+                      <div className="rating d-flex">
+                        <div
+                          className={`text-${color} stars d-flex align-self-end`}
+                        >
+                          <BsStarFill />
+                          <BsStarFill />
+                          <BsStarFill />
+                          <BsStarFill />
+                          <BsStarHalf />
+                        </div>
+                        <span className="text-grey rating-counter ml-1">
+                          (48 hodnocení)
+                        </span>
                       </div>
-                      <span className="text-grey rating-counter ml-1">
-                        (48 hodnocení)
-                      </span>
                     </div>
                   </div>
                 </div>
+                {user && (
+                  <div>
+                    {objekt.verejni_uzivatele.find(
+                      (publicUser) => publicUser.email === user?.email
+                    ) ? (
+                      <button
+                        className={`btn ghost text-${color} d-flex align-items-center`}
+                        onClick={() =>
+                          removeFromFavorite({ localId: objekt._id, user })
+                        }
+                      >
+                        <AiOutlineHeart className="btn-icon text-black" />
+                        Odebrat z oblíbených
+                      </button>
+                    ) : (
+                      <button
+                        className={`btn ghost text-${color} d-flex align-items-center`}
+                        onClick={() =>
+                          addToFavorite({ localId: objekt.id, user })
+                        }
+                      >
+                        <AiOutlineHeart className="btn-icon text-black" />
+                        Přidat do oblíbených
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
               <div className="hide-mobile">
                 <section className="objekt-detail-images mb-1">
@@ -443,6 +474,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                 </Col>
               </Row>
             </section>
+
             {objekt?.podrobny_popis && (
               <Section>
                 <SectionHeading>
@@ -704,14 +736,14 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
                 </SectionHeading>
                 <SectionContent>
                   <Row>
-                    {related.map(
-                      (objektItem) =>
-                        objektItem.id !== objekt.id && (
-                          <Col md={6} lg={4} key={objekt.id}>
-                            <MiniObjekt objekt={objektItem} />
-                          </Col>
-                        )
-                    )}
+                    {/*{related.map(*/}
+                    {/*  (objektItem) =>*/}
+                    {/*    objektItem.id !== objekt.id && (*/}
+                    {/*      <Col md={6} lg={4} key={objekt.id}>*/}
+                    {/*        <MiniObjekt objekt={objektItem} />*/}
+                    {/*      </Col>*/}
+                    {/*    )*/}
+                    {/*)}*/}
                   </Row>
                 </SectionContent>
               </Section>
@@ -722,18 +754,5 @@ const ObjektDetail = ({ addReview, objekt, kategorie }) => {
     </>
   );
 };
-
-ObjektDetail.propTypes = {
-  objekty: PropTypes.object.isRequired,
-  getObjektByID: PropTypes.func,
-  getObjektyInOblast: PropTypes.func,
-  addReview: PropTypes.func,
-  loadObjektByOblast: PropTypes.func,
-  removeObjektInStorage: PropTypes.func,
-};
-
-const mapStateToProps = (state) => ({
-  objekty: state.objekty,
-});
 
 export default ObjektDetail;

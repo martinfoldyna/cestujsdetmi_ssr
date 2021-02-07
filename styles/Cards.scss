@@ -431,8 +431,12 @@ h3.suggestion-post-heading {
 
 .inquiry-card.section {
   display: block;
-  max-width: 800px;
+  max-width: 1100px;
   margin: 0 auto;
+}
+
+.inquiry-card .d-flex div {
+  flex-basis: 50%;
 }
 
 .inquiry-card .section-heading {
@@ -457,3 +461,5 @@ h3.suggestion-post-heading {
 .inquiry-card .submit {
   margin: 0 auto;
 }
+
+

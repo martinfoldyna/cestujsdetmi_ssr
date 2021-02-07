@@ -8,8 +8,11 @@ import Image from "next/image";
 import { Row, Col } from "react-grid-system";
 import { fetchQuery } from "../../helpers/fetch";
 import { trimString } from "../../helpers/helpers";
+import { translateColor } from "../../helpers/translators";
+import { HiHome } from "react-icons/hi";
+import { AiFillCompass } from "react-icons/ai";
 
-const Objekt = ({ objekt, background, useNextImg = true }) => {
+const Objekt = ({ objekt, background, useNextImg = true, badge }) => {
   const parentRef = useRef(null);
   const [imageHeight, setImgHeight] = useState(0);
 
@@ -76,6 +79,23 @@ const Objekt = ({ objekt, background, useNextImg = true }) => {
                   <p className="bg-purple">
                     <Moment format="DD.MM.YY">{objekt.date_from}</Moment> -{" "}
                     <Moment format="DD.MM.YY">{objekt.date_to}</Moment>
+                  </p>
+                </div>
+              )}
+              {badge && (
+                <div className="article-date-range">
+                  <p
+                    className={`bg-${translateColor(
+                      objekt.typ_objektu
+                    )} d-flex align-items-center`}
+                  >
+                    {objekt.typ_objektu === enums.TYP_OBJEKTU.ubytovani.key && (
+                      <HiHome className="icon" />
+                    )}
+                    {objekt.typ_objektu === enums.TYP_OBJEKTU.zabava.key && (
+                      <AiFillCompass className="icon" />
+                    )}
+                    {enums.TYP_OBJEKTU[objekt.typ_objektu].value.toLowerCase()}
                   </p>
                 </div>
               )}

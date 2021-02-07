@@ -5,11 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/layouts/News.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/aktuality/detail/[id].js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/auth/google/callback.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/auth/logout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/user/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/PrevioObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/PrevioObjektDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/cards/Objekt.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/Objekt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/cards/OurSuggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/OurSuggestions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/cards/PrevioObjekt.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/PrevioObjekt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/listFilteredItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/listFilteredItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/fetch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/inquiry.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/inquiry.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/aktuality.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aktuality.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/auth/[...nextauth].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/[...nextauth].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/auth/providers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/ubytovani/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/detail/[hodnota].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/MediaQueries.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/MediaQueries.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +139,9 @@
       <workItem from="1612171443796" duration="25677000" />
       <workItem from="1612276243846" duration="76000" />
       <workItem from="1612297094291" duration="16913000" />
-      <workItem from="1612430329336" duration="3133000" />
+      <workItem from="1612430329336" duration="38544000" />
+      <workItem from="1612636191969" duration="281000" />
+      <workItem from="1612636621456" duration="10980000" />
     </task>
     <servers />
   </component>

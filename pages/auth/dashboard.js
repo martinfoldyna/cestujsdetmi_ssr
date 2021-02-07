@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import MyLink from "../../layouts/MyLink";
@@ -15,17 +15,29 @@ import { logoutUser, getUser } from "../../redux/actions/users";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { useRouter } from "next/router";
 import { GlobalContext } from "../../context/GlobalContext";
+import nookies, { parseCookies, destroyCookie } from "nookies";
+import { fetchQuery } from "../../helpers/fetch";
 
-const UserDashboard = () => {
+export async function getServerSideProps(ctx) {
+  const jwt = parseCookies(ctx).jwt;
+
+  const user = await fetchQuery(`users/me`, "", {
+    headers: { Authorization: `Bearer ${jwt}` },
+  });
+
+  return { props: { APIuser: user } };
+}
+
+const UserDashboard = ({ APIuser }) => {
   const router = useRouter();
   const userContext = useContext(GlobalContext).user;
-  const { user, setUser } = userContext;
-  console.log("dashboard_user", user);
+  const [user, setUser] = useState(APIuser);
+
   const logoutUser = () => {
-    setUser(null);
+    router.push("/auth/logout");
   };
 
-  return user && user.objekty ? (
+  return (
     <Container className="main-container">
       <span className="breadcrumb">
         <MyLink href="/">Úvodní stránka</MyLink>&nbsp;/&nbsp;Administrace
@@ -163,9 +175,6 @@ const UserDashboard = () => {
         </Row>
       </div>
     </Container>
-  ) : (
-    // <Redirect href="/auth/login" />
-    <p className="text-red">Not authorized</p>
   );
 };
 

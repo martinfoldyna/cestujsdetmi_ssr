@@ -23,14 +23,16 @@ import { FiMapPin } from "react-icons/fi";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 import CityPin from "../public/cityPin";
 import { objectToArray } from "../helpers/helpers";
+import { addToFavorite, removeFromFavorite } from "../helpers/user";
 
-const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
+const PrevioObjektDetail = ({ objekt, color = "blue", user }) => {
   const router = useRouter();
   const { id } = router.query;
   const [hotelProperties, setProperties] = useState(null);
   const [images, setImages] = useState(null);
   const [selectedPropertyGroup, setPropertyGroup] = useState("");
   const enumsArr = objectToArray(enums.PREVIO.PROPERTIES);
+  const [dbUser, setDbUser] = useState(null);
 
   const [showLightBox, setShowLightBox] = useState(false);
   const [lightboxImg, setLightboxImg] = useState(null);
@@ -233,6 +235,16 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
     </div>
   );
 
+  const getUser = async () => {
+    const foundUsers = await fetchQuery(
+      `verejni-uzivateles?email=${user.email}`
+    );
+
+    if (foundUsers) {
+      setDbUser(foundUsers[0]);
+    }
+  };
+
   useEffect(() => {
     fetchProperties();
 
@@ -244,17 +256,14 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
         : objekt.photogallery?.gallery?.photos.photo
     );
 
-    // if (objekt.gps) {
-    //   setViewport((prevState) => {
-    //     return {
-    //       ...prevState,
-    //       latitude: objekt.gps.lat,
-    //       longitude: objekt.gps.lng,
-    //     };
-    //   });
-    //   setMarker({ latitude: objekt.gps.lat, longitude: objekt.gps.lng });
-    // }
+    console.log(objekt);
   }, [id]);
+
+  useEffect(() => {
+    if (user) {
+      getUser();
+    }
+  }, [user]);
 
   const openLightbox = (image) => {
     setLightboxImg(image);
@@ -311,6 +320,36 @@ const PrevioObjektDetail = ({ objekt, color = "blue" }) => {
                     </div>
                   </div>
                 </div>
+                {user && (
+                  <div>
+                    {dbUser?.oblibene_externi.find(
+                      (externalObject) =>
+                        externalObject.origin === "previo" &&
+                        externalObject.hotId === objekt.hotId
+                    ) ? (
+                      <button
+                        className="btn ghost text-blue d-flex align-items-center"
+                        onClick={() => removeFromFavorite(objekt.id, user)}
+                      >
+                        <AiOutlineHeart className="btn-icon text-black" />
+                        Odebrat z oblíbených
+                      </button>
+                    ) : (
+                      <button
+                        className="btn ghost text-blue d-flex align-items-center"
+                        onClick={() =>
+                          addToFavorite({
+                            externalObject: { ...objekt, origin: "previo" },
+                            user,
+                          })
+                        }
+                      >
+                        <AiOutlineHeart className="btn-icon text-black" />
+                        Přidat do oblíbených
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
               <div className="hide-mobile">
                 <section className="objekt-detail-images mb-1">

@@ -5,6 +5,7 @@ import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
 import { Container } from "react-grid-system";
 import Head from "next/head";
+import { useSession } from "next-auth/client";
 
 export async function getStaticPaths() {
   const objects = await fetchQuery(`${enums.URLS.objektInfoMini}`);
@@ -41,6 +42,8 @@ export async function getStaticProps({ params }) {
 }
 
 const VyletyDetail = ({ objekt, kategorie }) => {
+  const [session] = useSession();
+
   return (
     <>
       <Head>
@@ -49,7 +52,11 @@ const VyletyDetail = ({ objekt, kategorie }) => {
         <meta name="robots" content="index, follow" />
       </Head>
       <Container className="main-container">
-        <ObjektDetail objekt={objekt} kategorie={kategorie} />
+        <ObjektDetail
+          objekt={objekt}
+          kategorie={kategorie}
+          user={session?.user}
+        />
       </Container>
     </>
   );

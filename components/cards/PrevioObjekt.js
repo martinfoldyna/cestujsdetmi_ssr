@@ -9,8 +9,9 @@ import { Row, Col } from "react-grid-system";
 import { fetchQuery } from "../../helpers/fetch";
 import { trimString } from "../../helpers/helpers";
 import { AiFillDollarCircle } from "react-icons/ai";
+import { HiHome } from "react-icons/hi";
 
-const PrevioObjekt = ({ objekt, background }) => {
+const PrevioObjekt = ({ objekt, background, badge = false }) => {
   return (
     <Link href={`/${enums.TYP_OBJEKTU.ubytovani.url}/previo/${objekt?.hotId}`}>
       {/* WAS: */}
@@ -36,22 +37,26 @@ const PrevioObjekt = ({ objekt, background }) => {
                   objekt?.photogallery?.length > 0 &&
                   objekt?.photogallery[0].label?.length > 0
                     ? objekt?.photogallery[0]?.label
-                    : objekt.nazev
+                    : objekt.name
                 }
                 layout="fill"
                 objectFit="cover"
                 className="border-radius"
               />
-              <span>
-                <AiFillDollarCircle /> Hotel s přímou rezervací
-              </span>
-
-              <div className="article-date-range">
-                <p className="bg-blue d-flex align-items-center">
-                  <AiFillDollarCircle className="icon" /> Hotel s přímou
-                  rezervací
-                </p>
-              </div>
+              {!badge ? (
+                <div className="article-date-range">
+                  <p className="bg-blue d-flex align-items-center">
+                    <AiFillDollarCircle className="icon" /> Hotel s přímou
+                    rezervací
+                  </p>
+                </div>
+              ) : (
+                <div className="article-date-range">
+                  <p className="bg-blue d-flex align-items-center">
+                    <HiHome className="icon" /> ubytování
+                  </p>
+                </div>
+              )}
             </div>
           </Col>
           <Col sm={8}>
@@ -69,10 +74,13 @@ const PrevioObjekt = ({ objekt, background }) => {
                   </div>
                 )}
               <div className="article-description">
-                {objekt.descriptions && objekt.descriptions.shortDescription ? (
-                  parse(trimString(objekt.descriptions.shortDescription, 40))
-                ) : objekt.descriptions.longDescription ? (
-                  parse(trimString(objekt.descriptions.longDescription, 40))
+                {objekt.shortDescription ? (
+                  parse(trimString(objekt.shortDescription, 40))
+                ) : objekt.descriptions &&
+                  objekt.descriptions?.shortDescription ? (
+                  parse(trimString(objekt.descriptions?.shortDescription, 40))
+                ) : objekt.descriptions?.longDescription ? (
+                  parse(trimString(objekt.descriptions?.longDescription, 40))
                 ) : (
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.

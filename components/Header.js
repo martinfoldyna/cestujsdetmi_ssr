@@ -17,9 +17,12 @@ import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import SmallButton from "../layouts/SmallButton";
+import { useSession, signOut } from "next-auth/client";
+
 const HeaderComponent = ({ user }) => {
   const [sticky, setSticky] = useState(false);
   const [stickyUp, setStickyUp] = useState(false);
+  const [sesssion, loading] = useSession();
 
   const [openNav, setOpenNav] = useState(false);
 
@@ -123,14 +126,27 @@ const HeaderComponent = ({ user }) => {
                 {/*  <FaRegUser className="btn-icon text-blue" />*/}
                 {/*  <span>Přihlášení</span>*/}
                 {/*</button>*/}
-                <SmallButton
-                  color="grey"
-                  ghost
-                  icon={FaRegUser}
-                  iconColor="blue"
-                >
-                  Přihlášení
-                </SmallButton>
+                {sesssion ? (
+                  <MyLink href="/user">
+                    <SmallButton
+                      color="grey"
+                      ghost
+                      icon={FaRegUser}
+                      iconColor="blue"
+                    >
+                      {sesssion.user.email}
+                    </SmallButton>
+                  </MyLink>
+                ) : (
+                  <SmallButton
+                    color="grey"
+                    ghost
+                    icon={FaRegUser}
+                    iconColor="blue"
+                  >
+                    Přihlášení
+                  </SmallButton>
+                )}
               </MyLink>
             </div>
           </div>

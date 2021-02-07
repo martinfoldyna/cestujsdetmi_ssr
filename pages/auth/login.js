@@ -11,6 +11,9 @@ import { useRouter } from "next/router";
 import { loginUser } from "../../helpers/auth";
 import { GlobalContext } from "../../context/GlobalContext";
 import Inquiry from "../../layouts/inquiry";
+import enums from "../../enums";
+import { setCookie } from "nookies";
+import { useSession, signIn, signOut } from "next-auth/client";
 
 const Login = ({ global }) => {
   const userContext = useContext(GlobalContext).user;
@@ -19,6 +22,7 @@ const Login = ({ global }) => {
   console.log(user);
   const { register, handleSubmit, errors } = useForm();
   const [token, setToken] = useState(null);
+  const [session, loading] = useSession();
 
   useEffect(() => {
     setToken(sessionStorage.getItem("auth-token"));
@@ -26,25 +30,42 @@ const Login = ({ global }) => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const { user } = await loginUser(data);
-    setUser(user);
+    const loginResponse = await loginUser(data);
+    setUser(loginResponse.user);
+
+    setCookie(null, "jwt", loginResponse.jwt, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: "/",
+    });
+
+    router.push("/auth/dashboard");
   };
 
-  useEffect(() => {
-    if (user) {
-      router.push("/auth/dashboard");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //   }
+  // }, [user]);
 
   const [adminLogin, setAdminLogin] = useState(false);
 
   const onErrors = (errors, e) => console.log(errors);
+
+  const googleLogin = (e) => {
+    e.preventDefault();
+    signIn("google");
+  };
 
   useEffect(() => {
     if (token) {
       getUser();
     }
   }, [token, getUser]);
+
+  useEffect(() => {
+    if (session) {
+      router.push("/auth/google/callback");
+    }
+  }, [session]);
 
   return (
     <Fragment>
@@ -93,7 +114,7 @@ const Login = ({ global }) => {
             {!adminLogin && (
               <Fragment>
                 <span className="d-block mt-1 mb-1">nebo</span>
-                <button className="btn bg-white w-100">
+                <button className="btn bg-white w-100" onClick={googleLogin}>
                   Přihlásit přes Google
                 </button>
               </Fragment>
@@ -121,7 +142,7 @@ const Login = ({ global }) => {
           </div>
         </div>
       </div>
-      <Inquiry />
+      <Inquiry typ_objektu={enums.TYP_OBJEKTU.ubytovani.key} />
     </Fragment>
   );
 };

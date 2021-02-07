@@ -13,6 +13,8 @@ import enums from "../../../enums";
 import { fetchQuery } from "../../../helpers/fetch";
 import RadyTipyLayout from "../../../layouts/siteLayouts/RadyTipyLayout";
 import Head from "next/head";
+import { useSession } from "next-auth/client";
+import { AiOutlineHeart } from "react-icons/ai";
 
 export async function getStaticPaths() {
   const fetchParams = {
@@ -49,6 +51,9 @@ const RadyTipyDetail = ({
 
   const { hodnota } = router.query;
 
+  const [session] = useSession();
+  const { user } = session;
+
   const loadAdvice = () => {
     getAdvice(hodnota);
   };
@@ -75,16 +80,45 @@ const RadyTipyDetail = ({
       </Head>
       <Section className="mt-0 post-detail">
         <SectionHeading background="grey">
-          <h2>{post.nazev}</h2>
-          <div className="d-flex align-items-center date">
-            <BsClock className="text-yellow btn-icon" />
-            <span>
-              {new Date(post.createdAt).toLocaleString("cs", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
+          <div className="d-flex">
+            <div>
+              <h2>{post.nazev}</h2>
+              <div className="d-flex align-items-center date">
+                <BsClock className="text-yellow btn-icon" />
+                <span>
+                  {new Date(post.createdAt).toLocaleString("cs", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+              </div>
+            </div>
+            {user && (
+              <div>
+                {post.verejni_uzivatele.find(
+                  (publicUser) => publicUser.email === user?.email
+                ) ? (
+                  <button
+                    className={`btn ghost text-${color} d-flex align-items-center`}
+                    onClick={() =>
+                      removeFromFavorite({ localId: post._id, user })
+                    }
+                  >
+                    <AiOutlineHeart className="btn-icon text-black" />
+                    Odebrat z oblíbených
+                  </button>
+                ) : (
+                  <button
+                    className={`btn ghost text-${color} d-flex align-items-center`}
+                    onClick={() => addToFavorite({ localId: post.id, user })}
+                  >
+                    <AiOutlineHeart className="btn-icon text-black" />
+                    Přidat do oblíbených
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </SectionHeading>
         <SectionContent>

@@ -7,6 +7,7 @@ import {
 import PropTypes from "prop-types";
 import PrevioObjektDetail from "../../../components/PrevioObjektDetail";
 import { objectToArray } from "../../../helpers/helpers";
+import { useSession } from "next-auth/client";
 
 export async function getStaticPaths() {
   const previoObjects = await fetchQuery("previo/hotels/100");
@@ -43,8 +44,9 @@ export async function getStaticProps({ params }) {
 }
 
 const PrevioDetail = ({ objekt }) => {
+  const [session] = useSession();
   return objekt ? (
-    <PrevioObjektDetail objekt={objekt} />
+    <PrevioObjektDetail objekt={objekt} user={session?.user} />
   ) : (
     <h3 className="m-0 p-2">
       Omlouváme se, ale tento objekt se nám nepodařilo najít

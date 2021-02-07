@@ -10,6 +10,8 @@ const OurSuggestions = () => {
   const [promo, setPromo] = useState(null);
   const [promoIndex, setPromoIndex] = useState(0);
 
+  const generateRandomIndex = () => {};
+
   useEffect(() => {
     fetchPromo(setPromo);
   }, []);

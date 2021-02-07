@@ -11,22 +11,23 @@ import SideBar from "../layouts/Sidebar";
 import { fetchQuery, fetcLoaclApi } from "../helpers/fetch";
 import Head from "next/head";
 import { searchParamsToQueryString } from "../helpers/helpers";
+import VerticalPost from "../layouts/VerticalPost";
+import News from "../layouts/News";
 
 export async function getStaticProps() {
-  const news = await fetchQuery(`rss`);
+  const newsArr = await fetchQuery(`rss`);
 
-  return { props: { news }, revalidate: 3600 };
+  return { props: { newsArr: newsArr.data }, revalidate: 3600 };
 }
 
-const Aktuality = ({ news }) => {
+const Aktuality = ({ newsArr }) => {
+  // How many objects per page to show
+  const limit = 20;
+
   // How many objects are shown and at which number start api call query
-  const [next, setNext] = useState(2);
+  const [next, setNext] = useState(limit);
 
   const [objektyCount, setObjektyCount] = useState(null);
-  // How many objects per page to show
-  const limit = 6;
-
-  console.log(news);
 
   const paginate = async () => {
     setNext((prevState) => prevState + limit);
@@ -67,25 +68,14 @@ const Aktuality = ({ news }) => {
             </Col>
             <Col>
               <div className="filtered-objects">
-                {/*{objekty?.map((objekt, index) => (*/}
-                {/*  <Objekt*/}
-                {/*    key={objekt.id}*/}
-                {/*    objekt={{*/}
-                {/*      ...objekt,*/}
-                {/*      ...{*/}
-                {/*        kategorie: "aktuality",*/}
-                {/*        date_from: new Date(2020, 11, 24),*/}
-                {/*        date_to: new Date(2020, 11, 31),*/}
-                {/*      },*/}
-                {/*    }}*/}
-                {/*    background={`${*/}
-                {/*      (index + 1) % 2 === 0 && index > 0 && "grey"*/}
-                {/*    }`}*/}
-                {/*  />*/}
-                {/*))}*/}
+                {newsArr?.map(
+                  (news, index) =>
+                    index < next && <News key={news.id} news={news} />
+                )}
               </div>
             </Col>
           </Row>
+          <button className="btn bg-purple text-white">Načíst další</button>
         </div>
       </Container>
     </>

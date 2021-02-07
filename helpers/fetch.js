@@ -6,16 +6,16 @@ import Router from "next/router";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export const fetchQuery = async (path, params = null, apiUrl = baseUrl) => {
+export const fetchQuery = async (path, params = null, headers) => {
   try {
     let url;
     if (params !== null) {
-      url = `${apiUrl}/${path}/${params}`;
+      url = `${baseUrl}/${path}/${params}`;
     } else {
-      url = `${apiUrl}/${path}`;
+      url = `${baseUrl}/${path}`;
     }
 
-    const response = await fetch(`${url}`);
+    const response = await fetch(`${url}`, headers);
     const data = await response.json();
     return data;
     // return "";
