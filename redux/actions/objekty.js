@@ -23,6 +23,7 @@ import { v4 } from "uuid";
 import { handleImageUpload } from "../../helpers/images";
 // import { setToast } from "./alerts";
 import { searchParamsToQueryString } from "../../helpers/helpers";
+import { fetchAllPrevioHotels, fetchQuery } from "../../helpers/fetch";
 
 // GET: Fetch all objects
 export const getObjekty = () => async (dispatch) => {
@@ -31,11 +32,13 @@ export const getObjekty = () => async (dispatch) => {
       `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos-minified?_sort=druh_zapisu_value:DESC,createdAt:DESC`
     );
 
+    const previoFetch = await fetchAllPrevioHotels(2);
+
     console.log(res.data);
 
     dispatch({
       type: GET_OBJEKTY,
-      payload: res.data,
+      payload: { ...res.data, ...previoFetch.data },
     });
   } catch (err) {
     dispatch({

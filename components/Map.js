@@ -102,7 +102,7 @@ const Map = () => {
   return (
     <section className="map-component bg-white">
       <Row className="row">
-        <Col md={6} className="d-flex">
+        <Col md={5} className="d-flex">
           <div>
             <div className="heading-with-icons d-flex align-items-center">
               <FaMapMarkerAlt
@@ -158,7 +158,7 @@ const Map = () => {
             </div>
           </div>
         </Col>
-        <Col md={6} className="d-flex justify-content-center">
+        <Col md={7} className="d-flex p-0">
           {regionMap ? (
             <VectorMap
               {...czechRepubilcRegions}
@@ -188,7 +188,7 @@ const Map = () => {
         </Col>
       </Row>
       <Row className="align-items-center m-0 ml-3 map-filters row">
-        <Col md={2} className="col">
+        <Col md={2} className="col p-0">
           <CustomSelect
             placeholder="Kraj"
             options={beautifiedKraj}
@@ -196,10 +196,10 @@ const Map = () => {
             value={clicked}
           />
         </Col>
-        <Col md={2} className="col">
+        <Col md={2} className="col p-0">
           <CustomSelect placeholder="Město" color={color} />
         </Col>
-        <Col md={2} className="col">
+        <Col md={2} className="col p-0">
           <CustomSelect
             placeholder="Oblast"
             options={beautifiedRegion}
@@ -209,17 +209,14 @@ const Map = () => {
         <Col md={1} className="col">
           <div className="hide-mobile">
             <button
-              className={`btn bg-${color} text-white`}
+              className={`btn bg-${color} text-white m-0`}
               onClick={submitLocation}
             >
               <FaSearch />
             </button>
           </div>
           <div className="hide-desktop">
-            <div className="d-flex justify-content-between">
-              <button className={`btn ghost text-${color} p-0`}>
-                upřesnit požadavky
-              </button>
+            <div className="d-flex justify-content-end">
               <button
                 className={`btn bg-${color} text-white`}
                 onClick={submitLocation}
@@ -230,26 +227,18 @@ const Map = () => {
           </div>
         </Col>
         {/*<Col>*/}
-        <div className="hide-mobile">
-          <>
-            <Col className="d-flex justify-content-between align-items-center pl-0 hide-mobile">
-              <a
-                href="mailto:kontakt@cestujsdetmi.cz"
-                className={`text-${color} font-weight-600`}
-              >
-                upřesnit požadavky
-              </a>
-            </Col>
-            <Col>
+        <Col className="p-0">
+          <div className="hide-mobile w-100">
+            <div className="d-flex justify-content-end ">
               <button
                 className={`text-${color} btn bg-white p-0`}
                 onClick={() => setRegionMap((prevState) => !prevState)}
               >
                 přepnout mapu
               </button>
-            </Col>
-          </>
-        </div>
+            </div>
+          </div>
+        </Col>
       </Row>
     </section>
   );

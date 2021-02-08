@@ -14,7 +14,7 @@ import { fetchQuery } from "../../../helpers/fetch";
 import RadyTipyLayout from "../../../layouts/siteLayouts/RadyTipyLayout";
 import Head from "next/head";
 import { useSession } from "next-auth/client";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 export async function getStaticPaths() {
   const fetchParams = {
@@ -94,30 +94,30 @@ const RadyTipyDetail = ({
                 </span>
               </div>
             </div>
-            {user && (
+            {user ? (
               <div>
                 {post.verejni_uzivatele.find(
                   (publicUser) => publicUser.email === user?.email
-                ) ? (
+                ) && (
                   <button
                     className={`btn ghost text-${color} d-flex align-items-center`}
                     onClick={() =>
                       removeFromFavorite({ localId: post._id, user })
                     }
                   >
-                    <AiOutlineHeart className="btn-icon text-black" />
+                    <AiFillHeart className="btn-icon text-red" />
                     Odebrat z oblíbených
-                  </button>
-                ) : (
-                  <button
-                    className={`btn ghost text-${color} d-flex align-items-center`}
-                    onClick={() => addToFavorite({ localId: post.id, user })}
-                  >
-                    <AiOutlineHeart className="btn-icon text-black" />
-                    Přidat do oblíbených
                   </button>
                 )}
               </div>
+            ) : (
+              <button
+                className={`btn ghost text-${color} d-flex align-items-center`}
+                onClick={() => addToFavorite({ localId: post.id, user })}
+              >
+                <AiOutlineHeart className="btn-icon text-red" />
+                Do oblíbených
+              </button>
             )}
           </div>
         </SectionHeading>

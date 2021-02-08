@@ -87,7 +87,7 @@ const HomePageSections = ({ data, loading, topic }) => {
       </Row>
       {data ? (
         <div className="section-content border-grey">
-          <Row className="justify-content-arround pt-1 m-0">
+          <Row className="justify-content-arround pt-1-15 m-0">
             <Col lg={6}>
               {data &&
                 data.length > 0 &&

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { HiHome, HiOutlineChevronRight, HiOutlineMail } from "react-icons/hi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiPhone, BiWifi } from "react-icons/bi";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FaDog, FaGlobeAmericas, FaHeart, FaSearchPlus } from "react-icons/fa";
@@ -319,29 +319,26 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                   <div>
                     {objekt.verejni_uzivatele.find(
                       (publicUser) => publicUser.email === user?.email
-                    ) ? (
+                    ) && (
                       <button
                         className={`btn ghost text-${color} d-flex align-items-center`}
                         onClick={() =>
                           removeFromFavorite({ localId: objekt._id, user })
                         }
                       >
-                        <AiOutlineHeart className="btn-icon text-black" />
+                        <AiFillHeart className="btn-icon text-red" />
                         Odebrat z oblíbených
-                      </button>
-                    ) : (
-                      <button
-                        className={`btn ghost text-${color} d-flex align-items-center`}
-                        onClick={() =>
-                          addToFavorite({ localId: objekt.id, user })
-                        }
-                      >
-                        <AiOutlineHeart className="btn-icon text-black" />
-                        Přidat do oblíbených
                       </button>
                     )}
                   </div>
                 )}
+                <button
+                  className={`btn ghost text-${color} d-flex align-items-center p-0`}
+                  onClick={() => addToFavorite({ localId: objekt.id, user })}
+                >
+                  <AiOutlineHeart className="btn-icon text-red" />
+                  Do oblíbených
+                </button>
               </div>
               <div className="hide-mobile">
                 <section className="objekt-detail-images mb-1">
@@ -477,7 +474,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
 
             {objekt?.podrobny_popis && (
               <Section>
-                <SectionHeading>
+                <SectionHeading background="white">
                   <h2>Podrobný popis</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -489,7 +486,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
               ""
             ) : (
               <Section>
-                <SectionHeading>
+                <SectionHeading background="white">
                   <div className="d-flex justify-content-between align-items-center">
                     <h2>Vybavení</h2>
                     {!noEquipemnt && (
@@ -531,7 +528,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
             )}
             {objekt.zajimavosti && (
               <Section>
-                <SectionHeading>
+                <SectionHeading background="white">
                   <h2>Zajímavosti v okolí</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -545,7 +542,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
             )}
             {objekt.dostupnost && (
               <Section>
-                <SectionHeading>
+                <SectionHeading background="white">
                   <h2>Dostupnost</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -583,7 +580,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
             <Row className="row">
               <Col className="col">
                 <Section className="objekt-detail-contacts">
-                  <SectionHeading>
+                  <SectionHeading background="white">
                     <h2>Kontakt</h2>
                   </SectionHeading>
                   <SectionContent>
@@ -631,7 +628,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
               {objekt.provozni_doba && objekt.provozni_doba.length > 0 && (
                 <Col md={4}>
                   <Section>
-                    <SectionHeading>
+                    <SectionHeading background="white">
                       <h2>Provozní doba</h2>
                     </SectionHeading>
                     <SectionContent>
@@ -648,7 +645,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
               )}
             </Row>
             <Section>
-              <SectionHeading>
+              <SectionHeading background="white">
                 <h2>Mapa</h2>
               </SectionHeading>
               <ReactMapGL
@@ -671,7 +668,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
               </ReactMapGL>
             </Section>
             <Section>
-              <SectionHeading>
+              <SectionHeading background="white">
                 <h2>Recenze</h2>
               </SectionHeading>
               <SectionContent>
@@ -731,7 +728,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
             </Section>
             {related && related.length > 0 && (
               <Section>
-                <SectionHeading>
+                <SectionHeading background="white">
                   <h2>Další tipy na ubytování v této oblasti</h2>
                 </SectionHeading>
                 <SectionContent>

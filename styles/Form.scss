@@ -194,11 +194,11 @@ textarea.inputText {
 .custom-options {
   position: absolute;
   display: block;
-  top: 100%;
-  left: 0;
-  right: 0;
-  border: 2px solid $grey;
-  border-top: 0;
+  top: 120%;
+  left: -2px;
+  right: -2px;
+  border: 2px solid $highlight-grey;
+  //border-top: 0;
   background: #fff;
   transition: all 0.5s;
   opacity: 0;
@@ -206,9 +206,13 @@ textarea.inputText {
   pointer-events: none;
   z-index: 2;
   margin-bottom: 2em;
+  border-radius: $border-radius;
   max-height: 400px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
+
+
 .custom-select.open .custom-options {
   opacity: 1;
   visibility: visible;
@@ -223,12 +227,12 @@ textarea.inputText {
   color: #3b3b3b;
   line-height: 42px;
   cursor: pointer;
-  transition: all 0.5s;
+  //transition: all 0.5s;
 }
 .custom-option:hover {
   cursor: pointer;
-  background-color: $blue;
-  color: #ffffff;
+  background-color: $highlight-grey;
+  //color: #ffffff;
 }
 .custom-option.selected {
   color: #ffffff;

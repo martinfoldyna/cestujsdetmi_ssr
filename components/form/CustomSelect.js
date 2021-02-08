@@ -79,20 +79,25 @@ const CustomSelect = ({
             className="custom-select__trigger "
             onClick={() => setSelectState((prevState) => !prevState)}
           >
-            <input
-              className={"search-input text-black"}
-              onChange={(e) => inputOnChange(e.target.value)}
-              placeholder={
-                selectedOption && selectedOption.value && selectedOption.key
-                  ? selectedOption.value
-                  : `${placeholder ? placeholder : "Vyberte možnost"}`
-              }
-              value={
-                selectedOption && selectedOption.value && selectedOption.key
-                  ? selectedOption.value
-                  : inputValue
-              }
-            />
+            {/*<input*/}
+            {/*  className={"search-input text-black"}*/}
+            {/*  onChange={(e) => inputOnChange(e.target.value)}*/}
+            {/*  placeholder={*/}
+            {/*    selectedOption && selectedOption.value && selectedOption.key*/}
+            {/*      ? selectedOption.value*/}
+            {/*      : `${placeholder ? placeholder : "Vyberte možnost"}`*/}
+            {/*  }*/}
+            {/*  value={*/}
+            {/*    selectedOption && selectedOption.value && selectedOption.key*/}
+            {/*      ? selectedOption.value*/}
+            {/*      : inputValue*/}
+            {/*  }*/}
+            {/*/>*/}
+            <span>
+              {selectedOption && selectedOption.value && selectedOption.key
+                ? selectedOption.value
+                : `${placeholder ? placeholder : "Vyberte možnost"}`}
+            </span>
 
             <div className="arrow">
               <BsFillTriangleFill className={"text-" + color} />

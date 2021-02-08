@@ -262,7 +262,16 @@ export default {
         value: "aktaulity",
       },
       ubytovani: {
-        key: "",
+        key: "ubytovani",
+        value: "ubytování",
+      },
+      vylety: {
+        key: "vylety",
+        value: "výlety a zábava",
+      },
+      radyTipy: {
+        key: "rady-a-tipy",
+        value: "rady a tipy",
       },
     },
   },

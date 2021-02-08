@@ -6,12 +6,13 @@ import Link from "next/link";
 import LoadingSkeleton from "./LoadingSkeleton";
 import HomePageObjekt from "./HomePageObjekt";
 import MyLink from "./MyLink";
+import PrevioObjekt from "../components/cards/PrevioObjekt";
 
-const Highlighted = ({ data }) => {
+const Highlighted = ({ data, previo }) => {
   return (
-    <div className="section highlighted bg-grey">
+    <div className="section highlighted">
       <Row className="justify-content-arround m-0">
-        <Col lg={6} className="bg-grey">
+        <Col lg={6}>
           <div className="heading-with-icons d-flex align-items-center">
             <HiHome
               className="text-white icon-heading bg-blue"
@@ -19,7 +20,7 @@ const Highlighted = ({ data }) => {
             />
             <h2>Naše tipy na ubytování</h2>
           </div>
-          {data ? (
+          {data && previo ? (
             <div className="section-content">
               {data &&
                 data.length > 0 &&
@@ -30,6 +31,9 @@ const Highlighted = ({ data }) => {
                     );
                   }
                 })}
+              {previo.map((objekt) => (
+                <PrevioObjekt objekt={objekt} />
+              ))}
               <div className="text-align-right">
                 <button className="btn btn-small-logo btn-homepage-detail bg-blue text-white">
                   <MyLink

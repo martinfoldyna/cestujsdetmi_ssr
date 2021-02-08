@@ -11,7 +11,7 @@ import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import Image from "next/image";
 import { FaDog, FaGlobeAmericas, FaSearchPlus } from "react-icons/fa";
 import Lightbox from "./lightbox/Lightbox";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import parse from "html-react-parser";
 import { BiPhone, BiWifi } from "react-icons/bi";
 import { RiCupLine, RiParkingBoxLine } from "react-icons/ri";
@@ -331,7 +331,7 @@ const PrevioObjektDetail = ({ objekt, color = "blue", user }) => {
                         className="btn ghost text-blue d-flex align-items-center"
                         onClick={() => removeFromFavorite(objekt.id, user)}
                       >
-                        <AiOutlineHeart className="btn-icon text-black" />
+                        <AiFillHeart className="btn-icon text-red" />
                         Odebrat z oblíbených
                       </button>
                     ) : (
@@ -344,8 +344,8 @@ const PrevioObjektDetail = ({ objekt, color = "blue", user }) => {
                           })
                         }
                       >
-                        <AiOutlineHeart className="btn-icon text-black" />
-                        Přidat do oblíbených
+                        <AiOutlineHeart className="btn-icon text-red" />
+                        Do oblíbených
                       </button>
                     )}
                   </div>

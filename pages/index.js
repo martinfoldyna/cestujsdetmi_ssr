@@ -15,20 +15,21 @@ import LastMinute from "../components/LastMinute";
 import NewPublished from "../components/NewPublished";
 import { wrapper } from "../redux/store";
 import { bindActionCreators } from "redux";
-import { fetchQuery } from "../helpers/fetch";
+import { fetchAllPrevioHotels, fetchQuery } from "../helpers/fetch";
 import enums from "../enums";
 import { GlobalContext } from "../context/GlobalContext";
 
-const Home = ({ objekty, radyTipy, newPublished }) => {
-  const fetchData = () => {
-    if (!objekty) {
-      getObjekty();
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+const Home = ({ objekty, previo, radyTipy, newPublished }) => {
+  // const fetchData = () => {
+  //   if (!objekty) {
+  //     console.log(objekty);
+  //     getObjekty();
+  //   }
+  // };
+  //
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div>
@@ -55,7 +56,7 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
         <Map />
 
         <div className="homepage">
-          <Highlighted data={objekty} />
+          <Highlighted data={objekty} previo={previo} />
           <HomePageSections topic="aktuality" heading="Index" data={objekty} />
           <HomeRadyTipy posts={radyTipy} />
           <LastMinute />
@@ -67,22 +68,19 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
   );
 };
 
-Home.propTypes = {
-  objekty: PropTypes.object.isRequired,
-  radyTipy: PropTypes.object,
-};
-
 export default Home;
 
 export async function getStaticProps() {
-  const [objekty, radyTipy, newPublished] = await Promise.all([
+  const [objekty, previoHotels, radyTipy, newPublished] = await Promise.all([
     fetchQuery(enums.URLS.objektInfoMini),
+    fetchAllPrevioHotels(2),
     fetchQuery(enums.URLS.radyTipy),
     fetchQuery(enums.URLS.newPublished),
   ]);
   return {
     props: {
-      objekty,
+      objekty: objekty,
+      previo: previoHotels.data,
       radyTipy,
       newPublished,
     },

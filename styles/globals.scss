@@ -67,10 +67,34 @@ a {
 }
 
 /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
+.custom-optionsinput::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* width */
+.custom-options::-webkit-scrollbar {
+  width: 8px;
+  border-radius: $border-radius;
+}
+
+/* Track */
+.custom-options::-webkit-scrollbar-track {
+  //border: 1px solid $highlight-grey;
+  //border-radius: $border-radius;
+
+}
+
+/* Handle */
+.custom-options::-webkit-scrollbar-thumb {
+  background: $highlight-grey;
+  border-radius: $border-radius;
+}
+
+/* Handle on hover */
+.custom-options::-webkit-scrollbar-thumb:hover {
+  background: $highlight-grey;
 }
 
 /* Firefox */
@@ -194,7 +218,7 @@ input[type=number] {
   background-repeat: no-repeat;
   display: block;
   height: 35vh;
-  width: 100vw;
+  width: 100%;
   background-position: right;
   position: relative;
   z-index: 1;
@@ -333,8 +357,8 @@ input[type=number] {
 
 .map-component {
   position: relative;
-  margin: 1.5em 0;
-  padding: 1em 2em;
+  margin: 2.5em 0 1.5em;
+  padding: 1em 2em 1.5em;
   border-radius: $border-radius;
 }
 
@@ -343,8 +367,23 @@ input[type=number] {
 }
 
 .map-component .heading-with-icons{
-  margin-top: 1.2em;
   margin-bottom: .5em;
+}
+
+.map-component .col {
+  margin: 0 1em;
+}
+
+.map-component .col .custom-select-wrapper {
+  margin: 0;
+}
+
+.map-component .map {
+  margin-top: -3em;
+  margin-bottom: 3em;
+  filter: drop-shadow(0px 49px 80px rgba(0, 0, 0, 0.05)) drop-shadow(0px 31.7593px 46.8519px rgba(0, 0, 0, 0.037963)) drop-shadow(0px 18.8741px 25.4815px rgba(0, 0, 0, 0.0303704)) drop-shadow(0px 9.8px 13px rgba(0, 0, 0, 0.025)) drop-shadow(0px 3.99259px 6.51852px rgba(0, 0, 0, 0.0196296)) drop-shadow(0px 0.907407px 3.14815px rgba(0, 0, 0, 0.012037));
+  stroke-width: 2px;
+  stroke-allignement: center;
 }
 
 .map-component .map-description {
@@ -361,6 +400,8 @@ input[type=number] {
   color: #fff;
   font-weight: 600;
   font-size: $font-size;
+  filter: drop-shadow(0px 49px 80px rgba(0, 0, 0, 0.05)) drop-shadow(0px 31.7593px 46.8519px rgba(0, 0, 0, 0.037963)) drop-shadow(0px 18.8741px 25.4815px rgba(0, 0, 0, 0.0303704)) drop-shadow(0px 9.8px 13px rgba(0, 0, 0, 0.025)) drop-shadow(0px 3.99259px 6.51852px rgba(0, 0, 0, 0.0196296)) drop-shadow(0px 0.907407px 3.14815px rgba(0, 0, 0, 0.012037));
+
 }
 
 .map-component .badge-location p {
@@ -410,7 +451,7 @@ input[type=number] {
 }
 
 .map path {
-  transition: .3s opacity;
+  //transition: .3s opacity;
 }
 
 .map path:hover,
@@ -483,7 +524,7 @@ input[type=number] {
   padding: 0.5rem 0.7rem;
 }
 
-.filtered-objects .article-card:last-of-type::after {
+.filtered-objects .article-card:last-of-type::after{
   display: none;
 }
 
@@ -500,7 +541,7 @@ input[type=number] {
 //}
 
 .highlighted {
-  background-color: #F6F6F6;
+  background-color: #fff;
   border-radius: $border-radius;
 }
 
@@ -776,7 +817,7 @@ input[type=number] {
 //}
 
 .objekt-detail .highlight-card {
-  padding: 2em;
+  padding: 1.6em;
 }
 
 .highlight-card .stars {
