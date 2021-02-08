@@ -100,7 +100,7 @@ const RadyTipyDetail = ({
                   (publicUser) => publicUser.email === user?.email
                 ) && (
                   <button
-                    className={`btn ghost text-${color} d-flex align-items-center`}
+                    className={`btn ghost text-yellow d-flex align-items-center`}
                     onClick={() =>
                       removeFromFavorite({ localId: post._id, user })
                     }
@@ -112,7 +112,7 @@ const RadyTipyDetail = ({
               </div>
             ) : (
               <button
-                className={`btn ghost text-${color} d-flex align-items-center`}
+                className={`btn ghost text-yellow d-flex align-items-center`}
                 onClick={() => addToFavorite({ localId: post.id, user })}
               >
                 <AiOutlineHeart className="btn-icon text-red" />
