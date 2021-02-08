@@ -25,7 +25,7 @@ export async function getServerSideProps(ctx) {
   }
 
   const response = await fetchQuery(
-    `verejni-uzivateles?email=${session.user.email}`
+    `verejni-uzivateles?email=${session?.user.email}`
   );
   const user = response[0];
 
@@ -33,7 +33,7 @@ export async function getServerSideProps(ctx) {
     console.log("no session");
   }
 
-  return { props: { user: { ...user, ...session.user } } };
+  return { props: { user: { ...user, ...session?.user } } };
 }
 
 const UserDashboard = ({ user }) => {

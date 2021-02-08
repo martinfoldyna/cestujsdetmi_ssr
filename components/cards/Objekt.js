@@ -41,113 +41,109 @@ const Objekt = ({ objekt, background, useNextImg = true, badge }) => {
         className={`article-card d-flex ${background && `bg-${background}`}`}
         ref={parentRef}
       >
-        <Row className="w-100 m-0">
-          <Col sm={4} className="p-0">
-            <div className="img-wrapper">
-              {useNextImg ? (
-                <Image
-                  src={
-                    objekt?.galerie && objekt?.galerie.length > 0
-                      ? objekt?.galerie[0].sm
-                      : objekt?.relative_galerie &&
-                        objekt?.relative_galerie?.length > 0
-                      ? objekt?.relative_galerie[0].sm
-                      : "/img/placeholder.png"
-                  }
-                  alt={
-                    objekt?.galerie
-                      ? objekt?.galerie[0]?.alternativeText
-                      : objekt.nazev
-                  }
-                  layout="fill"
-                  objectFit="cover"
-                  className="border-radius"
-                />
-              ) : (
-                <img
-                  src={
-                    objekt?.galerie && objekt?.galerie?.length > 0
-                      ? objekt?.galerie[0].sm
-                      : "/img/placeholder.png"
-                  }
-                  alt={objekt?.galerie && objekt?.galerie[0]?.alternativeText}
-                />
-              )}
-              {/*<img src={placeholder} alt="placeholder-image" />*/}
-              {isNews && (
-                <div className="article-date-range">
-                  <p className="bg-purple">
-                    <Moment format="DD.MM.YY">{objekt.date_from}</Moment> -{" "}
-                    <Moment format="DD.MM.YY">{objekt.date_to}</Moment>
-                  </p>
-                </div>
-              )}
-              {badge && (
-                <div className="article-date-range">
-                  <p
-                    className={`bg-${translateColor(
-                      objekt.typ_objektu
-                    )} d-flex align-items-center`}
-                  >
-                    {objekt.typ_objektu === enums.TYP_OBJEKTU.ubytovani.key && (
-                      <HiHome className="icon" />
-                    )}
-                    {objekt.typ_objektu === enums.TYP_OBJEKTU.zabava.key && (
-                      <AiFillCompass className="icon" />
-                    )}
-                    {enums.TYP_OBJEKTU[objekt.typ_objektu].value.toLowerCase()}
-                  </p>
-                </div>
-              )}
+        {/*<Row className="w-100 m-0">*/}
+        {/*  <Col sm={4} className="p-0">*/}
+        <div className="img-wrapper mr-0">
+          {useNextImg ? (
+            <Image
+              src={
+                objekt?.galerie && objekt?.galerie.length > 0
+                  ? objekt?.galerie[0].sm
+                  : objekt?.relative_galerie &&
+                    objekt?.relative_galerie?.length > 0
+                  ? objekt?.relative_galerie[0].sm
+                  : "/img/placeholder.png"
+              }
+              alt={
+                objekt?.galerie
+                  ? objekt?.galerie[0]?.alternativeText
+                  : objekt.nazev
+              }
+              layout="fill"
+              objectFit="cover"
+              className="border-radius"
+            />
+          ) : (
+            <img
+              src={
+                objekt?.galerie && objekt?.galerie?.length > 0
+                  ? objekt?.galerie[0].sm
+                  : "/img/placeholder.png"
+              }
+              alt={objekt?.galerie && objekt?.galerie[0]?.alternativeText}
+            />
+          )}
+          {/*<img src={placeholder} alt="placeholder-image" />*/}
+          {isNews && (
+            <div className="article-date-range">
+              <p className="bg-purple">
+                <Moment format="DD.MM.YY">{objekt.date_from}</Moment> -{" "}
+                <Moment format="DD.MM.YY">{objekt.date_to}</Moment>
+              </p>
             </div>
-          </Col>
-          <Col sm={8}>
-            <div className="content-wrapper">
-              <h3
-                className="article-heading"
-                // className={
-                //   color
-                //     ? `text-${color}`
-                //     : `text-${translateColor(objekt.kategorie)}`
-                // }
+          )}
+          {badge && (
+            <div className="article-date-range">
+              <p
+                className={`bg-${translateColor(
+                  objekt.typ_objektu
+                )} d-flex align-items-center`}
               >
-                {objekt?.nazev ? objekt?.nazev : "Nadpis"}
-              </h3>
-
-              {objekt?.adresa_ulice &&
-                objekt?.adresa_mesto &&
-                objekt?.adresa_psc &&
-                objekt?.adresa_kraj &&
-                objekt?.adresa_oblast && (
-                  <div className="d-flex article-location">
-                    <IoMdPin className="text-blue" />
-                    {objekt.adresa_mesto},{" "}
-                    {enums.KRAJ[objekt.adresa_kraj.replace("-", "_")].value}{" "}
-                    kraj
-                  </div>
+                {objekt.typ_objektu === enums.TYP_OBJEKTU.ubytovani.key && (
+                  <HiHome className="icon" />
                 )}
-              <div className="article-description">
-                {objekt.perex ? (
-                  parse(trimString(objekt.perex, 40))
-                ) : objekt?.zakladni_popis || objekt?.text ? (
-                  <p>
-                    {parse(
-                      trimString(objekt?.zakladni_popis || objekt?.text, 40)
-                    )}
-                    ...
-                  </p>
-                ) : (
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Atque fuga quod repellendus repudiandae. Esse iste nihil
-                    nostrum placeat quas, rem ut!
-                  </p>
+                {objekt.typ_objektu === enums.TYP_OBJEKTU.zabava.key && (
+                  <AiFillCompass className="icon" />
                 )}
-                <br />
-              </div>
+                {enums.TYP_OBJEKTU[objekt.typ_objektu].value.toLowerCase()}
+              </p>
             </div>
-          </Col>
-        </Row>
+          )}
+        </div>
+        {/*</Col>*/}
+        {/*<Col sm={8}>*/}
+        <div className="content-wrapper">
+          <h3
+            className="article-heading"
+            // className={
+            //   color
+            //     ? `text-${color}`
+            //     : `text-${translateColor(objekt.kategorie)}`
+            // }
+          >
+            {objekt?.nazev ? objekt?.nazev : "Nadpis"}
+          </h3>
+
+          {objekt?.adresa_ulice &&
+            objekt?.adresa_mesto &&
+            objekt?.adresa_psc &&
+            objekt?.adresa_kraj &&
+            objekt?.adresa_oblast && (
+              <div className="d-flex article-location align-items-center">
+                <IoMdPin className="text-blue" />
+                {objekt.adresa_mesto},{" "}
+                {enums.KRAJ[objekt.adresa_kraj.replace("-", "_")].value} kraj
+              </div>
+            )}
+          <div className="article-description">
+            {objekt.perex ? (
+              parse(trimString(objekt.perex, 40))
+            ) : objekt?.zakladni_popis || objekt?.text ? (
+              <p>
+                {parse(trimString(objekt?.zakladni_popis || objekt?.text, 40))}
+                ...
+              </p>
+            ) : (
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
+                fuga quod repellendus repudiandae. Esse iste nihil nostrum
+                placeat quas, rem ut!
+              </p>
+            )}
+          </div>
+        </div>
+        {/*  </Col>*/}
+        {/*</Row>*/}
       </div>
     </Link>
   );

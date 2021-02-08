@@ -52,7 +52,7 @@ const RadyTipyDetail = ({
   const { hodnota } = router.query;
 
   const [session] = useSession();
-  const { user } = session;
+  const user = session?.user;
 
   const loadAdvice = () => {
     getAdvice(hodnota);

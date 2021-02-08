@@ -469,9 +469,6 @@ input[type=number] {
   margin-top: 0;
 }
 
-.section .heading-with-icons h2 {
-  margin-bottom: 0.5em;
-}
 .section .section-content .content-wrapper:first-child {margin-top: 0}
 
 .section.highlighted .section-content {
@@ -480,6 +477,10 @@ input[type=number] {
 
 .main-header button {
   color: $heading-black;
+}
+
+.filtered-objects {
+  padding: 0.5rem 0.7rem;
 }
 
 .section-content .row {

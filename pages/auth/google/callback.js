@@ -7,7 +7,7 @@ const GoogleCallback = () => {
   const [session, loading] = useSession();
 
   const createNewUser = async () => {
-    const response = await createUser(session.user);
+    const response = await createUser(session?.user);
     if (response) {
       Router.push("/user");
     }
@@ -29,7 +29,7 @@ const GoogleCallback = () => {
       ) : (
         <>
           <h1>Welcome</h1>
-          Hello {session.user.email}, it's nice to see you again!
+          Hello {session?.user.email}, it's nice to see you again!
           <button onClick={signOut}>Sign out</button>
         </>
       )}

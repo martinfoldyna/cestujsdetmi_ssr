@@ -6,7 +6,7 @@
   border-radius: $border-radius;
   transition: .5s all;
   position: relative;
-  min-height: 15vh;
+  //min-height: 15vh;
   align-items: stretch;
   display: flex;
 }
@@ -17,7 +17,8 @@
   right: 1em;
   bottom: 0;
   background-color: $grey;
-  height: 1px;
+  height: 2px;
+  border-radius: $border-radius;
   content: "";
 }
 
@@ -38,6 +39,8 @@
 
 .homepage .article-homepage-card {
   padding: 0;
+  margin-bottom: 40px;
+
 }
 
 .homepage .section-content {
@@ -61,7 +64,7 @@
 }
 
 .article-card .article-heading {
-  margin: 0 0 .5em;
+  margin: 0 0 .4em;
   text-decoration: underline;
   font-size: 19px;
   transition: .2s all;
@@ -71,10 +74,21 @@
 
 .article-card .article-description {
   margin: 0 .5em 0 0;
+  color: $text-black;
 }
 
 .article-card .article-description p {
   margin-bottom: 0;
+  margin-top: .4em;
+  padding-right: .5em;
+}
+
+.homepage .article-card .article-description p {
+  padding-right: 0;
+}
+
+.homepage .article-card::after{
+  bottom: -20px;
 }
 
 .article-card .article-news-date {
@@ -97,19 +111,24 @@
 
 .article-card .img-wrapper {
   border-radius: $border-radius;
-  height: 100%;
+  height: 9.3rem;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  flex-basis: 30%;
+  //flex-basis: 30%;
   margin-right: 1em;
-  width: 100%;
+  width: 14rem;
   transition: .2s all;
   position: relative;
 }
 
+.homepage .article-card .img-wrapper {
+  width: 14rem;
+  //height: 9rem;
+}
+
 .homepage .article-homepage-card .article-heading {
-  margin: 0;
+  margin: 0 0 9px;
   text-align: left;
 }
 
@@ -122,7 +141,7 @@
 
 .article-homepage-card .img-wrapper {
   margin-right: 0;
-  flex-basis: 40%;
+  //flex-basis: 40%;
 }
 
 .article-homepage-card .content-wrapper {
@@ -133,7 +152,7 @@
 .article-card .content-wrapper {
   flex-basis: 70%;
   height: 100%;
-  margin-left: 1em;
+  margin-left: 1.6rem;
 }
 
 .aktuality-card {
