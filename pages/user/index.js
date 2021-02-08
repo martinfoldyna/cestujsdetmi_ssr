@@ -97,33 +97,18 @@ const UserDashboard = ({ user }) => {
               <div className="categories">
                 <p className="filter-name pl-0">Navigace:</p>
                 <ul className="pl-0 list-style-none categories-list">
-                  <li className="category-item">
-                    <Link href="/rady-a-tipy/">Všechny rady a tipy</Link>
-                  </li>
-                  {/*<li className="category-item">*/}
-                  {/*  <Link*/}
-                  {/*    href={`${router.pathname}/${enums.RADY_TIPY.KATEGORIE.cestujsdetmi_doporucuje.key}`}*/}
-                  {/*  >*/}
-                  {/*    Cestujsdetmi.cz doporučuje*/}
-                  {/*  </Link>*/}
-                  {/*</li>*/}
-                  {/*<li className="category-item"><Link href={`${router.pathname}/${enums.RADY_TIPY.KATEGORIE.}`}>Sportování s dětmi</Link></li>*/}
-                  {/*<li className="category-item">Děti a zdraví</li>*/}
-                  {/*<li className="category-item">Zábava a dovolená s dětmi</li>*/}
-                  {objectToArray(enums.RADY_TIPY.KATEGORIE).map(
-                    (categoryItem) => (
-                      <li className="category-item" key={categoryItem.key}>
-                        <Link
-                          href={{
-                            pathname: "/rady-a-tipy/[kategorie]",
-                            query: { kategorie: categoryItem.key },
-                          }}
-                        >
-                          {categoryItem.value}
-                        </Link>
-                      </li>
-                    )
-                  )}
+                  {objectToArray(enums.KATEGORIE.USER).map((categoryItem) => (
+                    <li className="category-item" key={categoryItem.key}>
+                      <Link
+                        href={{
+                          pathname: "/user",
+                          query: { kategorie: categoryItem.key },
+                        }}
+                      >
+                        {categoryItem.value}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

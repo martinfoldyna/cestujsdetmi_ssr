@@ -24,75 +24,73 @@ const PrevioObjekt = ({ objekt, background, badge = false }) => {
       <div
         className={`article-card d-flex ${background && `bg-${background}`}`}
       >
-        <Row className="w-100 m-0">
-          <Col sm={4} className="p-0">
-            <div className="img-wrapper">
-              <Image
-                src={
-                  objekt?.photogallery?.length > 0
-                    ? objekt.photogallery[0].url
-                    : "/img/placeholder.png"
-                }
-                alt={
-                  objekt?.photogallery?.length > 0 &&
-                  objekt?.photogallery[0].label?.length > 0
-                    ? objekt?.photogallery[0]?.label
-                    : objekt.name
-                }
-                layout="fill"
-                objectFit="cover"
-                className="border-radius"
-              />
-              {!badge ? (
-                <div className="article-date-range">
-                  <p className="bg-blue d-flex align-items-center">
-                    <AiFillDollarCircle className="icon" /> Hotel s přímou
-                    rezervací
-                  </p>
-                </div>
-              ) : (
-                <div className="article-date-range">
-                  <p className="bg-blue d-flex align-items-center">
-                    <HiHome className="icon" /> ubytování
-                  </p>
-                </div>
-              )}
+        {/*<Row className="w-100 m-0">*/}
+        {/*  <Col sm={4} className="p-0">*/}
+        <div className="img-wrapper mr-0">
+          <Image
+            src={
+              objekt?.photogallery?.length > 0
+                ? objekt.photogallery[0].url
+                : "/img/placeholder.png"
+            }
+            alt={
+              objekt?.photogallery?.length > 0 &&
+              objekt?.photogallery[0].label?.length > 0
+                ? objekt?.photogallery[0]?.label
+                : objekt.name
+            }
+            layout="fill"
+            objectFit="cover"
+            className="border-radius"
+          />
+          {!badge ? (
+            <div className="article-date-range">
+              <p className="bg-blue d-flex align-items-center">
+                <AiFillDollarCircle className="icon" /> Hotel s přímou rezervací
+              </p>
             </div>
-          </Col>
-          <Col sm={8}>
-            <div className="content-wrapper">
-              <h3 className="article-heading">{objekt?.name}</h3>
+          ) : (
+            <div className="article-date-range">
+              <p className="bg-blue d-flex align-items-center">
+                <HiHome className="icon" /> ubytování
+              </p>
+            </div>
+          )}
+        </div>
+        {/*</Col>*/}
+        {/*<Col sm={8}>*/}
+        <div className="content-wrapper">
+          <h3 className="article-heading">{objekt?.name}</h3>
 
-              {objekt?.address &&
-                objekt?.address.name &&
-                objekt?.address.street &&
-                objekt?.address.city && (
-                  <div className="d-flex article-location">
-                    <IoMdPin className="text-blue" />
-                    {objekt.address.name}, {objekt.address.street},{" "}
-                    {objekt.address.city}
-                  </div>
-                )}
-              <div className="article-description">
-                {objekt.shortDescription ? (
-                  parse(trimString(objekt.shortDescription, 40))
-                ) : objekt.descriptions &&
-                  objekt.descriptions?.shortDescription ? (
-                  parse(trimString(objekt.descriptions?.shortDescription, 40))
-                ) : objekt.descriptions?.longDescription ? (
-                  parse(trimString(objekt.descriptions?.longDescription, 40))
-                ) : (
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Atque fuga quod repellendus repudiandae. Esse iste nihil
-                    nostrum placeat quas, rem ut!
-                  </p>
-                )}
-                <br />
+          {objekt?.address &&
+            objekt?.address.name &&
+            objekt?.address.street &&
+            objekt?.address.city && (
+              <div className="d-flex article-location">
+                <IoMdPin className="text-blue" />
+                {objekt.address.name}, {objekt.address.street},{" "}
+                {objekt.address.city}
               </div>
-            </div>
-          </Col>
-        </Row>
+            )}
+          <div className="article-description">
+            {objekt.shortDescription ? (
+              parse(trimString(objekt.shortDescription, 35))
+            ) : objekt.descriptions && objekt.descriptions?.shortDescription ? (
+              parse(trimString(objekt.descriptions?.shortDescription, 35))
+            ) : objekt.descriptions?.longDescription ? (
+              parse(trimString(objekt.descriptions?.longDescription, 35))
+            ) : (
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
+                fuga quod repellendus repudiandae. Esse iste nihil nostrum
+                placeat quas, rem ut!
+              </p>
+            )}
+            <br />
+          </div>
+        </div>
+        {/*  </Col>*/}
+        {/*</Row>*/}
       </div>
     </Link>
   );

@@ -56,11 +56,7 @@ const Home = ({ objekty, radyTipy, newPublished }) => {
 
         <div className="homepage">
           <Highlighted data={objekty} />
-          <HomePageSections
-            topic="aktuality"
-            heading="Aktuality"
-            data={objekty}
-          />
+          <HomePageSections topic="aktuality" heading="Index" data={objekty} />
           <HomeRadyTipy posts={radyTipy} />
           <LastMinute />
           <HomePageSections topic="nejctenejsi" data={objekty} />

@@ -35,7 +35,7 @@ export async function getStaticProps({ params }) {
 
   console.log(data);
 
-  return { props: { news: response.sucess ? data : {} } };
+  return { props: { news: response.sucess ? data : data } };
 }
 
 const AktualityDetail = ({ news }) => {
@@ -84,7 +84,7 @@ const AktualityDetail = ({ news }) => {
     <Fragment>
       <Head>
         <title>{news.name} | Cestuj s dětmi.cz</title>
-        <meta name="description" content={trimString(news.annotation, 20)} />
+        <meta name="description" content={news.annotation} />
         <meta name="robots" content="index, follow" />
       </Head>
       <Section className="mt-0 post-detail">
@@ -122,10 +122,12 @@ const AktualityDetail = ({ news }) => {
           </div>
         </SectionContent>
       </Section>
-      <Section>
-        <SectionHeading>Mapa</SectionHeading>
-        <SectionContent>{renderMap()}</SectionContent>
-      </Section>
+      {news.gps && news.gps.latitude && news.gps.longitude && (
+        <Section>
+          <SectionHeading>Mapa</SectionHeading>
+          <SectionContent>{renderMap()}</SectionContent>
+        </Section>
+      )}
     </Fragment>
   ) : (
     "Loading"

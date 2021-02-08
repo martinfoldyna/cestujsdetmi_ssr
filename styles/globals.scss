@@ -483,6 +483,10 @@ input[type=number] {
   padding: 0.5rem 0.7rem;
 }
 
+.filtered-objects .article-card:last-of-type::after {
+  display: none;
+}
+
 .section-content .row {
   padding-top: 2em;
 }

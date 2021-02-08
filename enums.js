@@ -256,6 +256,15 @@ export default {
         value: "Venkovní",
       },
     },
+    USER: {
+      aktuality: {
+        key: "aktuality",
+        value: "aktaulity",
+      },
+      ubytovani: {
+        key: "",
+      },
+    },
   },
 
   RADY_TIPY: {

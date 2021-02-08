@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { Col, Container, Row } from "react-grid-system";
 import Link from "next/link";
-import enums from "../enums";
-import { getObjektyByParams, countObjekty } from "../redux/actions/objekty";
-import HeadingWithIcon from "../layouts/HeadingWithIcon";
+import enums from "../../enums";
+import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { HiNewspaper } from "react-icons/hi";
-import Objekt from "../components/cards/Objekt";
-import SideBar from "../layouts/Sidebar";
-import { fetchQuery, fetcLoaclApi } from "../helpers/fetch";
+import SideBar from "../../layouts/Sidebar";
+import { fetchQuery } from "../../helpers/fetch";
 import Head from "next/head";
-import { searchParamsToQueryString } from "../helpers/helpers";
-import VerticalPost from "../layouts/VerticalPost";
-import News from "../layouts/News";
+import News from "../../layouts/News";
 
 export async function getStaticProps() {
   const newsArr = await fetchQuery(`rss`);
@@ -36,7 +31,7 @@ const Aktuality = ({ newsArr }) => {
   return (
     <>
       <Head>
-        <title>Aktuality - kam na víkend s dětmi | Cestuj s dětmi.cz</title>
+        <title>Index - kam na víkend s dětmi | Cestuj s dětmi.cz</title>
         <meta
           name="description"
           content="Tipy kam na víkend s dětmi. Najdeme Vám ten správný tip, kam s dětmi na víkend."
@@ -49,13 +44,9 @@ const Aktuality = ({ newsArr }) => {
       </Head>
       <Container className="main-container">
         <span className="breadcrumb">
-          <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Aktuality
+          <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Index
         </span>
-        <HeadingWithIcon
-          background="purple"
-          heading="Aktuality"
-          icon={HiNewspaper}
-        >
+        <HeadingWithIcon background="purple" heading="Index" icon={HiNewspaper}>
           <p>
             Přehled aktuálně konaných akcí pro rodiny s dětmi. Tipy kam s dětmi
             za zábavou, kulturou.
