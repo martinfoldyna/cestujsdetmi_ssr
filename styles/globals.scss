@@ -53,9 +53,13 @@ h2 {
 
 p, span {
   font-family: $font-family-open-sans;
+  color: $text-black;
 
 }
 
+body span {
+  color: inherit;
+}
 
 p {
   font-size: 16px;
@@ -186,7 +190,8 @@ input[type=number] {
   width: 100%;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
 .main-nav .nav-item {
@@ -222,6 +227,11 @@ input[type=number] {
   background-position: right;
   position: relative;
   z-index: 1;
+  padding: 5vh 0;
+}
+
+.homepage .article-card {
+  padding: 0;
 }
 
 .hero::after {
@@ -252,7 +262,7 @@ input[type=number] {
   z-index: 100;
   color: $white;
   height: 100%;
-  width: 70%;
+  width: 1190px;
 }
 
 .hero .wrapper .d-flex {
@@ -284,10 +294,21 @@ input[type=number] {
 
 .search-bar .d-flex {
   align-items: stretch !important;
+  border-radius: $border-radius;
+
+}
+
+.header-wrapper {
+  margin: .5em 0;
 }
 
 .main-header .search-bar {
   width: 25%;
+}
+
+.main-header .search-bar .d-flex {
+  border: $highlight-grey 1px solid;
+
 }
 
 .search-bar input {
@@ -297,6 +318,14 @@ input[type=number] {
   overflow: hidden;
   font-size: 12px;
   border-radius: $border-radius 0 0 $border-radius;
+}
+
+.main-header .search-bar input{
+  padding: 1em;
+}
+
+.main-header > .hide-mobile > .d-flex.justify-content-between.align-items-center {
+  margin: .5em 0;
 }
 
 .search-bar input:focus {
@@ -396,7 +425,7 @@ input[type=number] {
   right: 0;
   padding: .5em;
   border-radius: $border-radius;
-  background-color: $blue;
+  //background-color: $blue;
   color: #fff;
   font-weight: 600;
   font-size: $font-size;
@@ -414,7 +443,7 @@ input[type=number] {
   height: 10px;
   display: block;
   content: "";
-  background-color: $blue;
+  background-color: inherit;
   position: absolute;
   left: -5px;
   top: 50%;
@@ -576,6 +605,8 @@ input[type=number] {
   margin-left: 4em;
   margin-bottom: .5em;
   margin-top: .5em;
+  color: #fff;
+
 }
 
 .breadcrumb {
@@ -818,6 +849,8 @@ input[type=number] {
 
 .objekt-detail .highlight-card {
   padding: 1.6em;
+  padding-top: 1.3em;
+  border-radius: $border-radius;
 }
 
 .highlight-card .stars {

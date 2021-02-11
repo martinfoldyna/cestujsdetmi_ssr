@@ -130,8 +130,8 @@ const Map = () => {
                     setColor("blue");
                   }}
                 >
-                  <span className="hide-mobile">Ubytování a dovolená</span>
-                  <span className="hide-desktop">Dovolená</span>
+                  <div className="hide-mobile">Ubytování a dovolená</div>
+                  <div className="hide-desktop">Dovolená</div>
                 </button>
                 <button
                   className={`btn ${
@@ -174,9 +174,9 @@ const Map = () => {
           )}
           {(hovered && hovered.key && hovered.value) ||
           (clicked && clicked.value && clicked.key) ? (
-            <div className="badge-location">
+            <div className={`badge-location bg-${color}`}>
               {/* When user clicks disable hover value */}
-              <p className="m-0">
+              <p className="m-0 text-white">
                 {clicked && clicked.value && clicked.key
                   ? clicked.value
                   : hovered.value}
@@ -194,6 +194,7 @@ const Map = () => {
             options={beautifiedKraj}
             onChange={onKrajChange}
             value={clicked}
+            color={color}
           />
         </Col>
         <Col md={2} className="col p-0">
@@ -204,6 +205,7 @@ const Map = () => {
             placeholder="Oblast"
             options={beautifiedRegion}
             onChange={(e) => setOblast(e.key)}
+            color={color}
           />
         </Col>
         <Col md={1} className="col">

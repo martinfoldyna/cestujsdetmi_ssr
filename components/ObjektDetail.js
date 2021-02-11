@@ -8,7 +8,7 @@ import { BiPhone, BiWifi } from "react-icons/bi";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FaDog, FaGlobeAmericas, FaHeart, FaSearchPlus } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
-import { IoMdCheckmark } from "react-icons/io";
+import { IoMdCheckmark, IoMdPin } from "react-icons/io";
 import { RiCupLine, RiParkingBoxLine } from "react-icons/ri";
 import { connect } from "react-redux";
 import {
@@ -80,6 +80,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
       objekt.id
     );
   };
+  console.log(objekt);
 
   // const readArticle = async (data) => {
   //   if (data) {
@@ -92,8 +93,6 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
   //     }
   //   }
   // };
-
-  useEffect(() => {}, [objekt]);
 
   // dynamically renders equipment section
   const equipment = () => {
@@ -287,7 +286,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
           </Col>
 
           <Col md={9.5}>
-            <section className="highlight-card bg-grey" id="top">
+            <section className="highlight-card bg-white" id="top">
               <div className="objekt-detail-heading d-flex align-items-center justify-content-between mb-2">
                 <div>
                   <div className="d-flex align-items-center">
@@ -299,18 +298,26 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                     <div>
                       <h1 className="m-0">{objekt?.nazev}</h1>
                       <div className="rating d-flex">
-                        <div
-                          className={`text-${color} stars d-flex align-self-end`}
-                        >
-                          <BsStarFill />
-                          <BsStarFill />
-                          <BsStarFill />
-                          <BsStarFill />
-                          <BsStarHalf />
+                        {/*<div*/}
+                        {/*  className={`text-${color} stars d-flex align-self-end`}*/}
+                        {/*>*/}
+                        {/*  <BsStarFill />*/}
+                        {/*  <BsStarFill />*/}
+                        {/*  <BsStarFill />*/}
+                        {/*  <BsStarFill />*/}
+                        {/*  <BsStarHalf />*/}
+                        {/*</div>*/}
+
+                        {/*<span className="text-grey rating-counter ml-1">*/}
+                        {/*  (48 hodnocení)*/}
+                        {/*</span>*/}
+                        <div className={`d-flex align-items-center`}>
+                          <span style={{ fontSize: "12px", marginTop: ".2em" }}>
+                            <IoMdPin className={`icon text-${color}`} />
+                            {objekt.nazev}, {objekt.adresa_ulice},{" "}
+                            {objekt.adresa_mesto}, {objekt.adresa_stat}
+                          </span>
                         </div>
-                        <span className="text-grey rating-counter ml-1">
-                          (48 hodnocení)
-                        </span>
                       </div>
                     </div>
                   </div>
@@ -472,13 +479,13 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
               </Row>
             </section>
 
-            {objekt?.podrobny_popis && (
+            {objekt?.popis && (
               <Section>
                 <SectionHeading background="white">
                   <h2>Podrobný popis</h2>
                 </SectionHeading>
                 <SectionContent>
-                  <div>{parse(objekt?.podrobny_popis)}</div>
+                  <div>{parse(objekt?.popis)}</div>
                 </SectionContent>
               </Section>
             )}

@@ -49,7 +49,9 @@ const HeaderComponent = ({ user }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
   }, []);
 
   return (
@@ -65,7 +67,7 @@ const HeaderComponent = ({ user }) => {
                 alt="logo cestuj s dětmi"
               />
             </MyLink>
-            <div className="d-flex align-items-center justify-content-end">
+            <div className="d-flex align-items-center justify-content-end header-wrapper">
               <div className="search-bar">
                 <div className="d-flex align-items-center justify-content-end">
                   <input
@@ -127,14 +129,15 @@ const HeaderComponent = ({ user }) => {
                 {/*  <span>Přihlášení</span>*/}
                 {/*</button>*/}
                 {sesssion ? (
-                  <MyLink href="/user">
+                  <MyLink href="/user" className="pr-0">
                     <SmallButton
                       color="grey"
                       ghost
                       icon={FaRegUser}
                       iconColor="blue"
+                      className="pr-0"
                     >
-                      {sesssion.user.email}
+                      Uživatel
                     </SmallButton>
                   </MyLink>
                 ) : (
@@ -143,6 +146,7 @@ const HeaderComponent = ({ user }) => {
                     ghost
                     icon={FaRegUser}
                     iconColor="blue"
+                    className="pr-0"
                   >
                     Přihlášení
                   </SmallButton>

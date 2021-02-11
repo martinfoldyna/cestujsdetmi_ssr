@@ -106,7 +106,7 @@ const ObjednatObjektInfo = ({
     objekt?.zakladni_popis ? objekt.zakladni_popis : ""
   );
   const [detailedInfo, setDetailedInfo] = useState(
-    objekt?.podrobny_popis ? objekt.podrobny_popis : ""
+    objekt?.popis ? objekt.popis : ""
   );
 
   const [mainCategories, setMainCategories] = useState(null);
@@ -430,7 +430,7 @@ const ObjednatObjektInfo = ({
       hlavni_kategorie: selectedMainCategory,
       podkategorie: selectedSecondCategory,
       zakladni_popis: generalInfo,
-      podrobny_popis: detailedInfo,
+      popis: detailedInfo,
       slevy: sale,
       cenik: priceList,
       uzivatel: user.id,
@@ -964,16 +964,16 @@ const ObjednatObjektInfo = ({
                       {/*  className={`inputText ${*/}
                       {/*    errors.pordrobny_popis && "border-danger"*/}
                       {/*  }`}*/}
-                      {/*  id="podrobny_popis"*/}
-                      {/*  name="podrobny_popis"*/}
+                      {/*  id="popis"*/}
+                      {/*  name="popis"*/}
                       {/*  ref={registerUser}*/}
                       {/*  required*/}
-                      {/*  defaultValue={objekt?.podrobny_popis}*/}
+                      {/*  defaultValue={objekt?.popis}*/}
                       {/*/>*/}
                       <Editor
                         {...tinyMCEConfig}
-                        initialValue={objekt?.podrobny_popis}
-                        textareaName="podrobny_popis"
+                        initialValue={objekt?.popis}
+                        textareaName="popis"
                         onEditorChange={(value, editor) => {
                           console.log(value);
                           setDetailedInfo(value);

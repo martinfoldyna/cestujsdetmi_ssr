@@ -1,45 +1,63 @@
 import axios from "axios";
 import { fetchQuery } from "./fetch";
 import { useSession } from "next-auth/client";
+import Router from "next/router";
 
-export const addToFavorite = async ({ localId, externalObject, user }) => {
+export const addToFavorite = async ({
+  localId,
+  externalObject,
+  user,
+  radyTipyId,
+}) => {
   try {
-    console.log(user.oblibene);
-    console.log(localId);
+    if (user) {
+      console.log(user.oblibene);
+      console.log(localId);
 
-    const requestBody = {};
+      const requestBody = {};
 
-    if (localId) {
-      requestBody.oblibene = user.oblibene
-        ? user.oblibene.length !== 0
-          ? [...user.oblibene, localId]
-          : [localId]
-        : [localId];
+      if (localId) {
+        requestBody.oblibene = user.oblibene
+          ? user.oblibene.length !== 0
+            ? [...user.oblibene, localId]
+            : [localId]
+          : [localId];
+      }
+
+      if (radyTipyId) {
+        requestBody.rady_a_tipy = user.rady_a_tipy
+          ? user.rady_a_tipy.length !== 0
+            ? [...user.rady_a_tipy, radyTipyId]
+            : [radyTipyId]
+          : [radyTipyId];
+      }
+
+      if (externalObject) {
+        const { hotId, name, origin, descriptions } = externalObject;
+
+        const finalExternalObject = {
+          hotId,
+          name,
+          origin,
+          shortDescription: descriptions.shortDescription,
+        };
+        requestBody.oblibene_externi = user.oblibene_externi
+          ? user.oblibene_externi.length !== 0
+            ? [...user.oblibene_externi, finalExternalObject]
+            : [finalExternalObject]
+          : [finalExternalObject];
+      }
+
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/verejni-uzivateles/addToFavorite/${user.email}`,
+        requestBody
+      );
+
+      console.log(response);
+      return { error: null, data: response.data };
+    } else {
+      Router.push("/auth/login");
     }
-
-    if (externalObject) {
-      const { hotId, name, origin, descriptions } = externalObject;
-
-      const finalExternalObject = {
-        hotId,
-        name,
-        origin,
-        shortDescription: descriptions.shortDescription,
-      };
-      requestBody.oblibene_externi = user.oblibene_externi
-        ? user.oblibene_externi.length !== 0
-          ? [...user.oblibene_externi, finalExternalObject]
-          : [finalExternalObject]
-        : [finalExternalObject];
-    }
-
-    const response = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/verejni-uzivateles/addToFavorite/${user.email}`,
-      requestBody
-    );
-
-    console.log(response);
-    return { error: null, data: response.data };
   } catch (error) {
     console.log(error);
     return { error, data: null };
@@ -51,9 +69,15 @@ export const addToFavorite = async ({ localId, externalObject, user }) => {
  * @param {string} localId ID of cestujsdetmi's object
  * @param {object} user
  * @param {string} hotId
+ * @param {string} rady_a_tipy
  * @returns {Promise<{data: any, error: null}|{data: null, error}>} Error object if any and response data of removed object
  */
-export const removeFromFavorite = async ({ localId, user, hotId }) => {
+export const removeFromFavorite = async ({
+  localId,
+  user,
+  hotId,
+  radyTipyId,
+}) => {
   try {
     console.log("user", user);
     console.log(localId);
@@ -65,6 +89,9 @@ export const removeFromFavorite = async ({ localId, user, hotId }) => {
     }
     if (hotId) {
       requestBody.hotId = hotId;
+    }
+    if (radyTipyId) {
+      requestBody.rady_a_tipy = radyTipyId;
     }
 
     const response = await axios.put(

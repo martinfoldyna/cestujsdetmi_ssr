@@ -13,6 +13,7 @@ import { fetchPrevio, fetchQuery } from "../../helpers/fetch";
 import Objekt from "../../components/cards/Objekt";
 import PrevioObjekt from "../../components/cards/PrevioObjekt";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
+import HomePageObjekt from "../../layouts/HomePageObjekt";
 
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
@@ -105,7 +106,7 @@ const UserDashboard = ({ user }) => {
                           query: { kategorie: categoryItem.key },
                         }}
                       >
-                        {categoryItem.value}
+                        <a href="#">oblíbené {categoryItem.value}</a>
                       </Link>
                     </li>
                   ))}
@@ -131,6 +132,14 @@ const UserDashboard = ({ user }) => {
               ) : (
                 <h2>Nemáte žádné oblíbené objekty</h2>
               )}
+              {user.rady_a_tipy.map((post) => (
+                <HomePageObjekt
+                  article={post}
+                  topic="rady-a-tipy"
+                  key={post.id}
+                  number_of_words={50}
+                />
+              ))}
             </div>
             <button onClick={signOut} className="btn">
               Odhlásit se

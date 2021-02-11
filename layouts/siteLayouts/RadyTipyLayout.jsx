@@ -98,7 +98,7 @@ const RadyTipyLayout = ({ post, getAdvices, children }) => {
       <div className="data-wrapper">
         <Row>
           <Col lg={2.5} className="hide-mobile">
-            <div className="filter-card full-padding bg-light-yellow">
+            <div className="filter-card full-padding bg-white">
               <div className="categories">
                 <p className="filter-name pl-0">Navigace:</p>
                 <ul className="pl-0 list-style-none categories-list">

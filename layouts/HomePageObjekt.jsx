@@ -22,6 +22,8 @@ const HomePageObjekt = ({
 
   const isNews = () => article?.kategorie === "aktuality";
 
+  console.log(article);
+
   return article ? (
     <div className={`${topic}-home-card ${className} border-radius`}>
       <Link href={`/${topic}/detail/${article?.hodnota}`}>
@@ -39,18 +41,19 @@ const HomePageObjekt = ({
                   article?.image_filename
                     ? `https://www.cestujsdetmi.cz/${article.image_filename}`
                     : article?.galerie && article?.galerie.length > 0
-                    ? article?.galerie[0].sm
-                    : article?.obrazek
-                    ? article.obrazek.formats.small.url
+                    ? article?.galerie[0].formats.small.url
                     : article?.relative_galerie &&
                       article.relative_galerie.length > 0
-                    ? article.relative_galerie[0].sm
+                    ? `https://www.cestujsdetmi.cz/${article.relative_galerie[0].relativeUrl}`
                     : "/img/placeholder.png"
                 }
                 quality={50}
                 alt={
                   article?.galerie && article?.galerie[0]?.alternativeText
                     ? article.galerie[0].alternativeText
+                    : article.relative_galerie &&
+                      article.relative_galerie.length > 0
+                    ? article.relative_galerie[0].alternativeText
                     : article.nazev
                 }
                 className="img border-radius"

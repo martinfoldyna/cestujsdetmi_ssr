@@ -11,7 +11,14 @@ import { trimString } from "../../helpers/helpers";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { HiHome } from "react-icons/hi";
 
-const PrevioObjekt = ({ objekt, background, badge = false }) => {
+const PrevioObjekt = ({
+  objekt,
+  background,
+  badge = false,
+  word_count = 35,
+}) => {
+  console.log(objekt);
+
   return (
     <Link href={`/${enums.TYP_OBJEKTU.ubytovani.url}/previo/${objekt?.hotId}`}>
       {/* WAS: */}
@@ -74,11 +81,15 @@ const PrevioObjekt = ({ objekt, background, badge = false }) => {
             )}
           <div className="article-description">
             {objekt.shortDescription ? (
-              parse(trimString(objekt.shortDescription, 35))
+              parse(trimString(objekt.shortDescription, word_count))
             ) : objekt.descriptions && objekt.descriptions?.shortDescription ? (
-              parse(trimString(objekt.descriptions?.shortDescription, 35))
+              parse(
+                trimString(objekt.descriptions?.shortDescription, word_count)
+              )
             ) : objekt.descriptions?.longDescription ? (
-              parse(trimString(objekt.descriptions?.longDescription, 35))
+              parse(
+                trimString(objekt.descriptions?.longDescription, word_count)
+              )
             ) : (
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque

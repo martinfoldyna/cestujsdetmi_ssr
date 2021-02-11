@@ -136,7 +136,7 @@ const SideFilter = ({
         !kategorie?.some((categoryItem) => categoryItem.urceni === topic.key)
           ? "full-padding"
           : ""
-      } ${color ? `bg-light-${color}` : "bg-grey"}`}
+      } bg-white`}
     >
       <Row className="m-0">
         <Col md={6} lg={12} className="col p-0">

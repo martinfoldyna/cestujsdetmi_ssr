@@ -56,7 +56,7 @@ const AktualityDetail = ({ news }) => {
         latitude={parseFloat(news.gps.latitude)}
         longitude={parseFloat(news.gps.longitude)}
       >
-        <CityPin className={"text-" + color} />
+        <CityPin className={"text-purple"} />
       </Marker>
     );
   };

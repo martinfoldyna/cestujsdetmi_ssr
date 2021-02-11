@@ -14,7 +14,7 @@ const HeadingWithIcon = ({
       <div className={`objekty-heading bg-${background} text-${text}`}>
         {/*<DesktopBreakpoint>*/}
         <Row>
-          <Col md={9}>
+          <Col md={9} className="text-white">
             <div className="heading-with-icons d-flex align-items-center">
               <Icon
                 className="text-white icon-heading"

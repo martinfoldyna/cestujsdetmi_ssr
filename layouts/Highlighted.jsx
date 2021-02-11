@@ -32,7 +32,7 @@ const Highlighted = ({ data, previo }) => {
                   }
                 })}
               {previo.map((objekt) => (
-                <PrevioObjekt objekt={objekt} />
+                <PrevioObjekt objekt={objekt} word_count={15} />
               ))}
               <div className="text-align-right">
                 <button className="btn btn-small-logo btn-homepage-detail bg-blue text-white">

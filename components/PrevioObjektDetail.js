@@ -17,7 +17,7 @@ import { BiPhone, BiWifi } from "react-icons/bi";
 import { RiCupLine, RiParkingBoxLine } from "react-icons/ri";
 import { Section, SectionContent, SectionHeading } from "../layouts/Section";
 import { translateEquipment } from "../helpers/translators";
-import { IoMdCheckmark } from "react-icons/io";
+import { IoMdCheckmark, IoMdPin } from "react-icons/io";
 import { Container } from "react-grid-system";
 import { FiMapPin } from "react-icons/fi";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
@@ -296,26 +296,23 @@ const PrevioObjektDetail = ({ objekt, color = "blue", user }) => {
           </Col>
 
           <Col md={9.5}>
-            <section className="highlight-card bg-grey" id="top">
+            <section className="highlight-card border-radius bg-white" id="top">
               <div className="objekt-detail-heading d-flex align-items-center justify-content-between mb-2">
-                <div className="d-flex align-items-center">
-                  <HiHome
-                    className={"text-" + color}
-                    style={{ marginRight: ".5em", fontSize: "2.5em" }}
-                  />
+                <div>
+                  <div className="d-flex align-items-center">
+                    <HiHome
+                      className={"text-" + color}
+                      style={{ marginRight: ".5em", fontSize: "2.5em" }}
+                    />
 
-                  <div className="d-flex">
-                    <h1 className="m-0">{objekt?.name}</h1>
-                    <div className="rating d-flex">
-                      <div
-                        className={`text-${color} stars d-flex align-self-end`}
-                      >
-                        {/*<BsStarFill />*/}
-                        {/*<BsStarFill />*/}
-                        {/*<BsStarFill />*/}
-                        {/*<BsStarFill />*/}
-                        {/*<BsStarHalf />*/}
-                        {objekt.classification.stars}
+                    <div>
+                      <h1 className="m-0">{objekt?.name}</h1>
+                      <div className="rating d-flex">
+                        <div className={`d-flex align-items-center`}>
+                          <IoMdPin className={`icon text-${color}`} />
+                          {objekt.address.name}, {objekt.address.street},{" "}
+                          {objekt.address.city}, {objekt.address.country}
+                        </div>
                       </div>
                     </div>
                   </div>

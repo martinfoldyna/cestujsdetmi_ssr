@@ -134,7 +134,7 @@
 
 .article-homepage-card .article-description p{
   margin-top: 0.5em;
-  color: #444;
+  color: $text-black;
   text-align: left;
   line-height: 21px;
 }
@@ -339,6 +339,10 @@
 .last-minute-small .card-heading,
 .small-article-card h3 {
   text-decoration: underline;
+}
+
+.small-article-card p {
+  color: #fff
 }
 
 .last-minute-small .card-heading {

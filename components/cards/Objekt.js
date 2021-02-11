@@ -47,11 +47,13 @@ const Objekt = ({ objekt, background, useNextImg = true, badge }) => {
           {useNextImg ? (
             <Image
               src={
-                objekt?.galerie && objekt?.galerie.length > 0
-                  ? objekt?.galerie[0].sm
+                objekt?.image_filename
+                  ? `https://www.cestujsdetmi.cz/${objekt.image_filename}`
+                  : objekt?.galerie && objekt?.galerie.length > 0
+                  ? objekt?.galerie[0].formats.small.url
                   : objekt?.relative_galerie &&
-                    objekt?.relative_galerie?.length > 0
-                  ? objekt?.relative_galerie[0].sm
+                    objekt.relative_galerie.length > 0
+                  ? `https://www.cestujsdetmi.cz/${objekt.relative_galerie[0].relativeUrl}`
                   : "/img/placeholder.png"
               }
               alt={

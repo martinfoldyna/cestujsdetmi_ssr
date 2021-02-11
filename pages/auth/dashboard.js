@@ -7,7 +7,7 @@ import { BsPlus } from "react-icons/bs";
 import { GiHouse } from "react-icons/gi";
 import { MdLocationCity } from "react-icons/md";
 import { TiSortNumerically } from "react-icons/ti";
-import { FaEnvelope, FaSave, FaUser } from "react-icons/fa";
+import { FaEnvelope, FaRegUser, FaSave, FaUser } from "react-icons/fa";
 import AdminObjekt from "../../layouts/AdminObjekt";
 import { Section, SectionContent, SectionHeading } from "../../layouts/Section";
 import Input from "../../components/form/Input.js";
@@ -17,6 +17,9 @@ import { useRouter } from "next/router";
 import { GlobalContext } from "../../context/GlobalContext";
 import nookies, { parseCookies, destroyCookie } from "nookies";
 import { fetchQuery } from "../../helpers/fetch";
+import { CgList } from "react-icons/cg";
+import { IoLogOutOutline } from "react-icons/io5";
+import { FiLogOut } from "react-icons/fi";
 
 export async function getServerSideProps(ctx) {
   const jwt = parseCookies(ctx).jwt;
@@ -52,6 +55,50 @@ const UserDashboard = ({ APIuser }) => {
 
       <div className="data-wrapper">
         <Row className="justify-content-between">
+          <Col md={3}>
+            <div className="filter-card bg-white">
+              <div className="p-1 bg-grey">
+                <p className="filter-name m-0">{user.email}</p>
+              </div>
+              <div className="pl-1 pr-1">
+                <ul className="categories-list list-style-none p-0 mb-0 mt-0">
+                  <li className="pt-1 pb-1 category-item text-black d-flex justify-content-between align-items-center">
+                    <MyLink href="#" className="d-flex align-items-center">
+                      <>
+                        <CgList className="btn-icon text-blue" />
+                        Seznam objektů
+                      </>
+                    </MyLink>
+                  </li>
+                  <li className="pt-1 pb-1 category-item text-black d-flex justify-content-between align-items-center">
+                    <MyLink
+                      href={`${router.pathname}/user-info`}
+                      className="d-flex align-items-center"
+                    >
+                      <>
+                        <FaRegUser className="btn-icon text-blue" />
+                        Osobní údaje
+                      </>
+                    </MyLink>
+                  </li>
+                  <li className="pt-1 pb-1 category-item text-black d-flex justify-content-between align-items-center">
+                    <MyLink
+                      href="#"
+                      onClick={() => {
+                        logoutUser();
+                        router.push("/auth/login");
+                      }}
+                    >
+                      <>
+                        <FiLogOut className="text-blue btn-icon" />
+                        Odhlášení
+                      </>
+                    </MyLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </Col>
           <Col>
             <Row className="user-objekty-row">
               {user?.objekty
@@ -139,38 +186,6 @@ const UserDashboard = ({ APIuser }) => {
                 </Section>
               </Col>
             </Row>
-          </Col>
-          <Col md={2.5}>
-            <div className="filter-card">
-              <h3>Správa účtu:</h3>
-              <ul className="categories-list list-style-none p-0 mb-0">
-                <li className="category-item text-black d-flex justify-content-between align-items-center">
-                  <MyLink href="#">Seznam objektů</MyLink>
-                </li>
-                <li className="category-item text-black d-flex justify-content-between align-items-center">
-                  <MyLink href={`${router.pathname}/user-info`}>
-                    Změna osobních údajů
-                  </MyLink>
-                </li>
-                <li className="category-item text-black d-flex justify-content-between align-items-center">
-                  <MyLink href="#">Změna formy zápisu</MyLink>
-                </li>
-                <li className="category-item text-black d-flex justify-content-between align-items-center">
-                  <MyLink href="#">Změna hesla</MyLink>
-                </li>
-                <li className="category-item text-black d-flex justify-content-between align-items-center">
-                  <MyLink
-                    href="#"
-                    onClick={() => {
-                      logoutUser();
-                      router.push("/auth/login");
-                    }}
-                  >
-                    Odhlášení
-                  </MyLink>
-                </li>
-              </ul>
-            </div>
           </Col>
         </Row>
       </div>

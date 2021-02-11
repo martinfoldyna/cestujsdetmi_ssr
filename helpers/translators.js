@@ -21,7 +21,7 @@ export const translateTermValue = (termValue) => {
       return "Dostupnost";
     case "odkaz_na_vlastni_web":
       return "Odkaz na vlastní webové stránky";
-    case "podrobny_popis":
+    case "popis":
       return "Podrobný popis objektu";
     case "cenik":
       return "Ceník služeb";
