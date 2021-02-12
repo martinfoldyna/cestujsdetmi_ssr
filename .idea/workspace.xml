@@ -6,15 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/HomepagePrevio.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/PrevioObjekt.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/PrevioObjekt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/inquiry.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Inquiry.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/ubytovani/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/detail/[hodnota].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +120,7 @@
       <workItem from="1612967032812" duration="1000" />
       <workItem from="1612970639401" duration="610000" />
       <workItem from="1612981602931" duration="11351000" />
+      <workItem from="1613118121519" duration="3936000" />
     </task>
     <servers />
   </component>

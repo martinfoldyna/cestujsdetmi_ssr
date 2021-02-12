@@ -8,7 +8,9 @@ import React from "react";
 import { useSession } from "next-auth/client";
 
 export async function getStaticPaths() {
-  const objects = await fetchQuery(`${enums.URLS.objektInfoMini}`);
+  const objects = await fetchQuery(
+    `${enums.URLS.objektInfoMini}&typ_objektu=${enums.TYP_OBJEKTU.ubytovani.key}`
+  );
 
   return {
     paths: objects.map((object) => ({

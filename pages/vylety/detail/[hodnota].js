@@ -8,7 +8,9 @@ import Head from "next/head";
 import { useSession } from "next-auth/client";
 
 export async function getStaticPaths() {
-  const objects = await fetchQuery(`${enums.URLS.objektInfoMini}`);
+  const objects = await fetchQuery(
+    `${enums.URLS.objektInfoMini}&typ_objektu=${enums.TYP_OBJEKTU.zabava.key}`
+  );
   const related = await fetchQuery(`${enums.URLS.objektInfoMini}&tags_in`);
 
   return {
@@ -33,8 +35,8 @@ export async function getStaticProps({ params }) {
     const objekt = objektQuery[0];
 
     return objekt
-      ? { props: { objekt, kategorie } }
-      : { props: { notFound: true } };
+      ? { props: { objekt, kategorie }, revalidate: 1800 }
+      : { props: { notFound: true }, revalidate: 1800 };
   } catch (err) {
     console.log(err);
     return { props: { notFound: true } };

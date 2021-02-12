@@ -80,8 +80,6 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
       objekt.id
     );
   };
-  console.log(objekt);
-
   // const readArticle = async (data) => {
   //   if (data) {
   //     try {

@@ -10,7 +10,7 @@ import { objectToArray } from "../../../helpers/helpers";
 import { useSession } from "next-auth/client";
 
 export async function getStaticPaths() {
-  const previoObjects = await fetchQuery("previo/hotels/100");
+  const previoObjects = await fetchQuery("previo/hotels/20");
 
   return {
     paths: previoObjects?.data?.map((hotel) => ({
