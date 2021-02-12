@@ -10,7 +10,6 @@ import MyLink from "../../layouts/MyLink";
 import { useRouter } from "next/router";
 import { loginUser } from "../../helpers/auth";
 import { GlobalContext } from "../../context/GlobalContext";
-import Inquiry from "../../layouts/inquiry";
 import enums from "../../enums";
 import { setCookie } from "nookies";
 import { useSession, signIn, signOut } from "next-auth/client";
@@ -142,20 +141,8 @@ const Login = ({ global }) => {
           </div>
         </div>
       </div>
-      <Inquiry typ_objektu={enums.TYP_OBJEKTU.ubytovani.key} />
     </Fragment>
   );
 };
-
-Login.propTypes = {
-  users: PropTypes.object,
-  loginUser: PropTypes.func,
-  getUser: PropTypes.func,
-  setToast: PropTypes.func,
-};
-
-const mapStateToProps = (state) => ({
-  users: state.users,
-});
 
 export default Login;

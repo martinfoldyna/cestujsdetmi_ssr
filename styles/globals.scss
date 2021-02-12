@@ -1099,6 +1099,11 @@ input[type=number] {
   scrollbar-width: none;  /* Firefox */
 }
 
+.modal-width-responsive {
+  width: auto;
+  max-width: 100% !important;
+}
+
 
 @import "MediaQueries";
 

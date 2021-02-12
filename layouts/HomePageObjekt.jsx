@@ -12,19 +12,8 @@ const HomePageObjekt = ({
   number_of_words = 15,
   className,
   topic = "ubytovani",
-}) => {
-  const [imageHeight, setImgHeight] = useState(0);
-  const parentRef = useRef(null);
-
-  useEffect(() => {
-    setImgHeight(parentRef.current?.clientHeight - 5);
-  }, [parentRef]);
-
-  const isNews = () => article?.kategorie === "aktuality";
-
-  console.log(article);
-
-  return article ? (
+}) =>
+  article ? (
     <div className={`${topic}-home-card ${className} border-radius`}>
       <Link href={`/${topic}/detail/${article?.hodnota}`}>
         <div
@@ -78,7 +67,7 @@ const HomePageObjekt = ({
             >
               {article?.nazev ? article?.nazev : "Nadpis"}
             </h3>
-            {isNews() && article?.adresa && (
+            {article?.kategorie === "aktuality" && article?.adresa && (
               <span className="article-location">
                 <IoMdPin className="text-pink address-icon" />{" "}
                 {article.adresa.mesto}
@@ -105,7 +94,9 @@ const HomePageObjekt = ({
                 </p>
               )}
             </div>
-            {isNews() && <div className="article-news-date">srpen 2020</div>}
+            {article?.kategorie === "aktuality" && (
+              <div className="article-news-date">srpen 2020</div>
+            )}
           </div>
           {/*  </Col>*/}
           {/*</Row>*/}
@@ -115,6 +106,5 @@ const HomePageObjekt = ({
   ) : (
     ""
   );
-};
 
 export default HomePageObjekt;

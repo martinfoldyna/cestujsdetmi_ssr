@@ -95,28 +95,6 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
   // };
 
   // dynamically renders equipment section
-  const equipment = () => {
-    console.log("in equiment funciton");
-    const selectedEquipment =
-      shownEquipment === "outer"
-        ? objekt.vnejsi_vybaveni
-        : objekt.vnitrni_vybaveni;
-    console.log(selectedEquipment);
-    return Object.keys(selectedEquipment).map((key) => {
-      if (
-        selectedEquipment[key] &&
-        typeof selectedEquipment[key] === "boolean"
-      ) {
-        let translatedValue = translateEquipment(key);
-        return (
-          <li className="d-flex align-items-center mb-1" key={key}>
-            <IoMdCheckmark className={`text-${color}`} />
-            <p className="pl-1 m-0">{translatedValue}</p>
-          </li>
-        );
-      }
-    });
-  };
 
   const fetchRelated = async () => {
     const related = await fetchQuery(
@@ -178,8 +156,12 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
   const generateEquipmentTable = (equipment) => {
     const ignoreKeys = ["_id", "id", "__v"];
     const equipmentKeys = Object.keys(equipment)
-      .filter((key) => ignoreKeys.indexOf(key) < 0)
-      .filter((key) => equipment[key]);
+      .filter((key) => {
+        if (key) ignoreKeys.indexOf(key) < 0;
+      })
+      .filter((key) => {
+        if (key) equipment[key];
+      });
     if (equipmentKeys && equipmentKeys.length > 0) {
       const dividedLength = Math.round(equipmentKeys?.length / 3);
       let finalEquipment = [];

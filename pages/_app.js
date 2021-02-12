@@ -2,6 +2,7 @@ import "../styles/globals.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import "react-responsive-modal/styles.css";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import EmptyLayout from "../layouts/EmptyLayout";

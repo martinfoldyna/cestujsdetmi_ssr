@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { VectorMap } from "@south-paw/react-vector-maps";
 import czechRepubilc from "../public/maps/czech-republic.js";
 import czechRepubilcRegions from "../public/maps/czech-republic-regions.js";
 import { Row, Col, Container } from "react-grid-system";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
+import { FiMap } from "react-icons/fi";
 import CustomSelect from "../components/form/CustomSelect";
 import enums from "../enums";
 import { objectToArray } from "../helpers/helpers";
 import { useRouter } from "next/router";
+import Inquiry from "./Inquiry";
 
 const Map = () => {
   const [selectedTrip, setSelectedTrip] = useState(false);
@@ -21,7 +23,10 @@ const Map = () => {
   const [kraj, setKraj] = useState(null);
   const beautifiedKraj = objectToArray(enums.KRAJ);
   const beautifiedRegion = objectToArray(enums.REGION);
+  const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
+
+  const onOpenModal = () => setOpenModal(true);
 
   const translateRegion = (value) => {
     let translatedString = "";
@@ -148,13 +153,15 @@ const Map = () => {
                   <span className="hide-desktop"> Výlety</span>
                 </button>
               </div>
-              <a
-                href="mailto:kontakt@cestujsdetmi.cz"
-                className={`text-${color} mt-2 d-flex align-items-center font-weight-600 hide-mobile`}
+              <button
+                className={`text-${color} btn p-0 ghost mt-2 d-flex align-items-center font-weight-600 hide-mobile`}
+                onClick={() => setOpenModal(true)}
               >
-                <FiSend />
-                &nbsp; Zaslat nezvávaznou nabídku
-              </a>
+                <>
+                  <FiSend />
+                  &nbsp; Zaslat nezvávaznou nabídku
+                </>
+              </button>
             </div>
           </div>
         </Col>
@@ -233,15 +240,22 @@ const Map = () => {
           <div className="hide-mobile w-100">
             <div className="d-flex justify-content-end ">
               <button
-                className={`text-${color} btn bg-white p-0`}
+                className={`text-${color} btn bg-white p-0 d-flex align-items-center`}
                 onClick={() => setRegionMap((prevState) => !prevState)}
               >
+                <FiMap className="btn-icon" />
                 přepnout mapu
               </button>
             </div>
           </div>
         </Col>
       </Row>
+      <Inquiry
+        typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}
+        modalOpen={openModal}
+        onModalOpen={() => setOpenModal(true)}
+        onModalClose={() => setOpenModal(false)}
+      />
     </section>
   );
 };
