@@ -26,17 +26,8 @@ import Input from "../components/form/Input.js";
 import DatePicker, { registerLocale } from "react-datepicker";
 import cs from "date-fns/locale/cs";
 import { useDropzone } from "react-dropzone";
-import {
-  handleObjekt,
-  uploadObjekt,
-  uploadObjektInfo,
-  getCategories,
-  getSecondaryCategoriesWithParam,
-} from "../redux/actions/objekty";
-import { connect } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import { tinyMCEConfig } from "../config/tinyMCEConfig";
-// import placeholder from "../public/img/placeholder.png";
 import Lightbox from "../components/lightbox/Lightbox";
 import { handleSingleCompression } from "../helpers/images";
 import {
@@ -58,16 +49,10 @@ import { GlobalContext } from "../context/GlobalContext";
 import { objektUpload } from "../helpers/objekty";
 
 const ObjednatObjektInfo = ({
-  uploadObjekt,
-  history,
-  handleObjekt,
   uploadingInProgress,
   kategorie,
-  match,
-  getCategories,
   geocoding,
   geoResults,
-  getSecondaryCategoriesWithParam,
 }) => {
   const router = useRouter();
   const userContext = useContext(GlobalContext).user;
@@ -188,7 +173,10 @@ const ObjednatObjektInfo = ({
       for (let [index, file] of acceptedFiles.entries()) {
         console.log("file", file);
         let compressedImage = await handleSingleCompression(file);
-        compressedImage.preview = file.preview;
+        const newImage = {
+          blob: compressedImage,
+          preview: URL.createObjectURL(compressedImage),
+        };
         setPreviewImages((prevState) => {
           /*const newImage = {
             sm: URL.createObjectURL(compressedImage.sm),
@@ -202,9 +190,7 @@ const ObjednatObjektInfo = ({
             id: prevState && prevState.length > 0 ? prevState.length : index,
           };*/
 
-          return prevState
-            ? [...prevState, compressedImage]
-            : [compressedImage];
+          return prevState ? [...prevState, newImage] : [newImage];
         });
 
         console.log(previewImages);
@@ -269,6 +255,8 @@ const ObjednatObjektInfo = ({
                 backgroundImage: `url(${
                   image.preview
                     ? image.preview
+                    : image
+                    ? image
                     : "../public/img/placeholder.png"
                 })`,
               }}
@@ -960,16 +948,6 @@ const ObjednatObjektInfo = ({
                 <Row className="pt-2">
                   <Col>
                     <div className="form-item">
-                      {/*<textarea*/}
-                      {/*  className={`inputText ${*/}
-                      {/*    errors.pordrobny_popis && "border-danger"*/}
-                      {/*  }`}*/}
-                      {/*  id="popis"*/}
-                      {/*  name="popis"*/}
-                      {/*  ref={registerUser}*/}
-                      {/*  required*/}
-                      {/*  defaultValue={objekt?.popis}*/}
-                      {/*/>*/}
                       <Editor
                         {...tinyMCEConfig}
                         initialValue={objekt?.popis}
@@ -984,9 +962,7 @@ const ObjednatObjektInfo = ({
                       {/*</label>*/}
                     </div>
                     <div className="error-wrapper">
-                      <p className="error-message">
-                        {errors.pordrobny_popis?.message}
-                      </p>
+                      <p className="error-message">{errors.popis?.message}</p>
                     </div>
                   </Col>
                 </Row>

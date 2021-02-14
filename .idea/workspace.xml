@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/components/LoginComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/LoginModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Inquiry.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Inquiry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ObjednatObjektInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjednatObjektInfo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ubytovani/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/detail/[hodnota].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/previo/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/objekty.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/objekty.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/SmallButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/SmallButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/ObjektDetail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/ObjektDetail.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,23 +129,13 @@
       <workItem from="1612967032812" duration="1000" />
       <workItem from="1612970639401" duration="610000" />
       <workItem from="1612981602931" duration="11351000" />
-      <workItem from="1613118121519" duration="3936000" />
+      <workItem from="1613118121519" duration="11257000" />
+      <workItem from="1613229880853" duration="784000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/ObjednatObjektInfo.js</url>
-          <line>81</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

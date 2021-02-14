@@ -20,7 +20,7 @@ export async function getServerSideProps(ctx) {
   console.log(session);
 
   if (!session) {
-    ctx.res.writeHead(302, { Location: "/auth/login" });
+    ctx.res.writeHead(302, { Location: "/" });
     ctx.res.end();
     return {};
   }

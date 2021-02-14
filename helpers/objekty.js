@@ -7,11 +7,12 @@ export const objektUpload = async (data, images, type, id) => {
     if (images && images.length > 0) {
       const uploadImages = Array.isArray(images) ? images : [images];
 
-      for (let image of uploadImages) {
-        console.log(image);
+      for (let imageObject of uploadImages) {
+        const image = imageObject.blob;
         if (image instanceof Blob) {
-          formData.append(`files.galerie.${image.name}`, image, image.name);
+          formData.append(`files.${image.name}`, image, image.name);
           formData.append("field", "galerie");
+          formData.append("ref", "objekt-info");
         }
         /*formData.append(
           "fileInfo",

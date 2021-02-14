@@ -42,7 +42,7 @@ const Inquiry = ({ typ_objektu, modalOpen, onModalOpen, onModalClose }) => {
       center
       classNames={{ modal: "modal-width-responsive" }}
     >
-      <Section className="inquiry-card pb-2">
+      <Section className="inquiry-card pb-2 border-radius">
         <SectionHeading>
           <div className="d-flex justify-content-center align-items-center">
             <HiHome className="bg-blue text-white border-radius icon-heading mr-1" />

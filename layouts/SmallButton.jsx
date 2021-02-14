@@ -10,6 +10,7 @@ const MyComponent = ({
   outlineColor = color,
   className,
   children,
+  onClick,
 }) => {
   const Icon = icon;
   return (
@@ -19,6 +20,7 @@ const MyComponent = ({
       } text-${color ? color : "grey"} ${ghost ? "ghost" : ""} ${
         background ? `bg-${background}` : ""
       } ${className ? className : ""}`}
+      onClick={onClick}
     >
       <Icon className={`btn-icon ${iconColor ? `text-${iconColor}` : ""}`} />
       <span>{children}</span>

@@ -229,7 +229,9 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
       ? objekt?.galerie
       : objekt?.relative_galerie && objekt?.relative_galerie?.length > 0
       ? objekt?.relative_galerie
-      : [];
+      : null;
+
+  console.log(images);
 
   return !objekt ? (
     <LoadingSkeleton />
@@ -341,7 +343,11 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                               key={i}
                             >
                               <Image
-                                src={image.sm}
+                                src={
+                                  image.relativeUrl
+                                    ? `https://www.cestujsdetmi.cz/${image.relativeUrl}`
+                                    : image.formats.small.url
+                                }
                                 alt={
                                   image.alternativeText
                                     ? image.alternativeText
@@ -385,7 +391,11 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                       onClick={() => openLightbox(images[0])}
                     >
                       <Image
-                        src={images[0].sm}
+                        src={
+                          images[0].relativeUrl
+                            ? `https://www.cestujsdetmi.cz/${images[0].relativeUrl}`
+                            : images[0].formats.small.url
+                        }
                         alt={
                           images[0].alternativeText
                             ? images[0].alternativeText

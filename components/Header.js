@@ -18,11 +18,14 @@ import { BiSearch } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import SmallButton from "../layouts/SmallButton";
 import { useSession, signOut } from "next-auth/client";
+import Login from "../pages/auth/login";
+import LoginModal from "./LoginModal";
 
 const HeaderComponent = ({ user }) => {
   const [sticky, setSticky] = useState(false);
   const [stickyUp, setStickyUp] = useState(false);
   const [sesssion, loading] = useSession();
+  const [openLogin, setOpenLogin] = useState(false);
 
   const [openNav, setOpenNav] = useState(false);
 
@@ -46,6 +49,10 @@ const HeaderComponent = ({ user }) => {
 
   const toggleNav = () => {
     setOpenNav(!openNav);
+  };
+
+  const onCloseModal = () => {
+    setOpenLogin(false);
   };
 
   useEffect(() => {
@@ -120,27 +127,16 @@ const HeaderComponent = ({ user }) => {
                   Přidat objekt
                 </SmallButton>
               </MyLink>
-              <MyLink href="/auth/login">
-                {/*<button*/}
-                {/*  className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost"*/}
-                {/*  style={{ marginRight: "0" }}*/}
-                {/*>*/}
-                {/*  <FaRegUser className="btn-icon text-blue" />*/}
-                {/*  <span>Přihlášení</span>*/}
-                {/*</button>*/}
-                {sesssion ? (
-                  <MyLink href="/user" className="pr-0">
-                    <SmallButton
-                      color="grey"
-                      ghost
-                      icon={FaRegUser}
-                      iconColor="blue"
-                      className="pr-0"
-                    >
-                      Uživatel
-                    </SmallButton>
-                  </MyLink>
-                ) : (
+              {/*<MyLink href="/auth/login">*/}
+              {/*<button*/}
+              {/*  className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost"*/}
+              {/*  style={{ marginRight: "0" }}*/}
+              {/*>*/}
+              {/*  <FaRegUser className="btn-icon text-blue" />*/}
+              {/*  <span>Přihlášení</span>*/}
+              {/*</button>*/}
+              {sesssion ? (
+                <MyLink href="/user" className="pr-0">
                   <SmallButton
                     color="grey"
                     ghost
@@ -148,10 +144,22 @@ const HeaderComponent = ({ user }) => {
                     iconColor="blue"
                     className="pr-0"
                   >
-                    Přihlášení
+                    Uživatel
                   </SmallButton>
-                )}
-              </MyLink>
+                </MyLink>
+              ) : (
+                <SmallButton
+                  color="grey"
+                  ghost
+                  icon={FaRegUser}
+                  iconColor="blue"
+                  className="pr-0"
+                  onClick={() => setOpenLogin(true)}
+                >
+                  Přihlášení
+                </SmallButton>
+              )}
+              {/*</MyLink>*/}
             </div>
           </div>
         </Container>
@@ -190,6 +198,7 @@ const HeaderComponent = ({ user }) => {
         open={openNav}
         onClose={toggleNav}
       />
+      <LoginModal open={openLogin} onClose={onCloseModal} />
     </header>
   );
 };
