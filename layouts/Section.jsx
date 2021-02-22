@@ -4,9 +4,9 @@ export const Section = ({ className, children }) => {
   return <section className={`section ${className}`}>{children}</section>;
 };
 
-export const SectionContent = ({ children, ...rest }) => {
+export const SectionContent = ({ children, className, ...rest }) => {
   return (
-    <div className="section-content" {...rest}>
+    <div className={`section-content ${className ? className : ""}`} {...rest}>
       {children}
     </div>
   );

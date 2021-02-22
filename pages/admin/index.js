@@ -15,25 +15,25 @@ import { logoutUser, getUser } from "../../redux/actions/users";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { useRouter } from "next/router";
 import { GlobalContext } from "../../context/GlobalContext";
-import nookies, { parseCookies, destroyCookie } from "nookies";
+import { parseCookies } from "nookies";
 import { fetchQuery } from "../../helpers/fetch";
 import { CgList } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
+import Login from "../../components/LoginComponent";
+import jwt_decode from "jwt-decode";
+import Cookie from "js-cookie";
+import { handleJwt } from "../../helpers/auth";
 
 export async function getServerSideProps(ctx) {
-  const jwt = parseCookies(ctx).jwt;
-
-  const user = await fetchQuery(`users/me`, "", {
-    headers: { Authorization: `Bearer ${jwt}` },
-  });
-
+  const user = await handleJwt(ctx);
+  console.log(user);
   return { props: { APIuser: user } };
 }
 
 const UserDashboard = ({ APIuser }) => {
   const router = useRouter();
-  const userContext = useContext(GlobalContext).user;
+  console.log(APIuser);
   const [user, setUser] = useState(APIuser);
 
   const logoutUser = () => {
@@ -110,7 +110,15 @@ const UserDashboard = ({ APIuser }) => {
                     </Col>
                   );
                 })}
-              <MyLink href="/auth/info/" className="m-0-auto">
+
+              {user.objekty.length === 0 && (
+                <Col sm={12} className="col">
+                  <h2 className="mt-0 mb-1">
+                    Zatím nemáte žádné registrované objekty.
+                  </h2>
+                </Col>
+              )}
+              <MyLink href="/admin/add/" className="m-0-auto">
                 <button
                   type="button"
                   className="btn-logo d-flex align-items-center btn bg-blue text-white m-0-auto"
@@ -193,14 +201,15 @@ const UserDashboard = ({ APIuser }) => {
   );
 };
 
-UserDashboard.propTypes = {
-  users: PropTypes.object.isRequired,
-  logoutUser: PropTypes.func.isRequired,
-  getUser: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  users: state.users,
-});
+// UserDashboard.getInitialProps = async ({ req }) => {
+//   const cookies = parseCookies(req);
+//   const { jwt } = cookies;
+//
+//   const user = await fetchQuery(`users/me`, "", {
+//     headers: { Authorization: `Bearer ${jwt}` },
+//   });
+//
+//   return { APIuser: user, jwt };
+// };
 
 export default UserDashboard;

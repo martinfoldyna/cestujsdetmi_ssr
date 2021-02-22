@@ -51,43 +51,125 @@
   }
 
   .hero {
-    position: relative;
-    min-height: 360px;
-    max-height: 30vh;
-  }
+    height: auto;
+    background-color: unset;
+  background-image: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
 
-  .hero .wrapper {
-    width: 90%;
-  }
 
-  .hero .wrapper > .d-flex > .content h2 {
-    font-size: 40px;
-    width: 100%;
-  }
 
-  .hero .wrapper > .d-flex > .content p {
-    font-size: 18px;
-    width: 100%;
-  }
+    & .wrapper {
+      width: 100%;
+      box-sizing: border-box;
 
-  .hero::after {
-    background: linear-gradient(360deg, rgba(20, 48, 69, 0.6) 25.62%, rgba(34, 110, 165, 0) 107.64%);
-  }
+      & .d-flex {
+        box-sizing: border-box;
+        height: auto;
 
-  .hero .description {
-    position: relative;
-  }
-  .hero .description:after {
-    content: "";
-    position: absolute;
-    bottom: -2.3em;
-    height: 1px;
-    width: 100%;
-    background-color: grey;
-    left: 0;
-  }
-  .hero .search-bar {
-    display: none;
+
+        & p.description {
+        font-size: 14px;
+        }
+
+      }
+
+      & > .d-flex {
+        flex-direction: column;
+
+        & > .content {
+          padding-right: 0;
+
+          & .search-bar {
+            width: 100%;
+            margin: 1rem 0;
+          }
+
+          & h1 {
+            font-size: 30px;
+
+            & .underline::before {
+              height: 3px;
+            }
+          }
+          & p {
+            font-size: 18px;
+            width: 100%;
+          }
+        }
+
+
+
+
+        & .image-wrapper {
+          & img {
+            width: 100%;
+          }
+
+          &::after {
+            display: none;
+          }
+
+          & .overlay {
+            display: none;
+          }
+        }
+      }
+
+
+      & .description-wrapper {
+        box-sizing: border-box;
+        justify-content: space-between;
+        margin-top: 1rem;
+
+        & p.description {
+
+          width: auto;
+          flex-basis: 85%;
+          line-height: 20px;
+        }
+
+        & .icon-heading {
+          font-size: 2rem;
+          padding: 5px 0 0;
+        }
+      }
+
+    }
+
+
+
+    &::after {
+      display: none;
+    }
+
+    & .description {
+      position: relative;
+
+      //&::after {
+      //  content: "";
+      //  position: absolute;
+      //  bottom: -2.3em;
+      //  height: 1px;
+      //  width: 100%;
+      //  background-color: grey;
+      //  left: 0;
+      //}
+    }
+
+    & .icons {
+      color: $text-black;
+      align-items: stretch;
+      height: 100%;
+      justify-content: end;
+
+      & .icon-wrapper {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        background-color: $background-grey;
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 
   .map-component {
@@ -404,14 +486,9 @@ and (orientation : portrait) {
     margin: 0 1em;
   }
 .hero .wrapper{
-  position: absolute;
-  top: 50%;
-  left: 2em;
-  transform: translate(0, -50%);
   z-index: 100;
   color: #fff;
   height: 100%;
-  width: calc(100% - 4em);
 }
 }
 

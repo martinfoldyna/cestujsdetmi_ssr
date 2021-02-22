@@ -5,10 +5,11 @@ import Input from "../components/form/Input.js";
 import { FaAt, FaChevronRight, FaLock } from "react-icons/fa";
 import MyLink from "../layouts/MyLink";
 import { useRouter } from "next/router";
-import { loginUser } from "../helpers/auth";
+import { handleJwt, loginUser } from "../helpers/auth";
 import { GlobalContext } from "../context/GlobalContext";
-import { setCookie } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 import { useSession, signIn, signOut } from "next-auth/client";
+import Cookie from "js-cookie";
 
 const Login = () => {
   const userContext = useContext(GlobalContext).user;
@@ -18,10 +19,6 @@ const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const [token, setToken] = useState(null);
   const [session, loading] = useSession();
-
-  useEffect(() => {
-    setToken(sessionStorage.getItem("auth-token"));
-  }, []);
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -33,7 +30,9 @@ const Login = () => {
       path: "/",
     });
 
-    router.push("/auth/dashboard");
+    Cookie.set("jwt", loginResponse.jwt);
+
+    router.push("/admin");
   };
 
   // useEffect(() => {

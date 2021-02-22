@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Container, Row } from "react-grid-system";
 import Link from "next/link";
 import enums from "../../enums";
@@ -8,6 +8,7 @@ import SideBar from "../../layouts/Sidebar";
 import { fetchQuery } from "../../helpers/fetch";
 import Head from "next/head";
 import News from "../../layouts/News";
+import { GlobalContext } from "../../context/GlobalContext";
 
 export async function getStaticProps() {
   const newsArr = await fetchQuery(`rss`);
@@ -18,6 +19,12 @@ export async function getStaticProps() {
 const Aktuality = ({ newsArr }) => {
   // How many objects per page to show
   const limit = 20;
+
+  const globalContext = useContext(GlobalContext).global;
+
+  const { global } = globalContext;
+
+  console.log(global);
 
   // How many objects are shown and at which number start api call query
   const [next, setNext] = useState(limit);

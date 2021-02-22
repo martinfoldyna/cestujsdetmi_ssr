@@ -47,16 +47,18 @@ import HeadingWithIcon from "../layouts/HeadingWithIcon";
 import { useRouter } from "next/router";
 import { GlobalContext } from "../context/GlobalContext";
 import { objektUpload } from "../helpers/objekty";
+import { handleJwt } from "../helpers/auth";
 
 const ObjednatObjektInfo = ({
   uploadingInProgress,
   kategorie,
   geocoding,
   geoResults,
+  user,
 }) => {
   const router = useRouter();
-  const userContext = useContext(GlobalContext).user;
-  const { user } = userContext;
+  const { global } = useContext(GlobalContext).global;
+  const { kraje, oblasti } = global;
 
   const { plan, name } = router.query;
   registerLocale("cs", cs);
@@ -295,54 +297,58 @@ const ObjednatObjektInfo = ({
       );
     });
 
-  const StartDateCustomInput = ({ value, onClick, forShow, ...rest }) => (
-    <>
-      <div
-        className={`date-form-item m-0 ${forShow ? "forShow" : ""}`}
-        onClick={onClick}
-      >
-        <input
-          type="text"
-          className={`inputText pr-0 ${
-            errors && errors[value] ? "border-danger" : ""
-          }`}
-          id="datumZacatku"
-          name="datumZacatku"
-          defaultValue={value}
-          required
-          autoComplete="off"
-          {...rest}
-        />
-        <label htmlFor="datumZacatku" className="floating-label">
-          Začátek
-        </label>
-      </div>
-    </>
+  const StartDateCustomInput = React.forwardRef(
+    ({ value, onClick, forShow, ...rest }, ref) => (
+      <>
+        <div
+          className={`date-form-item m-0 ${forShow ? "forShow" : ""}`}
+          onClick={onClick}
+        >
+          <input
+            type="text"
+            className={`inputText pr-0 ${
+              errors && errors[value] ? "border-danger" : ""
+            }`}
+            id="datumZacatku"
+            name="datumZacatku"
+            defaultValue={value}
+            required
+            autoComplete="off"
+            {...rest}
+          />
+          <label htmlFor="datumZacatku" className="floating-label">
+            Začátek
+          </label>
+        </div>
+      </>
+    )
   );
 
-  const EndDateCustomInput = ({ value, onClick, forShow, ...rest }) => (
-    <>
-      <div
-        className={`form-item m-0 ${forShow ? "forShow" : ""}`}
-        onClick={onClick}
-      >
-        <input
-          type="text"
-          className={`inputText ${
-            errors && errors[value] ? "border-danger" : ""
-          }`}
-          id="datumKonce"
-          name="datumKonce"
-          defaultValue={value}
-          required
-          autoComplete="off"
-          {...rest}
-        />
-        <label htmlFor="datumKonce" className="floating-label">
-          Konec
-        </label>
-      </div>
-    </>
+  const EndDateCustomInput = React.forwardRef(
+    ({ value, onClick, forShow, ...rest }, ref) => (
+      <>
+        <div
+          className={`form-item m-0 ${forShow ? "forShow" : ""}`}
+          onClick={onClick}
+        >
+          <input
+            type="text"
+            className={`inputText ${
+              errors && errors[value] ? "border-danger" : ""
+            }`}
+            id="datumKonce"
+            name="datumKonce"
+            defaultValue={value}
+            required
+            autoComplete="off"
+            {...rest}
+          />
+          <label htmlFor="datumKonce" className="floating-label">
+            Konec
+          </label>
+        </div>
+      </>
+    )
   );
 
   const getObjekt = () => {
@@ -353,6 +359,8 @@ const ObjednatObjektInfo = ({
     const keys = Object.keys(data);
 
     let infoFinal = {};
+
+    console.log(data);
 
     const hodnota = friendlyUrl(data.nazev);
     console.log(hodnota);
@@ -378,7 +386,7 @@ const ObjednatObjektInfo = ({
           ...infoFinal.vnejsi_vybaveni,
           ...{
             [key.replace("outside_", "")]: Array.isArray(data[key])
-              ? data[key].indexOf("on") > 0
+              ? data[key].indexOf("on") >= 0
               : data[key],
           },
         };
@@ -387,7 +395,7 @@ const ObjednatObjektInfo = ({
           ...infoFinal.vnitrni_vybaveni,
           ...{
             [key.replace("inside_", "")]: Array.isArray(data[key])
-              ? data[key].indexOf("on") > 0
+              ? data[key].indexOf("on") >= 0
               : data[key],
           },
         };
@@ -405,6 +413,10 @@ const ObjednatObjektInfo = ({
             [key.replace("address_", "")]: data[key],
           },
         };
+      } else if (key.includes("insideText_")) {
+        infoFinal.vnitrni_vybaveni_popis = data.insideText_dalsi_vybaveni;
+      } else if (key.includes("outsideText_")) {
+        infoFinal.vnejsi_vybaveni_popis = data.outsideText_dalsi_vybaveni;
       } else {
         infoFinal = {
           ...infoFinal,
@@ -450,26 +462,29 @@ const ObjednatObjektInfo = ({
     // Retrieve information, that are filled and stored to localStorage in ObjednatObjekt component
     const objektContactInfo = JSON.parse(localStorage.getItem("objekt_info"));
 
-    if (objekt) {
-      const { success } = await objektUpload(
-        infoFinal,
-        previewImages,
-        "update",
-        objekt._id
-      );
-
-      console.log(success);
-    } else {
-      const { success } = await objektUpload(
-        infoFinal,
-        previewImages,
-        "create"
-      );
-
-      console.log(success);
-
-      //handleObjekt(infoFinal, previewImages, "create");
-    }
+    console.log(infoFinal);
+    // if (objekt) {
+    //   const { success } = await objektUpload({
+    //     data: infoFinal,
+    //     images: previewImages,
+    //     type: "update",
+    //     id: objekt._id,
+    //     jwt: user.jwt,
+    //   });
+    //
+    //   console.log(success);
+    // } else {
+    //   const { success } = await objektUpload({
+    //     data: infoFinal,
+    //     images: previewImages,
+    //     type: "create",
+    //     jwt: user.jwt,
+    //   });
+    //
+    //   console.log(success);
+    //
+    //   //handleObjekt(infoFinal, previewImages, "create");
+    // }
   };
 
   const checkInputNumber = (evt, state) => {
@@ -618,10 +633,15 @@ const ObjednatObjektInfo = ({
   }, [searchQuery]);
 
   useEffect(() => {
-    if (!user) {
-      router.push("/not-authorized");
+    console.log(objectToArray(enums.DRUH_ZAPISU));
+    const foundEnum = objectToArray(enums.DRUH_ZAPISU).find(
+      (item) => item.key === router.query.plan
+    );
+    if (foundEnum) {
+      console.log(router.query.plan);
+      setSelectedPlan(foundEnum);
     }
-  }, [user]);
+  }, [router.query]);
 
   return (
     <>
@@ -660,7 +680,7 @@ const ObjednatObjektInfo = ({
       >
         <div className="section">
           <Row
-            className="justify-content-arround bg-grey m-0"
+            className="heading-wrapper justify-content-arround bg-grey m-0"
             onClick={() => setCollapseGeneral((prevState) => !prevState)}
           >
             <Col md={12}>
@@ -682,7 +702,7 @@ const ObjednatObjektInfo = ({
                   placeholder="Druh zápisu"
                   name="druh_zapisu"
                   translate={translateObjektPlan}
-                  selected={objekt?.druh_zapisu}
+                  selected={objekt?.druh_zapisu || selectedPlan}
                   ref={register({
                     required: "Zadejte prosím druh zápisu",
                   })}
@@ -867,14 +887,14 @@ const ObjednatObjektInfo = ({
                 {/*</Input>*/}
                 {/*<CustomSelect options={objectToArray(enums.KRAJ)} />*/}
                 <CustomFormSelect
-                  options={objectToArray(enums.KRAJ)}
+                  options={kraje}
                   placeholder="Kraj"
                   name="address_kraj"
                   selected={objekt?.adresa.kraj}
                   ref={register({
                     required: "Zadejte prosím kraj, ve které se objekt nachází",
                   })}
-                  onChange={(value) => setKraj(value)}
+                  onChange={(value) => setKraj(value.id)}
                   errors={errors}
                 >
                   <FaMapMarkedAlt className="form-icon" />
@@ -892,7 +912,7 @@ const ObjednatObjektInfo = ({
                 {/*  <FaMapSigns className="form-icon" />*/}
                 {/*</Input>*/}
                 <CustomFormSelect
-                  options={objectToArray(enums.REGION)}
+                  options={oblasti}
                   placeholder="Oblast"
                   name="address_oblast"
                   ref={register({
@@ -900,7 +920,7 @@ const ObjednatObjektInfo = ({
                       "Zadejte prosím oblast, ve které se objekt nachází",
                   })}
                   errors={errors}
-                  onChange={(value) => setOblast(value)}
+                  onChange={(value) => setOblast(value.id)}
                   selected={objekt?.adresa?.oblast}
                 >
                   <FaMapSigns className="form-icon" />
@@ -953,7 +973,6 @@ const ObjednatObjektInfo = ({
                         initialValue={objekt?.popis}
                         textareaName="popis"
                         onEditorChange={(value, editor) => {
-                          console.log(value);
                           setDetailedInfo(value);
                         }}
                       />
@@ -1509,8 +1528,8 @@ const ObjednatObjektInfo = ({
                       className={`inputText ${
                         errors.dalsi_vybaveni && "border-danger"
                       }`}
-                      id="inside_dalsi_vybaveni"
-                      name="inside_dalsi_vybaveni"
+                      id="insideText_dalsi_vybaveni"
+                      name="insideText_dalsi_vybaveni"
                       ref={register}
                       required
                     />
@@ -1520,7 +1539,7 @@ const ObjednatObjektInfo = ({
                   </div>
                   <div className="error-wrapper">
                     <p className="error-message">
-                      {errors.dalsi_vybaveni?.message}
+                      {errors.insideText_dalsi_vybaveni?.message}
                     </p>
                   </div>
                 </Col>
@@ -1846,18 +1865,18 @@ const ObjednatObjektInfo = ({
                       className={`inputText ${
                         errors.dalsi_vybaveni && "border-danger"
                       }`}
-                      id="dalsi_vybaveni"
-                      name="dalsi_vybaveni"
+                      id="outsideText_dalsi_vybaveni"
+                      name="outsideText_dalsi_vybaveni"
                       ref={register}
                       required
                     />
                     <label htmlFor="message" className="floating-label">
-                      Další vnitřní vybavení, oddělené čárkou:
+                      Další vnější vybavení, oddělené čárkou:
                     </label>
                   </div>
                   <div className="error-wrapper">
                     <p className="error-message">
-                      {errors.dalsi_vybaveni?.message}
+                      {errors.outsideText_dalsi_vybaveni?.message}
                     </p>
                   </div>
                 </Col>

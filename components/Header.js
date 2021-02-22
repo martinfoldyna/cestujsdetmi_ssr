@@ -8,24 +8,29 @@ import {
   FaRegEnvelope,
   FaSearch,
 } from "react-icons/fa";
-import Link from "next/link";
 import MyLink from "../layouts/MyLink";
 import Navbar from "./Navbar";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import SmallButton from "../layouts/SmallButton";
 import { useSession, signOut } from "next-auth/client";
-import Login from "../pages/auth/login";
 import LoginModal from "./LoginModal";
+import Cookies from "js-cookie";
+import { handleJwt, vaidateJwt } from "../helpers/auth";
+import { fetchQuery } from "../helpers/fetch";
+import { toast } from "react-toastify";
+import NewsletterModal from "./NewsletterModal";
 
-const HeaderComponent = ({ user }) => {
+const HeaderComponent = () => {
   const [sticky, setSticky] = useState(false);
   const [stickyUp, setStickyUp] = useState(false);
   const [sesssion, loading] = useSession();
   const [openLogin, setOpenLogin] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [openNewsletter, setOpenNewsletter] = useState(false);
 
   const [openNav, setOpenNav] = useState(false);
 
@@ -51,14 +56,23 @@ const HeaderComponent = ({ user }) => {
     setOpenNav(!openNav);
   };
 
-  const onCloseModal = () => {
-    setOpenLogin(false);
+  const onCloseModal = (setState) => {
+    setState(false);
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
+
+    const jwt = Cookies.get("jwt");
+    console.log("jwt", jwt);
+    console.log("typeof jwt", typeof jwt);
+
+    const isJwtValid = vaidateJwt(jwt);
+    if (isJwtValid) {
+      setUserLoggedIn(true);
+    }
   }, []);
 
   return (
@@ -81,13 +95,17 @@ const HeaderComponent = ({ user }) => {
                     type="text"
                     placeholder="Povězte nám, co hledáte"
                     className="bg-grey"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                   />
                   <button className="btn bg-grey search-bar-button">
-                    <FaSearch className="text-blue" />
+                    <MyLink href={`/search?query=${searchQuery}`}>
+                      <FaSearch className="text-blue" />
+                    </MyLink>
                   </button>
                 </div>
               </div>
-              <MyLink href="/oblibene">
+              <MyLink href={sesssion ? "/oblibene" : "/auth/login"}>
                 {/*<button className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost mr-0">*/}
                 {/*  <FaRegHeart className="btn-icon text-red" />*/}
                 {/*  <span>Oblíbené</span>*/}
@@ -97,6 +115,12 @@ const HeaderComponent = ({ user }) => {
                   ghost
                   icon={FaRegHeart}
                   iconColor="red"
+                  onClick={() => {
+                    if (!sesssion) {
+                      console.log("toasting");
+                      toast.info("Pro tuto akci musíte být přihlášen(a).");
+                    }
+                  }}
                 >
                   Oblíbené
                 </SmallButton>
@@ -105,16 +129,19 @@ const HeaderComponent = ({ user }) => {
               {/*  <FaRegEnvelope className="btn-icon text-blue" />*/}
               {/*  <span>Odběr newsletteru</span>*/}
               {/*</button>*/}
-              <MyLink href="/newsletter">
-                <SmallButton
-                  color="grey"
-                  ghost
-                  icon={FaRegEnvelope}
-                  iconColor="blue"
-                >
-                  Odběr newsletteru
-                </SmallButton>
-              </MyLink>
+              <SmallButton
+                color="grey"
+                ghost
+                icon={FaRegEnvelope}
+                iconColor="blue"
+                onClick={() => setOpenNewsletter(true)}
+              >
+                Odběr newsletteru
+              </SmallButton>
+              <NewsletterModal
+                open={openNewsletter}
+                onClose={() => onCloseModal(setOpenNewsletter)}
+              />
               <MyLink href="/objekty">
                 {/*<button*/}
                 {/*  className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost"*/}
@@ -135,8 +162,8 @@ const HeaderComponent = ({ user }) => {
               {/*  <FaRegUser className="btn-icon text-blue" />*/}
               {/*  <span>Přihlášení</span>*/}
               {/*</button>*/}
-              {sesssion ? (
-                <MyLink href="/user" className="pr-0">
+              {sesssion || userLoggedIn ? (
+                <MyLink href={sesssion ? "/user" : "/admin"} className="pr-0">
                   <SmallButton
                     color="grey"
                     ghost
@@ -198,7 +225,7 @@ const HeaderComponent = ({ user }) => {
         open={openNav}
         onClose={toggleNav}
       />
-      <LoginModal open={openLogin} onClose={onCloseModal} />
+      <LoginModal open={openLogin} onClose={() => onCloseModal(setOpenLogin)} />
     </header>
   );
 };

@@ -27,13 +27,11 @@ import { Section, SectionContent, SectionHeading } from "../layouts/Section";
 import Input from "./form/Input";
 import { translateColor, translateEquipment } from "../helpers/translators";
 import CityPin from "../public/cityPin";
-import MiniObjekt from "./cards/MiniObjekt";
 import SideBar from "../layouts/Sidebar";
 import enums from "../enums";
 import MyLink from "../layouts/MyLink";
 import { fetchQuery } from "../helpers/fetch";
 import { addToFavorite, removeFromFavorite } from "../helpers/user";
-import { useSession } from "next-auth/client";
 
 const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
   const [viewport, setViewport] = useState({
@@ -67,8 +65,6 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
   const [recenze, setReview] = useState("");
 
   const mapRef = useRef();
-
-  const { REACT_APP_MAPBOX_API_ACCESS_TOKEN } = process.env;
 
   const handleViewportChange = useCallback((newViewport) => {
     return setViewport(newViewport);
@@ -122,6 +118,16 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
           longitude: parseFloat(objekt.dostupnost.gps?.lng),
         });
       }
+      if (objekt.gps) {
+        const regex = objekt.gps.match(
+          /(?<lat>\d{0,5}[,.]{1}\d{0,10})N,? ?(?<lng>\d{0,5}[,.]{1}\d{0,10})E?/
+        );
+
+        setMarker({
+          latitude: parseFloat(regex.lat),
+          longitude: parseFloat(regex.lng),
+        });
+      }
       // if (objekt.adresa) {
       //   getObjektyInOblast(objekt.adresa.oblast);
       // }
@@ -139,7 +145,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
       <button
         className={`btn-small-logo d-flex align-items-center btn bg-${color} text-white`}
       >
-        Poslat dotaz
+        <a href={`mailto:${objekt.email}`}>Poslat dotaz</a>
         <HiOutlineChevronRight className="btn-icon right" />
       </button>
       <button
@@ -297,7 +303,12 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                           <span style={{ fontSize: "12px", marginTop: ".2em" }}>
                             <IoMdPin className={`icon text-${color}`} />
                             {objekt.nazev}, {objekt.adresa_ulice},{" "}
-                            {objekt.adresa_mesto}, {objekt.adresa_stat}
+                            {objekt.mesto
+                              ? objekt.mesto.nazev
+                              : objekt.adresa.mesto}
+                            {objekt.adresa_stat
+                              ? `, ${objekt.adresa_stat}`
+                              : ""}
                           </span>
                         </div>
                       </div>
@@ -479,37 +490,52 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                 </SectionContent>
               </Section>
             )}
-            {!objekt.vnitrni_vybaveni && !objekt.vnejsi_vybaveni ? (
+            {!objekt.vnitrni_vybaveni &&
+            !objekt.vnejsi_vybaveni &&
+            !objekt.vnejsi_vybaveni_popis &&
+            !objekt.vnitrni_vybaveni_popis ? (
               ""
             ) : (
               <Section>
                 <SectionHeading background="white">
                   <div className="d-flex justify-content-between align-items-center">
                     <h2>Vybavení</h2>
-                    {!noEquipemnt && (
+                    {noEquipemnt &&
+                    !objekt.vnitrni_vybaveni_popis &&
+                    !objekt.vnejsi_vybaveni_popis ? (
+                      ""
+                    ) : (
                       <div className="d-flex align-items-center">
-                        <button
-                          className={`btn-small-logo btn ${
-                            shownEquipment === "vnitrni_vybaveni"
-                              ? `bg-${color} text-white`
-                              : `outline-${color} text-${color}`
-                          }`}
-                          onClick={() => setShownEquipment("vnitrni_vybaveni")}
-                        >
-                          Vnitřní
-                          <span className="hide-mobile">&nbsp;vybavení</span>
-                        </button>
-                        <button
-                          className={`btn-small-logo btn ${
-                            shownEquipment === "vnejsi_vybaveni"
-                              ? `bg-${color} text-white`
-                              : `outline-${color} text-${color}`
-                          }`}
-                          onClick={() => setShownEquipment("vnejsi_vybaveni")}
-                        >
-                          Vnější
-                          <span className="hide-mobile">&nbsp;vybavení</span>
-                        </button>
+                        {(objekt.vnitrni_vybaveni ||
+                          objekt.vnitrni_vybaveni_popis) && (
+                          <button
+                            className={`btn-small-logo btn ${
+                              shownEquipment === "vnitrni_vybaveni"
+                                ? `bg-${color} text-white`
+                                : `outline-${color} text-${color}`
+                            }`}
+                            onClick={() =>
+                              setShownEquipment("vnitrni_vybaveni")
+                            }
+                          >
+                            Vnitřní
+                            <span className="hide-mobile">&nbsp;vybavení</span>
+                          </button>
+                        )}
+                        {(objekt.vnejsi_vybaveni ||
+                          objekt.vnejsi_vybaveni_popis) && (
+                          <button
+                            className={`btn-small-logo btn ${
+                              shownEquipment === "vnejsi_vybaveni"
+                                ? `bg-${color} text-white`
+                                : `outline-${color} text-${color}`
+                            }`}
+                            onClick={() => setShownEquipment("vnejsi_vybaveni")}
+                          >
+                            Vnější
+                            <span className="hide-mobile">&nbsp;vybavení</span>
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
@@ -517,8 +543,13 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                 <SectionContent>
                   {objekt[shownEquipment] &&
                     generateEquipmentTable(objekt[shownEquipment])}
-                  {noEquipemnt && (
-                    <p>Tento objekt neposkytl informace o jejich vybavení</p>
+                  {noEquipemnt &&
+                    !objekt.vnejsi_vybaveni_popis &&
+                    !objekt.vnitrni_vybaveni_popis && (
+                      <p>Tento objekt neposkytl informace o jejich vybavení</p>
+                    )}
+                  {objekt.vnitrni_vybaveni_popis && (
+                    <p>{objekt.vnitrni_vybaveni_popis}</p>
                   )}
                 </SectionContent>
               </Section>
@@ -659,9 +690,11 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                 <div style={{ position: "absolute", left: 10, top: 10 }}>
                   <NavigationControl />
                 </div>
-                <Marker {...marker}>
-                  <CityPin className={"text-" + color} />
-                </Marker>
+                {marker && (
+                  <Marker {...marker}>
+                    <CityPin className={"text-" + color} />
+                  </Marker>
+                )}
               </ReactMapGL>
             </Section>
             <Section>

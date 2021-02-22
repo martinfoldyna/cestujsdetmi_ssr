@@ -7,6 +7,7 @@ import Link from "next/link";
 import { objectToArray } from "../../helpers/helpers";
 import enums from "../../enums";
 import CustomDateRangePicker from "../form/CustomDateRangePicker";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const SideFilter = ({
   color,
@@ -19,6 +20,9 @@ const SideFilter = ({
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const { global } = useContext(GlobalContext).global;
+  const { kraje, oblasti } = global;
+  console.log(kraje, oblasti);
 
   const beautifiedKraj = objectToArray(enums.KRAJ);
   const beautifiedRegion = objectToArray(enums.REGION);
@@ -145,15 +149,13 @@ const SideFilter = ({
             <Row>
               <Col md={12}>
                 <CustomSelect
-                  options={beautifiedKraj}
+                  options={kraje}
                   onChange={(kraj) => onRegionsSelect({ kraj: kraj.key })}
                   placeholder="Kraj"
                   color={color}
                   value={
                     router.query.kraj
-                      ? beautifiedKraj.find(
-                          (kraj) => kraj.key === router.query.kraj
-                        )
+                      ? kraje.find((kraj) => kraj.key === router.query.kraj)
                       : null
                   }
                 />
@@ -162,7 +164,7 @@ const SideFilter = ({
             <Row className="m-0">
               <Col md={12} className="p-0">
                 <CustomSelect
-                  options={beautifiedRegion}
+                  options={oblasti}
                   onChange={(oblast) => onRegionsSelect({ oblast: oblast.key })}
                   placeholder="Oblast"
                   color={color}

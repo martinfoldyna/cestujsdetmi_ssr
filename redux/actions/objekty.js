@@ -259,7 +259,7 @@ export const handleObjekt = (data, images, type, id, history) => async (
       //   setToast(`ObjektOverviewItem ${data.nazev && data.nazev} byl upraven `, "success")
       // );
       dispatch({ type: OBJEKT_UPDATED, payload: res });
-      history.push("/auth/dashboard");
+      history.push("/admin");
     } else if (type === "create") {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos`,

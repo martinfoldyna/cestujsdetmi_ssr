@@ -24,10 +24,13 @@
 .lightbox-container .arrow,
 .react-responsive-modal-closeButton {
   color: #fff;
-  font-size: 2em;
+  font-size: 1.2rem;
   cursor: pointer;
   padding: .5em;
   border-radius: $border-radius;
+}
+
+.lightbox-container .arrow, .lightbox-container > .react-responsive-modal-closeButton {
   background-color: rgba(0,0,0,.5) !important;
 }
 

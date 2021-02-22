@@ -7,7 +7,15 @@ const LightboxItem = ({ image, onImageLoaded, ...rest }) => {
         <>
           <img
             className="lightbox-image"
-            src={image.lg ? image.lg : image.url ? image.url : image.preview}
+            src={
+              image.lg
+                ? image.lg
+                : image.url
+                ? image.url
+                : image.preview
+                ? image.preview
+                : `https://www.cestujsdetmi.cz/${image.relativeUrl}`
+            }
             alt={
               image.description
                 ? image.description

@@ -14,6 +14,8 @@ import Objekt from "../../components/cards/Objekt";
 import PrevioObjekt from "../../components/cards/PrevioObjekt";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
 import HomePageObjekt from "../../layouts/HomePageObjekt";
+import { Section, SectionContent } from "../../layouts/Section";
+import Image from "next/image";
 
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
@@ -130,7 +132,24 @@ const UserDashboard = ({ user }) => {
                   )
                 )
               ) : (
-                <h2>Nemáte žádné oblíbené objekty</h2>
+                <Container className="main-container favorite">
+                  <Section className="m-0 full-page-section">
+                    <SectionContent className="border-radius pt-3 pb-3 text-center">
+                      <Image src="/favorite.svg" height="200" width="200" />
+                      <h1>
+                        Zatím nemáte žádné oblíbené po
+                        <span className="crossed">
+                          <span className="on-top">l</span>n
+                        </span>
+                        ožky.
+                      </h1>
+                      <p>
+                        Do oblíbených můžete přidávat ubytování, aktuality, rady
+                        a tipy, články a výlety.
+                      </p>
+                    </SectionContent>
+                  </Section>
+                </Container>
               )}
               {user.rady_a_tipy.map((post) => (
                 <HomePageObjekt

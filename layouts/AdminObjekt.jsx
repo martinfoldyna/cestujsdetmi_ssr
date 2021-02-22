@@ -34,7 +34,7 @@ const AdminObjekt = ({ objekt }) => {
                   objekt.relative_galerie && objekt.relative_galerie.length > 0
                     ? objekt.relative_galerie[0].sm
                     : objekt?.galerie && objekt?.galerie.length > 0
-                    ? objekt?.galerie[0].sm
+                    ? objekt?.galerie[0].formats.small.url
                     : "/img/placeholder.png"
                 }
                 alt={objekt.nazev}
@@ -69,7 +69,7 @@ const AdminObjekt = ({ objekt }) => {
               <div className="d-flex justify-content-between buttons">
                 <button className="btn btn-logo bg-blue text-white mr-2">
                   <MyLink
-                    href={`/auth/info/${
+                    href={`/admin/info/${
                       objekt?.hodnota ? objekt?.hodnota : "123"
                     }`}
                     className="d-flex align-items-center"
