@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { IoMdPin } from "react-icons/io";
 import { trimString } from "../helpers/helpers";
 import parse from "html-react-parser";
 import Image from "next/image";
 import { Row, Col } from "react-grid-system";
+import MyLink from "./MyLink";
 
 const HomePageObjekt = ({
   article,
@@ -12,9 +13,10 @@ const HomePageObjekt = ({
   number_of_words = 15,
   className,
   topic = "ubytovani",
-}) =>
-  article ? (
-    <div className={`${topic}-home-card ${className} border-radius`}>
+}) => {
+  const link = `/${topic}/detail/${article?.hodnota}`;
+  return article ? (
+    <div className={link}>
       <Link href={`/${topic}/detail/${article?.hodnota}`}>
         <div
           className={`article-card article-homepage-card d-flex ${
@@ -100,11 +102,18 @@ const HomePageObjekt = ({
           </div>
           {/*  </Col>*/}
           {/*</Row>*/}
+          <div className="hide-desktop">
+            <div className="d-flex justify-content-end">
+              <MyLink href={link} className="text-blue">
+                Zobrazit >
+              </MyLink>
+            </div>
+          </div>
         </div>
       </Link>
     </div>
   ) : (
     ""
   );
-
+};
 export default HomePageObjekt;

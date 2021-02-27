@@ -9,9 +9,9 @@ import { useSession } from "next-auth/client";
 
 export async function getStaticPaths() {
   const objects = await fetchQuery(
-    `${enums.URLS.objektInfoMini}&typ_objektu=${enums.TYP_OBJEKTU.zabava.key}`
+    `${enums.URLS.objektInfoMini}&typ_objektu=${enums.TYP_OBJEKTU.zabava.key}&_limit=20`
   );
-  const related = await fetchQuery(`${enums.URLS.objektInfoMini}&tags_in`);
+  // const related = await fetchQuery(`${enums.URLS.objektInfoMini}&tags_in`);
 
   return {
     paths: objects.map((object) => ({
@@ -27,15 +27,14 @@ export async function getStaticProps({ params }) {
   const { hodnota } = params;
 
   try {
-    const [objektQuery, kategorie] = await Promise.all([
-      fetchQuery(`${enums.URLS.objektInfo}?hodnota=${hodnota}`),
-      fetchQuery(`${enums.URLS.kategorie}`),
-    ]);
+    const objektQuery = await fetchQuery(
+      `${enums.URLS.objektInfo}?hodnota=${hodnota}`
+    );
 
     const objekt = objektQuery[0];
 
     return objekt
-      ? { props: { objekt, kategorie }, revalidate: 1800 }
+      ? { props: { objekt }, revalidate: 1800 }
       : { props: { notFound: true }, revalidate: 1800 };
   } catch (err) {
     console.log(err);
@@ -43,7 +42,7 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const VyletyDetail = ({ objekt, kategorie }) => {
+const VyletyDetail = ({ objekt }) => {
   const [session] = useSession();
 
   return (
@@ -54,11 +53,7 @@ const VyletyDetail = ({ objekt, kategorie }) => {
         <meta name="robots" content="index, follow" />
       </Head>
       <Container className="main-container">
-        <ObjektDetail
-          objekt={objekt}
-          kategorie={kategorie}
-          user={session?.user}
-        />
+        <ObjektDetail objekt={objekt} user={session?.user} />
       </Container>
     </>
   );

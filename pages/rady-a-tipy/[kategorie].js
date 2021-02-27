@@ -11,6 +11,7 @@ import RadyTipy from "./index";
 import RadyTipyLayout from "../../layouts/siteLayouts/RadyTipyLayout";
 import MobileNewsArticle from "../../layouts/MobileNewsArticle";
 import Head from "next/head";
+import VerticalPost from "../../layouts/VerticalPost";
 export async function getStaticPaths() {
   const categories = objectToArray(enums.RADY_TIPY.KATEGORIE);
 
@@ -41,28 +42,30 @@ const RadyTipyKategorie = ({ radyTipy }) => {
       <Head>
         {/*   TODO: Přidat description    */}
         <title>{enums.RADY_TIPY.KATEGORIE[kategorie].value}</title>
-        <meta name="robots" content="index, follow" />
+        <meta name='robots' content='index, follow' />
       </Head>
-      <div className="border-radius mb-1">
+      <div className='border-radius mb-1 bg-white p-1'>
         {radyTipy.map((post, index) => (
           <div key={post.id}>
-            <div className="hide-mobile">
+            <div className='hide-mobile'>
               <HomePageObjekt
                 article={post}
-                topic="rady-a-tipy"
+                topic='rady-a-tipy'
                 key={post.id}
                 number_of_words={50}
-                className={`hide-mobile ${
-                  (index + 1) % 2 === 0 ? "bg-grey" : "bg-white"
-                }`}
+                className={`hide-mobile`}
               />
             </div>
-            <div className="hide-desktop">
-              <MobileNewsArticle
-                article={post}
-                key={post.id}
-                background={index - (1 % 2) === 0 ? "grey" : "white"}
-              />
+            <div className='hide-desktop'>
+              {index === 0 ? (
+                <VerticalPost post={post} useNextImg={true} />
+              ) : (
+                <MobileNewsArticle
+                  article={post}
+                  key={post.id}
+                  background={index - (1 % 2) === 0 ? "grey" : "white"}
+                />
+              )}
             </div>
           </div>
         ))}

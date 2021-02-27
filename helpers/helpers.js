@@ -1,6 +1,5 @@
 import { transalteDiacChar } from "./translators";
 import { useContext } from "react";
-import { GlobalContext } from "../context/GlobalContext";
 import { fetchQuery } from "./fetch";
 import enums from "../enums";
 import xml2js from "xml2js";

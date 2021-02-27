@@ -207,6 +207,7 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
     <LoadingSkeleton />
   ) : (
     <div className="filtered-objects bg-white border-radius">
+      {/* Filter badges */}
       {router.query && (
         <div className="filter–badges d-flex">
           {Object.keys(router.query).map((key) => (
@@ -224,9 +225,8 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
       )}
 
       {listObjects
-        ?.sort((a, b) => a.druh_zapisu - b.druh_zapisu)
+        .sort((a, b) => a.druh_zapisu - b.druh_zapisu)
         .map((objekt, index) => {
-          const currentIndex = index === 0 ? 0 : index + 1;
           const selectIndex = (index - 3) / 4;
 
           return (

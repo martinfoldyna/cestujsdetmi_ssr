@@ -1,15 +1,16 @@
+import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import ObjektDetail from "../../../components/ObjektDetail";
 import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
 import { searchParamsToQueryString } from "../../../helpers/helpers";
 import { Container } from "react-grid-system";
-import React from "react";
 import { useSession } from "next-auth/client";
+import { GlobalContext } from "../../../context/GlobalContext";
 
 export async function getStaticPaths() {
   const objects = await fetchQuery(
-    `${enums.URLS.objektInfoMini}&typ_objektu=${enums.TYP_OBJEKTU.ubytovani.key}`
+    `${enums.URLS.objektInfoMini}&typ_objektu=${enums.TYP_OBJEKTU.ubytovani.key}&_limit=20`
   );
 
   return {
@@ -26,9 +27,8 @@ export async function getStaticProps({ params }) {
   const { hodnota } = params;
 
   try {
-    const [objektQuery, kategorie] = await Promise.all([
+    const [objektQuery] = await Promise.all([
       fetchQuery(`${enums.URLS.objektInfo}?hodnota=${hodnota}`),
-      fetchQuery(`${enums.URLS.kategorie}`),
     ]);
 
     const objekt = objektQuery[0];
@@ -40,7 +40,7 @@ export async function getStaticProps({ params }) {
     }
 
     return objekt
-      ? { props: { objekt, kategorie, related } }
+      ? { props: { objekt, related } }
       : { props: { notFound: true } };
   } catch (err) {
     console.log(err);
@@ -48,17 +48,12 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const UbytovaniDetail = ({ objekt, kategorie, related }) => {
+const UbytovaniDetail = ({ objekt, related }) => {
   const [session] = useSession();
 
   return (
     <Container className="main-container">
-      <ObjektDetail
-        objekt={objekt}
-        kategorie={kategorie}
-        related={related}
-        user={session?.user}
-      />
+      <ObjektDetail objekt={objekt} related={related} user={session?.user} />
     </Container>
   );
 };

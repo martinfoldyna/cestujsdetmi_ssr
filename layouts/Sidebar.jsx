@@ -1,10 +1,10 @@
 import SideCards from "./SideCards";
 import SideFilter from "../components/cards/SideFilter";
 
-const SideBar = ({ color, topic, kategorie }) => {
+const SideBar = ({ color, topic }) => {
   return (
     <div>
-      <SideFilter color={color} topic={topic} kategorie={kategorie} />
+      <SideFilter color={color} topic={topic} />
       <SideCards />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { Col, Container, Row } from "react-grid-system";
 import { BsFilter } from "react-icons/bs";
@@ -14,6 +14,7 @@ import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchAllPrevioHotels, fetchQuery } from "../../helpers/fetch";
 import { searchParamsToQueryString } from "../../helpers/helpers";
 import Head from "next/head";
+import { GlobalContext } from "../../context/GlobalContext";
 
 export async function getStaticProps() {
   const limit = 6;
@@ -24,26 +25,28 @@ export async function getStaticProps() {
     _start: 0,
   };
 
-  const [objekty, previoObjekty, kategorie] = await Promise.all([
+  const [objekty, previoObjekty] = await Promise.all([
     fetchQuery(
       `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
     ),
     fetchAllPrevioHotels(10),
-    fetchQuery(enums.URLS.kategorie),
   ]);
 
   return {
     props: {
       objekty,
-      kategorie,
       previo: previoObjekty?.success ? previoObjekty.data : [],
     },
     revalidate: 3600,
   };
 }
 
-const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
+const TipyNaUbytovani = ({ objekty, previo, removeObjekty }) => {
   const router = useRouter();
+
+  const global = useContext(GlobalContext)?.global;
+
+  const { kategorie } = global;
 
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
@@ -81,8 +84,6 @@ const TipyNaUbytovani = ({ objekty, kategorie, previo, removeObjekty }) => {
         ),
       });
     }
-
-    console.log(finalHotels);
 
     // Assign all hotels with photo galleries to previoHotels state
     setPrevioHotels(finalHotels);

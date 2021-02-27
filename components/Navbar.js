@@ -11,9 +11,8 @@ import { IoMdAdd } from "react-icons/io";
 import { RiWebcamFill } from "react-icons/ri";
 import { CgClose } from "react-icons/cg";
 import { BiEnvelope } from "react-icons/bi";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegHeart, FaRegUser } from "react-icons/fa";
 import { MdPermContactCalendar } from "react-icons/md";
-import Image from "next/image";
 import { Container } from "react-grid-system";
 
 const Navbar = ({ isSticky, open, onClose }) => {
@@ -37,17 +36,9 @@ const Navbar = ({ isSticky, open, onClose }) => {
     >
       <Container className="main-container">
         <div className="hide-desktop">
-          <div className="d-flex justify-content-between m-1">
-            <Image
-              src="/img/logo-small.svg"
-              alt="logo Cestuj s detmi"
-              className="cestuj-logo"
-              layout="intrinsic"
-              height={35}
-              width={126}
-            />
-            <button className="btn text-blue ghost" onClick={closeNav}>
-              <CgClose style={{ fontSize: "1em" }} />
+          <div className="d-flex justify-content-end align-items-center">
+            <button className="btn text-blue ghost p-1" onClick={closeNav}>
+              <CgClose style={{ fontSize: "1.2em" }} />
             </button>
           </div>
         </div>
@@ -140,34 +131,43 @@ const Navbar = ({ isSticky, open, onClose }) => {
         </nav>
         <div className="buttons hide-desktop">
           <div className="actions">
-            <button className="btn ghost text-black d-flex" onClick={closeNav}>
-              <AiFillHeart className="text-red btn-icon" />
+            <button
+              className="btn bg-white text-black d-flex align-items-center"
+              onClick={closeNav}
+            >
+              <FaRegHeart className="text-red btn-icon" />
               Oblíbené položky
             </button>
-            <button className="btn ghost text-black d-flex" onClick={closeNav}>
+            <button
+              className="btn bg-white text-black d-flex align-items-center"
+              onClick={closeNav}
+            >
               <BiEnvelope className="text-blue btn-icon" />
               Odběr newsletteru
             </button>
-          </div>
-          <div className="d-flex links justify-content-between">
-            <MyLink href="/objekty" onClick={closeNav}>
-              <button
-                className="btn-small-logo d-flex align-items-center btn ghost text-blue"
-                style={{ marginLeft: "0" }}
-              >
-                <IoMdAdd className="btn-icon" />
+            <button
+              className="btn d-flex align-items-center bg-white text-blue"
+              style={{ marginLeft: "0" }}
+            >
+              <MyLink href="/objekty" onClick={closeNav}>
+                <IoMdAdd className="btn-icon text-blue" />
                 Přidat objekt
-              </button>
-            </MyLink>
-            <MyLink href="/auth/login" onClick={closeNav}>
-              <button
-                className="btn-small-logo d-flex align-items-center btn ghost text-blue"
-                style={{ marginRight: "0" }}
+              </MyLink>
+            </button>
+
+            <button
+              className="btn d-flex align-items-center bg-blue justify-content-center"
+              style={{ marginRight: "0" }}
+            >
+              <MyLink
+                href="/auth/login"
+                onClick={closeNav}
+                className="text-white"
               >
                 <FaRegUser className="btn-icon" />
                 Přihlášení
-              </button>
-            </MyLink>
+              </MyLink>
+            </button>
           </div>
         </div>
       </Container>

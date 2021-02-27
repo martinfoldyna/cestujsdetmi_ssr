@@ -6,16 +6,12 @@ import { FaAt, FaChevronRight, FaLock } from "react-icons/fa";
 import MyLink from "../layouts/MyLink";
 import { useRouter } from "next/router";
 import { handleJwt, loginUser } from "../helpers/auth";
-import { GlobalContext } from "../context/GlobalContext";
 import { parseCookies, setCookie } from "nookies";
 import { useSession, signIn, signOut } from "next-auth/client";
 import Cookie from "js-cookie";
 
 const Login = () => {
-  const userContext = useContext(GlobalContext).user;
-  const { user, setUser } = userContext;
   const router = useRouter();
-  console.log(user);
   const { register, handleSubmit, errors } = useForm();
   const [token, setToken] = useState(null);
   const [session, loading] = useSession();
@@ -23,7 +19,6 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data);
     const loginResponse = await loginUser(data);
-    setUser(loginResponse.user);
 
     setCookie(null, "jwt", loginResponse.jwt, {
       maxAge: 30 * 24 * 60 * 60,

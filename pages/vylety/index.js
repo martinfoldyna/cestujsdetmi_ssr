@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { Col, Row, Container } from "react-grid-system";
 import { BsFilter } from "react-icons/bs";
@@ -13,6 +13,7 @@ import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { fetchQuery } from "../../helpers/fetch";
 import { searchParamsToQueryString } from "../../helpers/helpers";
 import Head from "next/head";
+import { GlobalContext } from "../../context/GlobalContext";
 
 export async function getStaticProps() {
   const limit = 6;
@@ -23,17 +24,14 @@ export async function getStaticProps() {
     _start: 0,
   };
 
-  const [objekty, kategorie] = await Promise.all([
-    fetchQuery(
-      `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
-    ),
-    fetchQuery(enums.URLS.kategorie),
-  ]);
+  const objekty = await fetchQuery(
+    `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
+  );
 
-  return { props: { objekty, kategorie }, revalidate: 3600 };
+  return { props: { objekty }, revalidate: 3600 };
 }
 
-const TipyNaVylety = ({ objekty, kategorie }) => {
+const TipyNaVylety = ({ objekty }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
@@ -94,11 +92,7 @@ const TipyNaVylety = ({ objekty, kategorie }) => {
         <div className="data-wrapper">
           <Row>
             <Col md={2.5} className="hide-mobile">
-              <SideBar
-                topic={enums.TYP_OBJEKTU.zabava}
-                color="orange"
-                kategorie={kategorie}
-              />
+              <SideBar topic={enums.TYP_OBJEKTU.zabava} color="orange" />
             </Col>
             <Col>
               <div className="hide-desktop">

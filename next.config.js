@@ -12,6 +12,7 @@ module.exports = {
       "www.ceske-sjezdovky.cz",
       "image.unet.cz",
       "files.previo.cz",
+      "www.kdykde.cz",
     ],
   },
   webpack(config) {

@@ -69,9 +69,12 @@ const CustomSelect = ({
     setSelectState((prevState) => !prevState);
   };
 
-  useEffect(() => {}, [value]);
+  useEffect(() => {
+    console.log(options);
+    setOptions(options);
+  }, [options]);
 
-  return (
+  return Array.isArray(selectOptions) ? (
     <>
       <div className="custom-select-wrapper" ref={wrapperRef}>
         <div className={`custom-select  ${selectState ? "open" : ""}`}>
@@ -122,6 +125,8 @@ const CustomSelect = ({
         </div>
       </div>
     </>
+  ) : (
+    ""
   );
 };
 

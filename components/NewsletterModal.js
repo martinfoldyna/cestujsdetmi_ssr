@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FaSearch } from "react-icons/fa";
 import { BsPlus } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
+import NewsletterInput from "./NewsletterInput";
 
 const NewsletterModal = ({ onClose, open }) => {
   return (
@@ -28,18 +29,7 @@ const NewsletterModal = ({ onClose, open }) => {
             kam na výlety a dovolenou s dětmi?
           </p>
           <h1>Přihlašte se k odběru!</h1>
-          <div className="search-bar mt-1">
-            <div className="d-flex">
-              <input
-                type="text"
-                placeholder="Zadejte Váš email"
-                className="border-grey"
-              />
-              <button className="btn bg-blue text-white ">
-                <span>Odebírat</span>
-              </button>
-            </div>
-          </div>
+          <NewsletterInput />
         </SectionContent>
       </Section>
     </Modal>

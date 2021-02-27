@@ -12,6 +12,7 @@ const PrevioObjekt = ({
   objekt,
   background,
   badge = false,
+  homepage = false,
   word_count = 35,
 }) => (
   <Link href={`/${enums.TYP_OBJEKTU.ubytovani.url}/previo/${objekt?.hotId}`}>
@@ -22,7 +23,11 @@ const PrevioObjekt = ({
     {/*    } ${!!background ? "border-grey" : ""}`}*/}
     {/*    ref={parentRef}*/}
     {/*>*/}
-    <div className={`article-card d-flex ${background && `bg-${background}`}`}>
+    <div
+      className={`article-card ${
+        homepage ? "article-homepage-card" : ""
+      } d-flex ${background && `bg-${background}`}`}
+    >
       {/*<Row className="w-100 m-0">*/}
       {/*  <Col sm={4} className="p-0">*/}
       <div className="img-wrapper mr-0">

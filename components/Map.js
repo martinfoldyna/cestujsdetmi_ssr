@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import { VectorMap } from "@south-paw/react-vector-maps";
 import czechRepubilc from "../public/maps/czech-republic.js";
 import czechRepubilcRegions from "../public/maps/czech-republic-regions.js";
@@ -11,8 +11,13 @@ import enums from "../enums";
 import { objectToArray } from "../helpers/helpers";
 import { useRouter } from "next/router";
 import Inquiry from "./Inquiry";
+import { GlobalContext } from "../context/GlobalContext";
+import { fetchQuery } from "../helpers/fetch";
 
-const Map = () => {
+const Map = ({ mesta }) => {
+  const { global } = useContext(GlobalContext);
+  const { kraje, oblasti } = global;
+
   const [selectedTrip, setSelectedTrip] = useState(false);
   const [clicked, setClicked] = useState({ key: null, value: null });
   const [hovered, setHovered] = useState({ key: null, value: null });
@@ -23,6 +28,8 @@ const Map = () => {
   const [kraj, setKraj] = useState(null);
   const beautifiedKraj = objectToArray(enums.KRAJ);
   const beautifiedRegion = objectToArray(enums.REGION);
+  const [filteredCities, setFilteredCities] = useState(mesta);
+  const [filteredOblasts, setFilteredOblasts] = useState(oblasti);
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
 
@@ -64,14 +71,18 @@ const Map = () => {
     if (target.attributes?.name) {
       setHovered(() => generateValue(target));
     } else {
-      console.log("target", target);
       setHovered(target);
     }
   };
 
-  const onKrajChange = (e) => {
+  const onKrajChange = async (e) => {
     setMapValue(e);
-    setKraj(e.key);
+    const findKraj = kraje.find((kraj) => kraj.key === e.key);
+    const dbKraj = await fetchQuery(
+      `oblasts-woobjectswkrajs?kraj=${findKraj._id}`
+    );
+    setFilteredOblasts(dbKraj);
+    setKraj(findKraj);
   };
 
   const onOblastChange = () => {};
@@ -79,7 +90,7 @@ const Map = () => {
   const submitLocation = () => {
     router.push({
       pathname: selectedTrip ? "/vylety" : "/ubytovani/",
-      search: `?kraj=${kraj}&mesto=${mesto}&oblast=${oblast}`,
+      search: `?kraj=${kraj.key}&mesto=${mesto}&oblast=${oblast}`,
     });
   };
 
@@ -102,7 +113,15 @@ const Map = () => {
     },
   };
 
-  useEffect(() => {}, [selectedTrip]);
+  useEffect(() => {
+    if (kraj) {
+      setFilteredCities(
+        mesta.filter((mesto) => {
+          return mesto.kraj_id === kraj.old_id;
+        })
+      );
+    }
+  }, [kraj]);
 
   return (
     <section className="map-component bg-white">
@@ -198,19 +217,30 @@ const Map = () => {
         <Col md={2} className="col p-0">
           <CustomSelect
             placeholder="Kraj"
-            options={beautifiedKraj}
+            options={kraje}
             onChange={onKrajChange}
             value={clicked}
             color={color}
           />
         </Col>
-        <Col md={2} className="col p-0">
-          <CustomSelect placeholder="Město" color={color} />
-        </Col>
+        {kraje &&
+          kraj &&
+          Array.isArray(filteredCities) &&
+          filteredCities.length > 0 && (
+            <Col md={2} className="col p-0">
+              <CustomSelect
+                placeholder="Město"
+                options={filteredCities}
+                onChange={(e) => setMesto(e.key)}
+                color={color}
+              />
+            </Col>
+          )}
+
         <Col md={2} className="col p-0">
           <CustomSelect
             placeholder="Oblast"
-            options={beautifiedRegion}
+            options={filteredOblasts}
             onChange={(e) => setOblast(e.key)}
             color={color}
           />

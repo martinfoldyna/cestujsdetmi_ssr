@@ -30,7 +30,7 @@ const RadyTipyHomepage = ({ posts }) => {
 
   return (
     <Section className="rady-tipy-homepage">
-      <SectionHeading>
+      <SectionHeading background="grey">
         <MyLink href="/rady-a-tipy" className="d-flex align-items-center">
           <>
             <AiFillBulb

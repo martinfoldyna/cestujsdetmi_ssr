@@ -21,15 +21,12 @@ const Objekt = ({ objekt, background, useNextImg = true, badge }) => {
   }, [parentRef]);
 
   const isNews = objekt.kategorie === "aktuality";
-
-  console.log(objekt?.typ_objektu);
+  const link = `/${enums.TYP_OBJEKTU[objekt?.typ_objektu]?.url}/detail/${
+    objekt?.hodnota
+  }`;
 
   return (
-    <Link
-      href={`/${enums.TYP_OBJEKTU[objekt?.typ_objektu]?.url}/detail/${
-        objekt?.hodnota
-      }`}
-    >
+    <Link href={link}>
       {/* WAS: */}
       {/*<div*/}
       {/*    className={`objekt-card d-flex align-items-center ${*/}
@@ -143,6 +140,9 @@ const Objekt = ({ objekt, background, useNextImg = true, badge }) => {
               </p>
             )}
           </div>
+          <Link href={link} className="text-blue">
+            Zobrazit >
+          </Link>
         </div>
         {/*  </Col>*/}
         {/*</Row>*/}

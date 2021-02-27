@@ -69,6 +69,7 @@ const Inquiry = ({ typ_objektu, modalOpen, onModalOpen, onModalClose }) => {
                           type="checkbox"
                           ref={register}
                           removeErr
+                          key={index}
                         />
                       )
                   )}
@@ -84,6 +85,7 @@ const Inquiry = ({ typ_objektu, modalOpen, onModalOpen, onModalClose }) => {
                           type="checkbox"
                           ref={register}
                           removeErr
+                          key={index}
                         />
                       )
                   )}
@@ -102,6 +104,7 @@ const Inquiry = ({ typ_objektu, modalOpen, onModalOpen, onModalClose }) => {
                           type="checkbox"
                           ref={register}
                           removeErr
+                          key={index}
                         />
                       )
                   )}
@@ -117,6 +120,7 @@ const Inquiry = ({ typ_objektu, modalOpen, onModalOpen, onModalClose }) => {
                           type="checkbox"
                           ref={register}
                           removeErr
+                          key={index}
                         />
                       )
                   )}

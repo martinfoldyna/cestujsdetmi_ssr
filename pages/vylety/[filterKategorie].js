@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 
 export async function getStaticPaths() {
   const kategorie = await fetchQuery(
-    `${enums.URLS.kategorie}?urceni=${enums.TYP_OBJEKTU.ubytovani.key}`
+    `${enums.URLS.kategorie}?urceni=${enums.TYP_OBJEKTU.ubytovani.key}&_limit=20`
   );
 
   return {
@@ -42,17 +42,14 @@ export async function getStaticProps({ params }) {
     _start: 0,
   };
 
-  const [objekty, kategorie] = await Promise.all([
-    fetchQuery(
-      `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
-    ),
-    fetchQuery(enums.URLS.kategorie),
-  ]);
+  const objekty = await fetchQuery(
+    `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
+  );
 
-  return { props: { objekty, kategorie }, revalidate: 3600 };
+  return { props: { objekty }, revalidate: 3600 };
 }
 
-const TipyNaVyletyKategorie = ({ objekty, kategorie }) => {
+const TipyNaVyletyKategorie = ({ objekty }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
@@ -113,11 +110,7 @@ const TipyNaVyletyKategorie = ({ objekty, kategorie }) => {
         <div className="data-wrapper">
           <Row>
             <Col md={2.5} className="hide-mobile">
-              <SideBar
-                topic={enums.TYP_OBJEKTU.zabava}
-                color="orange"
-                kategorie={kategorie}
-              />
+              <SideBar topic={enums.TYP_OBJEKTU.zabava} color="orange" />
             </Col>
             <Col>
               <div className="hide-desktop">

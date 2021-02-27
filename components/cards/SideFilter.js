@@ -11,7 +11,6 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 const SideFilter = ({
   color,
-  kategorie = [],
   // getCategories,
   topic,
   dateRange = false,
@@ -20,17 +19,12 @@ const SideFilter = ({
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const { global } = useContext(GlobalContext).global;
-  const { kraje, oblasti } = global;
-  console.log(kraje, oblasti);
+  const { global } = useContext(GlobalContext);
+  const { kraje, oblasti, kategorie } = global;
 
   const beautifiedKraj = objectToArray(enums.KRAJ);
   const beautifiedRegion = objectToArray(enums.REGION);
   const router = useRouter();
-
-  useEffect(() => {
-    console.log(kategorie);
-  }, [kategorie]);
 
   const cancelFilter = (e) => {
     if (e.target.classList.contains("selected")) {

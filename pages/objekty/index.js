@@ -38,9 +38,18 @@ const ObjektyOverview = ({ objektyTypy }) => {
     ));
   };
 
-  // useEffect(() => {
-  //   getAllObjectTypes();
-  // }, []);
+  const fetchPublicAPI = async () => {
+    const res = await fetch(
+      " https://salty-fortress-11549.herokuapp.com/objekt-infos?_sort=druh_zapisu:DESC,created_at:DESC&typ_objektu=zabava&_limit=20"
+    );
+    console.log(res);
+    const data = await res.json();
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetchPublicAPI();
+  }, []);
 
   return (
     <>
@@ -104,6 +113,11 @@ const ObjektyOverview = ({ objektyTypy }) => {
         </HeadingWithIcon>
 
         <Row className="justify-content-between">
+          <Col md={2.5}>
+            <div className="mt-1">
+              <SideCards />
+            </div>
+          </Col>
           <Col>
             <div className="objekty">
               <h3 className="font-weight-600 section-heading">
@@ -262,23 +276,12 @@ const ObjektyOverview = ({ objektyTypy }) => {
               </Col>
             </Row>
           </Col>
-          <Col md={2.5}>
-            <div className="mt-1">
-              <SideCards />
-            </div>
-          </Col>
         </Row>
       </Container>
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
-  objekty: state.objekty,
-});
-
-ObjektyOverview.propTypes = {
-  getAllObjectTypes: PropTypes.func.isRequired,
-};
+ObjektyOverview.propTypes = {};
 
 export default ObjektyOverview;

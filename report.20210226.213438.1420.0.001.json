@@ -4,10 +4,10 @@
     "reportVersion": 1,
     "event": "Allocation failed - JavaScript heap out of memory",
     "trigger": "FatalError",
-    "filename": "report.20210203.090148.69525.0.001.json",
-    "dumpEventTime": "2021-02-03T09:01:48Z",
-    "dumpEventTimeStamp": "1612339308768",
-    "processId": 69525,
+    "filename": "report.20210226.213438.1420.0.001.json",
+    "dumpEventTime": "2021-02-26T21:34:38Z",
+    "dumpEventTimeStamp": "1614371678031",
+    "processId": 1420,
     "cwd": "/Users/radimfoldyna/Documents/Programování/_MONIUM/ssr/cestujsdetmi_ssr",
     "commandLine": [
       "/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node",
@@ -51,109 +51,109 @@
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 81161310,
+        "user": 124671020,
         "nice": 0,
-        "sys": 63629790,
-        "idle": 312570270,
+        "sys": 86194550,
+        "idle": 253706460,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 5406650,
+        "user": 8635380,
         "nice": 0,
-        "sys": 5290980,
-        "idle": 446623330,
+        "sys": 7237100,
+        "idle": 448644370,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 68402150,
+        "user": 105772440,
         "nice": 0,
-        "sys": 42657780,
-        "idle": 346267840,
+        "sys": 63380780,
+        "idle": 295369820,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 5518450,
+        "user": 8799920,
         "nice": 0,
-        "sys": 4917590,
-        "idle": 446884180,
+        "sys": 6555050,
+        "idle": 449161210,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 55512510,
+        "user": 88926730,
         "nice": 0,
-        "sys": 33879530,
-        "idle": 367934350,
+        "sys": 52219430,
+        "idle": 323375590,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 5661730,
+        "user": 9213010,
         "nice": 0,
-        "sys": 4744120,
-        "idle": 446913640,
+        "sys": 6252500,
+        "idle": 449049980,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 50836150,
+        "user": 81826870,
         "nice": 0,
-        "sys": 30650960,
-        "idle": 375837890,
+        "sys": 46856830,
+        "idle": 335836760,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 5806500,
+        "user": 9684080,
         "nice": 0,
-        "sys": 4572850,
-        "idle": 446939370,
+        "sys": 5949550,
+        "idle": 448881160,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 41566040,
+        "user": 66315530,
         "nice": 0,
-        "sys": 24551130,
-        "idle": 391206460,
+        "sys": 35920070,
+        "idle": 362283580,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 5885260,
+        "user": 10044460,
         "nice": 0,
-        "sys": 4424170,
-        "idle": 447008540,
+        "sys": 5689690,
+        "idle": 448779940,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 38488330,
+        "user": 61979330,
         "nice": 0,
-        "sys": 21189480,
-        "idle": 397644430,
+        "sys": 31693530,
+        "idle": 370845040,
         "irq": 0
       },
       {
         "model": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
         "speed": 2200,
-        "user": 5972470,
+        "user": 10358750,
         "nice": 0,
-        "sys": 4280040,
-        "idle": 447064690,
+        "sys": 5431630,
+        "idle": 448723010,
         "irq": 0
       }
     ],
@@ -188,7 +188,7 @@
         "name": "en0",
         "internal": false,
         "mac": "f0:18:98:36:e0:4e",
-        "address": "fe80::8e0:d8a:4aac:af33",
+        "address": "fe80::14c4:ab29:1665:9d81",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
         "scopeid": 10
@@ -197,51 +197,33 @@
         "name": "en0",
         "internal": false,
         "mac": "f0:18:98:36:e0:4e",
-        "address": "192.168.0.31",
+        "address": "192.168.1.126",
         "netmask": "255.255.255.0",
         "family": "IPv4"
       },
       {
-        "name": "en0",
-        "internal": false,
-        "mac": "f0:18:98:36:e0:4e",
-        "address": "2a02:8308:290:b000:47a:75:d6db:8691",
-        "netmask": "ffff:ffff:ffff:ffff::",
-        "family": "IPv6",
-        "scopeid": 0
-      },
-      {
-        "name": "en0",
-        "internal": false,
-        "mac": "f0:18:98:36:e0:4e",
-        "address": "2a02:8308:290:b000:c59e:d6bf:db69:6170",
-        "netmask": "ffff:ffff:ffff:ffff::",
-        "family": "IPv6",
-        "scopeid": 0
-      },
-      {
         "name": "awdl0",
         "internal": false,
-        "mac": "8e:af:6d:08:82:c1",
-        "address": "fe80::8caf:6dff:fe08:82c1",
+        "mac": "4a:56:fc:63:ff:8a",
+        "address": "fe80::4856:fcff:fe63:ff8a",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
-        "scopeid": 16
+        "scopeid": 11
       },
       {
         "name": "llw0",
         "internal": false,
-        "mac": "8e:af:6d:08:82:c1",
-        "address": "fe80::8caf:6dff:fe08:82c1",
+        "mac": "4a:56:fc:63:ff:8a",
+        "address": "fe80::4856:fcff:fe63:ff8a",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
-        "scopeid": 17
+        "scopeid": 12
       },
       {
         "name": "utun0",
         "internal": false,
         "mac": "00:00:00:00:00:00",
-        "address": "fe80::610e:8e13:cad:6ff3",
+        "address": "fe80::cc23:1558:fd12:2180",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
         "scopeid": 18
@@ -250,7 +232,7 @@
         "name": "utun1",
         "internal": false,
         "mac": "00:00:00:00:00:00",
-        "address": "fe80::7d1a:5874:e9c6:1b85",
+        "address": "fe80::9e46:5280:fc78:56ac",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
         "scopeid": 19
@@ -259,7 +241,7 @@
         "name": "utun2",
         "internal": false,
         "mac": "00:00:00:00:00:00",
-        "address": "fe80::e880:59f9:c21:b160",
+        "address": "fe80::31bb:1833:dd13:bb20",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
         "scopeid": 20
@@ -268,7 +250,7 @@
         "name": "utun3",
         "internal": false,
         "mac": "00:00:00:00:00:00",
-        "address": "fe80::abab:5bbc:8a85:4174",
+        "address": "fe80::ec1e:e503:6fac:a260",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
         "scopeid": 21
@@ -277,19 +259,19 @@
         "name": "utun4",
         "internal": false,
         "mac": "00:00:00:00:00:00",
-        "address": "fe80::2a12:e59d:d02b:d528",
+        "address": "fe80::1be6:7456:4f1f:8576",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
-        "scopeid": 24
+        "scopeid": 22
       },
       {
         "name": "utun5",
         "internal": false,
         "mac": "00:00:00:00:00:00",
-        "address": "fe80::a6fb:60ec:11c7:b97",
+        "address": "fe80::46b0:e5b9:ec06:3a5a",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
-        "scopeid": 25
+        "scopeid": 23
       },
       {
         "name": "en5",
@@ -301,7 +283,7 @@
         "scopeid": 8
       }
     ],
-    "host": "martinfoldyna-MacBook-Pro.local"
+    "host": "martinfldynaMBP.local.tld"
   },
   "javascriptStack": {
     "message": "No stack.",
@@ -331,11 +313,55 @@
       "symbol": "v8::internal::Heap::FatalProcessOutOfMemory(char const*) [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
     },
     {
-      "pc": "0x00000001002f3d2d",
-      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+      "pc": "0x000000010033f870",
+      "symbol": "v8::internal::EvacuateNewSpaceVisitor::Visit(v8::internal::HeapObject, int) [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
     },
     {
-      "pc": "0x00000001002f0ae6",
+      "pc": "0x00000001003237cb",
+      "symbol": "void v8::internal::LiveObjectVisitor::VisitBlackObjectsNoFail<v8::internal::EvacuateNewSpaceVisitor, v8::internal::MajorNonAtomicMarkingState>(v8::internal::MemoryChunk*, v8::internal::MajorNonAtomicMarkingState*, v8::internal::EvacuateNewSpaceVisitor*, v8::internal::LiveObjectVisitor::IterationMode) [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x000000010032340f",
+      "symbol": "v8::internal::FullEvacuator::RawEvacuatePage(v8::internal::MemoryChunk*, long*) [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x000000010032308e",
+      "symbol": "v8::internal::Evacuator::EvacuatePage(v8::internal::MemoryChunk*) [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000100344de2",
+      "symbol": "v8::internal::PageEvacuationTask::RunInParallel() [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x00000001003142bf",
+      "symbol": "v8::internal::ItemParallelJob::Task::RunInternal() [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000100314742",
+      "symbol": "v8::internal::ItemParallelJob::Run() [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000100324f40",
+      "symbol": "void v8::internal::MarkCompactCollectorBase::CreateAndExecuteEvacuationTasks<v8::internal::FullEvacuator, v8::internal::MarkCompactCollector>(v8::internal::MarkCompactCollector*, v8::internal::ItemParallelJob*, v8::internal::MigrationObserver*, long) [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000100324b10",
+      "symbol": "v8::internal::MarkCompactCollector::EvacuatePagesInParallel() [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000100318dfe",
+      "symbol": "v8::internal::MarkCompactCollector::Evacuate() [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x000000010031639a",
+      "symbol": "v8::internal::MarkCompactCollector::CollectGarbage() [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x00000001002f28ad",
+      "symbol": "v8::internal::Heap::MarkCompact() [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
+    },
+    {
+      "pc": "0x00000001002f0224",
       "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
     },
     {
@@ -361,17 +387,13 @@
     {
       "pc": "0x00000001009288f9",
       "symbol": "Builtins_CEntry_Return1_DontSaveFPRegs_ArgvOnStack_NoBuiltinExit [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
-    },
-    {
-      "pc": "0x00000001008cd588",
-      "symbol": "Builtins_ArrayPrototypePush [/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node]"
     }
   ],
   "javascriptHeap": {
-    "totalMemory": 2196082688,
-    "totalCommittedMemory": 2194771528,
-    "usedMemory": 2170327600,
-    "availableMemory": 20519488,
+    "totalMemory": 1012523008,
+    "totalCommittedMemory": 1010392560,
+    "usedMemory": 992057168,
+    "availableMemory": 17048776,
     "memoryLimit": 2197815296,
     "heapSpaces": {
       "read_only_space": {
@@ -382,38 +404,38 @@
         "available": 230400
       },
       "new_space": {
-        "memorySize": 2097152,
-        "committedMemory": 1360496,
-        "capacity": 1047328,
-        "used": 337840,
-        "available": 709488
+        "memorySize": 33554432,
+        "committedMemory": 31898560,
+        "capacity": 16757248,
+        "used": 16724792,
+        "available": 32456
       },
       "old_space": {
-        "memorySize": 552710144,
-        "committedMemory": 552670736,
-        "capacity": 549180512,
-        "used": 532565520,
-        "available": 16614992
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 0,
+        "used": 0,
+        "available": 0
       },
       "code_space": {
         "memorySize": 3047424,
-        "committedMemory": 2858048,
-        "capacity": 2393696,
-        "used": 2209024,
-        "available": 184672
+        "committedMemory": 2966240,
+        "capacity": 2633312,
+        "used": 2633312,
+        "available": 0
       },
       "map_space": {
-        "memorySize": 9965568,
-        "committedMemory": 9850248,
-        "capacity": 7615200,
-        "used": 7615200,
+        "memorySize": 10227712,
+        "committedMemory": 10064720,
+        "capacity": 7736560,
+        "used": 7736560,
         "available": 0
       },
       "large_object_space": {
-        "memorySize": 1627377664,
-        "committedMemory": 1627377664,
-        "capacity": 1627018024,
-        "used": 1627018024,
+        "memorySize": 964808704,
+        "committedMemory": 964808704,
+        "capacity": 964380512,
+        "used": 964380512,
         "available": 0
       },
       "code_large_object_space": {
@@ -426,24 +448,24 @@
       "new_large_object_space": {
         "memorySize": 0,
         "committedMemory": 0,
-        "capacity": 1047328,
+        "capacity": 16757248,
         "used": 0,
-        "available": 1047328
+        "available": 16757248
       }
     }
   },
   "resourceUsage": {
-    "userCpuSeconds": 296.868,
-    "kernelCpuSeconds": 51.8265,
-    "cpuConsumptionPercent": 0.831233,
-    "maxRss": 1552538402816,
+    "userCpuSeconds": 331.532,
+    "kernelCpuSeconds": 27.1729,
+    "cpuConsumptionPercent": 4.64163,
+    "maxRss": 2006555033600,
     "pageFaults": {
-      "IORequired": 2096,
-      "IONotRequired": 5057842
+      "IORequired": 2463,
+      "IONotRequired": 4052037
     },
     "fsActivity": {
       "reads": 0,
-      "writes": 3
+      "writes": 1
     }
   },
   "libuv": [
@@ -478,18 +500,22 @@
     "USER": "radimfoldyna",
     "npm_package_description": "First, run the development server:",
     "npm_package_dependencies_react_map_gl": "^6.0.2",
+    "npm_package_dependencies_jwt_decode": "^2.2.0",
     "COMMAND_MODE": "unix2003",
     "npm_package_dependencies_xml2js": "^0.4.23",
+    "npm_package_dependencies_nookies": "^2.5.2",
     "npm_package_dependencies_react_icons": "^4.1.0",
-    "SSH_AUTH_SOCK": "/private/tmp/com.apple.launchd.VVoPbe8g1F/Listeners",
+    "SSH_AUTH_SOCK": "/private/tmp/com.apple.launchd.D5kGRWbcQe/Listeners",
     "__CF_USER_TEXT_ENCODING": "0x1F6:0x1D:0x38",
     "npm_package_dependencies_react_responsive": "^8.2.0",
     "npm_package_dependencies_react_grid_system": "^7.1.1",
     "npm_execpath": "/usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js",
     "npm_package_dependencies_react_redux": "^7.2.2",
+    "npm_package_dependencies_cors": "^2.8.5",
     "npm_package_dependencies_prop_types": "^15.7.2",
-    "PATH": "/var/folders/nj/wydlgxw57v5_9qs47_jhrbjc0000gp/T/yarn--1612297358938-0.07876800627725022:/Users/radimfoldyna/Documents/Programování/_MONIUM/ssr/cestujsdetmi_ssr/node_modules/.bin:/Users/radimfoldyna/.config/yarn/link/node_modules/.bin:/Users/radimfoldyna/.nvm/versions/node/v12.10.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/radimfoldyna/.nvm/versions/node/v12.10.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node_modules/npm/bin/node-gyp-bin:/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin",
+    "PATH": "/var/folders/nj/wydlgxw57v5_9qs47_jhrbjc0000gp/T/yarn--1614361784704-0.2772122895622935:/Users/radimfoldyna/Documents/Programování/_MONIUM/ssr/cestujsdetmi_ssr/node_modules/.bin:/Users/radimfoldyna/.config/yarn/link/node_modules/.bin:/Users/radimfoldyna/.nvm/versions/node/v12.10.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/radimfoldyna/.nvm/versions/node/v12.10.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin/node_modules/npm/bin/node-gyp-bin:/Users/radimfoldyna/.nvm/versions/node/v12.10.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin",
     "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"dev\"],\"original\":[\"run\",\"dev\"]}",
+    "npm_package_dependencies_slugify": "^1.4.7",
     "_": "/Users/radimfoldyna/Documents/Programování/_MONIUM/ssr/cestujsdetmi_ssr/node_modules/.bin/next",
     "npm_package_dependencies_next_auth": "^3.1.0",
     "__CFBundleIdentifier": "com.jetbrains.WebStorm",
@@ -514,6 +540,7 @@
     "npm_config_save_prefix": "^",
     "npm_config_strict_ssl": "true",
     "npm_config_version_git_message": "v%s",
+    "npm_package_dependencies_js_cookie": "^2.2.1",
     "npm_package_dependencies_firebase": "^8.2.1",
     "LOGNAME": "radimfoldyna",
     "YARN_WRAP_OUTPUT": "false",
@@ -526,7 +553,7 @@
     "npm_config_version_git_sign": "",
     "npm_config_ignore_scripts": "",
     "npm_config_user_agent": "yarn/1.22.10 npm/? node/v12.10.0 darwin x64",
-    "DISPLAY": "/private/tmp/com.apple.launchd.QoaIoYPYt5/org.macosforge.xquartz:0",
+    "DISPLAY": "/private/tmp/com.apple.launchd.sEGnACxcl5/org.macosforge.xquartz:0",
     "npm_package_dependencies_browser_image_compression": "^1.0.13",
     "npm_package_dependencies_react_datepicker": "^3.3.0",
     "npm_config_init_version": "1.0.0",
@@ -552,12 +579,13 @@
     "FIREBASE_MESSAGING_SENDER_ID": "1079707242132",
     "FIREBASE_APP_ID": "1:1079707242132:web:29261a546357f145226e81",
     "FIREBASE_MEASUREMENT_ID": "G-70BY6S86ZV",
+    "NEXT_PUBLIC_LOCAL_API_ROUTE": "http://localhost:3333/api",
     "NEXT_PUBLIC_TINY_MCE_API_KEY": "cl8r4cxm121auk9r6ipm9y3hfgoo9xsvka19yrymq7ovqy34",
     "PREVIO_API_URL": "http://api.previo.cz/x1",
     "PREVIO_LOGIN": "info@cestujsdetmi.cz",
     "PREVIO_PASSWORD": "QLqYQq3r",
-    "NEXT_PUBLIC_GOOGLE_CLIENT_ID": "572602152858-elsee54sh2f7f59o7fn65tkjh82l7gpm.apps.googleusercontent.com",
-    "NEXT_PUBLIC_GOOGLE_CLIENT_SECRET": "Rfz3VhJlkQ2fn03XyfrMP0I1",
+    "GOOGLE_ID": "572602152858-elsee54sh2f7f59o7fn65tkjh82l7gpm.apps.googleusercontent.com",
+    "GOOGLE_SECRET": "Rfz3VhJlkQ2fn03XyfrMP0I1",
     "NEXTAUTH_URL": "http://localhost:3333",
     "VIPSHOME": "/Users/runner/work/sharp-libvips/sharp-libvips/target"
   },

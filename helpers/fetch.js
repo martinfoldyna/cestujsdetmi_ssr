@@ -16,7 +16,9 @@ export const fetchQuery = async (path, params = null, headers) => {
     }
 
     const response = await fetch(`${url}`, headers);
+    console.log("response", response);
     const data = await response.json();
+    console.log("data", data);
     return data;
     // return "";
   } catch (err) {
@@ -175,9 +177,7 @@ export const fetchPrevio = async (
 };
 
 export const fetchObjekty = async () => {
-  return await fetchQuery(
-    `${enums.URLS.objektInfoMini}?_sort=druh_zapisu:DESC,createdAt:DESC`
-  );
+  return await fetchQuery(`${enums.URLS.objektInfoMini}`);
 };
 
 export const fetchPromo = async (setState) => {

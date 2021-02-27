@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useContext,
+} from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -32,16 +38,21 @@ import enums from "../enums";
 import MyLink from "../layouts/MyLink";
 import { fetchQuery } from "../helpers/fetch";
 import { addToFavorite, removeFromFavorite } from "../helpers/user";
+import { GlobalContext } from "../context/GlobalContext";
 
-const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
+const ObjektDetail = ({ addReview, objekt, user }) => {
   const [viewport, setViewport] = useState({
     width: "100%",
-    height: 500,
+    height: "50vh",
     latitude: 50.7301,
     longitude: 15.1761383,
     zoom: 12,
     scrollZoom: false,
   });
+
+  const { global } = useContext(GlobalContext);
+
+  const { kategorie } = global;
 
   const router = useRouter();
   const { id } = router.query;
@@ -123,10 +134,12 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
           /(?<lat>\d{0,5}[,.]{1}\d{0,10})N,? ?(?<lng>\d{0,5}[,.]{1}\d{0,10})E?/
         );
 
-        setMarker({
-          latitude: parseFloat(regex.lat),
-          longitude: parseFloat(regex.lng),
-        });
+        // if (regex) {
+        //   setMarker({
+        //     latitude: parseFloat(regex.lat),
+        //     longitude: parseFloat(regex.lng),
+        //   });
+        // }
       }
       // if (objekt.adresa) {
       //   getObjektyInOblast(objekt.adresa.oblast);
@@ -161,10 +174,12 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
     const ignoreKeys = ["_id", "id", "__v"];
     const equipmentKeys = Object.keys(equipment)
       .filter((key) => {
-        if (key) ignoreKeys.indexOf(key) < 0;
+        if (key) {
+          return ignoreKeys.indexOf(key) === -1;
+        }
       })
       .filter((key) => {
-        if (key) equipment[key];
+        return key && equipment[key];
       });
     if (equipmentKeys && equipmentKeys.length > 0) {
       const dividedLength = Math.round(equipmentKeys?.length / 3);
@@ -237,8 +252,6 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
       ? objekt?.relative_galerie
       : null;
 
-  console.log(images);
-
   return !objekt ? (
     <LoadingSkeleton />
   ) : (
@@ -277,7 +290,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
             <section className="highlight-card bg-white" id="top">
               <div className="objekt-detail-heading d-flex align-items-center justify-content-between mb-2">
                 <div>
-                  <div className="d-flex align-items-center">
+                  <div className="d-flex icon">
                     <HiHome
                       className={"text-" + color}
                       style={{ marginRight: ".5em", fontSize: "2.5em" }}
@@ -305,7 +318,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                             {objekt.nazev}, {objekt.adresa_ulice},{" "}
                             {objekt.mesto
                               ? objekt.mesto.nazev
-                              : objekt.adresa.mesto}
+                              : objekt.adresa?.mesto}
                             {objekt.adresa_stat
                               ? `, ${objekt.adresa_stat}`
                               : ""}
@@ -315,30 +328,33 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                     </div>
                   </div>
                 </div>
-                {user && (
-                  <div>
-                    {objekt.verejni_uzivatele.find(
-                      (publicUser) => publicUser.email === user?.email
-                    ) && (
-                      <button
-                        className={`btn ghost text-${color} d-flex align-items-center`}
-                        onClick={() =>
-                          removeFromFavorite({ localId: objekt._id, user })
-                        }
-                      >
-                        <AiFillHeart className="btn-icon text-red" />
-                        Odebrat z oblíbených
-                      </button>
-                    )}
-                  </div>
-                )}
-                <button
-                  className={`btn ghost text-${color} d-flex align-items-center p-0`}
-                  onClick={() => addToFavorite({ localId: objekt.id, user })}
-                >
-                  <AiOutlineHeart className="btn-icon text-red" />
-                  Do oblíbených
-                </button>
+                <div className="hide-mobile">
+                  {user && (
+                    <div>
+                      {objekt.verejni_uzivatele.find(
+                        (publicUser) => publicUser.email === user?.email
+                      ) && (
+                        <button
+                          className={`btn ghost text-${color} d-flex align-items-center`}
+                          onClick={() =>
+                            removeFromFavorite({ localId: objekt._id, user })
+                          }
+                        >
+                          <AiFillHeart className="btn-icon text-red" />
+                          Odebrat z oblíbených
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                  <button
+                    className={`btn ghost text-${color} d-flex align-items-center p-0`}
+                    onClick={() => addToFavorite({ localId: objekt.id, user })}
+                  >
+                    <AiOutlineHeart className="btn-icon text-red" />
+                    Do oblíbených
+                  </button>
+                </div>
               </div>
               <div className="hide-mobile">
                 <section className="objekt-detail-images mb-1">
@@ -449,7 +465,7 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                     </div>
                   </Col>
                 )}
-                <Col className="pl-0">
+                <Col className="pl-0 pr-0">
                   <div className="objekt-detail-services">
                     <h2>Služby</h2>
                     <ul className="services">
@@ -576,14 +592,16 @@ const ObjektDetail = ({ addReview, objekt, kategorie, user }) => {
                 <SectionContent>
                   <ul className="list-style-none pl-0 m-0">
                     <Row>
-                      <Col md={3}>
-                        {objekt.dostupnost.mhd && (
-                          <li>MHD: {objekt.dostupnost?.mhd}</li>
-                        )}
-                        {objekt.dostupnost.metro && (
-                          <li>Metro: {objekt.dostupnost?.metro}</li>
-                        )}
-                      </Col>
+                      {(objekt.dostupnost.mhd || objekt.dostupnost.metro) && (
+                        <Col md={3}>
+                          {objekt.dostupnost.mhd && (
+                            <li>MHD: {objekt.dostupnost.mhd}</li>
+                          )}
+                          {objekt.dostupnost.metro && (
+                            <li>Metro: {objekt.dostupnost.metro}</li>
+                          )}
+                        </Col>
+                      )}
                       <Col md={3}>
                         {objekt.dostupnost.csad && (
                           <li>ČSAD: {objekt.dostupnost?.csad}</li>

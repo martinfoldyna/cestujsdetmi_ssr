@@ -1,6 +1,4 @@
 import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
-import { useContext } from "react";
 import MyLink from "../../layouts/MyLink";
 import { Col, Row, Container } from "react-grid-system";
 import { BsPlus } from "react-icons/bs";
@@ -11,18 +9,10 @@ import { FaEnvelope, FaRegUser, FaSave, FaUser } from "react-icons/fa";
 import AdminObjekt from "../../layouts/AdminObjekt";
 import { Section, SectionContent, SectionHeading } from "../../layouts/Section";
 import Input from "../../components/form/Input.js";
-import { logoutUser, getUser } from "../../redux/actions/users";
 import HeadingWithIcon from "../../layouts/HeadingWithIcon";
 import { useRouter } from "next/router";
-import { GlobalContext } from "../../context/GlobalContext";
-import { parseCookies } from "nookies";
-import { fetchQuery } from "../../helpers/fetch";
 import { CgList } from "react-icons/cg";
-import { IoLogOutOutline } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
-import Login from "../../components/LoginComponent";
-import jwt_decode from "jwt-decode";
-import Cookie from "js-cookie";
 import { handleJwt } from "../../helpers/auth";
 
 export async function getServerSideProps(ctx) {

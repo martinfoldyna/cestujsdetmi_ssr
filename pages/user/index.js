@@ -151,14 +151,15 @@ const UserDashboard = ({ user }) => {
                   </Section>
                 </Container>
               )}
-              {user.rady_a_tipy.map((post) => (
-                <HomePageObjekt
-                  article={post}
-                  topic="rady-a-tipy"
-                  key={post.id}
-                  number_of_words={50}
-                />
-              ))}
+              {user.rady_a_tipy &&
+                user.rady_a_tipy.map((post) => (
+                  <HomePageObjekt
+                    article={post}
+                    topic="rady-a-tipy"
+                    key={post.id}
+                    number_of_words={50}
+                  />
+                ))}
             </div>
             <button onClick={signOut} className="btn">
               Odhlásit se

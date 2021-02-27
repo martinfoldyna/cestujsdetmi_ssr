@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-grid-system";
 import { IoMdAdd } from "react-icons/io";
-import {
-  FaRegUser,
-  FaRegHeart,
-  FaEnvelope,
-  FaRegEnvelope,
-  FaSearch,
-} from "react-icons/fa";
+import { FaRegUser, FaRegHeart, FaRegEnvelope, FaSearch } from "react-icons/fa";
 import MyLink from "../layouts/MyLink";
 import Navbar from "./Navbar";
 import PropTypes from "prop-types";
 import Image from "next/image";
-import { BiSearch } from "react-icons/bi";
+import { BiSearch, BiUser } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import SmallButton from "../layouts/SmallButton";
 import { useSession, signOut } from "next-auth/client";
@@ -22,6 +16,7 @@ import { handleJwt, vaidateJwt } from "../helpers/auth";
 import { fetchQuery } from "../helpers/fetch";
 import { toast } from "react-toastify";
 import NewsletterModal from "./NewsletterModal";
+import { MdPersonOutline } from "react-icons/md";
 
 const HeaderComponent = () => {
   const [sticky, setSticky] = useState(false);
@@ -195,7 +190,7 @@ const HeaderComponent = () => {
         <div className="d-flex justify-content-between header-wrapper">
           <MyLink href="/">
             <Image
-              src="/img/logo-small.svg"
+              src="/cestuj_big.svg"
               alt="logo Cestuj s detmi"
               className="cestuj-logo"
               layout="intrinsic"
@@ -204,13 +199,16 @@ const HeaderComponent = () => {
               style={{ height: "80%" }}
             />
           </MyLink>
-          <div className="d-flex">
-            <button className="btn text-blue ghost">
+          <div className="d-flex align-items-center">
+            <button className="btn ghost">
               {/*<Image src="/icons/search.svg" alt="search" layout="fill" />*/}
-              <BiSearch className="text-blue" />
+              <BiSearch className="text-black" />
             </button>
-            <button className="btn text-blue ghost" onClick={toggleNav}>
-              <GiHamburgerMenu className="text-blue" />
+            <button className="btn ghost">
+              <BiUser className="text-black" />
+            </button>
+            <button className="btn ghost" onClick={toggleNav}>
+              <GiHamburgerMenu className="text-black" />
               {/*<Image
               src="/icons/hamburger.svg"
               alt="hamburger menu"

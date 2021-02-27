@@ -57,7 +57,7 @@ const ObjednatObjektInfo = ({
   user,
 }) => {
   const router = useRouter();
-  const { global } = useContext(GlobalContext).global;
+  const { global } = useContext(GlobalContext);
   const { kraje, oblasti } = global;
 
   const { plan, name } = router.query;

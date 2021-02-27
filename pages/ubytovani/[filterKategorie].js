@@ -23,7 +23,7 @@ import Head from "next/head";
 
 export async function getStaticPaths() {
   const kategorie = await fetchQuery(
-    `${enums.URLS.kategorie}?urceni=${enums.TYP_OBJEKTU.ubytovani.key}`
+    `${enums.URLS.kategorie}?urceni=${enums.TYP_OBJEKTU.ubytovani.key}&_limit=20`
   );
 
   return {
@@ -48,17 +48,14 @@ export async function getStaticProps({ params }) {
     _start: 0,
   };
 
-  const [objekty, kategorie] = await Promise.all([
-    fetchQuery(
-      `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
-    ),
-    fetchQuery(enums.URLS.kategorie),
-  ]);
+  const objekty = await fetchQuery(
+    `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
+  );
 
-  return { props: { objekty, kategorie }, revalidate: 3600 };
+  return { props: { objekty }, revalidate: 3600 };
 }
 
-const TipyNaUbytovaniKategorie = ({ objekty, kategorie, removeObjekty }) => {
+const TipyNaUbytovaniKategorie = ({ objekty, removeObjekty }) => {
   const router = useRouter();
   const { query } = router;
   const { filterKategorie } = query;
@@ -108,11 +105,7 @@ const TipyNaUbytovaniKategorie = ({ objekty, kategorie, removeObjekty }) => {
         <div className="data-wrapper">
           <Row>
             <Col md={2.5} className="hide-mobile">
-              <SideBar
-                topic={enums.TYP_OBJEKTU.ubytovani}
-                color="blue"
-                kategorie={kategorie}
-              />
+              <SideBar topic={enums.TYP_OBJEKTU.ubytovani} color="blue" />
             </Col>
             <Col>
               <div className="hide-desktop">

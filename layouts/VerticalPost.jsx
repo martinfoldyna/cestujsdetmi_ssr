@@ -19,7 +19,13 @@ const VerticalPost = ({ post, useNextImg = true }) => {
     : "";
 
   return (
-    <Link href={router.pathname + "/detail/" + post.hodnota}>
+    <Link
+      href={
+        router.pathname.includes("/detail/")
+          ? { path: router.pathname, query: { hodnota: post.hodnota } }
+          : router.pathname + "/detail/" + post.hodnota
+      }
+    >
       <div className="post">
         {(post?.galerie || post?.image_filename || post?.obrazek) && (
           <div className="post-thumbnail-wrapper">

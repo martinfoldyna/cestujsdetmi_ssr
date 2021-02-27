@@ -12,24 +12,34 @@ import { GlobalContext } from "../context/GlobalContext";
 import { Provider } from "next-auth/client";
 import App from "next/app";
 import { ToastContainer } from "react-toastify";
+import { fetchQuery } from "../helpers/fetch";
 
-const MyApp = ({ Component, pageProps, APIuser, kraje, oblasti }) => {
+const MyApp = ({
+  Component,
+  pageProps,
+  APIuser,
+  kraje,
+  oblasti,
+  kategorie,
+}) => {
   // const { global } = pageProps;
-  // const [global, setGlobal] = useState({
-  //   kraje,
-  //   oblasti,
-  // });
-  const [global, setGlobal] = useState({ kraje: null, oblasti: null });
+  const [global, setGlobal] = useState({
+    kraje,
+    oblasti,
+    kategorie,
+  });
+  // const [global, setGlobal] = useState({ kraje: null, oblasti: null });
   const [user, setUser] = useState(null);
   console.log(APIuser);
 
   // const fetchRegions = async () => {
-  //   const kraje = await fetchQuery("krajs");
+  //   const kraje = await fetchQuery("krajs-woobjects");
   //   console.log("kraje", kraje);
-  //   setGlobal({ kraje });
+  //   setGlobal((prevState) => ({ ...prevState, kraje }));
   // };
   //
   // useEffect(() => {
+  //   console.log("fetching regions");
   //   fetchRegions();
   // }, []);
 
@@ -37,9 +47,7 @@ const MyApp = ({ Component, pageProps, APIuser, kraje, oblasti }) => {
 
   return (
     <Provider session={pageProps.session}>
-      <GlobalContext.Provider
-        value={{ user: { user, setUser }, global: { global, setGlobal } }}
-      >
+      <GlobalContext.Provider value={{ global, setGlobal }}>
         <ToastContainer />
         <Header user={APIuser} />
         <main style={{ position: "relative" }}>
@@ -58,11 +66,13 @@ MyApp.getInitialProps = async (appContext) => {
   let appProps = await App.getInitialProps(appContext);
 
   // TODO: REACT MEMO, MAYBE?
-  // const kraje = await fetchQuery("krajs");
-  // const oblasti = await fetchQuery("oblasts");
-  // console.log("kraje", kraje);
-  //
-  // appProps = { ...appProps, kraje, oblasti };
+  const [kategorie, kraje, oblasti] = await Promise.all([
+    fetchQuery("kategories"),
+    fetchQuery("krajs-woobjects"),
+    fetchQuery("oblasts-woobjects"),
+  ]);
+
+  appProps = { ...appProps, kraje, oblasti, kategorie };
 
   return { ...appProps };
 };

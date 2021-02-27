@@ -1349,6 +1349,16 @@
   "resolved" "https://registry.npmjs.org/@hapi/hoek/-/hoek-9.1.1.tgz"
   "version" "9.1.1"
 
+"@iconify/icons-bx@^1.1.0":
+  "integrity" "sha512-4TyjNcB4hO5e5pTe/M0xaW1vqK92DcK3y9n0cDx/bUaBBa/xt2K3OM6uBGVbna2yIcmDvQJGPJpd5hnXtgZrBw=="
+  "resolved" "https://registry.npmjs.org/@iconify/icons-bx/-/icons-bx-1.1.0.tgz"
+  "version" "1.1.0"
+
+"@iconify/react@^1.1.4":
+  "integrity" "sha512-oxq8IMOq8q3nKGiDHbQPC8FcFuBsKve68JWBo140d5LRnj0bv5TB/FE/y01ZSvEZ7PlI2HIrnb2qivPN8kTDgw=="
+  "resolved" "https://registry.npmjs.org/@iconify/react/-/react-1.1.4.tgz"
+  "version" "1.1.4"
+
 "@mapbox/geojson-rewind@^0.5.0":
   "integrity" "sha512-73l/qJQgj/T/zO1JXVfuVvvKDgikD/7D/rHAD28S9BG1OTstgmftrmqfCx4U+zQAmtsB6HcDA3a7ymdnJZAQgg=="
   "resolved" "https://registry.npmjs.org/@mapbox/geojson-rewind/-/geojson-rewind-0.5.0.tgz"
@@ -6575,6 +6585,11 @@
   "version" "0.2.2"
   dependencies:
     "is-arrayish" "^0.3.1"
+
+"slugify@^1.4.7":
+  "integrity" "sha512-tf+h5W1IrjNm/9rKKj0JU2MDMruiopx0jjVA5zCdBtcGjfp0+c5rHw/zADLC3IeKlGHtVbHtpfzvYA0OYT+HKg=="
+  "resolved" "https://registry.npmjs.org/slugify/-/slugify-1.4.7.tgz"
+  "version" "1.4.7"
 
 "snapdragon-node@^2.0.1":
   "integrity" "sha512-O27l4xaMYt/RSQ5TR3vpWCAB5Kb/czIcqUFOM/C4fYcLnbZUc1PkjTAMjof2pBWaSTwOUd6qUHcFGVGj7aIwnw=="

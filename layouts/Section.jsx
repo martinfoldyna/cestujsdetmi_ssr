@@ -13,7 +13,7 @@ export const SectionContent = ({ children, className, ...rest }) => {
 };
 
 export const SectionHeading = ({
-  background = "grey",
+  background = "white",
   children,
   className,
 }) => {

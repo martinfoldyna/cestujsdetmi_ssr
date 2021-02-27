@@ -29,7 +29,7 @@ import { fetchAllPrevioHotels, fetchQuery } from "../../helpers/fetch";
 export const getObjekty = () => async (dispatch) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos-minified?_sort=druh_zapisu_value:DESC,createdAt:DESC`
+      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos?_sort=druh_zapisu:DESC,createdAt:DESC`
     );
 
     const previoFetch = await fetchAllPrevioHotels(2);
@@ -51,7 +51,7 @@ export const getObjekty = () => async (dispatch) => {
 export const getNewPublished = () => async (dispatch) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos-minified?_sort=createdAt:DESC&_limit=4`
+      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos?_sort=createdAt:DESC&_limit=4`
     );
 
     dispatch({ type: GET_NEW_PUBLISHED_OBJEKTY, payload: res.data });
@@ -70,7 +70,7 @@ export const removeObjektInStorage = () => (dispatch) => {
 export const getLastMinute = () => async (dispatch) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos-minified?_sort=druh_zapisu_value:DESC,createdAt:DESC&last_minute_popis_null=false&druh_zapisu_value=04_premium_gold`
+      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos?_sort=druh_zapisu:DESC,createdAt:DESC&last_minute_popis_null=false&druh_zapisu=04_premium_gold`
     );
 
     dispatch({ type: GET_LAST_MINUTE, payload: res.data });
@@ -86,7 +86,7 @@ export const getLastMinute = () => async (dispatch) => {
 export const getObjektyInOblast = (oblast) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos-minified/byOblast/${oblast.key}`
+      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos/byOblast/${oblast.key}`
     );
 
     dispatch({ type: GET_OBJEKTY_IN_OBLAST, payload: res.data });
@@ -123,7 +123,7 @@ export const getObjektyByParams = (params) => async (dispatch) => {
     let paramString = searchParamsToQueryString(params);
     console.log(paramString);
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos-minified?_sort=druh_zapisu:DESC,createdAt:DESC&${paramString}`
+      `${process.env.NEXT_PUBLIC_API_URL}/objekt-infos?_sort=druh_zapisu:DESC,createdAt:DESC&${paramString}`
     );
 
     dispatch({

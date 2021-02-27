@@ -11,7 +11,7 @@ const LastMinuteSmall = ({ background }) => {
 
   const getLastMinute = async () => {
     const fetchedLastMinute = await fetchQuery(
-      `objekt-infos-minified?_sort=druh_zapisu_value:DESC,createdAt:DESC&last_minute_popis_null=false&druh_zapisu=04_premium_gold`
+      `objekt-infos?_sort=druh_zapisu:DESC,createdAt:DESC&last_minute_popis_null=false&druh_zapisu=04_premium_gold`
     );
     setLastMinute(fetchedLastMinute);
     console.log(Math.floor(Math.random() * fetchedLastMinute?.length));

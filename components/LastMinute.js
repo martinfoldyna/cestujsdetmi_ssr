@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getLastMinute } from "../redux/actions/objekty";
 
-const LastMinute = ({}) => {
+const LastMinute = ({ posts }) => {
   return (
     <section className="section">
       <Row className="section-heading justify-content-arround bg-grey m-0 row">
@@ -23,7 +23,7 @@ const LastMinute = ({}) => {
 
       <Row className="p-0 m-0">
         <Col md={12} className="p-0">
-          <LastMinuteBig background="red" />
+          <LastMinuteBig background="red" posts={posts} />
         </Col>
       </Row>
     </section>

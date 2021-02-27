@@ -19,56 +19,50 @@ const PromoArticle = ({
           background ? `bg-${background}` : ""
         } border-yellow`}
       >
-        <Row className="w-100 m-0">
-          <Col md={4} className="p-0">
-            <div className="img-wrapper">
-              <Image
-                src={
-                  article?.image_filename
-                    ? `https://www.cestujsdetmi.cz/${article.image_filename}`
-                    : article?.galerie && article?.galerie.length > 0
-                    ? article?.galerie[0].sm
-                    : article?.obrazek
-                    ? article.obrazek.formats.small.url
-                    : article?.relative_galerie &&
-                      article.relative_galerie.length > 0
-                    ? article.relative_galerie[0].sm
-                    : "/img/placeholder.png"
-                }
-                alt={article?.nazev}
-                layout="fill"
-                objectFit="cover"
-                className="border-radius"
-              />
-            </div>
-          </Col>
-          <Col sm={8}>
-            <div className="content-wrapper">
-              <h3 className="article-heading">{article?.nazev}</h3>
-              <div className="article-description">
-                {article.perex ? (
-                  parse(trimString(article.perex, number_of_words))
-                ) : article?.zakladni_popis || article?.text ? (
-                  <p>
-                    {parse(
-                      trimString(
-                        article?.zakladni_popis || article?.text,
-                        number_of_words
-                      )
-                    )}
-                    ...
-                  </p>
-                ) : (
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Atque fuga quod repellendus repudiandae. Esse iste nihil
-                    nostrum placeat quas, rem ut!
-                  </p>
+        <div className="img-wrapper mr-0">
+          <Image
+            src={
+              article?.image_filename
+                ? `https://www.cestujsdetmi.cz/${article.image_filename}`
+                : article?.galerie && article?.galerie.length > 0
+                ? article?.galerie[0].sm
+                : article?.obrazek
+                ? article.obrazek.formats.small.url
+                : article?.relative_galerie &&
+                  article.relative_galerie.length > 0
+                ? article.relative_galerie[0].sm
+                : "/img/placeholder.png"
+            }
+            alt={article?.nazev}
+            layout="fill"
+            objectFit="cover"
+            className="border-radius"
+          />
+        </div>
+        <div className="content-wrapper">
+          <h3 className="article-heading">{article?.nazev}</h3>
+          <div className="article-description">
+            {article.perex ? (
+              parse(trimString(article.perex, number_of_words))
+            ) : article?.zakladni_popis || article?.text ? (
+              <p>
+                {parse(
+                  trimString(
+                    article?.zakladni_popis || article?.text,
+                    number_of_words
+                  )
                 )}
-              </div>
-            </div>
-          </Col>
-        </Row>
+                ...
+              </p>
+            ) : (
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
+                fuga quod repellendus repudiandae. Esse iste nihil nostrum
+                placeat quas, rem ut!
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </MyLink>
   );

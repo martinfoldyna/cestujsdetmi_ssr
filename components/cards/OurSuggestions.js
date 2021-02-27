@@ -25,11 +25,11 @@ const OurSuggestions = () => {
   return (
     <div>
       <Section className="border-radius">
-        <SectionHeading className="d-flex align-items-center bg-grey p-0">
+        <SectionHeading className="d-flex align-items-center p-0">
           <MdFlag className="icon text-blue" />
           <h3>Naše tipy</h3>
         </SectionHeading>
-        <SectionContent className="bg-white last-minute-small mb-1">
+        <div className="bg-white last-minute-small mb-1">
           <div className="suggestion-article">
             <h3 className="m-0 suggestion-post-heading">Chateau St. Havelno</h3>
             <p>
@@ -65,7 +65,7 @@ const OurSuggestions = () => {
               </MyLink>
             </div>
           )}
-        </SectionContent>
+        </div>
       </Section>
     </div>
   );

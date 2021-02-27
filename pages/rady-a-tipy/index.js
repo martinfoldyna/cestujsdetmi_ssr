@@ -41,7 +41,7 @@ const RadyTipy = ({ posts }) => {
       </Head>
       {objectToArray(enums.RADY_TIPY.KATEGORIE).map((categoryItem) => (
         <Section className=" mt-0" key={categoryItem.key}>
-          <SectionHeading background="grey">
+          <SectionHeading>
             <h2>{categoryItem.value}</h2>
           </SectionHeading>
           <SectionContent>

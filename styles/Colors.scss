@@ -154,7 +154,7 @@
 }
 
 .text-black {
-  color: #000
+  color: $text-black
 }
 
 .text-grey {
@@ -171,103 +171,132 @@
 
 // Links
 .link-coloured:hover {
-  background-position: 0 100%;
+  //color: #157DFF;
+  transition: color .2s ease;
 }
 
 .link-blue {
-  background-image: linear-gradient(to right, $blue, $blue 50%, #000 50%);
-  position: relative;
-  display: inline-block;
+  //background-image: linear-gradient(to right, $blue, $blue 50%, #000 50%);
+  //position: relative;
+  //display: inline-block;
   color: #157DFF;
-  overflow: hidden;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position .5s ease;
-  text-decoration: none !important;
+  //overflow: hidden;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+  //background-size: 200% 100%;
+  //background-position: 100%;
+  transition: color .5s ease;
+  //text-decoration: none !important;
 }
-.link-green {
-  background-image: linear-gradient(to right, $green, $green 50%, #000 50%);
-  position: relative;
-  display: inline-block;
-  color: #157DFF;
-  overflow: hidden;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position .5s ease;
-  text-decoration: none !important;
+.main-nav a.link-blue:hover {
+  color: $blue !important;
+}
 
+.main-nav a.link-green:hover {
+  color: $green !important;
 }
+
+.main-nav a.link-red:hover {
+  color: $red !important;
+}
+
+.main-nav a.link-orange:hover {
+  color: $orange !important;
+}
+
+.main-nav a.link-purple:hover {
+  color: $purple !important;
+}
+
+.main-nav a.link-pink:hover {
+  color: $pink !important;
+}
+
+.main-nav a.link-yellow:hover {
+  color: $yellow !important;
+}
+
+.link-green {
+  //background-image: linear-gradient(to right, $green, $green 50%, #000 50%);
+  //position: relative;
+  //display: inline-block;
+  //color: #157DFF;
+  //overflow: hidden;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+  //background-size: 200% 100%;
+  //background-position: 100%;
+  //transition: background-position .5s ease;
+  //text-decoration: none !important;
+}
+
 .link-pink {
-  background-image: linear-gradient(to right, $pink, $pink 50%, #000 50%);
-    position: relative;
-  display: inline-block;
-  color: #157DFF;
-  overflow: hidden;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position .5s ease;
-  text-decoration: none !important;
+  //background-image: linear-gradient(to right, $pink, $pink 50%, #000 50%);
+  //  position: relative;
+  //display: inline-block;
+  //color: #157DFF;
+  //overflow: hidden;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+  //background-size: 200% 100%;
+  //background-position: 100%;
+  //transition: background-position .5s ease;
+  //text-decoration: none !important;
 
 }
 .link-purple {
-  background-image: linear-gradient(to right, $purple, $purple 50%, #000 50%);
-    position: relative;
-  display: inline-block;
-  color: #157DFF;
-  overflow: hidden;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position .5s ease;
-  text-decoration: none !important;
+  //background-image: linear-gradient(to right, $purple, $purple 50%, #000 50%);
+  //  position: relative;
+  //display: inline-block;
+  //color: #157DFF;
+  //overflow: hidden;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+  //background-size: 200% 100%;
+  //background-position: 100%;
+  //transition: background-position .5s ease;
+  //text-decoration: none !important;
 
 }
 .link-orange {
-  background-image: linear-gradient(to right, $orange, $orange 50%, #000 50%);
-    position: relative;
-  display: inline-block;
-  color: #157DFF;
-  overflow: hidden;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position .5s ease;
-  text-decoration: none !important;
+  //background-image: linear-gradient(to right, $orange, $orange 50%, #000 50%);
+  //  position: relative;
+  //display: inline-block;
+  //color: #157DFF;
+  //overflow: hidden;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+  //background-size: 200% 100%;
+  //background-position: 100%;
+  //transition: background-position .5s ease;
+  //text-decoration: none !important;
 
 }
 .link-red {
-  background-image: linear-gradient(to right, $red, $red 50%, #000 50%);
-    position: relative;
-  display: inline-block;
-  color: #157DFF;
-  overflow: hidden;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position .5s ease;
-  text-decoration: none !important;
+  //background-image: linear-gradient(to right, $red, $red 50%, #000 50%);
+  //  position: relative;
+  //display: inline-block;
+  //color: #157DFF;
+  //overflow: hidden;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+  //background-size: 200% 100%;
+  //background-position: 100%;
+  //transition: background-position .5s ease;
+  //text-decoration: none !important;
 
 }
 .link-yellow {
-  background-image: linear-gradient(to right, $yellow, $yellow 50%, #000 50%);
-    position: relative;
-  display: inline-block;
-  color: #157DFF;
-  overflow: hidden;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position .5s ease;
-  text-decoration: none !important;
+  //background-image: linear-gradient(to right, $yellow, $yellow 50%, #000 50%);
+  //  position: relative;
+  //display: inline-block;
+  //color: #157DFF;
+  //overflow: hidden;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+  //background-size: 200% 100%;
+  //background-position: 100%;
+  //transition: background-position .5s ease;
+  //text-decoration: none !important;
 
 }

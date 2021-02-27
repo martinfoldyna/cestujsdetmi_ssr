@@ -300,13 +300,12 @@ export default {
   },
 
   URLS: {
-    objektInfoMini:
-      "objekt-infos-minified?_sort=druh_zapisu_value:DESC,created_at:DESC",
+    objektInfoMini: "objekt-infos?_sort=druh_zapisu:DESC,created_at:DESC",
     objektInfo: "objekt-infos",
     lastMinute:
-      "objekt-infos-minified?_sort=druh_zapisu_value:DESC,created_at:DESC&last_minute_popis_null=false&druh_zapisu_value=04_premium_gold",
+      "objekt-infos?_sort=druh_zapisu:DESC,created_at:DESC&last_minute_popis_null=false&druh_zapisu=04_premium_gold",
     radyTipy: "rady-a-tipies?_sort=createdAt:DESC",
-    newPublished: "objekt-infos-minified?_sort=createdAt:DESC&_limit=4",
+    newPublished: "objekt-infos?_sort=createdAt:DESC&_limit=4",
     webkamery: "webkameries?_limit=9",
     objektyTypy: "objekty-typies?_sort=hodnota:ASC",
     kategorie: "kategories",
