@@ -27,9 +27,9 @@ export async function getStaticProps({ params }) {
   const { hodnota } = params;
 
   try {
-    const [objektQuery] = await Promise.all([
-      fetchQuery(`${enums.URLS.objektInfo}?hodnota=${hodnota}`),
-    ]);
+    const objektQuery = await fetchQuery(
+      `${enums.URLS.objektInfo}?hodnota=${hodnota}`
+    );
 
     const objekt = objektQuery[0];
     let related = [];
@@ -39,8 +39,10 @@ export async function getStaticProps({ params }) {
       );
     }
 
+    const locations = await fetchQuery("locations");
+
     return objekt
-      ? { props: { objekt, related } }
+      ? { props: { objekt, related, locations } }
       : { props: { notFound: true } };
   } catch (err) {
     console.log(err);
@@ -48,12 +50,21 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const UbytovaniDetail = ({ objekt, related }) => {
+const UbytovaniDetail = ({ objekt, related, locations }) => {
   const [session] = useSession();
 
   return (
-    <Container className="main-container">
-      <ObjektDetail objekt={objekt} related={related} user={session?.user} />
+    <Container className='main-container'>
+      {objekt ? (
+        <ObjektDetail
+          objekt={objekt}
+          related={related}
+          user={session?.user}
+          locations={locations}
+        />
+      ) : (
+        <p>Loading...</p>
+      )}
     </Container>
   );
 };

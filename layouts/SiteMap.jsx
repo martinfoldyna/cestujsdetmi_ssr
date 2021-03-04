@@ -1,16 +1,17 @@
 import React from "react";
-import { Row, Col } from "react-grid-system";
+import { Row, Col, Container } from "react-grid-system";
 import Link from "next/link";
 import Image from "next/image";
 import { FaEnvelope, FaFacebookSquare } from "react-icons/fa";
 import MyLink from "./MyLink";
 import NewsletterInput from "../components/NewsletterInput";
+import { IoLogoInstagram } from "react-icons/io5";
 
 const SiteMap = () => {
   return (
     <div className='bg-grey text-black'>
       <div className='sitemap'>
-        <div className='content-wrapper'>
+        <div className='content-wrapper p-0'>
           <div
             className='d-flex justify-content-between sitemap-header'
             style={{ position: "relative" }}
@@ -28,17 +29,17 @@ const SiteMap = () => {
             </div>
             <div className='hide-mobile'>
               <div className='d-flex align-items-center'>
-                <MyLink href='/newsletter'>
-                  <button className='btn btn-logo ghost'>
-                    Odběr newsletteru{" "}
-                    <FaEnvelope className='text-blue btn-icon right' />
+                <h3 className='m-0 mr-1'>Odebírejte zajímavé novinky!</h3>
+                <NewsletterInput className='mr-1' padding={1} />
+                <MyLink href='https://www.facebook.com/cestujsdetmi.cz/'>
+                  <button className='btn btn-logo btn-circle mr-1'>
+                    <FaFacebookSquare className='text-black m-0 p-0 btn-icon' />
                   </button>
                 </MyLink>
 
-                <MyLink href='https://www.facebook.com/cestujsdetmi.cz/'>
-                  <button className='btn btn-logo ghost'>
-                    Sledujte nás na{" "}
-                    <FaFacebookSquare className='text-blue btn-icon right' />
+                <MyLink href='https://www.instagram.com/cestujsdetmi.cz/'>
+                  <button className='btn btn-logo btn-circle '>
+                    <IoLogoInstagram className='text-black m-0 p-0 btn-icon' />
                   </button>
                 </MyLink>
               </div>

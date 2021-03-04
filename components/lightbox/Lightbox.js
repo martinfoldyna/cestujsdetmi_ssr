@@ -21,6 +21,8 @@ const Lightbox = ({ open, images, clickedImage, onClose, ...rest }) => {
     );
   };
 
+  console.log("Lightbox initialized");
+
   const previousImage = () => {
     setLoadingImage(true);
     setImage((prevState) => {
@@ -69,22 +71,22 @@ const Lightbox = ({ open, images, clickedImage, onClose, ...rest }) => {
       closeOnEsc={true}
       closeOnOverlayClick={true}
       closeIcon={
-        <BsPlus className="cancel-filter-icon close-lightbox text-white" />
+        <BsPlus className='cancel-filter-icon close-lightbox text-white' />
       }
     >
-      <div className="lightbox-container" tabIndex={0} onKeyDown={onKeyDown}>
+      <div className='lightbox-container' tabIndex={0} onKeyDown={onKeyDown}>
         <LightboxItem
           image={currentImage}
           onMouseDown={onMouseDown}
           onImageLoaded={onImageLoaded}
         />
         {currentImage.id !== 0 && (
-          <FaArrowRight className="arrow arrow-left" onClick={previousImage} />
+          <FaArrowRight className='arrow arrow-left' onClick={previousImage} />
         )}
         {currentImage.id !== images.length - 1 && (
-          <FaArrowLeft className="arrow arrow-right" onClick={nextImage} />
+          <FaArrowLeft className='arrow arrow-right' onClick={nextImage} />
         )}
-        <span className="counter">
+        <span className='counter'>
           {currentImage.id + 1 + " / " + images.length}
         </span>
       </div>

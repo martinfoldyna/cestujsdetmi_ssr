@@ -61,20 +61,20 @@ const MyApp = ({
   );
 };
 
-MyApp.getInitialProps = async (appContext) => {
-  // calls page's `getInitialProps` and fills `appProps.pageProps`
-  let appProps = await App.getInitialProps(appContext);
+// MyApp.getInitialProps = async (appContext) => {
+//   // calls page's `getInitialProps` and fills `appProps.pageProps`
+//   let appProps = await App.getInitialProps(appContext);
 
-  // TODO: REACT MEMO, MAYBE?
-  const [kategorie, kraje, oblasti] = await Promise.all([
-    fetchQuery("kategories"),
-    fetchQuery("krajs-woobjects"),
-    fetchQuery("oblasts-woobjects"),
-  ]);
+//   // TODO: REACT MEMO, MAYBE?
+//   const [kategorie, kraje, oblasti] = await Promise.all([
+//     fetchQuery("kategories"),
+//     fetchQuery("krajs-woobjects"),
+//     fetchQuery("oblasts-woobjects"),
+//   ]);
 
-  appProps = { ...appProps, kraje, oblasti, kategorie };
+//   appProps = { ...appProps, kraje, oblasti, kategorie };
 
-  return { ...appProps };
-};
+//   return { ...appProps };
+// };
 
 export default MyApp;

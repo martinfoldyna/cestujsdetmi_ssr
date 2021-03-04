@@ -25,14 +25,14 @@ const HomePageSections = ({ data, loading, topic }) => {
           href: "aktuality",
         });
         headingHTML = (
-          <MyLink href="/aktuality" className="d-flex align-items-center">
+          <MyLink href='/aktuality' className='d-flex align-items-center'>
             <>
               <FaNewspaper
-                className="text-white icon-heading bg-pink"
+                className='text-white icon-heading bg-pink'
                 style={{ marginRight: "1em" }}
               />
               <h2>Aktuality</h2>
-              <RiArrowRightSLine className="text-pink arrow-heading" />
+              <RiArrowRightSLine className='text-pink arrow-heading' />
             </>
           </MyLink>
         );
@@ -40,9 +40,9 @@ const HomePageSections = ({ data, loading, topic }) => {
         break;
       case "nejctenejsi":
         headingHTML = (
-          <div className="d-flex align-items-center">
+          <div className='d-flex align-items-center'>
             <BiBookContent
-              className="text-white icon-heading bg-purple"
+              className='text-white icon-heading bg-purple'
               style={{ marginRight: "1em" }}
             />
             <h2>Nejčtenější články</h2>
@@ -55,14 +55,14 @@ const HomePageSections = ({ data, loading, topic }) => {
           href: "rady-a-tipy",
         });
         headingHTML = (
-          <MyLink href="/rady-a-tipy" className="d-flex align-items-center">
+          <MyLink href='/rady-a-tipy' className='d-flex align-items-center'>
             <>
               <AiFillBulb
-                className="text-white icon-heading bg-yellow"
+                className='text-white icon-heading bg-yellow'
                 style={{ marginRight: "1em" }}
               />
               <h2>Rady a tipy</h2>
-              <RiArrowRightSLine className="text-green arrow-heading" />
+              <RiArrowRightSLine className='text-green arrow-heading' />
             </>
           </MyLink>
         );
@@ -80,14 +80,14 @@ const HomePageSections = ({ data, loading, topic }) => {
 
   return (
     <section className={`section`} style={{ marginTop: "2em" }}>
-      <Row className="justify-content-arround bg-grey m-0 section-heading">
+      <Row className='justify-content-arround bg-white m-0 section-heading'>
         <Col md={12}>
-          <div className="heading-with-icons">{heading}</div>
+          <div className='heading-with-icons'>{heading}</div>
         </Col>
       </Row>
       {data ? (
-        <div className="section-content border-grey">
-          <Row className="justify-content-arround pt-1-15 m-0">
+        <div className='section-content'>
+          <Row className='justify-content-arround pt-1-15 m-0'>
             <Col lg={6}>
               {data &&
                 data.length > 0 &&
@@ -97,7 +97,7 @@ const HomePageSections = ({ data, loading, topic }) => {
                       <HomePageObjekt
                         article={article}
                         key={article.id}
-                        color="purple"
+                        color='purple'
                       />
                     );
                   }
@@ -112,7 +112,7 @@ const HomePageSections = ({ data, loading, topic }) => {
                       <HomePageObjekt
                         article={article}
                         key={article.id}
-                        color="purple"
+                        color='purple'
                       />
                     );
                   }
@@ -125,7 +125,7 @@ const HomePageSections = ({ data, loading, topic }) => {
             >
               <MyLink
                 href={`/${link.href}`}
-                className="d-flex align-items-center"
+                className='d-flex align-items-center'
               >
                 <>
                   Další {link.text}&nbsp;
@@ -136,7 +136,7 @@ const HomePageSections = ({ data, loading, topic }) => {
           )}
         </div>
       ) : (
-        <Row className="justify-content-arround">
+        <Row className='justify-content-arround'>
           <Col lg={5}>
             <LoadingSkeleton />
           </Col>

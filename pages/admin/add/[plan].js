@@ -5,13 +5,15 @@ import { handleJwt } from "../../../helpers/auth";
 
 export async function getServerSideProps(ctx) {
   const user = await handleJwt(ctx);
+  const locations = await fetchQuery("locations");
+
   console.log(user);
   return { props: { APIuser: user } };
 }
 
-const AddObjektWithPlan = ({ apiUser }) => (
-  <Container className="main-container">
-    <ObjednatObjektInfo user={apiUser} />
+const AddObjektWithPlan = ({ apiUser, locations }) => (
+  <Container className='main-container'>
+    <ObjednatObjektInfo user={apiUser} locations={locations} />
   </Container>
 );
 

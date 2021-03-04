@@ -39,8 +39,10 @@ import MyLink from "../layouts/MyLink";
 import { fetchQuery } from "../helpers/fetch";
 import { addToFavorite, removeFromFavorite } from "../helpers/user";
 import { GlobalContext } from "../context/GlobalContext";
+import ClampLines from "react-clamp-lines";
+import CenikModal from "./CenikModal";
 
-const ObjektDetail = ({ addReview, objekt, user }) => {
+const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "50vh",
@@ -50,14 +52,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
     scrollZoom: false,
   });
 
-  const { global } = useContext(GlobalContext);
-
-  const { kategorie } = global;
-
   const router = useRouter();
-  const { id } = router.query;
-
-  const ignoreInComponent = ["_id", "id", "createdAt", "__v"];
 
   const [showLightBox, setShowLightBox] = useState(false);
   const [lightboxImg, setLightboxImg] = useState(null);
@@ -66,7 +61,8 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
   const [selectedStar, setSelectedStar] = useState(null);
   const [shownEquipment, setShownEquipment] = useState("vnitrni_vybaveni");
   const [color, setColor] = useState("blue");
-  const [related, setRelated] = useState(null);
+  const [relatedObjects, setRelated] = useState(related);
+  const [openPriceList, setOpenPriceList] = useState(false);
   const [outerEquipmentLength, setOuterEquipmentLength] = useState(0);
   const [innerEquipmentLength, setInnerEquipmentLength] = useState(0);
 
@@ -76,10 +72,6 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
   const [recenze, setReview] = useState("");
 
   const mapRef = useRef();
-
-  const handleViewportChange = useCallback((newViewport) => {
-    return setViewport(newViewport);
-  }, []);
 
   const handleReview = () => {
     addReview(
@@ -101,24 +93,14 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
 
   // dynamically renders equipment section
 
-  const fetchRelated = async () => {
-    const related = await fetchQuery(
-      `objekt-infos?adresa_oblast_value=${objekt.adresa_oblast_value}`
-    );
-
-    setRelated(related);
-  };
-
   useEffect(() => {
     if (objekt) {
-      fetchRelated();
       setColor(translateColor(objekt.typ_objektu));
 
       setInnerEquipmentLength(objekt.vnitrni_vybaveni?.length);
       setOuterEquipmentLength(objekt.vnejsi_vybaveni?.length);
 
       // Init mapbox
-      console.log("GPS", objekt["dostupnost.mhd"]);
       if (
         objekt.dostupnost?.gps &&
         objekt.dostupnost.gps.lat &&
@@ -148,24 +130,22 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
   }, [objekt]);
 
   const descriptionButtons = (
-    <div className="d-flex buttons">
+    <div className='d-flex buttons'>
       <button
-        className={`btn-small-logo d-flex align-items-center ml-0 btn bg-${color} text-white`}
+        className={`btn-logo d-flex align-items-center ml-0 btn bg-${color} text-white`}
+        onClick={() => setOpenPriceList(true)}
       >
         Ceník
-        <HiOutlineChevronRight className="btn-icon right" />
       </button>
       <button
-        className={`btn-small-logo d-flex align-items-center btn bg-${color} text-white`}
+        className={`btn-logo d-flex align-items-center btn bg-${color} text-white`}
       >
         <a href={`mailto:${objekt.email}`}>Poslat dotaz</a>
-        <HiOutlineChevronRight className="btn-icon right" />
       </button>
       <button
-        className={`btn-small-logo d-flex align-items-center btn bg-${color} text-white`}
+        className={`btn-logo d-flex align-items-center btn outline-${color} text-${color}`}
       >
         Webové stránky
-        <HiOutlineChevronRight className="btn-icon right" />
       </button>
     </div>
   );
@@ -181,21 +161,26 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
       .filter((key) => {
         return key && equipment[key];
       });
+
     if (equipmentKeys && equipmentKeys.length > 0) {
       const dividedLength = Math.round(equipmentKeys?.length / 3);
       let finalEquipment = [];
 
-      for (let i = 0; i <= equipmentKeys.length; i += dividedLength) {
-        finalEquipment.push(equipmentKeys.slice(i, i + dividedLength));
+      if (dividedLength > 0) {
+        for (let i = 0; i <= equipmentKeys.length; i += dividedLength) {
+          finalEquipment.push(equipmentKeys.slice(i, i + dividedLength));
+        }
+      } else {
+        finalEquipment.push(equipmentKeys);
       }
 
       return (
         <Row>
-          {finalEquipment.map(
-            (item) =>
+          {finalEquipment.map((item) => {
+            return (
               item.length > 0 && (
                 <Col md={12 / finalEquipment.length}>
-                  <ul className="list-style-none pl-0">
+                  <ul className='list-style-none pl-0'>
                     {objekt &&
                       shownEquipment &&
                       item.map((key, index) => {
@@ -210,11 +195,11 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
 
                           return (
                             <li
-                              className="d-flex align-items-center mb-1"
+                              className='d-flex align-items-center mb-1'
                               key={key}
                             >
                               <IoMdCheckmark className={"text-" + color} />
-                              <p className="pl-1 m-0">{translatedValue}</p>
+                              <p className='pl-1 m-0'>{translatedValue}</p>
                             </li>
                           );
                         }
@@ -222,7 +207,8 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                   </ul>
                 </Col>
               )
-          )}
+            );
+          })}
         </Row>
       );
     } else {
@@ -245,6 +231,12 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
     setShowLightBox(false);
   };
 
+  const sideBarProps = {
+    topic: enums.TYP_OBJEKTU[objekt.typ_objektu],
+    color,
+    ...locations,
+  };
+
   const images =
     objekt?.galerie && objekt?.galerie?.length > 0
       ? objekt?.galerie
@@ -256,15 +248,15 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
     <LoadingSkeleton />
   ) : (
     <>
-      <div className="objekt-detail">
-        <span className="breadcrumb">
-          <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;
+      <div className='objekt-detail'>
+        <span className='breadcrumb'>
+          <Link href='/'>Úvodní stránka</Link>&nbsp;/&nbsp;
           {objekt.typ_objektu === "ubytovani" ? (
-            <MyLink href="/ubytovani" className={"text-" + color}>
+            <MyLink href='/ubytovani' className={"text-" + color}>
               Ubytování a dovolená
             </MyLink>
           ) : objekt.typ_objektu === "zabava" ? (
-            <MyLink href="/vylety" className={"text-" + color}>
+            <MyLink href='/vylety' className={"text-" + color}>
               Výlety s dětmi
             </MyLink>
           ) : (
@@ -277,28 +269,30 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
         {/*<Link href="/">*/}
         {/*  <FiHome />*/}
         {/*</Link>*/}
+        <CenikModal
+          open={openPriceList}
+          onClose={() => setOpenPriceList(false)}
+          cenik={objekt.ceny}
+          slevy={objekt.slevy}
+        />
         <Row>
-          <Col md={2.5} className="hide-mobile">
-            <SideBar
-              topic={enums.TYP_OBJEKTU[objekt.typ_objektu]}
-              color={color}
-              kategorie={kategorie}
-            />
+          <Col md={2.5} className='hide-mobile'>
+            <SideBar {...sideBarProps} />
           </Col>
 
           <Col md={9.5}>
-            <section className="highlight-card bg-white" id="top">
-              <div className="objekt-detail-heading d-flex align-items-center justify-content-between mb-2">
+            <section className='highlight-card bg-white' id='top'>
+              <div className='objekt-detail-heading d-flex align-items-center justify-content-between mb-2'>
                 <div>
-                  <div className="d-flex icon">
+                  <div className='d-flex icon'>
                     <HiHome
                       className={"text-" + color}
                       style={{ marginRight: ".5em", fontSize: "2.5em" }}
                     />
 
                     <div>
-                      <h1 className="m-0">{objekt?.nazev}</h1>
-                      <div className="rating d-flex">
+                      <h1 className='m-0'>{objekt?.nazev}</h1>
+                      <div className='rating d-flex'>
                         {/*<div*/}
                         {/*  className={`text-${color} stars d-flex align-self-end`}*/}
                         {/*>*/}
@@ -315,10 +309,13 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                         <div className={`d-flex align-items-center`}>
                           <span style={{ fontSize: "12px", marginTop: ".2em" }}>
                             <IoMdPin className={`icon text-${color}`} />
-                            {objekt.nazev}, {objekt.adresa_ulice},{" "}
+                            {objekt.nazev}, {objekt.adresa_ulice}
                             {objekt.mesto
-                              ? objekt.mesto.nazev
-                              : objekt.adresa?.mesto}
+                              ? ", " + objekt.mesto.value
+                              : ", " + objekt.adresa?.mesto}
+                            {objekt.kraj
+                              ? `, ${objekt.kraj.value} kraj`
+                              : `, ${objekt.adresa?.kraj} kraj`}
                             {objekt.adresa_stat
                               ? `, ${objekt.adresa_stat}`
                               : ""}
@@ -328,7 +325,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                     </div>
                   </div>
                 </div>
-                <div className="hide-mobile">
+                <div className='hide-mobile'>
                   {user && (
                     <div>
                       {objekt.verejni_uzivatele.find(
@@ -340,7 +337,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                             removeFromFavorite({ localId: objekt._id, user })
                           }
                         >
-                          <AiFillHeart className="btn-icon text-red" />
+                          <AiFillHeart className='btn-icon text-red' />
                           Odebrat z oblíbených
                         </button>
                       )}
@@ -351,13 +348,13 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                     className={`btn ghost text-${color} d-flex align-items-center p-0`}
                     onClick={() => addToFavorite({ localId: objekt.id, user })}
                   >
-                    <AiOutlineHeart className="btn-icon text-red" />
+                    <AiOutlineHeart className='btn-icon text-red' />
                     Do oblíbených
                   </button>
                 </div>
               </div>
-              <div className="hide-mobile">
-                <section className="objekt-detail-images mb-1">
+              <div className='hide-mobile'>
+                <section className='objekt-detail-images mb-1'>
                   {images?.length > 0 &&
                     images?.map((image, i) => {
                       if (typeof image === "object") {
@@ -382,19 +379,19 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                                         (i < 10 ? "0" : "") + `${i}`
                                       }`
                                 }
-                                layout="fill"
-                                objectFit="cover"
+                                layout='fill'
+                                objectFit='cover'
                               />
 
                               {i === 2 ? (
-                                <div className="overlay">
-                                  <p className="show-more">
+                                <div className='overlay'>
+                                  <p className='show-more'>
                                     +{images.length - 2} <span>dalších</span>
                                   </p>
                                 </div>
                               ) : (
-                                <div className="overlay  on-hover">
-                                  <FaSearchPlus className="enlarge-icon text-white" />
+                                <div className='overlay  on-hover'>
+                                  <FaSearchPlus className='enlarge-icon text-white' />
                                 </div>
                               )}
                             </div>
@@ -410,7 +407,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                   />
                 </section>
               </div>
-              <section className="objekt-detail-images mb-1 hide-desktop">
+              <section className='objekt-detail-images mb-1 hide-desktop'>
                 {images && images?.length > 0 && (
                   <>
                     <div
@@ -428,16 +425,16 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                             ? images[0].alternativeText
                             : `${objekt.nazev}`
                         }
-                        layout="fill"
-                        objectFit="cover"
+                        layout='fill'
+                        objectFit='cover'
                       />
-                      <div className="overlay">
-                        <div className="d-flex justify-content-between image-actions content-wrapper">
-                          <div className="d-flex align-items-center text-white">
-                            <AiOutlineHeart className="text-white btn-icon" />
+                      <div className='overlay'>
+                        <div className='d-flex justify-content-between image-actions content-wrapper'>
+                          <div className='d-flex align-items-center text-white'>
+                            <AiOutlineHeart className='text-white btn-icon' />
                             <span>Do oblíbených</span>
                           </div>
-                          <div className="text-white">
+                          <div className='text-white'>
                             <span>+{images.length - 2} dalších</span>
                           </div>
                         </div>
@@ -453,44 +450,44 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                 )}
               </section>
 
-              <Row className="m-0">
+              <Row className='m-0'>
                 {objekt?.zakladni_popis && (
-                  <Col md={8.7} className="p-0">
-                    <div className="objekt-detail-description">
-                      <div className="text-wrapper">
+                  <Col md={8.7} className='p-0'>
+                    <div className='objekt-detail-description'>
+                      <div className='text-wrapper'>
                         <h2>Základní popis</h2>
                         <div>{parse(objekt?.zakladni_popis)}</div>
                       </div>
-                      <div className="hide-mobile">{descriptionButtons}</div>
+                      <div className='hide-mobile'>{descriptionButtons}</div>
                     </div>
                   </Col>
                 )}
-                <Col className="pl-0 pr-0">
-                  <div className="objekt-detail-services">
+                <Col className='pl-0 pr-0'>
+                  <div className='objekt-detail-services'>
                     <h2>Služby</h2>
-                    <ul className="services">
-                      <li className="service-item d-flex align-items-center">
+                    <ul className='services'>
+                      <li className='service-item d-flex align-items-center'>
                         <BiWifi className={`text-${color} service-item-icon`} />{" "}
                         <span>WiFi Zdarma</span>
                       </li>
-                      <li className="service-item d-flex align-items-center">
+                      <li className='service-item d-flex align-items-center'>
                         <RiCupLine
                           className={`text-${color} service-item-icon`}
                         />{" "}
                         <span>Snídaně v ceně</span>
                       </li>
-                      <li className="service-item d-flex align-items-center">
+                      <li className='service-item d-flex align-items-center'>
                         <RiParkingBoxLine
                           className={`text-${color} service-item-icon`}
                         />{" "}
                         <span>Parkování</span>
                       </li>
-                      <li className="service-item d-flex align-items-center">
+                      <li className='service-item d-flex align-items-center'>
                         <FaDog className={`text-${color} service-item-icon`} />{" "}
                         <span>Domácí mazlíčci</span>
                       </li>
                     </ul>
-                    <div className="hide-desktop">{descriptionButtons}</div>
+                    <div className='hide-desktop'>{descriptionButtons}</div>
                   </div>
                 </Col>
               </Row>
@@ -498,11 +495,27 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
 
             {objekt?.popis && (
               <Section>
-                <SectionHeading background="white">
+                <SectionHeading background='white'>
                   <h2>Podrobný popis</h2>
                 </SectionHeading>
                 <SectionContent>
-                  <div>{parse(objekt?.popis)}</div>
+                  <div>
+                    {parse(objekt?.popis)[0] !== "<" ? (
+                      <ClampLines
+                        text={objekt?.popis}
+                        id='really-unique-id'
+                        lines={4}
+                        ellipsis='...'
+                        moreText='Zobrazit více..'
+                        lessText='Zobrazit méně..'
+                        className='custom-class'
+                        innerElement='p'
+                      />
+                    ) : (
+                      // <p>{parse(objekt?.popis)}</p>
+                      parse(objekt?.popis)
+                    )}
+                  </div>
                 </SectionContent>
               </Section>
             )}
@@ -513,15 +526,15 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
               ""
             ) : (
               <Section>
-                <SectionHeading background="white">
-                  <div className="d-flex justify-content-between align-items-center">
+                <SectionHeading background='white'>
+                  <div className='d-flex justify-content-between align-items-center'>
                     <h2>Vybavení</h2>
                     {noEquipemnt &&
                     !objekt.vnitrni_vybaveni_popis &&
                     !objekt.vnejsi_vybaveni_popis ? (
                       ""
                     ) : (
-                      <div className="d-flex align-items-center">
+                      <div className='d-flex align-items-center'>
                         {(objekt.vnitrni_vybaveni ||
                           objekt.vnitrni_vybaveni_popis) && (
                           <button
@@ -535,7 +548,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                             }
                           >
                             Vnitřní
-                            <span className="hide-mobile">&nbsp;vybavení</span>
+                            <span className='hide-mobile'>&nbsp;vybavení</span>
                           </button>
                         )}
                         {(objekt.vnejsi_vybaveni ||
@@ -549,7 +562,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                             onClick={() => setShownEquipment("vnejsi_vybaveni")}
                           >
                             Vnější
-                            <span className="hide-mobile">&nbsp;vybavení</span>
+                            <span className='hide-mobile'>&nbsp;vybavení</span>
                           </button>
                         )}
                       </div>
@@ -572,7 +585,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
             )}
             {objekt.zajimavosti && (
               <Section>
-                <SectionHeading background="white">
+                <SectionHeading background='white'>
                   <h2>Zajímavosti v okolí</h2>
                 </SectionHeading>
                 <SectionContent>
@@ -586,11 +599,11 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
             )}
             {objekt.dostupnost && (
               <Section>
-                <SectionHeading background="white">
+                <SectionHeading background='white'>
                   <h2>Dostupnost</h2>
                 </SectionHeading>
                 <SectionContent>
-                  <ul className="list-style-none pl-0 m-0">
+                  <ul className='list-style-none pl-0 m-0'>
                     <Row>
                       {(objekt.dostupnost.mhd || objekt.dostupnost.metro) && (
                         <Col md={3}>
@@ -623,14 +636,14 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                 </SectionContent>
               </Section>
             )}
-            <Row className="row">
-              <Col className="col">
-                <Section className="objekt-detail-contacts">
-                  <SectionHeading background="white">
+            <Row className='row'>
+              <Col className='col'>
+                <Section className='objekt-detail-contacts'>
+                  <SectionHeading background='white'>
                     <h2>Kontakt</h2>
                   </SectionHeading>
                   <SectionContent>
-                    <ul className="list-style-none pl-0 m-0 contact-list">
+                    <ul className='list-style-none pl-0 m-0 contact-list'>
                       <li className={"text-" + color}>
                         <FaGlobeAmericas className={`icon text-${color}`} />
                         <a
@@ -640,28 +653,28 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                               ? objekt.web
                               : `https://${objekt.web}`
                           }
-                          target="_blank"
+                          target='_blank'
                         >
                           {objekt.web}
                         </a>
                       </li>
                       <li className={"text-" + color}>
-                        <HiOutlineMail className="icon" />
+                        <HiOutlineMail className='icon' />
                         <a href={`mailto:${objekt.email}`}>{objekt.email}</a>
                       </li>
                       <li className={"text-" + color}>
-                        <BiPhone className="icon" />
+                        <BiPhone className='icon' />
                         <a
                           href={`tel:${objekt.telefon}`}
-                          className="text-black"
+                          className='text-black'
                         >
                           {objekt.telefon}
                         </a>
                       </li>
                       {objekt.adresa && (
                         <li className={"text-" + color}>
-                          <p className="m-0">
-                            <FiMapPin className="icon" />
+                          <p className='m-0'>
+                            <FiMapPin className='icon' />
                             {objekt.adresa.ulice}, {objekt.adresa.mesto}, Česká
                             republika
                           </p>
@@ -673,25 +686,30 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
               </Col>
               {objekt.provozni_doba && objekt.provozni_doba.length > 0 && (
                 <Col md={4}>
-                  <Section>
-                    <SectionHeading background="white">
+                  <Section className='mt-0'>
+                    <SectionHeading background='white'>
                       <h2>Provozní doba</h2>
                     </SectionHeading>
                     <SectionContent>
-                      <ul className="operating-hours-timetable">
-                        {objekt.provozni_doba.map((doba, i) => (
-                          <li key={i}>
-                            {doba.popis}: {doba.otevira_v} - {doba.zavira_v}
-                          </li>
-                        ))}
+                      <ul className='operating-hours-timetable'>
+                        {objekt.provozni_doba.map(
+                          (doba, i) =>
+                            (doba.doba || doba.popis) && (
+                              <li key={i}>
+                                {doba.popis}
+                                {doba.popis && doba.doba ? ": " : ""}
+                                {doba.doba}
+                              </li>
+                            )
+                        )}
                       </ul>
                     </SectionContent>
                   </Section>
                 </Col>
               )}
             </Row>
-            <Section>
-              <SectionHeading background="white">
+            <Section className=''>
+              <SectionHeading background='white'>
                 <h2>Mapa</h2>
               </SectionHeading>
               <ReactMapGL
@@ -702,7 +720,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                   process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
                 }
                 scrollZoom={false}
-                className="mapbox"
+                className='mapbox'
                 style={{ maxWidth: "100%", width: "auto" }}
               >
                 <div style={{ position: "absolute", left: 10, top: 10 }}>
@@ -716,7 +734,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
               </ReactMapGL>
             </Section>
             <Section>
-              <SectionHeading background="white">
+              <SectionHeading background='white'>
                 <h2>Recenze</h2>
               </SectionHeading>
               <SectionContent>
@@ -730,8 +748,8 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                     ))}
                   </ul>
                 )}
-                <div className="d-flex align-items-center add-review">
-                  <span className="text-grey">Ohodnotit:</span>
+                <div className='d-flex align-items-center add-review'>
+                  <span className='text-grey'>Ohodnotit:</span>
                   <div
                     className={"stars text-" + color}
                     onMouseLeave={() =>
@@ -742,14 +760,14 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                       hoveredStar >= number ? (
                         <BsStarFill
                           key={number}
-                          className="star mr-1"
+                          className='star mr-1'
                           onMouseEnter={(e) => setHoveredStar(number)}
                           onClick={() => setSelectedStar(number)}
                         />
                       ) : (
                         <BsStar
                           key={number}
-                          className="star mr-1"
+                          className='star mr-1'
                           onMouseEnter={(e) => setHoveredStar(number)}
                           onClick={() => setSelectedStar(number)}
                         />
@@ -758,15 +776,15 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
                   </div>
                 </div>
                 <Input
-                  name="recenze"
-                  text="Přidejte recenzi"
-                  className="ml-0 mt-1"
+                  name='recenze'
+                  text='Přidejte recenzi'
+                  className='ml-0 mt-1'
                   onChange={(e) => setReview(e.target.value)}
                   value={recenze}
                 />
                 {(recenze || selectedStar) && (
                   <button
-                    className="btn bg-blue text-white mt-1"
+                    className='btn bg-blue text-white mt-1'
                     onClick={handleReview}
                   >
                     Odeslat
@@ -776,7 +794,7 @@ const ObjektDetail = ({ addReview, objekt, user }) => {
             </Section>
             {related && related.length > 0 && (
               <Section>
-                <SectionHeading background="white">
+                <SectionHeading background='white'>
                   <h2>Další tipy na ubytování v této oblasti</h2>
                 </SectionHeading>
                 <SectionContent>

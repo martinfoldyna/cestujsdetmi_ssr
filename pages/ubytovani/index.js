@@ -15,6 +15,7 @@ import { fetchAllPrevioHotels, fetchQuery } from "../../helpers/fetch";
 import { searchParamsToQueryString } from "../../helpers/helpers";
 import Head from "next/head";
 import { GlobalContext } from "../../context/GlobalContext";
+import MobileFilters from "../../components/mobileFilters";
 
 export async function getStaticProps() {
   const limit = 6;
@@ -25,37 +26,32 @@ export async function getStaticProps() {
     _start: 0,
   };
 
-  const [objekty, previoObjekty] = await Promise.all([
+  const [objekty, previoObjekty, locations] = await Promise.all([
     fetchQuery(
       `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
     ),
     fetchAllPrevioHotels(10),
+    fetchQuery("locations"),
   ]);
 
   return {
     props: {
       objekty,
       previo: previoObjekty?.success ? previoObjekty.data : [],
+      locations,
     },
     revalidate: 3600,
   };
 }
 
-const TipyNaUbytovani = ({ objekty, previo, removeObjekty }) => {
+const TipyNaUbytovani = ({ objekty, previo, removeObjekty, locations }) => {
   const router = useRouter();
-
-  const global = useContext(GlobalContext)?.global;
-
-  const { kategorie } = global;
 
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
   const [next, setNext] = useState(2);
   const [previoHotels, setPrevioHotels] = useState(previo);
-
-  // const globalContext = useContext(GlobalContext)?.global;
-  // const { global, setGlobal } = globalContext;
 
   /**
    * Fetch profile photo gallery for each previo hotel
@@ -106,23 +102,29 @@ const TipyNaUbytovani = ({ objekty, previo, removeObjekty }) => {
     _start: 0,
   };
 
+  const sideBarProps = {
+    topic: enums.TYP_OBJEKTU.ubytovani,
+    color: "blue",
+    ...locations,
+  };
+
   return (
     <>
       <Head>
         <title>Ubytování a dovolená s dětmi | Cestuj s dětmi.cz</title>
-        <meta name="description" content="Ubytování a dovolená s dětmi" />
-        <meta name="keywords" content="Ubytování a dovolená s dětmi" />
-        <meta name="robots" content="index, follow" />
+        <meta name='description' content='Ubytování a dovolená s dětmi' />
+        <meta name='keywords' content='Ubytování a dovolená s dětmi' />
+        <meta name='robots' content='index, follow' />
       </Head>
-      <Container className="main-container">
-        <span className="breadcrumb">
-          <Link href="/">Úvodní stránka</Link>
+      <Container className='main-container'>
+        <span className='breadcrumb'>
+          <Link href='/'>Úvodní stránka</Link>
           &nbsp;/&nbsp;Ubytování a dovolená
         </span>
 
         <HeadingWithIcon
-          background="blue"
-          heading="Tipy na ubytování"
+          background='blue'
+          heading='Tipy na ubytování'
           icon={HiHome}
         >
           <p>
@@ -132,44 +134,14 @@ const TipyNaUbytovani = ({ objekty, previo, removeObjekty }) => {
             ale třeba i na lodi. Dovolenou s dětmi v Čechách si užijete.
           </p>
         </HeadingWithIcon>
-        <div className="data-wrapper ubytovani">
+        <div className='data-wrapper ubytovani'>
           <Row>
-            <Col md={2.5} className="hide-mobile">
-              <SideBar
-                topic={enums.TYP_OBJEKTU.ubytovani}
-                color="blue"
-                kategorie={kategorie}
-              />
+            <Col md={2.5} className='hide-mobile'>
+              <SideBar {...sideBarProps} />
             </Col>
-            <Col className=".col-pl-0">
-              <div className="hide-desktop">
-                <div
-                  className={`d-flex ${
-                    openFilter
-                      ? "justify-content-between"
-                      : "justify-content-end"
-                  }`}
-                >
-                  {openFilter && (
-                    <button
-                      className="btn btn-small-logo bg-blue text-white m-0"
-                      onClick={() => setOpenFilter(false)}
-                    >
-                      Zavřít filtr
-                    </button>
-                  )}
-                  <button
-                    className="btn btn-small-logo ghost m-0"
-                    onClick={() => setOpenFilter(true)}
-                  >
-                    Upřesnit parametry{" "}
-                    <BsFilter className="text-blue btn-icon right" />
-                  </button>
-                </div>
-                {openFilter && (
-                  <SideFilter topic={enums.TYP_OBJEKTU.ubytovani.key} />
-                )}
-              </div>
+            <Col className='.col-pl-0'>
+              <MobileFilters {...sideBarProps} />
+
               <ListFilteredItems
                 region={selectedRegion}
                 city={selectedCity}
@@ -177,8 +149,8 @@ const TipyNaUbytovani = ({ objekty, previo, removeObjekty }) => {
                 objekty={objekty}
                 previoObjekty={previoHotels}
               />
-              <div className="hide-desktop">
-                <div className="mt-1">
+              <div className='hide-desktop'>
+                <div className='mt-1'>
                   <SideCards />
                 </div>
               </div>

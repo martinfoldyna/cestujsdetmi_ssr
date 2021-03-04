@@ -83,12 +83,6 @@ input::-webkit-inner-spin-button {
   border-radius: $border-radius;
 }
 
-/* Track */
-.custom-options::-webkit-scrollbar-track {
-  //border: 1px solid $highlight-grey;
-  //border-radius: $border-radius;
-}
-
 /* Handle */
 .custom-options::-webkit-scrollbar-thumb {
   background: $highlight-grey;
@@ -110,7 +104,8 @@ input[type="number"] {
 }
 
 .main-container,
-.hero .wrapper {
+.hero .wrapper,
+.sitemap {
   max-width: 1330px !important;
 }
 
@@ -281,7 +276,7 @@ input[type="number"] {
 
   & h1 {
     margin: 0;
-    font-size: 46px;
+    font-size: 42px;
     color: #101010;
 
     & .underline {
@@ -289,14 +284,14 @@ input[type="number"] {
 
       &::before {
         position: absolute;
-        bottom: 0;
+        bottom: 2px;
         left: 0;
         right: 0;
-        height: 7px;
+        height: 4px;
         content: "";
         background-color: $blue;
         z-index: -1;
-        border: $border-radius;
+        border-radius: $border-radius;
       }
     }
   }
@@ -390,6 +385,25 @@ input[type="number"] {
 
 .hero .btn-small-logo {
   font-weight: normal;
+  height: 100px;
+}
+
+.hero .logos-wrapper.d-flex {
+  align-items: center;
+
+  & .logo {
+    position: relative;
+    height: 33px;
+    flex: 1;
+    margin: 0 5px;
+    box-sizing: border-box;
+
+    & img {
+      object-fit: contain;
+      padding: 0 5px;
+      filter: grayscale(100%);
+    }
+  }
 }
 
 .search-bar {
@@ -488,8 +502,17 @@ input[type="number"] {
   border-radius: $border-radius;
 }
 
-.map-component .margin-wrapper {
+.map-component .margin-wrapper,
+.actions-component .margin-wrapper {
   margin-left: 3em;
+}
+
+.actions-component {
+  margin: 0;
+
+  & .btn a {
+    line-height: 0;
+  }
 }
 
 .map-component .heading-with-icons {
@@ -586,10 +609,6 @@ input[type="number"] {
   -moz-outline-style: none;
 }
 
-.map path {
-  //transition: .3s opacity;
-}
-
 .map path:hover,
 .map .clicked {
   opacity: 0.6;
@@ -638,7 +657,13 @@ input[type="number"] {
   padding: 0.5em 30px 2em;
 
   //border: 1px solid $grey;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
   background-color: #fff;
+}
+
+.show-objekt {
+  display: none !important;
 }
 
 .section-content p:first-of-type {
@@ -659,6 +684,7 @@ input[type="number"] {
 
 .filtered-objects {
   padding: 0.5rem 0.7rem;
+  overflow: hidden;
 }
 
 .filtered-objects .article-card:last-of-type::after {
@@ -911,6 +937,10 @@ input[type="number"] {
   list-style: none;
   padding: 0;
   margin: 0;
+
+  & li {
+    margin-bottom: 0.5em;
+  }
 }
 
 .uploading-objekt {
@@ -976,9 +1006,13 @@ input[type="number"] {
 }
 
 .sitemap {
-  max-width: 1220px;
+  // max-width: 1220px;
   margin: 0 auto;
   padding: 2em 30px;
+
+  & .search-bar input {
+    width: 220px;
+  }
 }
 
 .sitemap h3 {
@@ -1307,6 +1341,88 @@ input[type="number"] {
 
 .objekt-detail-heading .d-flex.icon {
   align-items: center;
+}
+
+.detail-pricelist-wrapper {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  border: 0 solid silver;
+  border-width: 0;
+
+  & .pricelist-item {
+    display: grid;
+    grid-template-columns: 30% 30% 40%;
+    width: 800px;
+    position: relative;
+    border: 0 solid silver;
+    border-width: 0 0 0 0;
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: $highlight-grey;
+      height: 1px;
+      content: "";
+    }
+  }
+
+  & .second-column {
+    background-color: #f9f9f9;
+  }
+
+  & .third-column {
+    background-color: #e3f4fb;
+  }
+
+  & .first-row {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      content: "";
+      background-color: $blue;
+      height: 2px;
+    }
+
+    & .column {
+      background-color: transparent;
+    }
+  }
+
+  & .column {
+    padding: 0.5em 15px;
+  }
+}
+
+.modal-close-icon {
+  background-color: $blue;
+  color: #fff;
+  padding: 0.5em;
+  border-radius: 50%;
+}
+
+.react-responsive-modal-modal.modalWithOverflow {
+  overflow: visible;
+}
+
+.react-responsive-modal-closeButton {
+  top: 0 !important;
+  transform: translate(50%, -50%);
+  right: 0 !important;
+  z-index: 1000;
+}
+
+.section-content.price-list-content {
+  overflow: hidden;
+}
+
+.icon-big {
+  font-size: 1.5em;
 }
 
 @import "MediaQueries";

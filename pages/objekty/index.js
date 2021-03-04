@@ -38,24 +38,11 @@ const ObjektyOverview = ({ objektyTypy }) => {
     ));
   };
 
-  const fetchPublicAPI = async () => {
-    const res = await fetch(
-      " https://salty-fortress-11549.herokuapp.com/objekt-infos?_sort=druh_zapisu:DESC,created_at:DESC&typ_objektu=zabava&_limit=20"
-    );
-    console.log(res);
-    const data = await res.json();
-    console.log(data);
-  };
-
-  useEffect(() => {
-    fetchPublicAPI();
-  }, []);
-
   return (
     <>
-      <Container className="main-container">
-        <span className="breadcrumb">
-          <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Registrace - nabídka
+      <Container className='main-container'>
+        <span className='breadcrumb'>
+          <Link href='/'>Úvodní stránka</Link>&nbsp;/&nbsp;Registrace - nabídka
           možností
         </span>
 
@@ -90,8 +77,8 @@ const ObjektyOverview = ({ objektyTypy }) => {
         {/*  </Row>*/}
         {/*</div>*/}
         <HeadingWithIcon
-          heading="Registrace - Nabídka možností prezentace"
-          background="blue"
+          heading='Registrace - Nabídka možností prezentace'
+          background='blue'
           icon={FiPlus}
         >
           <>
@@ -112,17 +99,17 @@ const ObjektyOverview = ({ objektyTypy }) => {
           </>
         </HeadingWithIcon>
 
-        <Row className="justify-content-between">
+        <Row className='justify-content-between'>
           <Col md={2.5}>
-            <div className="mt-1">
+            <div className='mt-1'>
               <SideCards />
             </div>
           </Col>
           <Col>
-            <div className="objekty">
-              <h3 className="font-weight-600 section-heading">
+            <div className='objekty'>
+              <h3 className='font-weight-600 section-heading'>
                 Pokud chcete vybrat formu prezentace, nejdříve se{" "}
-                <MyLink href="/auth/register" className="text-blue">
+                <MyLink href='/auth/register' className='text-blue'>
                   registrujte
                 </MyLink>
                 .
@@ -146,14 +133,14 @@ const ObjektyOverview = ({ objektyTypy }) => {
               </Row>
             </div>
             {objektyTypy && <ObjektyTable objektyTypy={objektyTypy} />}
-            <h3 className="font-weight-600 section-heading">Vysvětlivky</h3>
+            <h3 className='font-weight-600 section-heading'>Vysvětlivky</h3>
             <Row>
-              <Col md={6} style={{ marginBottom: "2em" }} className="pl-0">
-                <div className="plan-card">
-                  <h3 className="card-heading d-flex align-items-center">
+              <Col md={6} style={{ marginBottom: "2em" }} className='pl-0'>
+                <div className='plan-card'>
+                  <h3 className='card-heading d-flex align-items-center'>
                     <span>
                       PR článek v sekci &nbsp;
-                      <FaNewspaper className="text-pink link-icon m-0" />
+                      <FaNewspaper className='text-pink link-icon m-0' />
                       &nbsp; Aktuality
                     </span>
                   </h3>
@@ -190,12 +177,12 @@ const ObjektyOverview = ({ objektyTypy }) => {
                   </p>
                 </div>
               </Col>
-              <Col md={6} style={{ marginBottom: "2em" }} className="p-0">
-                <div className="plan-card">
-                  <h3 className="card-heading d-flex align-items-center">
+              <Col md={6} style={{ marginBottom: "2em" }} className='p-0'>
+                <div className='plan-card'>
+                  <h3 className='card-heading d-flex align-items-center'>
                     <span>
                       PR článek v sekci &nbsp;
-                      <AiFillBulb className="text-yellow link-icon m-0" />
+                      <AiFillBulb className='text-yellow link-icon m-0' />
                       &nbsp; Rady a tipy
                     </span>
                   </h3>
@@ -229,7 +216,7 @@ const ObjektyOverview = ({ objektyTypy }) => {
                   </p>{" "}
                   <p>
                     Sekci RADY A TIPY naleznete přímo{" "}
-                    <MyLink href="/rady-tipy" className="text-yellow">
+                    <MyLink href='/rady-tipy' className='text-yellow'>
                       zde
                     </MyLink>
                     .
@@ -239,8 +226,8 @@ const ObjektyOverview = ({ objektyTypy }) => {
                     Pokud Vás nabídka zaujala, pak určitě neváhejte a
                     kontaktujte nás{" "}
                     <a
-                      href="mailto:info@cestujsdetmi.cz"
-                      className="text-yellow"
+                      href='mailto:info@cestujsdetmi.cz'
+                      className='text-yellow'
                     >
                       info@cestujsdetmi.cz
                     </a>
@@ -249,8 +236,8 @@ const ObjektyOverview = ({ objektyTypy }) => {
                 </div>
               </Col>
               <Col md={6}>
-                <div className="plan-card">
-                  <h3 className="card-heading d-flex align-items-center">
+                <div className='plan-card'>
+                  <h3 className='card-heading d-flex align-items-center'>
                     Bannerová reklama
                   </h3>
                   <p>

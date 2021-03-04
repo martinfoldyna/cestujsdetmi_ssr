@@ -14,6 +14,7 @@ import { fetchQuery } from "../../helpers/fetch";
 import { searchParamsToQueryString } from "../../helpers/helpers";
 import Head from "next/head";
 import { GlobalContext } from "../../context/GlobalContext";
+import MobileFilters from "../../components/mobileFilters";
 
 export async function getStaticProps() {
   const limit = 6;
@@ -28,10 +29,12 @@ export async function getStaticProps() {
     `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
   );
 
-  return { props: { objekty }, revalidate: 3600 };
+  const locations = await fetchQuery(`locations`);
+
+  return { props: { objekty, locations }, revalidate: 3600 };
 }
 
-const TipyNaVylety = ({ objekty }) => {
+const TipyNaVylety = ({ objekty, locations }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
@@ -55,6 +58,12 @@ const TipyNaVylety = ({ objekty }) => {
   //   }
   // }, []);
 
+  const sideBarProps = {
+    topic: enums.TYP_OBJEKTU.zabava,
+    color: "orange",
+    ...locations,
+  };
+
   return (
     <>
       <Head>
@@ -62,24 +71,24 @@ const TipyNaVylety = ({ objekty }) => {
           Tipy kam na výlet s dětmi v Čechách i na Moravě | Cestujsdetmi.cz
         </title>
         <meta
-          name="description"
-          content="Tipy kam na výlet s dětmi v Čechách i na Moravě"
+          name='description'
+          content='Tipy kam na výlet s dětmi v Čechách i na Moravě'
         />
         <meta
-          name="keywords"
-          content="Tipy kam na výlet s dětmi v Čechách i na Moravě"
+          name='keywords'
+          content='Tipy kam na výlet s dětmi v Čechách i na Moravě'
         />
-        <meta name="robots" content="index, follow" />
+        <meta name='robots' content='index, follow' />
       </Head>
-      <Container className="main-container">
-        <span className="breadcrumb">
-          <Link href="/">Úvodní stránka</Link>
+      <Container className='main-container'>
+        <span className='breadcrumb'>
+          <Link href='/'>Úvodní stránka</Link>
           &nbsp;/&nbsp;Výlety s dětmi
         </span>
 
         <HeadingWithIcon
-          background="orange"
-          heading="Tipy kam na výlet s dětmi v Čechách i na Moravě"
+          background='orange'
+          heading='Tipy kam na výlet s dětmi v Čechách i na Moravě'
           icon={AiFillCompass}
         >
           <p>
@@ -89,40 +98,13 @@ const TipyNaVylety = ({ objekty }) => {
             rodinné výlety a výlety s dětmi.
           </p>
         </HeadingWithIcon>
-        <div className="data-wrapper">
+        <div className='data-wrapper'>
           <Row>
-            <Col md={2.5} className="hide-mobile">
-              <SideBar topic={enums.TYP_OBJEKTU.zabava} color="orange" />
+            <Col md={2.5} className='hide-mobile'>
+              <SideBar {...sideBarProps} />
             </Col>
             <Col>
-              <div className="hide-desktop">
-                <div
-                  className={`d-flex ${
-                    openFilter
-                      ? "justify-content-between"
-                      : "justify-content-end"
-                  }`}
-                >
-                  {openFilter && (
-                    <button
-                      className="btn btn-small-logo bg-blue text-white m-0"
-                      onClick={() => setOpenFilter(false)}
-                    >
-                      Zavřít filtr
-                    </button>
-                  )}
-                  <button
-                    className="btn btn-small-logo ghost m-0"
-                    onClick={() => setOpenFilter(true)}
-                  >
-                    Upřesnit parametry{" "}
-                    <BsFilter className="text-blue btn-icon right" />
-                  </button>
-                </div>
-                {openFilter && (
-                  <SideFilter topic={enums.TYP_OBJEKTU.zabava.key} />
-                )}
-              </div>
+              <MobileFilters {...sideBarProps} />
               {/*<Switch>*/}
               {/*  <Route exact path={match.path}>*/}
               {
@@ -151,8 +133,8 @@ const TipyNaVylety = ({ objekty }) => {
               {/*  </Route>*/}
               {/*</Switch>*/}
 
-              <div className="hide-desktop">
-                <div className="mt-1">
+              <div className='hide-desktop'>
+                <div className='mt-1'>
                   <SideCards />
                 </div>
               </div>

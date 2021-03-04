@@ -13,11 +13,12 @@ import { Section, SectionContent } from "../../layouts/Section";
 
 export async function getStaticProps() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
+  const locations = await fetchQuery("locations");
 
-  return { props: { webcams }, revalidate: 3600 };
+  return { props: { webcams, locations }, revalidate: 3600 };
 }
 
-const Webcams = ({ webcams }) => {
+const Webcams = ({ webcams, locations }) => {
   const router = useRouter();
   const { query } = router;
   const { kraj, mesto, oblast } = query;
@@ -25,6 +26,10 @@ const Webcams = ({ webcams }) => {
   const limit = 9;
   const [next, setNext] = useState(limit);
   const [allWebcams, setAllWebcams] = useState(webcams);
+
+  const layoutProps = {
+    ...locations,
+  };
 
   useEffect(() => {
     if (Object.keys(query) > 0) {
@@ -64,30 +69,30 @@ const Webcams = ({ webcams }) => {
   return !webcams ? (
     <LoadingSkeleton />
   ) : (
-    <>
+    <WebcamsLayout {...layoutProps}>
       <Head>
         <title>Webkamery v Čechách a na Moravě | Cestuj s dětmi.cz</title>
         <meta
-          name="description"
-          content="Webkamery a webové kamery na vybraných místech v čechách. Online záběry z atraktivních míst po celé ČR. "
+          name='description'
+          content='Webkamery a webové kamery na vybraných místech v čechách. Online záběry z atraktivních míst po celé ČR. '
         />
         <meta
-          name="keywords"
-          content="webkamery,webové kamery,online kamery,Čechy,ski areály,města"
+          name='keywords'
+          content='webkamery,webové kamery,online kamery,Čechy,ski areály,města'
         />
-        <meta name="robots" content="index, follow" />
+        <meta name='robots' content='index, follow' />
       </Head>
 
-      <Row className="mr-0 bg-white pt-1 position-relative border-radius">
+      <Row className='mr-0 bg-white pt-1 position-relative border-radius'>
         <>
           {allWebcams?.map((webcam) => (
             <Col md={4} key={webcam.id}>
               <VerticalPost post={webcam} useNextImg={false} />
             </Col>
           ))}
-          <div className="d-flex justify-content-center w-100 mt-1">
+          <div className='d-flex justify-content-center w-100 mt-1'>
             <button
-              className="btn btn-small-logo btn-homepage-detail center bg-dark-purple text-white"
+              className='btn btn-small-logo btn-homepage-detail center bg-dark-purple text-white'
               onClick={() => {
                 loadMoreWebcams();
                 setNext((prevState) => prevState + limit);
@@ -98,11 +103,11 @@ const Webcams = ({ webcams }) => {
           </div>
         </>
       </Row>
-    </>
+    </WebcamsLayout>
   );
 };
 
-Webcams.Layout = WebcamsLayout;
+// Webcams.Layout = WebcamsLayout;
 
 Webcams.propTypes = {
   webcams: PropTypes.array.isRequired,

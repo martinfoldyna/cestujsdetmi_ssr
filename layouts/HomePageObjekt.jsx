@@ -6,6 +6,7 @@ import parse from "html-react-parser";
 import Image from "next/image";
 import { Row, Col } from "react-grid-system";
 import MyLink from "./MyLink";
+import { translateColor } from "../helpers/translators";
 
 const HomePageObjekt = ({
   article,
@@ -15,6 +16,7 @@ const HomePageObjekt = ({
   topic = "ubytovani",
 }) => {
   const link = `/${topic}/detail/${article?.hodnota}`;
+  const color = translateColor(topic);
   return article ? (
     <div className={link}>
       <Link href={`/${topic}/detail/${article?.hodnota}`}>
@@ -25,8 +27,8 @@ const HomePageObjekt = ({
         >
           {/*<Row className="w-100 m-0">*/}
           {/*  <Col className="p-0">*/}
-          <div className="d-flex align-items-center">
-            <div className="img-wrapper">
+          <div className='d-flex align-items-center'>
+            <div className='img-wrapper'>
               <Image
                 src={
                   article?.image_filename
@@ -47,9 +49,9 @@ const HomePageObjekt = ({
                     ? article.relative_galerie[0].alternativeText
                     : article.nazev
                 }
-                className="img border-radius"
-                objectFit="cover"
-                layout="fill"
+                className='img border-radius'
+                objectFit='cover'
+                layout='fill'
                 // width={6}
                 // height={3}
               />
@@ -58,9 +60,9 @@ const HomePageObjekt = ({
           </div>
           {/*</Col>*/}
           {/*<Col className="p-0">*/}
-          <div className="content-wrapper">
+          <div className='content-wrapper'>
             <h3
-              className="article-heading"
+              className='article-heading'
               // className={
               //   color
               //     ? `text-${color}`
@@ -70,12 +72,19 @@ const HomePageObjekt = ({
               {article?.nazev ? article?.nazev : "Nadpis"}
             </h3>
             {article?.kategorie === "aktuality" && article?.adresa && (
-              <span className="article-location">
-                <IoMdPin className="text-pink address-icon" />{" "}
+              <span className='article-location'>
+                <IoMdPin className='text-pink address-icon' />{" "}
                 {article.adresa.mesto}
               </span>
             )}
-            <div className="article-description">
+            {(article.kraj || article.mesto) && (
+              <div className='d-flex article-location align-items-center'>
+                <IoMdPin className={`text-${color}`} />
+                {article.mesto ? `${article.mesto.value}, ` : ""}
+                {article.kraj ? `${article.kraj.value} kraj` : ""}
+              </div>
+            )}
+            <div className='article-description'>
               {article.perex ? (
                 parse(trimString(article.perex, number_of_words))
               ) : article?.zakladni_popis || article?.text ? (
@@ -97,14 +106,14 @@ const HomePageObjekt = ({
               )}
             </div>
             {article?.kategorie === "aktuality" && (
-              <div className="article-news-date">srpen 2020</div>
+              <div className='article-news-date'>srpen 2020</div>
             )}
           </div>
           {/*  </Col>*/}
           {/*</Row>*/}
-          <div className="hide-desktop">
-            <div className="d-flex justify-content-end">
-              <MyLink href={link} className="text-blue">
+          <div className='hide-desktop'>
+            <div className='d-flex justify-content-end'>
+              <MyLink href={link} className='text-blue'>
                 Zobrazit >
               </MyLink>
             </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import Router, { useRouter } from "next/router";
 import { connect } from "react-redux";
@@ -21,7 +21,7 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
   const router = useRouter();
   const { kraj, mesto, oblast } = router.query;
 
-  const limit = 4;
+  const limit = 10;
   const [next, setNext] = useState(limit);
   const [filterParams, setFilterParams] = useState(null);
   const [region, setRegion] = useState(kraj);
@@ -29,6 +29,7 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
   const [area, setArea] = useState(oblast);
   const [listObjects, setListObjects] = useState(objekty);
   const [promo, setPromo] = useState(null);
+  const [color, setColor] = useState("blue");
   let fetchParams = {
     typ_objektu,
     _limit: limit,
@@ -56,6 +57,10 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
   }, []);
 
   useEffect(() => {
+    setColor(translateColor(typ_objektu));
+  }, [typ_objektu]);
+
+  useEffect(() => {
     console.log("query", router.query);
 
     if (Object.keys(router.query)?.length > 0) {
@@ -77,28 +82,27 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
     });
     setObjektyCount(count);
   };
-  //
-  // useEffect(() => {
-  //   // getObjektyByParams(fetchParams);
-  //   // setObjektyCount(() => countObjekty());
-  //   countAllObjekty();
-  // }, []);
-
-  // const fetchObjects = () => {
-  //   getObjektyByParams({
-  //     ...fetchParams,
-  //     kategorie_value: filter,
-  //   });
-  // };
 
   const paginate = async () => {
-    /* await getObjektyByParams({
-      ...fetchParams,
-      method: "add",
-      _start: next,
-      _limit: limit,
-    });
-    setNext((prevState) => prevState + limit);*/
+    // const data = await getObjektyByParams({
+    //   ...fetchParams,
+    //   method: "add",
+    //   _start: next,
+    //   _limit: limit,
+    // });
+    // setNext((prevState) => prevState + limit);
+
+    const objekty = await fetchQuery(
+      `objekt-infos?${searchParamsToQueryString({
+        ...fetchParams,
+        _start: next,
+        _limit: limit,
+      })}`
+    );
+
+    setNext((prevState) => prevState + limit);
+
+    setListObjects((prevState) => [...prevState, ...objekty]);
   };
 
   const filteredItems = () => {
@@ -206,10 +210,10 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
   return !listObjects ? (
     <LoadingSkeleton />
   ) : (
-    <div className="filtered-objects bg-white border-radius">
+    <div className='filtered-objects bg-white border-radius'>
       {/* Filter badges */}
       {router.query && (
-        <div className="filter–badges d-flex">
+        <div className='filter–badges d-flex'>
           {Object.keys(router.query).map((key) => (
             <span
               className={`filter-badge d-flex align-items-center bg-${translateColor(
@@ -217,7 +221,7 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
               )}`}
               onClick={() => removeFilterValue(key)}
             >
-              <IoClose className="icon" />
+              <IoClose className='icon' />
               {renderFilterBadgeValue(key)}
             </span>
           ))}
@@ -230,21 +234,27 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
           const selectIndex = (index - 3) / 4;
 
           return (
-            <>
-              <Objekt objekt={objekt} key={objekt.id} background="white" />
+            <Fragment key={objekt.id}>
+              <Objekt
+                objekt={objekt}
+                key={objekt.id}
+                background='white'
+                color={color}
+              />
               {index > 0 &&
               (index + 1) % 4 === 0 &&
               promo &&
-              promo.length > (index + 1) / 4 ? (
+              (promo.length > (index + 1) / 4 || promo.length === index) ? (
                 <PromoArticle
                   article={promo[selectIndex]}
                   key={promo[selectIndex]?.id}
-                  background="white"
+                  background='white'
+                  index={selectIndex}
                 />
               ) : (
                 ""
               )}
-            </>
+            </Fragment>
           );
         })}
       {previoObjekty?.map((objekt, index) => (
@@ -253,26 +263,16 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
       {objekty && objekty.length === 0 && objektyCount === 0 && (
         <p>Omlouvám se, ale tato kategorie neobsahuje žádné objekty.</p>
       )}
-      {objekty?.length > 0 && objekty?.length < objektyCount && (
-        <div className="d-flex justify-content-center">
-          <button
-            className={`btn bg-${
-              typ_objektu === enums.TYP_OBJEKTU.zabava.key ? "orange" : "blue"
-            } text-white`}
-            onClick={paginate}
-          >
-            Načíst další
-          </button>
-        </div>
-      )}
+      {/* {objekty?.length > 0 && objekty?.length < objektyCount && ( */}
+      <div className='d-flex justify-content-center'>
+        <button className={`btn bg-${color} text-white`} onClick={paginate}>
+          Načíst další
+        </button>
+      </div>
+      {/* )} */}
       {previoObjekty?.length > 0 && (
-        <div className="d-flex justify-content-center">
-          <button
-            className={`btn bg-${
-              typ_objektu === enums.TYP_OBJEKTU.zabava.key ? "orange" : "blue"
-            } text-white`}
-            onClick={paginate}
-          >
+        <div className='d-flex justify-content-center'>
+          <button className={`btn bg-${color} text-white`} onClick={paginate}>
             Načíst další
           </button>
         </div>

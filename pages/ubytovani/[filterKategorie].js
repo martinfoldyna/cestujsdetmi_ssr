@@ -20,6 +20,7 @@ import {
 } from "../../helpers/helpers";
 import { GlobalContext } from "../../context/GlobalContext";
 import Head from "next/head";
+import MobileFilters from "../../components/mobileFilters";
 
 export async function getStaticPaths() {
   const kategorie = await fetchQuery(
@@ -52,10 +53,12 @@ export async function getStaticProps({ params }) {
     `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
   );
 
-  return { props: { objekty }, revalidate: 3600 };
+  const locations = await fetchQuery("locations");
+
+  return { props: { objekty, locations }, revalidate: 3600 };
 }
 
-const TipyNaUbytovaniKategorie = ({ objekty, removeObjekty }) => {
+const TipyNaUbytovaniKategorie = ({ objekty, locations }) => {
   const router = useRouter();
   const { query } = router;
   const { filterKategorie } = query;
@@ -77,7 +80,11 @@ const TipyNaUbytovaniKategorie = ({ objekty, removeObjekty }) => {
     _start: 0,
   };
 
-  useEffect(() => {}, []);
+  const sideBarProps = {
+    topic: enums.TYP_OBJEKTU.ubytovani,
+    color: "blue",
+    ...locations,
+  };
 
   return (
     <>
@@ -88,54 +95,27 @@ const TipyNaUbytovaniKategorie = ({ objekty, removeObjekty }) => {
           Cestuj s dětmi.cz
         </title>
       </Head>
-      <Container className="main-container">
-        <span className="breadcrumb">
-          <Link href="/">Úvodní stránka</Link>
+      <Container className='main-container'>
+        <span className='breadcrumb'>
+          <Link href='/'>Úvodní stránka</Link>
           &nbsp;/&nbsp;Ubytování a dovolená
         </span>
 
         <HeadingWithIcon
-          background="blue"
+          background='blue'
           heading={enums.KATEGORIE.UBYTOVANI[filterKategorie]?.value}
           icon={HiHome}
-          icon_size="medium"
+          icon_size='medium'
         >
           <p>Naše tipy na ubytování a dovolenou</p>
         </HeadingWithIcon>
-        <div className="data-wrapper">
+        <div className='data-wrapper'>
           <Row>
-            <Col md={2.5} className="hide-mobile">
-              <SideBar topic={enums.TYP_OBJEKTU.ubytovani} color="blue" />
+            <Col md={2.5} className='hide-mobile'>
+              <SideBar {...sideBarProps} />
             </Col>
             <Col>
-              <div className="hide-desktop">
-                <div
-                  className={`d-flex ${
-                    openFilter
-                      ? "justify-content-between"
-                      : "justify-content-end"
-                  }`}
-                >
-                  {openFilter && (
-                    <button
-                      className="btn btn-small-logo bg-blue text-white m-0"
-                      onClick={() => setOpenFilter(false)}
-                    >
-                      Zavřít filtr
-                    </button>
-                  )}
-                  <button
-                    className="btn btn-small-logo ghost m-0"
-                    onClick={() => setOpenFilter(true)}
-                  >
-                    Upřesnit parametry{" "}
-                    <BsFilter className="text-blue btn-icon right" />
-                  </button>
-                </div>
-                {openFilter && (
-                  <SideFilter topic={enums.TYP_OBJEKTU.ubytovani.key} />
-                )}
-              </div>
+              <MobileFilters {...sideBarProps} />
 
               <ListFilteredItems
                 region={selectedRegion}
@@ -144,8 +124,8 @@ const TipyNaUbytovaniKategorie = ({ objekty, removeObjekty }) => {
                 objekty={objekty}
               />
 
-              <div className="hide-desktop">
-                <div className="mt-1">
+              <div className='hide-desktop'>
+                <div className='mt-1'>
                   <SideCards />
                 </div>
               </div>

@@ -1,3 +1,7 @@
+import { BiWifi } from "react-icons/bi";
+import { FaDog } from "react-icons/fa";
+import { RiCupLine, RiParkingBoxLine } from "react-icons/ri";
+
 export default {
   MEDIA_QUERIES: {
     phone: "phone",
@@ -341,6 +345,32 @@ export default {
         key: "catering",
         value: "Catering",
         buttonValue: "Catering",
+      },
+    },
+  },
+  OBJEKTY: {
+    VYBAVENI: {
+      IKONY: {
+        mazlicci_vitani: {
+          value: "Domácí mazlíčci",
+          key: "inside_mazlicci_vitani",
+          icon: FaDog,
+        },
+        parking: {
+          value: "Parkování",
+          key: "outside_parkoviste",
+          icon: RiParkingBoxLine,
+        },
+        snidane: {
+          value: "Snídaně/Polopenze/Plná penze",
+          key: "inside_snidane_polopenze_plnapenze",
+          icon: RiCupLine,
+        },
+        wifi: {
+          value: "WiFi Zdarma",
+          key: "inside_internet_zdarma",
+          icon: BiWifi,
+        },
       },
     },
   },

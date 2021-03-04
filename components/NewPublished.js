@@ -13,12 +13,12 @@ const NewPublished = ({ newPublished }) => {
   // }, []);
 
   return (
-    <div className="section new-published">
-      <Row className="section-heading justify-content-arround new-published-heading bg-grey m-0">
-        <Col md={12} className="text-align-right">
-          <div className="heading-with-icons d-flex align-items-center">
+    <div className='section new-published'>
+      <Row className='section-heading justify-content-arround new-published-heading bg-white m-0'>
+        <Col md={12} className='text-align-right'>
+          <div className='heading-with-icons d-flex align-items-center'>
             <RiPushpin2Fill
-              className="text-white icon-heading bg-green"
+              className='text-white icon-heading bg-green'
               style={{ marginRight: "1em" }}
             />
             <h2>Nově zařazeno na portál</h2>
@@ -26,10 +26,10 @@ const NewPublished = ({ newPublished }) => {
         </Col>
       </Row>
 
-      <Row className="justify-content-arround">
+      <Row className='justify-content-arround'>
         <Col md={12}>
-          <div className="new-published-content text-white bg-green p-1">
-            <Row className="row">
+          <div className='new-published-content text-white bg-green p-1'>
+            <Row className='row'>
               {newPublished ? (
                 newPublished?.map((article) => (
                   <Col md={3} key={article.id}>

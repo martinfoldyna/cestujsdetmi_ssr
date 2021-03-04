@@ -45,32 +45,32 @@ const Aktuality = ({ newsArr }) => {
       <Head>
         <title>Index - kam na víkend s dětmi | Cestuj s dětmi.cz</title>
         <meta
-          name="description"
-          content="Tipy kam na víkend s dětmi. Najdeme Vám ten správný tip, kam s dětmi na víkend."
+          name='description'
+          content='Tipy kam na víkend s dětmi. Najdeme Vám ten správný tip, kam s dětmi na víkend.'
         />
         <meta
-          name="keywords"
-          content="kam,na,víkend,s dětmi,o víkendu,tip,tipy,akce,pro děti,"
+          name='keywords'
+          content='kam,na,víkend,s dětmi,o víkendu,tip,tipy,akce,pro děti,'
         />
-        <meta name="robots" content="index, follow" />
+        <meta name='robots' content='index, follow' />
       </Head>
-      <Container className="main-container">
-        <span className="breadcrumb">
-          <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Index
+      <Container className='main-container'>
+        <span className='breadcrumb'>
+          <Link href='/'>Úvodní stránka</Link>&nbsp;/&nbsp;Index
         </span>
-        <HeadingWithIcon background="purple" heading="Index" icon={HiNewspaper}>
+        <HeadingWithIcon background='purple' heading='Index' icon={HiNewspaper}>
           <p>
             Přehled aktuálně konaných akcí pro rodiny s dětmi. Tipy kam s dětmi
             za zábavou, kulturou.
           </p>
         </HeadingWithIcon>
-        <div className="data-wrapper">
+        <div className='data-wrapper'>
           <Row>
             <Col md={2.5}>
-              <SideCards color="purple" topic={enums.TYP_OBJEKTU.aktualita} />
+              <SideCards color='purple' topic={enums.TYP_OBJEKTU.aktualita} />
             </Col>
             <Col>
-              <div className="filtered-objects bg-white border-radius">
+              <div className='filtered-objects bg-white border-radius'>
                 {newsArr?.EVENTS.EVENT.map(
                   (news, index) =>
                     index < next && <News key={news.id} news={news} />
@@ -78,7 +78,7 @@ const Aktuality = ({ newsArr }) => {
               </div>
             </Col>
           </Row>
-          <button className="btn bg-purple text-white">Načíst další</button>
+          <button className='btn bg-purple text-white'>Načíst další</button>
         </div>
       </Container>
     </>

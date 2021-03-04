@@ -55,10 +55,10 @@ const ObjednatObjektInfo = ({
   geocoding,
   geoResults,
   user,
+  locations,
 }) => {
   const router = useRouter();
-  const { global } = useContext(GlobalContext);
-  const { kraje, oblasti } = global;
+  const { kraje, oblasti } = locations;
 
   const { plan, name } = router.query;
   registerLocale("cs", cs);
@@ -239,7 +239,7 @@ const ObjednatObjektInfo = ({
             i === 0 ? "objekt-image-thumbnail" : ""
           }`}
         >
-          <Col md={1} className="align-self-center reorder text-black">
+          <Col md={1} className='align-self-center reorder text-black'>
             <IoIosArrowUp
               onClick={() =>
                 setPreviewImages((prevState) => arrayMove(prevState, i, i + 1))
@@ -262,28 +262,28 @@ const ObjednatObjektInfo = ({
                     : "../public/img/placeholder.png"
                 })`,
               }}
-              className="image-container"
+              className='image-container'
               onClick={() => openLightBox(image)}
             >
-              <div className="overlay">
-                <FaSearchPlus className="enlarge-icon text-white" />
+              <div className='overlay'>
+                <FaSearchPlus className='enlarge-icon text-white' />
               </div>
             </div>
             {/*<img src={image.preview} style={{ width: "100%" }} />*/}
           </Col>
-          <Col className="align-self-center">
+          <Col className='align-self-center'>
             <Input
-              name="image-name"
-              text="Popis obrázku"
+              name='image-name'
+              text='Popis obrázku'
               onChange={(e) => (previewImages[i].description = e.target.value)}
             />
             {i === 0 && (
               <p>Tento obrázek se bude zobrazovat i jako náheldový</p>
             )}
           </Col>
-          <Col md={1} className="align-self-center">
+          <Col md={1} className='align-self-center'>
             <BsPlus
-              className="cancel-filter-icon text-black"
+              className='cancel-filter-icon text-black'
               onClick={() =>
                 setPreviewImages((prevState) =>
                   prevState.filter(
@@ -305,18 +305,18 @@ const ObjednatObjektInfo = ({
           onClick={onClick}
         >
           <input
-            type="text"
+            type='text'
             className={`inputText pr-0 ${
               errors && errors[value] ? "border-danger" : ""
             }`}
-            id="datumZacatku"
-            name="datumZacatku"
+            id='datumZacatku'
+            name='datumZacatku'
             defaultValue={value}
             required
-            autoComplete="off"
+            autoComplete='off'
             {...rest}
           />
-          <label htmlFor="datumZacatku" className="floating-label">
+          <label htmlFor='datumZacatku' className='floating-label'>
             Začátek
           </label>
         </div>
@@ -332,18 +332,18 @@ const ObjednatObjektInfo = ({
           onClick={onClick}
         >
           <input
-            type="text"
+            type='text'
             className={`inputText ${
               errors && errors[value] ? "border-danger" : ""
             }`}
-            id="datumKonce"
-            name="datumKonce"
+            id='datumKonce'
+            name='datumKonce'
             defaultValue={value}
             required
-            autoComplete="off"
+            autoComplete='off'
             {...rest}
           />
-          <label htmlFor="datumKonce" className="floating-label">
+          <label htmlFor='datumKonce' className='floating-label'>
             Konec
           </label>
         </div>
@@ -532,9 +532,9 @@ const ObjednatObjektInfo = ({
 
   const showItems = (itemsArray, setItemsArray) =>
     itemsArray?.map((item, i) => (
-      <Row className="pt-2 align-items-center" key={i}>
+      <Row className='pt-2 align-items-center' key={i}>
         <Col md={4}>
-          <div className="d-flex form-item">
+          <div className='d-flex form-item'>
             <div style={{ width: "50%" }}>
               <StartDateCustomInput
                 value={moment(item.datum_zacatku).format("DD.MM.YYYY")}
@@ -552,20 +552,20 @@ const ObjednatObjektInfo = ({
           </div>
         </Col>
         <Col md={4}>
-          <Input value={item.popis} text="Popis" disabled className="forShow" />
+          <Input value={item.popis} text='Popis' disabled className='forShow' />
         </Col>
         <Col md={3}>
-          <Input value={item.cena} text="Cena" disabled className="forShow" />
+          <Input value={item.cena} text='Cena' disabled className='forShow' />
         </Col>
         <Col>
           <button
-            type="button"
-            className="btn bg-white"
+            type='button'
+            className='btn bg-white'
             onClick={() => {
               setItemsArray((prevState) => prevState.splice(i, 1));
             }}
           >
-            <BsPlus className="cancel-filter-icon" />
+            <BsPlus className='cancel-filter-icon' />
           </button>
         </Col>
       </Row>
@@ -645,20 +645,20 @@ const ObjednatObjektInfo = ({
 
   return (
     <>
-      <span className="breadcrumb">
-        <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;Registrace - nabídka
+      <span className='breadcrumb'>
+        <Link href='/'>Úvodní stránka</Link>&nbsp;/&nbsp;Registrace - nabídka
         možností
       </span>
 
       <HeadingWithIcon
-        background="blue"
+        background='blue'
         heading={
           objekt
             ? `${objekt?.nazev} - detail objektu`
             : "Administrace - Přídání nového objektu"
         }
         icon={objekt ? BiDetail : FaPlus}
-        icon_size="medium"
+        icon_size='medium'
       />
 
       {/*{user && (*/}
@@ -676,15 +676,15 @@ const ObjednatObjektInfo = ({
       <form
         noValidate
         onSubmit={handleSubmit(onSubmitGeneral)}
-        className="objednat-objekt-info"
+        className='objednat-objekt-info'
       >
-        <div className="section">
+        <div className='section'>
           <Row
-            className="heading-wrapper justify-content-arround bg-grey m-0"
+            className='heading-wrapper justify-content-arround bg-grey m-0'
             onClick={() => setCollapseGeneral((prevState) => !prevState)}
           >
             <Col md={12}>
-              <div className="heading-with-icons">
+              <div className='heading-with-icons'>
                 <h2>Základní informace</h2>
               </div>
             </Col>
@@ -694,13 +694,13 @@ const ObjednatObjektInfo = ({
               collapseGeneral && "collapsed"
             }`}
           >
-            <Row className="pt-2">
+            <Row className='pt-2'>
               <Col md={6} lg={4}>
                 <CustomFormSelect
                   options={objectToArray(enums.DRUH_ZAPISU)}
-                  optionsFormat="key"
-                  placeholder="Druh zápisu"
-                  name="druh_zapisu"
+                  optionsFormat='key'
+                  placeholder='Druh zápisu'
+                  name='druh_zapisu'
                   translate={translateObjektPlan}
                   selected={objekt?.druh_zapisu || selectedPlan}
                   ref={register({
@@ -712,14 +712,14 @@ const ObjednatObjektInfo = ({
                   }}
                   disabled={objekt?.druh_zapisu}
                 >
-                  <FaMapMarkedAlt className="form-icon" />
+                  <FaMapMarkedAlt className='form-icon' />
                 </CustomFormSelect>
 
                 <CustomFormSelect
                   options={objectToArray(enums.TYP_OBJEKTU)}
-                  placeholder="Druh objektu"
-                  name="typ_objektu"
-                  optionsFormat="key"
+                  placeholder='Druh objektu'
+                  name='typ_objektu'
+                  optionsFormat='key'
                   selected={objekt?.typ_objektu}
                   disabled={objekt?.typ_objektu}
                   onChange={(value) => {
@@ -728,17 +728,17 @@ const ObjednatObjektInfo = ({
                   }}
                   errors={errors}
                 >
-                  <FaMapMarkedAlt className="form-icon" />
+                  <FaMapMarkedAlt className='form-icon' />
                 </CustomFormSelect>
 
                 <Input
                   errors={errors}
                   ref={register({ required: "Zadejte prosím název objektu" })}
-                  text="Název objektu"
-                  name="nazev"
+                  text='Název objektu'
+                  name='nazev'
                   defaultValue={objekt?.nazev}
                 >
-                  <FaEnvelope className="form-icon" />
+                  <FaEnvelope className='form-icon' />
                 </Input>
                 {/*<Input*/}
                 {/*  name="hlavni_kategorie"*/}
@@ -755,8 +755,8 @@ const ObjednatObjektInfo = ({
                 {mainCategories && (
                   <CustomFormSelect
                     options={mainCategories}
-                    placeholder="Zařazení hlavní kategorie"
-                    name="hlavni_kategorie"
+                    placeholder='Zařazení hlavní kategorie'
+                    name='hlavni_kategorie'
                     selected={objekt?.hlavni_kategorie}
                     onChange={(value) => {
                       setSelectedCategory(value);
@@ -767,27 +767,27 @@ const ObjednatObjektInfo = ({
                     })}
                     errors={errors}
                   >
-                    <FaMapMarkedAlt className="form-icon" />
+                    <FaMapMarkedAlt className='form-icon' />
                   </CustomFormSelect>
                 )}
                 {secondaryCategories && (
                   <CustomFormSelect
                     options={secondaryCategories}
-                    placeholder="Zařazení druhé kategorie"
-                    name="prodkategorie"
+                    placeholder='Zařazení druhé kategorie'
+                    name='prodkategorie'
                     selected={selectedSecondCategory}
                     onChange={(value) => setSelectedSecondCategory(value)}
                     ref={register}
                     errors={errors}
                   >
-                    <CgListTree className="form-icon" />
+                    <CgListTree className='form-icon' />
                   </CustomFormSelect>
                 )}
               </Col>
               <Col md={6} lg={4}>
                 <Input
-                  name="telefon"
-                  text="Telefon"
+                  name='telefon'
+                  text='Telefon'
                   ref={register({
                     required: "Zadejte prosím kontaktní telefon na objekt",
                     pattern: {
@@ -798,11 +798,11 @@ const ObjednatObjektInfo = ({
                   errors={errors}
                   defaultValue={objekt?.telefon}
                 >
-                  <FaPhoneAlt className="form-icon" />
+                  <FaPhoneAlt className='form-icon' />
                 </Input>
                 <Input
-                  name="email"
-                  text="E-mail"
+                  name='email'
+                  text='E-mail'
                   ref={register({
                     required: "Zadejte prosím kontaktní email na objekt",
                     pattern: {
@@ -813,12 +813,12 @@ const ObjednatObjektInfo = ({
                   errors={errors}
                   defaultValue={objekt?.email}
                 >
-                  <FaEnvelope className="form-icon" />
+                  <FaEnvelope className='form-icon' />
                 </Input>
                 {!isStandard && (
                   <Input
-                    name="web"
-                    text="Webové stránky"
+                    name='web'
+                    text='Webové stránky'
                     ref={register({
                       required: "Zadejte prosím webové stránky objekt",
                       pattern: {
@@ -830,14 +830,14 @@ const ObjednatObjektInfo = ({
                     errors={errors}
                     defaultValue={objekt?.web}
                   >
-                    <FaGlobeAmericas className="form-icon" />
+                    <FaGlobeAmericas className='form-icon' />
                   </Input>
                 )}
               </Col>
               <Col md={6} lg={4}>
                 <Input
-                  name="address_ulice"
-                  text="Ulice"
+                  name='address_ulice'
+                  text='Ulice'
                   ref={register({
                     required:
                       "Zadejte prosím ulici, ve které se objekt nachází",
@@ -845,11 +845,11 @@ const ObjednatObjektInfo = ({
                   errors={errors}
                   defaultValue={objekt?.adresa?.ulice}
                 >
-                  <GiHouse className="form-icon" />
+                  <GiHouse className='form-icon' />
                 </Input>
                 <Input
-                  name="address_mesto"
-                  text="Město"
+                  name='address_mesto'
+                  text='Město'
                   ref={register({
                     required:
                       "Zadejte prosím město, ve které se objekt nachází",
@@ -857,11 +857,11 @@ const ObjednatObjektInfo = ({
                   errors={errors}
                   defaultValue={objekt?.adresa?.mesto}
                 >
-                  <MdLocationCity className="form-icon" />
+                  <MdLocationCity className='form-icon' />
                 </Input>
                 <Input
-                  name="address_psc"
-                  text="PSČ"
+                  name='address_psc'
+                  text='PSČ'
                   ref={register({
                     required: "Zadejte prosím PSČ objektu",
                     pattern: {
@@ -872,7 +872,7 @@ const ObjednatObjektInfo = ({
                   errors={errors}
                   defaultValue={objekt?.adresa?.psc}
                 >
-                  <TiSortNumerically className="form-icon" />
+                  <TiSortNumerically className='form-icon' />
                 </Input>
                 {/*<Input*/}
                 {/*  name="address_kraj"*/}
@@ -888,8 +888,8 @@ const ObjednatObjektInfo = ({
                 {/*<CustomSelect options={objectToArray(enums.KRAJ)} />*/}
                 <CustomFormSelect
                   options={kraje}
-                  placeholder="Kraj"
-                  name="address_kraj"
+                  placeholder='Kraj'
+                  name='address_kraj'
                   selected={objekt?.adresa.kraj}
                   ref={register({
                     required: "Zadejte prosím kraj, ve které se objekt nachází",
@@ -897,7 +897,7 @@ const ObjednatObjektInfo = ({
                   onChange={(value) => setKraj(value.id)}
                   errors={errors}
                 >
-                  <FaMapMarkedAlt className="form-icon" />
+                  <FaMapMarkedAlt className='form-icon' />
                 </CustomFormSelect>
                 {/*<Input*/}
                 {/*  name="address_oblast"*/}
@@ -913,8 +913,8 @@ const ObjednatObjektInfo = ({
                 {/*</Input>*/}
                 <CustomFormSelect
                   options={oblasti}
-                  placeholder="Oblast"
-                  name="address_oblast"
+                  placeholder='Oblast'
+                  name='address_oblast'
                   ref={register({
                     required:
                       "Zadejte prosím oblast, ve které se objekt nachází",
@@ -923,25 +923,25 @@ const ObjednatObjektInfo = ({
                   onChange={(value) => setOblast(value.id)}
                   selected={objekt?.adresa?.oblast}
                 >
-                  <FaMapSigns className="form-icon" />
+                  <FaMapSigns className='form-icon' />
                 </CustomFormSelect>
               </Col>
               <Col sm={12}>
-                <span className="ml-1 pb-1 d-block">Základní popis</span>
-                <div className="form-item">
+                <span className='ml-1 pb-1 d-block'>Základní popis</span>
+                <div className='form-item'>
                   <Editor
                     {...tinyMCEConfig}
                     initialValue={objekt?.zakladni_popis}
-                    textareaName="zakladni_popis"
+                    textareaName='zakladni_popis'
                     onEditorChange={(value, editor) => {
                       setGeneralInfo(value);
                     }}
                   />
                 </div>
-                <div className="error-wrapper">
-                  <p className="error-message">{errors.message?.message}</p>
+                <div className='error-wrapper'>
+                  <p className='error-message'>{errors.message?.message}</p>
                 </div>
-                <div className="form-item d-flex justify-content-between">
+                <div className='form-item d-flex justify-content-between'>
                   {/*<div></div>*/}
                   <span>* Povinné údaje</span>
                   <span>{`${descriptionLength} / 250`}</span>
@@ -953,25 +953,25 @@ const ObjednatObjektInfo = ({
 
         <ConditionalWrapper
           condition={!selectedPlan}
-          wrapper={(children) => <div className="overlay">{children}</div>}
+          wrapper={(children) => <div className='overlay'>{children}</div>}
         >
           {!isStandard && (
-            <div className="section">
-              <Row className="justify-content-arround bg-grey m-0">
+            <div className='section'>
+              <Row className='justify-content-arround bg-grey m-0'>
                 <Col md={12}>
-                  <div className="heading-with-icons">
+                  <div className='heading-with-icons'>
                     <h2>Podrobné informace</h2>
                   </div>
                 </Col>
               </Row>
-              <div className="section-content border-grey">
-                <Row className="pt-2">
+              <div className='section-content border-grey'>
+                <Row className='pt-2'>
                   <Col>
-                    <div className="form-item">
+                    <div className='form-item'>
                       <Editor
                         {...tinyMCEConfig}
                         initialValue={objekt?.popis}
-                        textareaName="popis"
+                        textareaName='popis'
                         onEditorChange={(value, editor) => {
                           setDetailedInfo(value);
                         }}
@@ -980,8 +980,8 @@ const ObjednatObjektInfo = ({
                       {/*  Podrobný popis objektu*/}
                       {/*</label>*/}
                     </div>
-                    <div className="error-wrapper">
-                      <p className="error-message">{errors.popis?.message}</p>
+                    <div className='error-wrapper'>
+                      <p className='error-message'>{errors.popis?.message}</p>
                     </div>
                   </Col>
                 </Row>
@@ -989,40 +989,40 @@ const ObjednatObjektInfo = ({
             </div>
           )}
           {!isStandard && !isOptimal && (
-            <div className="section">
-              <Row className="justify-content-arround bg-grey m-0">
+            <div className='section'>
+              <Row className='justify-content-arround bg-grey m-0'>
                 <Col md={12}>
-                  <div className="heading-with-icons d-flex align-items-center">
+                  <div className='heading-with-icons d-flex align-items-center'>
                     <FaTag
-                      className="text-white icon-heading bg-red"
+                      className='text-white icon-heading bg-red'
                       style={{ marginRight: "1em" }}
                     />
                     <h2>Last minute / Aktuality</h2>
                   </div>
                 </Col>
               </Row>
-              <div className="section-content border-grey">
-                <Row className="row">
+              <div className='section-content border-grey'>
+                <Row className='row'>
                   <Col>
-                    <div className="form-item">
+                    <div className='form-item'>
                       <textarea
                         className={`inputText ${
                           errors.last_minute_message && "border-danger"
                         }`}
-                        id="last_minute_popis"
-                        name="last_minute_popis"
+                        id='last_minute_popis'
+                        name='last_minute_popis'
                         ref={register}
                         required
                         defaultValue={objekt?.last_minute_popis}
                       />
                       <label
-                        htmlFor="lastMinute_message"
-                        className="floating-label"
+                        htmlFor='lastMinute_message'
+                        className='floating-label'
                       >
                         Podrobný popis objektu
                       </label>
                     </div>
-                    <div className="error-wrapper" />
+                    <div className='error-wrapper' />
                   </Col>
                 </Row>
                 <Row>
@@ -1034,34 +1034,34 @@ const ObjednatObjektInfo = ({
                           message: "Zadejte prosím platnou webovou stránku",
                         },
                       })}
-                      text="Odkaz na webové stránky"
-                      name="last_minute_odkaz_na_web"
+                      text='Odkaz na webové stránky'
+                      name='last_minute_odkaz_na_web'
                       defaultValue={objekt?.last_minute_odkaz_na_web}
                       errors={errors}
                     />
                   </Col>
                 </Row>
-                <Row className="pt-2 align-items-center">
+                <Row className='pt-2 align-items-center'>
                   <Col md={7}>
-                    <div className="d-flex form-item">
+                    <div className='d-flex form-item'>
                       <div style={{ width: "50%" }}>
                         <label
-                          htmlFor="LastMinutetDatumZacatku"
-                          className="text-black"
+                          htmlFor='LastMinutetDatumZacatku'
+                          className='text-black'
                         >
                           Platnost last minute
                         </label>
                         <DatePicker
                           selected={lastMinuteStartDate}
                           onChange={(date) => setLastMinuteStartDate(date)}
-                          name="LastMinutetDatumZacatku"
-                          id="LastMinutetDatumZacatku"
+                          name='LastMinutetDatumZacatku'
+                          id='LastMinutetDatumZacatku'
                           startDate={lastMinuteStartDate}
                           minDate={Date.now()}
-                          locale="cs"
+                          locale='cs'
                           endDate={lastMinuteEndDate}
-                          dateFormat="dd.MM.yyyy"
-                          className="inputText datePicker"
+                          dateFormat='dd.MM.yyyy'
+                          className='inputText datePicker'
                           required
                           selectsStart
                           customInput={<StartDateCustomInput />}
@@ -1069,8 +1069,8 @@ const ObjednatObjektInfo = ({
                       </div>
                       <div>
                         <label
-                          htmlFor="LastMinutetDatumKonce"
-                          className="text-black"
+                          htmlFor='LastMinutetDatumKonce'
+                          className='text-black'
                         >
                           {" "}
                         </label>
@@ -1078,14 +1078,14 @@ const ObjednatObjektInfo = ({
                           selected={lastMinuteEndDate}
                           onChange={(date) => setLastMinuteEndDate(date)}
                           selectsEnd
-                          name="LastMinutetDatumKonce"
-                          id="LastMinutetDatumKonce"
+                          name='LastMinutetDatumKonce'
+                          id='LastMinutetDatumKonce'
                           startDate={lastMinuteStartDate}
                           minDate={Date.now()}
-                          locale="cs"
+                          locale='cs'
                           endDate={lastMinuteEndDate}
-                          dateFormat="dd.MM.yyyy"
-                          className="inputText datePicker"
+                          dateFormat='dd.MM.yyyy'
+                          className='inputText datePicker'
                           required
                           customInput={<EndDateCustomInput />}
                         />
@@ -1096,29 +1096,29 @@ const ObjednatObjektInfo = ({
               </div>
             </div>
           )}
-          <div className="section">
-            <Row className="justify-content-arround bg-grey m-0">
+          <div className='section'>
+            <Row className='justify-content-arround bg-grey m-0'>
               <Col md={12}>
-                <div className="heading-with-icons d-flex align-items-center">
+                <div className='heading-with-icons d-flex align-items-center'>
                   <h2>Zajímavosti v okolí</h2>
                 </div>
               </Col>
             </Row>
-            <div className="section-content">
-              <Row className="row">
+            <div className='section-content'>
+              <Row className='row'>
                 <Col sm={12}>
-                  <div className="form-item">
+                  <div className='form-item'>
                     <textarea
                       className={`inputText ${
                         errors.zajimavosti_v_okoli && "border-danger"
                       }`}
-                      id="zajimavosti"
-                      name="zajimavosti"
+                      id='zajimavosti'
+                      name='zajimavosti'
                       ref={register}
                       required
                       defaultValue={objekt?.zajimavosti}
                     />
-                    <label htmlFor="zajimavosti" className="floating-label">
+                    <label htmlFor='zajimavosti' className='floating-label'>
                       Zajímavosti v okolí Vašeho objektu
                     </label>
                   </div>
@@ -1126,396 +1126,396 @@ const ObjednatObjektInfo = ({
               </Row>
             </div>
           </div>
-          <div className="section">
-            <Row className="justify-content-arround bg-grey m-0">
+          <div className='section'>
+            <Row className='justify-content-arround bg-grey m-0'>
               <Col md={12}>
-                <div className="heading-with-icons d-flex align-items-center">
+                <div className='heading-with-icons d-flex align-items-center'>
                   <h2>Vnitřní vybavení</h2>
                 </div>
               </Col>
             </Row>
-            <div className="section-content border-grey">
-              <Row className="pt-2">
+            <div className='section-content border-grey'>
+              <Row className='pt-2'>
                 <Col md={6} lg={4}>
                   <Checkbox
                     ref={register}
-                    text="DVD / Pohádky na DVD"
-                    name="inside_dvd_pohadky"
+                    text='DVD / Pohádky na DVD'
+                    name='inside_dvd_pohadky'
                     checked={objekt?.vnitrni_vybaveni?.dvd_pohadky}
                   />
                   <Checkbox
                     ref={register}
-                    text="autodráha"
-                    name="inside_autodraha"
+                    text='autodráha'
+                    name='inside_autodraha'
                     checked={objekt?.vnitrni_vybaveni?.autodraha}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_bazen"
-                    text="bazén"
+                    name='inside_bazen'
+                    text='bazén'
                     checked={objekt?.vnitrni_vybaveni?.bazen}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_bowling"
-                    text="bowling"
+                    name='inside_bowling'
+                    text='bowling'
                     checked={objekt?.vnitrni_vybaveni?.bowling}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_chuvicky"
-                    text="chůvičky - vysílačky"
+                    name='inside_chuvicky'
+                    text='chůvičky - vysílačky'
                     checked={objekt?.vnitrni_vybaveni?.chuvicky}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detska_kosmetika"
-                    text="dětská kosmetika"
+                    name='inside_detska_kosmetika'
+                    text='dětská kosmetika'
                     checked={objekt?.vnitrni_vybaveni?.detska_kosmetika}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detska_postylka"
-                    text="dětská postýlka"
+                    name='inside_detska_postylka'
+                    text='dětská postýlka'
                     checked={objekt?.vnitrni_vybaveni?.detska_postylka}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detska_strava"
-                    text="dětská strava"
+                    name='inside_detska_strava'
+                    text='dětská strava'
                     checked={objekt?.vnitrni_vybaveni?.detska_strava}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detska_zidlicka"
-                    text="dětská židlička"
+                    name='inside_detska_zidlicka'
+                    text='dětská židlička'
                     checked={objekt?.vnitrni_vybaveni?.detska_zidlicka}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detska_luzkoviny"
-                    text="dětské lůžkoviny"
+                    name='inside_detska_luzkoviny'
+                    text='dětské lůžkoviny'
                     checked={objekt?.vnitrni_vybaveni?.detska_luzkoviny}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detske_menu"
-                    text="dětské menu"
+                    name='inside_detske_menu'
+                    text='dětské menu'
                     checked={objekt?.vnitrni_vybaveni?.detske_menu}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detska_plenky"
-                    text="dětské plenky"
+                    name='inside_detska_plenky'
+                    text='dětské plenky'
                     checked={objekt?.vnitrni_vybaveni?.detska_plenky}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detska_sedatko"
-                    text="dětské sedátko na wc"
+                    name='inside_detska_sedatko'
+                    text='dětské sedátko na wc'
                     checked={objekt?.vnitrni_vybaveni?.detska_sedatko}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detsky_domecek"
-                    text="dětský domeček"
+                    name='inside_detsky_domecek'
+                    text='dětský domeček'
                     checked={objekt?.vnitrni_vybaveni?.detsky_domecek}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detsky_koutek"
-                    text="dětský koutek"
+                    name='inside_detsky_koutek'
+                    text='dětský koutek'
                     checked={objekt?.vnitrni_vybaveni?.detsky_koutek}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_detsky_pribor"
-                    text="dětský příbor"
+                    name='inside_detsky_pribor'
+                    text='dětský příbor'
                     checked={objekt?.vnitrni_vybaveni?.detsky_pribor}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_dilnicky_pro_deti"
-                    text="dílničky pro děti"
+                    name='inside_dilnicky_pro_deti'
+                    text='dílničky pro děti'
                     checked={objekt?.vnitrni_vybaveni?.dilnicky_pro_deti}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_mazlicci_vitani"
-                    text="domácí mazlíčci vítáni / po dohodě"
+                    name='inside_mazlicci_vitani'
+                    text='domácí mazlíčci vítáni / po dohodě'
                     checked={objekt?.vnitrni_vybaveni?.mazlicci_vitani}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_dvd"
-                    text="DVD"
+                    name='inside_dvd'
+                    text='DVD'
                     checked={objekt?.vnitrni_vybaveni?.dvd}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_expozice_pro_deti"
-                    text="expozice pro děti"
+                    name='inside_expozice_pro_deti'
+                    text='expozice pro děti'
                     checked={objekt?.vnitrni_vybaveni?.expozice_pro_deti}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_fen"
-                    text="Fén"
+                    name='inside_fen'
+                    text='Fén'
                     checked={objekt?.vnitrni_vybaveni?.fen}
                   />
                 </Col>
                 <Col md={6} lg={4}>
                   <Checkbox
                     ref={register}
-                    name="inside_herna_sal"
-                    text="herna / sál"
+                    name='inside_herna_sal'
+                    text='herna / sál'
                     checked={objekt?.vnitrni_vybaveni?.herna_sal}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_hlidani_deti_zdarma"
-                    text="hlídání dětí - zdarma"
+                    name='inside_hlidani_deti_zdarma'
+                    text='hlídání dětí - zdarma'
                     checked={objekt?.vnitrni_vybaveni?.hlidani_deti_zdarma}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_hlidani_deti_placeny"
-                    text="hlídání dětí za poplatek"
+                    name='inside_hlidani_deti_placeny'
+                    text='hlídání dětí za poplatek'
                     checked={objekt?.vnitrni_vybaveni?.dvd_pohadky}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_hygienicke_ubrousky"
-                    text="hygienické ubrousky"
+                    name='inside_hygienicke_ubrousky'
+                    text='hygienické ubrousky'
                     checked={objekt?.vnitrni_vybaveni?.hygienicke_ubrousky}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_internet_zdarma"
-                    text="internet / WiFi - zdarma"
+                    name='inside_internet_zdarma'
+                    text='internet / WiFi - zdarma'
                     checked={objekt?.vnitrni_vybaveni?.internet_zdarma}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_internet_placeny"
-                    text="internet / WiFi - placený"
+                    name='inside_internet_placeny'
+                    text='internet / WiFi - placený'
                     checked={objekt?.vnitrni_vybaveni?.internet_placeny}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_bryndacky"
-                    text="jednorázové bryndáčky"
+                    name='inside_bryndacky'
+                    text='jednorázové bryndáčky'
                     checked={objekt?.vnitrni_vybaveni?.dvd_pohadky}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_kuchynka"
-                    text="kuchyňka"
+                    name='inside_kuchynka'
+                    text='kuchyňka'
                     checked={objekt?.vnitrni_vybaveni?.kuchynka}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_kulecnik"
-                    text="kulečník"
+                    name='inside_kulecnik'
+                    text='kulečník'
                     checked={objekt?.vnitrni_vybaveni?.kulecnik}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_kuzelky"
-                    text="kuželky"
+                    name='inside_kuzelky'
+                    text='kuželky'
                     checked={objekt?.vnitrni_vybaveni?.kuzelky}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_lednice"
-                    text="lednice"
+                    name='inside_lednice'
+                    text='lednice'
                     checked={objekt?.vnitrni_vybaveni?.lednice}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_mikrovlnka"
-                    text="mikrovlná trouba"
+                    name='inside_mikrovlnka'
+                    text='mikrovlná trouba'
                     checked={objekt?.vnitrni_vybaveni?.mikrovlnka}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_minibar"
-                    text="minibar"
+                    name='inside_minibar'
+                    text='minibar'
                     checked={objekt?.vnitrni_vybaveni?.minibar}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_vstup_s_kocarkem"
-                    text="možný vstup s kočárkem"
+                    name='inside_vstup_s_kocarkem'
+                    text='možný vstup s kočárkem'
                     checked={objekt?.vnitrni_vybaveni?.vstup_s_kocarkem}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_snidane_polopenze_plnapenze"
-                    text="nabídka snídaní / polopenze / plné penze"
+                    name='inside_snidane_polopenze_plnapenze'
+                    text='nabídka snídaní / polopenze / plné penze'
                     checked={
                       objekt?.vnitrni_vybaveni?.snidane_polopenze_plnapenze
                     }
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_nekuracke"
-                    text="nekuřácké prostředí"
+                    name='inside_nekuracke'
+                    text='nekuřácké prostředí'
                     checked={objekt?.vnitrni_vybaveni?.nekuracke}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_nocnik"
-                    text="nočník"
+                    name='inside_nocnik'
+                    text='nočník'
                     checked={objekt?.vnitrni_vybaveni?.nocnik}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_baby_friendly"
-                    text="ocenění BABY FRIENDLY CERTIFICATE"
+                    name='inside_baby_friendly'
+                    text='ocenění BABY FRIENDLY CERTIFICATE'
                     checked={objekt?.vnitrni_vybaveni?.baby_friendly}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_ochrana_schodiste"
-                    text="ochrana schodiště proti pádu"
+                    name='inside_ochrana_schodiste'
+                    text='ochrana schodiště proti pádu'
                     checked={objekt?.vnitrni_vybaveni?.ochrana_schodiste}
                   />
                   <Checkbox
                     ref={register}
-                    name="inside_ohrivac_lahvi"
-                    text="ohřívač lahví"
+                    name='inside_ohrivac_lahvi'
+                    text='ohřívač lahví'
                     checked={objekt?.vnitrni_vybaveni?.ohrivac_lahvi}
                   />
                 </Col>
 
                 <Col md={6} lg={4}>
                   <Checkbox
-                    name="inside_pohybove_hry"
-                    text="pohybové hry nebo cvičení s dětmi"
+                    name='inside_pohybove_hry'
+                    text='pohybové hry nebo cvičení s dětmi'
                     checked={objekt?.vnitrni_vybaveni?.pohybove_hry}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_prebalovaci_pult"
-                    text="přebalovací pult"
+                    name='inside_prebalovaci_pult'
+                    text='přebalovací pult'
                     checked={objekt?.vnitrni_vybaveni?.prebalovaci_pult}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_porgramy_pro_deti"
-                    text="programy pro děti"
+                    name='inside_porgramy_pro_deti'
+                    text='programy pro děti'
                     checked={objekt?.vnitrni_vybaveni?.porgramy_pro_deti}
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_pujcovna_hracek"
-                    text="půjčování hraček"
+                    name='inside_pujcovna_hracek'
+                    text='půjčování hraček'
                     checked={objekt?.vnitrni_vybaveni?.pujcovna_hracek}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_pujcovna_sportovniho_vybaveni"
-                    text="půjčovna sportovního vybavení"
+                    name='inside_pujcovna_sportovniho_vybaveni'
+                    text='půjčovna sportovního vybavení'
                     checked={
                       objekt?.vnitrni_vybaveni?.pujcovna_sportovniho_vybaveni
                     }
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_halove_sporty"
-                    text="halové sporty"
+                    name='inside_halove_sporty'
+                    text='halové sporty'
                     checked={objekt?.vnitrni_vybaveni?.halove_sporty}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_radio_CD"
-                    text="rádio s CD"
+                    name='inside_radio_CD'
+                    text='rádio s CD'
                     checked={objekt?.vnitrni_vybaveni?.radio_CD}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_restaurace_jidelna"
-                    text="restaurace / jídelna"
+                    name='inside_restaurace_jidelna'
+                    text='restaurace / jídelna'
                     checked={objekt?.vnitrni_vybaveni?.restaurace_jidelna}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_rucniky_luzkoviny"
-                    text="ručníky / lůžkoviny"
+                    name='inside_rucniky_luzkoviny'
+                    text='ručníky / lůžkoviny'
                     checked={objekt?.vnitrni_vybaveni?.rucniky_luzkoviny}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_sauna"
-                    text="inside_sauna / whirlpool"
+                    name='inside_sauna'
+                    text='inside_sauna / whirlpool'
                     checked={objekt?.vnitrni_vybaveni?.sauna}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_sipky"
-                    text="šipky"
+                    name='inside_sipky'
+                    text='šipky'
                     checked={objekt?.vnitrni_vybaveni?.sipky}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_spolecenska_mistnost"
-                    text="společenská místnost"
+                    name='inside_spolecenska_mistnost'
+                    text='společenská místnost'
                     checked={objekt?.vnitrni_vybaveni?.spolecenska_mistnost}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_stolni_hry"
-                    text="stolní hry"
+                    name='inside_stolni_hry'
+                    text='stolní hry'
                     checked={objekt?.vnitrni_vybaveni?.stolni_hry}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_stolni_tenis"
-                    text="stolní tenis"
+                    name='inside_stolni_tenis'
+                    text='stolní tenis'
                     checked={objekt?.vnitrni_vybaveni?.stolni_tenis}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_stupatko_pod_umyvadlo"
-                    text="stupátko pod umyvadlo"
+                    name='inside_stupatko_pod_umyvadlo'
+                    text='stupátko pod umyvadlo'
                     checked={objekt?.vnitrni_vybaveni?.stupatko_pod_umyvadlo}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_televize"
-                    text="televize"
+                    name='inside_televize'
+                    text='televize'
                     checked={objekt?.vnitrni_vybaveni?.televize}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_tensiovy_kurt"
-                    text="tenisový kurt"
+                    name='inside_tensiovy_kurt'
+                    text='tenisový kurt'
                     checked={objekt?.vnitrni_vybaveni?.tensiovy_kurt}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_vanicka"
-                    text="vanička"
+                    name='inside_vanicka'
+                    text='vanička'
                     checked={objekt?.vnitrni_vybaveni?.vanicka}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_varna_konvice"
-                    text="varná konvice"
+                    name='inside_varna_konvice'
+                    text='varná konvice'
                     checked={objekt?.vnitrni_vybaveni?.varna_konvice}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_vytah"
-                    text="výtah"
+                    name='inside_vytah'
+                    text='výtah'
                     checked={objekt?.vnitrni_vybaveni?.vytah}
                     ref={register}
                   />
                   <Checkbox
-                    name="inside_zaslepky_do_zasuvek"
-                    text="záslepky do elektr. zásuvek"
+                    name='inside_zaslepky_do_zasuvek'
+                    text='záslepky do elektr. zásuvek'
                     checked={objekt?.vnitrni_vybaveni?.zaslepky_do_zasuvek}
                     ref={register}
                   />
@@ -1523,22 +1523,22 @@ const ObjednatObjektInfo = ({
               </Row>
               <Row>
                 <Col sm={12}>
-                  <div className="form-item">
+                  <div className='form-item'>
                     <textarea
                       className={`inputText ${
                         errors.dalsi_vybaveni && "border-danger"
                       }`}
-                      id="insideText_dalsi_vybaveni"
-                      name="insideText_dalsi_vybaveni"
+                      id='insideText_dalsi_vybaveni'
+                      name='insideText_dalsi_vybaveni'
                       ref={register}
                       required
                     />
-                    <label htmlFor="message" className="floating-label">
+                    <label htmlFor='message' className='floating-label'>
                       Další vnitřní vybavení, oddělené čárkou:
                     </label>
                   </div>
-                  <div className="error-wrapper">
-                    <p className="error-message">
+                  <div className='error-wrapper'>
+                    <p className='error-message'>
                       {errors.insideText_dalsi_vybaveni?.message}
                     </p>
                   </div>
@@ -1546,220 +1546,220 @@ const ObjednatObjektInfo = ({
               </Row>
             </div>
           </div>
-          <div className="section">
-            <Row className="justify-content-arround bg-grey m-0">
+          <div className='section'>
+            <Row className='justify-content-arround bg-grey m-0'>
               <Col md={12}>
-                <div className="heading-with-icons d-flex align-items-center">
+                <div className='heading-with-icons d-flex align-items-center'>
                   <h2>Vnější vybavení</h2>
                 </div>
               </Col>
             </Row>
-            <div className="section-content border-grey">
-              <Row className="pt-2">
+            <div className='section-content border-grey'>
+              <Row className='pt-2'>
                 <Col md={6} lg={4}>
                   <Checkbox
-                    name="outside_badminton"
-                    text="badminton"
+                    name='outside_badminton'
+                    text='badminton'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_bazen"
-                    text="bazén"
+                    name='outside_bazen'
+                    text='bazén'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_brouzdaliste"
-                    text="brouzdaliště"
+                    name='outside_brouzdaliste'
+                    text='brouzdaliště'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_cyklo_sedacka"
-                    text="cyklo sedačka"
+                    name='outside_cyklo_sedacka'
+                    text='cyklo sedačka'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
                     errors={errors}
                     ref={register}
-                    name="outside_detska_lyzarska_skolicka"
-                    text="dětská lyžařská školička"
+                    name='outside_detska_lyzarska_skolicka'
+                    text='dětská lyžařská školička'
                   />
                   <Checkbox
-                    name="outside_detska_sjezdovka"
-                    text="dětská sjezdovka"
+                    name='outside_detska_sjezdovka'
+                    text='dětská sjezdovka'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_detsky_domecek"
-                    text="dětský domeček"
+                    name='outside_detsky_domecek'
+                    text='dětský domeček'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_detsky_koutek"
-                    text="dětský koutek"
+                    name='outside_detsky_koutek'
+                    text='dětský koutek'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_detsky_lyzarsky_vlek"
-                    text="dětský lyžařský vlek"
+                    name='outside_detsky_lyzarsky_vlek'
+                    text='dětský lyžařský vlek'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_dobove_hry"
-                    text="dobové hry"
+                    name='outside_dobove_hry'
+                    text='dobové hry'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_fotbalove_hriste"
-                    text="fotbalové hřiště"
+                    name='outside_fotbalove_hriste'
+                    text='fotbalové hřiště'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_houpacka"
-                    text="houpačka"
+                    name='outside_houpacka'
+                    text='houpačka'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_hriste"
-                    text="hřiště"
+                    name='outside_hriste'
+                    text='hřiště'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_indianske_typi"
-                    text="indiánské týpí"
+                    name='outside_indianske_typi'
+                    text='indiánské týpí'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_klouzacka"
-                    text="klouzačka"
+                    name='outside_klouzacka'
+                    text='klouzačka'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_kocarek"
-                    text="kočárek"
+                    name='outside_kocarek'
+                    text='kočárek'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_kolotoc"
-                    text="kolotoč"
+                    name='outside_kolotoc'
+                    text='kolotoč'
                     errors={errors}
                     ref={register}
                   />
                 </Col>
                 <Col md={6} lg={4}>
                   <Checkbox
-                    name="outside_krosna_na_dite"
-                    text="krosnička na dítě"
+                    name='outside_krosna_na_dite'
+                    text='krosnička na dítě'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_lanove_atrakce"
-                    text="lanové atrakce"
+                    name='outside_lanove_atrakce'
+                    text='lanové atrakce'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_lezecka_stena"
-                    text="lezecká stěna"
+                    name='outside_lezecka_stena'
+                    text='lezecká stěna'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_lyzarska_skola"
-                    text="lyžařská škola"
+                    name='outside_lyzarska_skola'
+                    text='lyžařská škola'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_mikrovlnka"
-                    text="mikrovlná trouba"
+                    name='outside_mikrovlnka'
+                    text='mikrovlná trouba'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_minigolf"
-                    text="minigolf"
+                    name='outside_minigolf'
+                    text='minigolf'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_minizoo"
-                    text="minizoo"
+                    name='outside_minizoo'
+                    text='minizoo'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_vstup_s_kocarkem"
-                    text="možný vstup s kočárkem"
+                    name='outside_vstup_s_kocarkem'
+                    text='možný vstup s kočárkem'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_odrazedlo"
-                    text="odrážedlo"
+                    name='outside_odrazedlo'
+                    text='odrážedlo'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_ohniste_grill_krb"
-                    text="ohniště / gril / krb"
+                    name='outside_ohniste_grill_krb'
+                    text='ohniště / gril / krb'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_parkoviste"
-                    text="parkoviště"
+                    name='outside_parkoviste'
+                    text='parkoviště'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_petangue"
-                    text="petangue"
+                    name='outside_petangue'
+                    text='petangue'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_piskoviste"
-                    text="pískoviště"
+                    name='outside_piskoviste'
+                    text='pískoviště'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_prebalovaci_pult"
-                    text="přebalovací pult"
+                    name='outside_prebalovaci_pult'
+                    text='přebalovací pult'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_programy_pro_deti"
-                    text="programy pro děti"
+                    name='outside_programy_pro_deti'
+                    text='programy pro děti'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_projizdky_na_konich"
-                    text="projížďky na koních"
+                    name='outside_projizdky_na_konich'
+                    text='projížďky na koních'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_prulezka"
-                    text="průlezka"
+                    name='outside_prulezka'
+                    text='průlezka'
                     errors={errors}
                     ref={register}
                   />
@@ -1767,92 +1767,92 @@ const ObjednatObjektInfo = ({
 
                 <Col md={6} lg={4}>
                   <Checkbox
-                    name="outside_pujcovna_kol"
-                    text="půjčovna kol"
+                    name='outside_pujcovna_kol'
+                    text='půjčovna kol'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_pujcovna_lyzi"
-                    text="půjčovna lyží"
+                    name='outside_pujcovna_lyzi'
+                    text='půjčovna lyží'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_pujcovna_sportovniho_vybaveni"
-                    text="půjčovna sportovního vybavení"
+                    name='outside_pujcovna_sportovniho_vybaveni'
+                    text='půjčovna sportovního vybavení'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_venkovni_sporty"
-                    text="venkovní sporty"
+                    name='outside_venkovni_sporty'
+                    text='venkovní sporty'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_ruske_kuzelky"
-                    text="ruské kuželky"
+                    name='outside_ruske_kuzelky'
+                    text='ruské kuželky'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_skladaci_hrad"
-                    text="skákací hrad"
+                    name='outside_skladaci_hrad'
+                    text='skákací hrad'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_ski_servis"
-                    text="SKI servis"
+                    name='outside_ski_servis'
+                    text='SKI servis'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_stolni_tenis"
-                    text="stolní tenis"
+                    name='outside_stolni_tenis'
+                    text='stolní tenis'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_tenisovy_kurt"
-                    text="tenisový kurt"
+                    name='outside_tenisovy_kurt'
+                    text='tenisový kurt'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_trampolina"
-                    text="trampolína"
+                    name='outside_trampolina'
+                    text='trampolína'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_travnata_plocha"
-                    text="travnatá plocha"
+                    name='outside_travnata_plocha'
+                    text='travnatá plocha'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_volejbalove_hriste"
-                    text="volejbalové hřiště"
+                    name='outside_volejbalove_hriste'
+                    text='volejbalové hřiště'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_vozik_za_kolo"
-                    text="vozík za kolo"
+                    name='outside_vozik_za_kolo'
+                    text='vozík za kolo'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_zahrada"
-                    text="zahrada"
+                    name='outside_zahrada'
+                    text='zahrada'
                     errors={errors}
                     ref={register}
                   />
                   <Checkbox
-                    name="outside_zahradni_altan"
-                    text="zahradní altán"
+                    name='outside_zahradni_altan'
+                    text='zahradní altán'
                     errors={errors}
                     ref={register}
                   />
@@ -1860,22 +1860,22 @@ const ObjednatObjektInfo = ({
               </Row>
               <Row>
                 <Col sm={12}>
-                  <div className="form-item">
+                  <div className='form-item'>
                     <textarea
                       className={`inputText ${
                         errors.dalsi_vybaveni && "border-danger"
                       }`}
-                      id="outsideText_dalsi_vybaveni"
-                      name="outsideText_dalsi_vybaveni"
+                      id='outsideText_dalsi_vybaveni'
+                      name='outsideText_dalsi_vybaveni'
                       ref={register}
                       required
                     />
-                    <label htmlFor="message" className="floating-label">
+                    <label htmlFor='message' className='floating-label'>
                       Další vnější vybavení, oddělené čárkou:
                     </label>
                   </div>
-                  <div className="error-wrapper">
-                    <p className="error-message">
+                  <div className='error-wrapper'>
+                    <p className='error-message'>
                       {errors.outsideText_dalsi_vybaveni?.message}
                     </p>
                   </div>
@@ -1883,30 +1883,30 @@ const ObjednatObjektInfo = ({
               </Row>
             </div>
           </div>
-          <div className="section">
-            <Row className="justify-content-arround bg-grey m-0">
+          <div className='section'>
+            <Row className='justify-content-arround bg-grey m-0'>
               <Col md={12}>
-                <div className="heading-with-icons d-flex align-items-center">
+                <div className='heading-with-icons d-flex align-items-center'>
                   <h2>Dostupnost</h2>
                 </div>
               </Col>
             </Row>
-            <div className="section-content border-grey">
-              <Row className="pt-2">
+            <div className='section-content border-grey'>
+              <Row className='pt-2'>
                 <Col md={3}>
-                  <span className="ml-1 pb-1">MHD</span>
+                  <span className='ml-1 pb-1'>MHD</span>
                   <Input
-                    text="m / km"
-                    name="accessibility_mhd"
+                    text='m / km'
+                    name='accessibility_mhd'
                     ref={register}
                     defaultValue={objekt?.dostupnost?.mhd}
                   />
                 </Col>
                 <Col md={3}>
-                  <span className="ml-1 pb-1">ČSAD</span>
+                  <span className='ml-1 pb-1'>ČSAD</span>
                   <Input
-                    text="m / km"
-                    name="accessibility_csad"
+                    text='m / km'
+                    name='accessibility_csad'
                     ref={register}
                     errors={errors}
                     defaultValue={objekt?.dostupnost?.csad}
@@ -1915,20 +1915,20 @@ const ObjednatObjektInfo = ({
               </Row>
               <Row>
                 <Col md={3}>
-                  <span className="ml-1 pb-1">Metro</span>
+                  <span className='ml-1 pb-1'>Metro</span>
                   <Input
-                    text="m / km"
-                    name="accessibility_metro"
+                    text='m / km'
+                    name='accessibility_metro'
                     ref={register}
                     errors={errors}
                     defaultValue={objekt?.dostupnost?.metro}
                   />
                 </Col>
                 <Col md={3}>
-                  <span className="ml-1 pb-1">Vlak</span>
+                  <span className='ml-1 pb-1'>Vlak</span>
                   <Input
-                    text="m / km"
-                    name="accessibility_vlak"
+                    text='m / km'
+                    name='accessibility_vlak'
                     ref={register}
                     errors={errors}
                     defaultValue={objekt?.dostupnost?.vlak}
@@ -1938,53 +1938,53 @@ const ObjednatObjektInfo = ({
               {!isStandard && (
                 <Row>
                   <Col md={6}>
-                    <p className="mr-1 ml-1">
+                    <p className='mr-1 ml-1'>
                       Zadejte GPS souřadnice manuálně nebo vyhledejte pomocí
                       zadání adresy
                     </p>
-                    <div className="ml-1 d-flex">
-                      <div className="mr-1">
-                        <label className="checkbox-container">
-                          <span className="radio-label">Vyhledat</span>
+                    <div className='ml-1 d-flex'>
+                      <div className='mr-1'>
+                        <label className='checkbox-container'>
+                          <span className='radio-label'>Vyhledat</span>
                           <input
-                            type="radio"
-                            name="find_gps"
-                            value="search"
+                            type='radio'
+                            name='find_gps'
+                            value='search'
                             ref={register}
                             defaultChecked
                           />
-                          <span className="checkmark" />
+                          <span className='checkmark' />
                         </label>
                       </div>
                       <div>
-                        <label className="checkbox-container">
-                          <span className="radio-label">Ručně</span>
+                        <label className='checkbox-container'>
+                          <span className='radio-label'>Ručně</span>
                           <input
-                            type="radio"
-                            name="find_gps"
-                            value="manual"
+                            type='radio'
+                            name='find_gps'
+                            value='manual'
                             ref={register}
                           />
-                          <span className="checkmark" />
+                          <span className='checkmark' />
                         </label>
                       </div>
                     </div>
-                    <span className="ml-1 pb-1" />
+                    <span className='ml-1 pb-1' />
                     {watchFindGps === "manual" && (
                       <>
                         <Input
-                          text="Nadmořská výška"
-                          name="accessibility_gps_lat"
+                          text='Nadmořská výška'
+                          name='accessibility_gps_lat'
                           ref={register}
                           defaultValue={gpsCoordinatesLat}
                           onChange={(e) => setGpsCoordinatesLat(e.target.value)}
                         />
                         <Input
-                          text="Nadmořská šířka"
-                          name="accessibility_gps_lng"
+                          text='Nadmořská šířka'
+                          name='accessibility_gps_lng'
                           ref={register}
                           defaultValue={gpsCoordinatesLng}
-                          className="mt-1"
+                          className='mt-1'
                           onChange={(e) => setGpsCoordinatesLng(e.target.value)}
                         />
                       </>
@@ -1992,8 +1992,8 @@ const ObjednatObjektInfo = ({
                     {watchFindGps === "search" && (
                       <>
                         <Input
-                          name="geocodingQuery"
-                          text="Zadejte hledaný výraz"
+                          name='geocodingQuery'
+                          text='Zadejte hledaný výraz'
                           defaultValue={gpsGeoString}
                           onChange={(e) => {
                             const value = e.target?.value;
@@ -2004,7 +2004,7 @@ const ObjednatObjektInfo = ({
                             }
                           }}
                         />
-                        <div className="location-options border-grey">
+                        <div className='location-options border-grey'>
                           {loadingGeo ? (
                             <LoadingSkeleton />
                           ) : (
@@ -2013,7 +2013,7 @@ const ObjednatObjektInfo = ({
                               return (
                                 <div
                                   key={index}
-                                  className="location-options-item"
+                                  className='location-options-item'
                                   onClick={() => {
                                     setGpsCoordinatesLat(
                                       resultItem.geometry.coordinates[1]
@@ -2037,7 +2037,7 @@ const ObjednatObjektInfo = ({
                           )}
                         </div>
                         {
-                          <div className="ml-1">
+                          <div className='ml-1'>
                             <p>Nadmořské výška: {gpsCoordinatesLat}</p>
                             <p>Nadmořské šířka: {gpsCoordinatesLng}</p>
                           </div>
@@ -2053,38 +2053,38 @@ const ObjednatObjektInfo = ({
             </div>
           </div>
           {!isStandard && (
-            <div className="section">
-              <Row className="justify-content-arround bg-grey m-0">
+            <div className='section'>
+              <Row className='justify-content-arround bg-grey m-0'>
                 <Col md={12}>
-                  <div className="heading-with-icons d-flex align-items-center">
+                  <div className='heading-with-icons d-flex align-items-center'>
                     <h2>Ceník</h2>
                   </div>
                 </Col>
               </Row>
-              <div className="section-content border-grey">
+              <div className='section-content border-grey'>
                 {showItems(priceList, setPriceList)}
 
-                <Row className="pt-2 align-items-center">
+                <Row className='pt-2 align-items-center'>
                   <Col md={4}>
-                    <div className="d-flex form-item">
+                    <div className='d-flex form-item'>
                       <div style={{ width: "50%" }}>
                         <label
-                          htmlFor="priceListDatumZacatku"
-                          className="text-black"
+                          htmlFor='priceListDatumZacatku'
+                          className='text-black'
                         >
                           Termín
                         </label>
                         <DatePicker
                           selected={priceLIStartDate}
                           onChange={(date) => setPriceLIStartDate(date)}
-                          name="priceListDatumZacatku"
-                          id="priceListDatumZacatku"
+                          name='priceListDatumZacatku'
+                          id='priceListDatumZacatku'
                           startDate={priceLIStartDate}
                           minDate={Date.now()}
-                          locale="cs"
+                          locale='cs'
                           endDate={priceLIEndDate}
-                          dateFormat="dd.MM.yyyy"
-                          className="inputText datePicker"
+                          dateFormat='dd.MM.yyyy'
+                          className='inputText datePicker'
                           required
                           selectsStart
                           customInput={<StartDateCustomInput />}
@@ -2092,8 +2092,8 @@ const ObjednatObjektInfo = ({
                       </div>
                       <div>
                         <label
-                          htmlFor="priceListDatumKonce"
-                          className="text-black"
+                          htmlFor='priceListDatumKonce'
+                          className='text-black'
                         >
                           &nbsp;
                         </label>
@@ -2101,14 +2101,14 @@ const ObjednatObjektInfo = ({
                           selected={priceLIEndDate}
                           onChange={(date) => setPriceLIEndDate(date)}
                           selectsEnd
-                          name="priceListDatumKonce"
-                          id="priceListDatumKonce"
+                          name='priceListDatumKonce'
+                          id='priceListDatumKonce'
                           startDate={priceLIStartDate}
                           minDate={Date.now()}
-                          locale="cs"
+                          locale='cs'
                           endDate={priceLIEndDate}
-                          dateFormat="dd.MM.yyyy"
-                          className="inputText datePicker"
+                          dateFormat='dd.MM.yyyy'
+                          className='inputText datePicker'
                           required
                           customInput={<EndDateCustomInput />}
                         />
@@ -2116,12 +2116,12 @@ const ObjednatObjektInfo = ({
                     </div>
                   </Col>
                   <Col md={4}>
-                    <label htmlFor="pricelist_popis" className="text-black">
+                    <label htmlFor='pricelist_popis' className='text-black'>
                       &nbsp;
                     </label>
                     <Input
-                      text="Popis"
-                      name="pricelist_popis"
+                      text='Popis'
+                      name='pricelist_popis'
                       value={priceLIDescription}
                       onChange={(e) => {
                         setPriceLIDescription(e.target.value);
@@ -2129,23 +2129,23 @@ const ObjednatObjektInfo = ({
                     />
                   </Col>
                   <Col md={3}>
-                    <label htmlFor="pricelist_cena" className="text-black">
+                    <label htmlFor='pricelist_cena' className='text-black'>
                       &nbsp;
                     </label>
                     <Input
-                      text="Cena"
-                      name="pricelist_cena"
-                      type="number"
+                      text='Cena'
+                      name='pricelist_cena'
+                      type='number'
                       value={priceLIPrice}
                       onChange={(e) => checkInputNumber(e, setPriceLIPrice)}
                     />
                   </Col>
                   <Col md={1}>
-                    <label htmlFor="pricelist_cena" className="text-black">
+                    <label htmlFor='pricelist_cena' className='text-black'>
                       &nbsp;
                     </label>
                     <button
-                      className="btn bg-blue w-100"
+                      className='btn bg-blue w-100'
                       disabled={
                         priceLIDescription.length === 0 ||
                         !priceLIEndDate ||
@@ -2169,7 +2169,7 @@ const ObjednatObjektInfo = ({
                         setPriceLIDescription("");
                       }}
                     >
-                      <IoMdCheckmark className="text-white" />
+                      <IoMdCheckmark className='text-white' />
                     </button>
                   </Col>
                 </Row>
@@ -2177,8 +2177,8 @@ const ObjednatObjektInfo = ({
                 <Row>
                   <Col>
                     <button
-                      type="button"
-                      className="btn add-row d-flex align-items-center"
+                      type='button'
+                      className='btn add-row d-flex align-items-center'
                       onClick={() => {
                         setPriceList((prevState) => {
                           const finalItem = {
@@ -2197,7 +2197,7 @@ const ObjednatObjektInfo = ({
                         setPriceLIDescription("");
                       }}
                     >
-                      <BsFillPlusCircleFill className="text-blue icon" />
+                      <BsFillPlusCircleFill className='text-blue icon' />
                       <span>Přidat další řádek</span>
                     </button>
                   </Col>
@@ -2206,58 +2206,58 @@ const ObjednatObjektInfo = ({
             </div>
           )}
           {!isStandard && (
-            <div className="section">
-              <Row className="justify-content-arround bg-grey m-0">
+            <div className='section'>
+              <Row className='justify-content-arround bg-grey m-0'>
                 <Col md={12}>
-                  <div className="heading-with-icons d-flex align-items-center">
+                  <div className='heading-with-icons d-flex align-items-center'>
                     <h2>Slevy</h2>
                   </div>
                 </Col>
               </Row>
-              <div className="section-content border-grey">
+              <div className='section-content border-grey'>
                 {showItems(sale, setSale)}
-                <Row className="pt-2">
+                <Row className='pt-2'>
                   <Col md={4}>
-                    <div className="d-flex form-item">
+                    <div className='d-flex form-item'>
                       <div style={{ width: "50%" }}>
                         <label
-                          htmlFor="saleDatumZacatku"
-                          className="text-black"
+                          htmlFor='saleDatumZacatku'
+                          className='text-black'
                         >
                           Termín
                         </label>
                         <DatePicker
                           selected={saleItemStartDate}
                           onChange={(date) => setSaleItemStartDate(date)}
-                          name="saleDatumZacatku"
-                          id="saleDatumZacatku"
+                          name='saleDatumZacatku'
+                          id='saleDatumZacatku'
                           startDate={saleItemStartDate}
                           minDate={Date.now()}
-                          locale="cs"
+                          locale='cs'
                           endDate={saleItemEndDate}
-                          dateFormat="dd.MM.yyyy"
-                          className="inputText datePicker"
+                          dateFormat='dd.MM.yyyy'
+                          className='inputText datePicker'
                           required
                           selectsStart
                           customInput={<StartDateCustomInput />}
                         />
                       </div>
                       <div>
-                        <label htmlFor="saleDatumKonce" className="text-black">
+                        <label htmlFor='saleDatumKonce' className='text-black'>
                           &nbsp;
                         </label>
                         <DatePicker
                           selected={saleItemEndDate}
                           onChange={(date) => setSaleItemEndDate(date)}
                           selectsEnd
-                          name="saleDatumKonce"
-                          id="saleDatumKonce"
+                          name='saleDatumKonce'
+                          id='saleDatumKonce'
                           startDate={saleItemStartDate}
                           minDate={Date.now()}
-                          locale="cs"
+                          locale='cs'
                           endDate={saleItemEndDate}
-                          dateFormat="dd.MM.yyyy"
-                          className="inputText datePicker"
+                          dateFormat='dd.MM.yyyy'
+                          className='inputText datePicker'
                           required
                           customInput={<EndDateCustomInput />}
                         />
@@ -2265,24 +2265,24 @@ const ObjednatObjektInfo = ({
                     </div>
                   </Col>
                   <Col md={4}>
-                    <label htmlFor="sale_popis" className="text-black">
+                    <label htmlFor='sale_popis' className='text-black'>
                       &nbsp;
                     </label>
                     <Input
-                      text="Popis"
-                      name="sale_popis"
+                      text='Popis'
+                      name='sale_popis'
                       onChange={(e) => setSaleItemDescription(e.target.value)}
                       value={saleItemDescription}
                     />
                   </Col>
                   <Col md={3}>
-                    <label htmlFor="sale_cena" className="text-black">
+                    <label htmlFor='sale_cena' className='text-black'>
                       &nbsp;
                     </label>
                     <Input
-                      type="number"
-                      text="Cena"
-                      name="sale_cena"
+                      type='number'
+                      text='Cena'
+                      name='sale_cena'
                       value={saleItemPrice}
                       onChange={(e) => checkInputNumber(e, setSaleItemPrice)}
                     />
@@ -2292,8 +2292,8 @@ const ObjednatObjektInfo = ({
                 <Row>
                   <Col>
                     <button
-                      type="button"
-                      className="btn add-row d-flex align-items-center"
+                      type='button'
+                      className='btn add-row d-flex align-items-center'
                       onClick={() => {
                         setSale((prevState) => {
                           const finalItem = {
@@ -2312,7 +2312,7 @@ const ObjednatObjektInfo = ({
                         setSaleItemDescription("");
                       }}
                     >
-                      <BsFillPlusCircleFill className="text-blue icon" />
+                      <BsFillPlusCircleFill className='text-blue icon' />
                       <span>Přidat další řádek</span>
                     </button>
                   </Col>
@@ -2320,23 +2320,23 @@ const ObjednatObjektInfo = ({
               </div>
             </div>
           )}
-          <div className="section">
-            <Row className="justify-content-arround bg-grey m-0">
+          <div className='section'>
+            <Row className='justify-content-arround bg-grey m-0'>
               <Col md={12}>
-                <div className="heading-with-icons d-flex align-items-center">
+                <div className='heading-with-icons d-flex align-items-center'>
                   <h2>Provozní doba</h2>
                 </div>
               </Col>
             </Row>
-            <div className="section-content">
+            <div className='section-content'>
               {operatingHours?.map((item, i) => (
-                <Row className="pt-2 align-items-center" key={i}>
+                <Row className='pt-2 align-items-center' key={i}>
                   <Col md={4}>
-                    <div className="d-flex form-item">
+                    <div className='d-flex form-item'>
                       <div style={{ width: "50%" }}>
                         <StartDateCustomInput
                           value={item.datum_zacatku}
-                          className="forShow"
+                          className='forShow'
                           disabled
                         />
                       </div>
@@ -2346,76 +2346,76 @@ const ObjednatObjektInfo = ({
                     </div>
                   </Col>
                   <Col md={4}>
-                    <Input value={item.popis} text="Popis" disabled forShow />
+                    <Input value={item.popis} text='Popis' disabled forShow />
                   </Col>
                   <Col>
                     <button
-                      type="button"
-                      className="btn bg-white"
+                      type='button'
+                      className='btn bg-white'
                       onClick={() => {
                         setOperatingHours((prevState) =>
                           prevState.splice(i, 1)
                         );
                       }}
                     >
-                      <BsPlus className="cancel-filter-icon" />
+                      <BsPlus className='cancel-filter-icon' />
                     </button>
                   </Col>
                 </Row>
               ))}
-              <Row className="row">
+              <Row className='row'>
                 <Col md={4}>
-                  <div className="d-flex form-item">
+                  <div className='d-flex form-item'>
                     <div style={{ width: "50%" }}>
-                      <label htmlFor="openingHoursStart" className="text-black">
+                      <label htmlFor='openingHoursStart' className='text-black'>
                         Termín
                       </label>
                       <Input
-                        type="time"
-                        text="Otevření"
-                        name="openingHoursStart"
+                        type='time'
+                        text='Otevření'
+                        name='openingHoursStart'
                         required
-                        defaultValue="00:00"
-                        className="m-0"
+                        defaultValue='00:00'
+                        className='m-0'
                         value={openingStart}
                         onChange={(e) => setOpeningStart(e.target.value)}
                       />
                     </div>
                     <div style={{ width: "50%" }}>
-                      <label htmlFor="openingHoursEnd" className="text-black">
+                      <label htmlFor='openingHoursEnd' className='text-black'>
                         &nbsp;
                       </label>
-                      <div className="form-item m-0">
+                      <div className='form-item m-0'>
                         <Input
-                          type="time"
-                          text="Zavření"
-                          name="openingHoursEnd"
+                          type='time'
+                          text='Zavření'
+                          name='openingHoursEnd'
                           required
-                          defaultValue="00:00"
+                          defaultValue='00:00'
                           value={openingEnd}
                           onChange={(e) => setOpeningEnd(e.target.value)}
-                          className="m-0 pr-0"
+                          className='m-0 pr-0'
                         />
                       </div>
                     </div>
                   </div>
                 </Col>
                 <Col md={4}>
-                  <label htmlFor="openingHoursDescription">&nbsp;</label>
+                  <label htmlFor='openingHoursDescription'>&nbsp;</label>
                   <Input
-                    text="Popis (např. Po-Ne)"
-                    name="openingHoursDescription"
+                    text='Popis (např. Po-Ne)'
+                    name='openingHoursDescription'
                     value={openingDescripiton}
                     onChange={(e) => setOpeningDescripiton(e.target.value)}
                   />
                 </Col>
                 <Col>
                   <button
-                    type="button"
-                    className="btn bg-white"
+                    type='button'
+                    className='btn bg-white'
                     disabled={!operatingHours || operatingHours?.length === 0}
                   >
-                    <BsPlus className="cancel-filter-icon" />
+                    <BsPlus className='cancel-filter-icon' />
                   </button>
                 </Col>
               </Row>
@@ -2423,8 +2423,8 @@ const ObjednatObjektInfo = ({
               <Row>
                 <Col>
                   <button
-                    type="button"
-                    className="btn add-row d-flex align-items-center"
+                    type='button'
+                    className='btn add-row d-flex align-items-center'
                     onClick={() => {
                       setOperatingHours((prevState) => [
                         ...prevState,
@@ -2439,23 +2439,23 @@ const ObjednatObjektInfo = ({
                       setOpeningDescripiton("");
                     }}
                   >
-                    <BsFillPlusCircleFill className="text-blue icon" />
+                    <BsFillPlusCircleFill className='text-blue icon' />
                     <span>Přidat další řádek</span>
                   </button>
                 </Col>
               </Row>
             </div>
           </div>
-          <div className="section">
-            <Row className="justify-content-arround bg-grey m-0">
+          <div className='section'>
+            <Row className='justify-content-arround bg-grey m-0'>
               <Col md={12}>
-                <div className="heading-with-icons d-flex align-items-center">
+                <div className='heading-with-icons d-flex align-items-center'>
                   <h2>Fotogalerie</h2>
                 </div>
               </Col>
             </Row>
-            <div className="section-content ">
-              <Row className="row">
+            <div className='section-content '>
+              <Row className='row'>
                 <Col md={12}>
                   <div
                     {...dropzonePropsParent}
@@ -2487,12 +2487,12 @@ const ObjednatObjektInfo = ({
                           kliknutím na tlačítko.
                         </p>
                       )}
-                      <div {...dropzonePropsChildren} className="outline-none">
+                      <div {...dropzonePropsChildren} className='outline-none'>
                         <button
-                          className="btn-small-logo btn bg-blue text-white"
-                          type="button"
+                          className='btn-small-logo btn bg-blue text-white'
+                          type='button'
                         >
-                          <MdCloudUpload className="btn-icon" />
+                          <MdCloudUpload className='btn-icon' />
                           Nahrát{" "}
                           {previewImages && previewImages.length > 0
                             ? "další"
@@ -2506,17 +2506,17 @@ const ObjednatObjektInfo = ({
             </div>
           </div>
           <button
-            type="submit"
-            className="btn-logo d-flex align-items-center btn bg-blue text-white"
+            type='submit'
+            className='btn-logo d-flex align-items-center btn bg-blue text-white'
           >
-            <FaSave className="btn-icon" />
+            <FaSave className='btn-icon' />
             Uložit údaje
           </button>
         </ConditionalWrapper>
       </form>
       {uploadingInProgress && (
-        <div className="uploading-objekt">
-          <div className="content-wrapper">
+        <div className='uploading-objekt'>
+          <div className='content-wrapper'>
             <h2>Nahrávám objekt..</h2>
             <p>Neoupštejte tuto stránka objekt se nahrává</p>
           </div>

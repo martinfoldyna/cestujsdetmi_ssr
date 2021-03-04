@@ -2,28 +2,29 @@ import { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Col, Row } from "react-grid-system";
 import CustomSelect from "../form/CustomSelect";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { objectToArray } from "../../helpers/helpers";
 import enums from "../../enums";
 import CustomDateRangePicker from "../form/CustomDateRangePicker";
 import { GlobalContext } from "../../context/GlobalContext";
+import StickyBox from "react-sticky-box";
 
 const SideFilter = ({
   color,
   // getCategories,
   topic,
+  kraje,
+  mesta,
+  kategorie,
+  oblasti,
   dateRange = false,
   fullPadding = false,
+  beSticky = true,
 }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const { global } = useContext(GlobalContext);
-  const { kraje, oblasti, kategorie } = global;
-
-  const beautifiedKraj = objectToArray(enums.KRAJ);
-  const beautifiedRegion = objectToArray(enums.REGION);
   const router = useRouter();
 
   const cancelFilter = (e) => {
@@ -117,14 +118,21 @@ const SideFilter = ({
     return returnValue;
   };
 
-  useEffect(() => {
-    if (router.query) {
-      console.log(router.query);
-      console.log(
-        beautifiedKraj.find((kraj) => kraj.key === router.query.kraj)
-      );
-    }
-  }, [router.query]);
+  // useEffect(() => {
+  //   if (router.query) {
+  //     // console.log(router.query);
+  //     // console.log(
+  //     //   beautifiedKraj.find((kraj) => kraj.key === router.query.kraj)
+  //     // );
+  //   }
+
+  //   console.log("urceni", topic.key);
+  //   console.log("kategorie", kategorie);
+  //   console.log(
+  //     "kategorie.find",
+  //     kategorie.find((categoryItem) => categoryItem.urceni === topic.key)
+  //   );
+  // }, [kategorie]);
 
   return (
     <div
@@ -136,16 +144,18 @@ const SideFilter = ({
           : ""
       } bg-white`}
     >
-      <Row className="m-0">
-        <Col md={6} lg={12} className="col p-0">
-          <div className="selects">
-            <p className="filter-name">Vyberte lokalitu</p>
+      {/* <Waypoint onEnter={() => setSticky(true)} /> */}
+
+      <Row className='m-0'>
+        <Col md={6} lg={12} className='col p-0'>
+          <div className='selects'>
+            <p className='filter-name'>Vyberte lokalitu</p>
             <Row>
               <Col md={12}>
                 <CustomSelect
                   options={kraje}
                   onChange={(kraj) => onRegionsSelect({ kraj: kraj.key })}
-                  placeholder="Kraj"
+                  placeholder='Kraj'
                   color={color}
                   value={
                     router.query.kraj
@@ -155,12 +165,12 @@ const SideFilter = ({
                 />
               </Col>
             </Row>
-            <Row className="m-0">
-              <Col md={12} className="p-0">
+            <Row className='m-0'>
+              <Col md={12} className='p-0'>
                 <CustomSelect
                   options={oblasti}
                   onChange={(oblast) => onRegionsSelect({ oblast: oblast.key })}
-                  placeholder="Oblast"
+                  placeholder='Oblast'
                   color={color}
                   value={router.query.oblast}
                 />
@@ -168,36 +178,36 @@ const SideFilter = ({
             </Row>
             {(selectedCity !== null || selectedRegion !== null) && (
               <Link
-                href="#"
+                href='#'
                 onClick={() => {
                   setSelectedRegion(null);
                   setSelectedCity(null);
                 }}
-                className="text-blue"
+                className='text-blue'
               >
                 Zrušit filtry
               </Link>
             )}
           </div>
         </Col>
-        <Col lg={12} className="col p-0">
-          <div className="selects pt-0">
+        <Col lg={12} className='col p-0'>
+          <div className='selects pt-0'>
             {dateRange && (
-              <div className="date-range-picker">
-                <p className="filter-name">Vyberte termín</p>
+              <div className='date-range-picker'>
+                <p className='filter-name'>Vyberte termín</p>
                 <CustomDateRangePicker />
               </div>
             )}
           </div>
         </Col>
-        <Col className="col p-0">
+        <Col className='col p-0'>
           {kategorie &&
             kategorie.find(
-              (categoryItem) => categoryItem.urceni === topic.key
+              (categoryItem) => categoryItem.urceni === topic?.key
             ) && (
-              <div className="categories">
-                <p className="filter-name">Kategorie</p>
-                <ul className="categories-list list-style-none p-0 mb-0">
+              <div className='categories'>
+                <p className='filter-name'>Kategorie</p>
+                <ul className='categories-list list-style-none p-0 mb-0'>
                   {kategorie.map(
                     (categoryItem) =>
                       categoryItem.urceni === topic.key && (
@@ -213,7 +223,9 @@ const SideFilter = ({
                           <Link
                             href={{
                               pathname: `/${topic.url}/[filterKategorie]`,
-                              query: { filterKategorie: categoryItem.hodnota },
+                              query: {
+                                filterKategorie: categoryItem.hodnota,
+                              },
                             }}
                           >
                             {categoryItem.nazev}

@@ -46,7 +46,9 @@ export async function getStaticProps({ params }) {
     `${enums.URLS.objektInfoMini}&${searchParamsToQueryString(fetchParams)}`
   );
 
-  return { props: { objekty }, revalidate: 3600 };
+  const locations = await fetchQuery("locations");
+
+  return { props: { objekty, locations }, revalidate: 3600 };
 }
 
 const TipyNaVyletyKategorie = ({ objekty }) => {
@@ -70,6 +72,12 @@ const TipyNaVyletyKategorie = ({ objekty }) => {
     _start: 0,
   };
 
+  const sideBarProps = {
+    topic: enums.TYP_OBJEKTU.zabava,
+    color: "orange",
+    ...locations,
+  };
+
   // useEffect(() => {
   //   console.log(objekty);
   //   if (!objekty) {
@@ -81,7 +89,7 @@ const TipyNaVyletyKategorie = ({ objekty }) => {
     <>
       <Head>
         <meta
-          name="description"
+          name='description'
           content={`Tipy kam na výlet s dětmi v Čechách i na Moravě, ${filterKategorie}`}
         />
         <title>
@@ -89,15 +97,15 @@ const TipyNaVyletyKategorie = ({ objekty }) => {
           Cestuj s dětmi.cz
         </title>
       </Head>
-      <Container className="main-container">
-        <span className="breadcrumb">
-          <Link href="/">Úvodní stránka</Link>
+      <Container className='main-container'>
+        <span className='breadcrumb'>
+          <Link href='/'>Úvodní stránka</Link>
           &nbsp;/&nbsp;Výlety s dětmi
         </span>
 
         <HeadingWithIcon
-          background="orange"
-          heading="Tipy kam na výlet s dětmi v Čechách i na Moravě"
+          background='orange'
+          heading='Tipy kam na výlet s dětmi v Čechách i na Moravě'
           icon={AiFillCompass}
         >
           <p>
@@ -107,13 +115,13 @@ const TipyNaVyletyKategorie = ({ objekty }) => {
             rodinné výlety a výlety s dětmi.
           </p>
         </HeadingWithIcon>
-        <div className="data-wrapper">
+        <div className='data-wrapper'>
           <Row>
-            <Col md={2.5} className="hide-mobile">
-              <SideBar topic={enums.TYP_OBJEKTU.zabava} color="orange" />
+            <Col md={2.5} className='hide-mobile'>
+              <SideBar {...sideBarProps} />
             </Col>
             <Col>
-              <div className="hide-desktop">
+              <div className='hide-desktop'>
                 <div
                   className={`d-flex ${
                     openFilter
@@ -123,54 +131,30 @@ const TipyNaVyletyKategorie = ({ objekty }) => {
                 >
                   {openFilter && (
                     <button
-                      className="btn btn-small-logo bg-blue text-white m-0"
+                      className='btn btn-small-logo bg-blue text-white m-0'
                       onClick={() => setOpenFilter(false)}
                     >
                       Zavřít filtr
                     </button>
                   )}
                   <button
-                    className="btn btn-small-logo ghost m-0"
+                    className='btn btn-small-logo ghost m-0'
                     onClick={() => setOpenFilter(true)}
                   >
                     Upřesnit parametry{" "}
-                    <BsFilter className="text-blue btn-icon right" />
+                    <BsFilter className='text-blue btn-icon right' />
                   </button>
                 </div>
-                {openFilter && (
-                  <SideFilter topic={enums.TYP_OBJEKTU.zabava.key} />
-                )}
+                {openFilter && <SideFilter {...sideBarProps} />}
               </div>
-              {/*<Switch>*/}
-              {/*  <Route exact path={match.path}>*/}
-              {
-                <ListFilteredItems
-                  region={selectedRegion}
-                  city={selectedCity}
-                  typ_objektu={enums.TYP_OBJEKTU.zabava.key}
-                  objekty={objekty}
-                />
-              }
-              {/*</Route>*/}
-              {/*  <Route*/}
-              {/*    exact*/}
-              {/*    path={`${match.path}/:filter/:kraj?/:oblast?/:mesto?`}*/}
-              {/*  >*/}
-              {/*    {*/}
-              {/*      <ListFilteredItems*/}
-              {/*        region={selectedRegion}*/}
-              {/*        city={selectedCity}*/}
-              {/*        typ_objektu={enums.TYP_OBJEKTU.ubytovani.key}*/}
-              {/*      />*/}
-              {/*    }*/}
-              {/*  </Route>*/}
-              {/*  <Route exact path={`${match.path}/detail/:id`}>*/}
-              {/*    <ObjektDetail />*/}
-              {/*  </Route>*/}
-              {/*</Switch>*/}
-
-              <div className="hide-desktop">
-                <div className="mt-1">
+              <ListFilteredItems
+                region={selectedRegion}
+                city={selectedCity}
+                typ_objektu={enums.TYP_OBJEKTU.zabava.key}
+                objekty={objekty}
+              />
+              <div className='hide-desktop'>
+                <div className='mt-1'>
                   <SideCards />
                 </div>
               </div>

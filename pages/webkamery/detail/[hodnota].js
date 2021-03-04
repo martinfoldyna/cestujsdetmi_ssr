@@ -37,14 +37,15 @@ export async function getStaticProps({ params }) {
       `${enums.URLS.webkamery}&hodnota=${hodnota}`
     );
     const webcam = webcamQuery[0];
-    return webcam ? { props: { webcam } } : { notFound: true };
+    const locations = await fetchQuery("locations");
+    return webcam ? { props: { webcam, locations } } : { notFound: true };
   } catch (err) {
     console.log("error", err);
     return { notFound: true };
   }
 }
 
-const WebcamDetail = ({ webcam }) => {
+const WebcamDetail = ({ webcam, locations }) => {
   const router = useRouter();
   const { hodnota } = router.query;
   const { isFallback } = useRouter();
@@ -58,6 +59,8 @@ const WebcamDetail = ({ webcam }) => {
     setRelated(fetchRelated);
   };
 
+  const layoutProps = { ...locations };
+
   useEffect(() => {
     loadWebcam();
     console.log(webcam);
@@ -66,44 +69,44 @@ const WebcamDetail = ({ webcam }) => {
   return isFallback ? (
     <LoadingSkeleton />
   ) : (
-    <>
+    <WebcamsLayout {...layoutProps}>
       {/*<HeadTitle*/}
       {/*  title={webcam.page_title}*/}
       {/*  description={webcam.page_description}*/}
       {/*/>*/}
       <Head>
         <title>{webcam.nazev} | Cestuj s dětmi.cz</title>
-        <meta name="description" content={webcam.page_description} />
+        <meta name='description' content={webcam.page_description} />
         <meta
-          name="keywords"
+          name='keywords'
           content={`webkamery,webové kamery,online kamery,Čechy,ski areály,města, ${webcam.nazev}`}
         />
-        <meta name="robots" content="index, follow" />
+        <meta name='robots' content='index, follow' />
       </Head>
 
-      <Section className="mt-0 webcam-detail">
+      <Section className='mt-0 webcam-detail'>
         {/*<SectionHeading background="none">*/}
         {/*  <h2>{webcam.nazev}</h2>*/}
         {/*</SectionHeading>*/}
-        <SectionContent>
-          <div className="content-wrapper">
+        <SectionContent className='border-radius'>
+          <div className='content-wrapper'>
             {webcam.text && parse(webcam?.text)}
           </div>
           {webcam.galerie && webcam.galerie.length > 0 && (
-            <div className="pt-1">
-              <span className="mb-1 d-block info-text">
+            <div className='pt-1'>
+              <span className='mb-1 d-block info-text'>
                 Kliknutím na příslušnou webkameru její obsah zvětšíte.
               </span>
-              <div className="webcam-detail-image-wrapper d-flex">
+              <div className='webcam-detail-image-wrapper d-flex'>
                 {webcam.galerie.map((image, index) => (
                   <a
                     href={image}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target='_blank'
+                    rel='noopener noreferrer'
                     key={index}
                   >
                     <img
-                      className="webcam-detail-image w-100"
+                      className='webcam-detail-image w-100'
                       src={image}
                       alt={webcam.nazev + "0" + index}
                     />
@@ -115,8 +118,8 @@ const WebcamDetail = ({ webcam }) => {
         </SectionContent>
       </Section>
       {related && (
-        <Section className="realted-advices">
-          <SectionHeading background="grey">
+        <Section className='realted-advices'>
+          <SectionHeading background='white' className='border-radius'>
             <h2>Další webkamery</h2>
           </SectionHeading>
           <SectionContent>
@@ -134,11 +137,9 @@ const WebcamDetail = ({ webcam }) => {
           </SectionContent>
         </Section>
       )}
-    </>
+    </WebcamsLayout>
   );
 };
-
-WebcamDetail.Layout = WebcamsLayout;
 
 WebcamDetail.propTypes = {
   webcam: PropTypes.object.isRequired,

@@ -1,33 +1,39 @@
 @import "Variables";
 
-.btn {
+.btn,
+.clamp-lines__button {
   border: 2px solid transparent;
   border-radius: 4px;
   cursor: pointer;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   font-weight: 600;
   font-size: $font-size;
-  transition: .5s;
+  transition: 0.5s;
   display: block;
 }
 
 .btn:disabled {
-  opacity: .3;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 .btn:focus {
   outline: none;
 }
 
-.btn:hover {
-  opacity: .65;
+.btn:hover,
+.clamp-lines__button {
+  opacity: 0.65;
 }
 
+.btn.btn-circle {
+  padding: 0.6em;
+  border-radius: 50%;
+}
 
 .btn-small-logo {
   height: auto;
-  padding: 1em .8em;
-  margin: 0 .5em;
+  padding: 1em 0.8em;
+  margin: 0 0.5em;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -48,24 +54,21 @@
   transform: translate(-50%, -50%);
 }
 
-  .btn-icon {
-  margin-right: .5em;
+.btn-icon {
+  margin-right: 0.5em;
 }
 
 .map-buttons .btn:first-of-type {
   margin-right: 1em;
 }
 
-
 .btn-blue {
   background-size: 200% 100%;
   background-image: linear-gradient(to left, $blue-tint 50%, $blue 50%);
-  -webkit-transition: background-position .5s;
-  -moz-transition: background-position .5s;
-  transition: background-position .5s;
-
+  -webkit-transition: background-position 0.5s;
+  -moz-transition: background-position 0.5s;
+  transition: background-position 0.5s;
 }
-
 
 .btn-blue:hover {
   background-position: -100% 0;
@@ -74,9 +77,9 @@
 .add-row {
   background-color: transparent;
   font-weight: normal;
-  color: #8F8F8F;
+  color: #8f8f8f;
   font-family: $font-family-open-sans;
-  margin-top: .5em;
+  margin-top: 0.5em;
 }
 
 .add-row .icon {
@@ -101,7 +104,7 @@
 }
 
 .btn-icon.right {
-  margin-left: .5em !important;
+  margin-left: 0.5em !important;
   margin-right: 0 !important;
 }
 

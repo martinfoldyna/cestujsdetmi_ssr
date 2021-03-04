@@ -7,19 +7,44 @@ import { Col, Container, Row } from "react-grid-system";
 import SideFilter from "../../components/cards/SideFilter";
 import SideCards from "../SideCards";
 
-const WebcamsLayout = ({ children, ...pageProps }) => {
+// export async function getStaticProps() {
+//   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
+//   const locations = await fetchQuery("locations");
+
+//   const { kraje, mesta, oblasti, kategorie } = locations;
+
+//   return { props: { webcams, kraje }, revalidate: 3600 };
+// }
+
+const WebcamsLayout = ({
+  children,
+  kraje,
+  mesta,
+  oblasti,
+  kategorie,
+  pageProps,
+}) => {
   const router = useRouter();
   const { hodnota } = router.query;
 
   console.log(pageProps);
 
+  const filterProps = {
+    kraje,
+    mesta,
+    oblasti,
+    kategorie,
+    fullPadding: true,
+    color: "purple",
+  };
+
   return (
-    <Container className="main-container">
-      <span className="breadcrumb">
-        <Link href="/">Úvodní stránka</Link>&nbsp;/&nbsp;
+    <Container className='main-container'>
+      <span className='breadcrumb'>
+        <Link href='/'>Úvodní stránka</Link>&nbsp;/&nbsp;
         {hodnota ? (
           <>
-            <Link href="/webkamery">Webkamery</Link>&nbsp;/&nbsp;Detail
+            <Link href='/webkamery'>Webkamery</Link>&nbsp;/&nbsp;Detail
             webkamery
           </>
         ) : (
@@ -28,8 +53,8 @@ const WebcamsLayout = ({ children, ...pageProps }) => {
       </span>
 
       <HeadingWithIcon
-        background="dark-purple"
-        heading="Webkamery"
+        background='dark-purple'
+        heading='Webkamery'
         icon={RiWebcamFill}
       >
         <p>
@@ -38,17 +63,17 @@ const WebcamsLayout = ({ children, ...pageProps }) => {
           snadno zadat lokalitu webkamer, kterou požadujete zobrazit.
         </p>
       </HeadingWithIcon>
-      <div className="data-wrapper">
+      <div className='data-wrapper'>
         <Row>
-          <Col lg={2.5} className="hide-mobile">
-            <SideFilter fullPadding={true} color="purple" />
+          <Col lg={2.5} className='hide-mobile'>
+            <SideFilter {...filterProps} />
             <SideCards />
           </Col>
           <Col lg={9.5}>
             <>
               {children}
-              <div className="hide-desktop">
-                <div className="mt-1">
+              <div className='hide-desktop'>
+                <div className='mt-1'>
                   <SideCards />
                 </div>
               </div>

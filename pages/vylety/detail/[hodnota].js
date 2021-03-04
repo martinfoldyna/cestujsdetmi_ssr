@@ -11,7 +11,6 @@ export async function getStaticPaths() {
   const objects = await fetchQuery(
     `${enums.URLS.objektInfoMini}&typ_objektu=${enums.TYP_OBJEKTU.zabava.key}&_limit=20`
   );
-  // const related = await fetchQuery(`${enums.URLS.objektInfoMini}&tags_in`);
 
   return {
     paths: objects.map((object) => ({
@@ -26,34 +25,44 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { hodnota } = params;
 
-  try {
-    const objektQuery = await fetchQuery(
-      `${enums.URLS.objektInfo}?hodnota=${hodnota}`
+  const objektQuery = await fetchQuery(
+    `${enums.URLS.objektInfo}?hodnota=${hodnota}`
+  );
+
+  const objekt = objektQuery[0];
+  let related = [];
+  if (objekt?.adresa_oblast) {
+    related = await fetchQuery(
+      `${enums.URLS.objektInfo}?adresa_oblast=${objekt.adresa_oblast}&_limit=10`
     );
-
-    const objekt = objektQuery[0];
-
-    return objekt
-      ? { props: { objekt }, revalidate: 1800 }
-      : { props: { notFound: true }, revalidate: 1800 };
-  } catch (err) {
-    console.log(err);
-    return { props: { notFound: true } };
   }
+
+  const locations = await fetchQuery("locations");
+
+  return { props: { objekt, related, locations } };
 }
 
-const VyletyDetail = ({ objekt }) => {
+const VyletyDetail = ({ objekt, locations, related }) => {
   const [session] = useSession();
 
   return (
     <>
       <Head>
         <title>{objekt?.nazev} | Cestuj s dětmi.cz</title>
-        <meta name="description" content={objekt?.page_description} />
-        <meta name="robots" content="index, follow" />
+        <meta name='description' content={objekt?.page_description} />
+        <meta name='robots' content='index, follow' />
       </Head>
-      <Container className="main-container">
-        <ObjektDetail objekt={objekt} user={session?.user} />
+      <Container className='main-container'>
+        {objekt ? (
+          <ObjektDetail
+            objekt={objekt}
+            user={session?.user}
+            locations={locations}
+            related={related}
+          />
+        ) : (
+          "Loading.."
+        )}
       </Container>
     </>
   );

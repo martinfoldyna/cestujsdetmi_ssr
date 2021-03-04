@@ -14,9 +14,9 @@ import Inquiry from "./Inquiry";
 import { GlobalContext } from "../context/GlobalContext";
 import { fetchQuery } from "../helpers/fetch";
 
-const Map = ({ mesta }) => {
+const Map = ({ mesta, kraje, oblasti }) => {
   const { global } = useContext(GlobalContext);
-  const { kraje, oblasti } = global;
+  // const { kraje, oblasti } = global;
 
   const [selectedTrip, setSelectedTrip] = useState(false);
   const [clicked, setClicked] = useState({ key: null, value: null });
@@ -124,25 +124,25 @@ const Map = ({ mesta }) => {
   }, [kraj]);
 
   return (
-    <section className="map-component bg-white">
-      <Row className="row">
-        <Col md={5} className="d-flex">
+    <section className='map-component bg-white'>
+      <Row className='row'>
+        <Col md={5} className='d-flex'>
           <div>
-            <div className="heading-with-icons d-flex align-items-center">
+            <div className='heading-with-icons d-flex align-items-center'>
               <FaMapMarkerAlt
                 className={`text-white icon-heading bg-${color}`}
                 style={{ marginRight: "1em" }}
               />
-              <h2 className="d-flex align-items-center">
+              <h2 className='d-flex align-items-center'>
                 Zvolte si lokaci na mapě
               </h2>
             </div>
-            <div className="margin-wrapper">
-              <p className="map-description">
+            <div className='margin-wrapper'>
+              <p className='map-description'>
                 Chtěli byste na dovolenou nebo na výlet? <br />
                 Zvolte si druh mapky kliknutím na tlačítko.
               </p>
-              <div className="map-buttons d-flex">
+              <div className='map-buttons d-flex'>
                 <button
                   className={`btn ${
                     selectedTrip
@@ -154,8 +154,8 @@ const Map = ({ mesta }) => {
                     setColor("blue");
                   }}
                 >
-                  <div className="hide-mobile">Ubytování a dovolená</div>
-                  <div className="hide-desktop">Dovolená</div>
+                  <div className='hide-mobile'>Ubytování a dovolená</div>
+                  <div className='hide-desktop'>Dovolená</div>
                 </button>
                 <button
                   className={`btn ${
@@ -168,8 +168,8 @@ const Map = ({ mesta }) => {
                     setColor("orange");
                   }}
                 >
-                  <span className="hide-mobile"> Výlety a zábava</span>
-                  <span className="hide-desktop"> Výlety</span>
+                  <span className='hide-mobile'> Výlety a zábava</span>
+                  <span className='hide-desktop'> Výlety</span>
                 </button>
               </div>
               <button
@@ -184,7 +184,7 @@ const Map = ({ mesta }) => {
             </div>
           </div>
         </Col>
-        <Col md={7} className="d-flex p-0">
+        <Col md={7} className='d-flex p-0'>
           {regionMap ? (
             <VectorMap
               {...czechRepubilcRegions}
@@ -202,7 +202,7 @@ const Map = ({ mesta }) => {
           (clicked && clicked.value && clicked.key) ? (
             <div className={`badge-location bg-${color}`}>
               {/* When user clicks disable hover value */}
-              <p className="m-0 text-white">
+              <p className='m-0 text-white'>
                 {clicked && clicked.value && clicked.key
                   ? clicked.value
                   : hovered.value}
@@ -213,10 +213,10 @@ const Map = ({ mesta }) => {
           )}
         </Col>
       </Row>
-      <Row className="align-items-center m-0 ml-3 map-filters row">
-        <Col md={2} className="col p-0">
+      <Row className='align-items-center m-0 ml-3 map-filters row'>
+        <Col md={2} className='col p-0'>
           <CustomSelect
-            placeholder="Kraj"
+            placeholder='Kraj'
             options={kraje}
             onChange={onKrajChange}
             value={clicked}
@@ -227,9 +227,9 @@ const Map = ({ mesta }) => {
           kraj &&
           Array.isArray(filteredCities) &&
           filteredCities.length > 0 && (
-            <Col md={2} className="col p-0">
+            <Col md={2} className='col p-0'>
               <CustomSelect
-                placeholder="Město"
+                placeholder='Město'
                 options={filteredCities}
                 onChange={(e) => setMesto(e.key)}
                 color={color}
@@ -237,16 +237,16 @@ const Map = ({ mesta }) => {
             </Col>
           )}
 
-        <Col md={2} className="col p-0">
+        <Col md={2} className='col p-0'>
           <CustomSelect
-            placeholder="Oblast"
+            placeholder='Oblast'
             options={filteredOblasts}
             onChange={(e) => setOblast(e.key)}
             color={color}
           />
         </Col>
-        <Col md={1} className="col">
-          <div className="hide-mobile">
+        <Col md={1} className='col'>
+          <div className='hide-mobile'>
             <button
               className={`btn bg-${color} text-white m-0`}
               onClick={submitLocation}
@@ -254,8 +254,8 @@ const Map = ({ mesta }) => {
               <FaSearch />
             </button>
           </div>
-          <div className="hide-desktop">
-            <div className="d-flex justify-content-end">
+          <div className='hide-desktop'>
+            <div className='d-flex justify-content-end'>
               <button
                 className={`btn bg-${color} text-white`}
                 onClick={submitLocation}
@@ -266,14 +266,14 @@ const Map = ({ mesta }) => {
           </div>
         </Col>
         {/*<Col>*/}
-        <Col className="p-0">
-          <div className="hide-mobile w-100">
-            <div className="d-flex justify-content-end ">
+        <Col className='p-0'>
+          <div className='hide-mobile w-100'>
+            <div className='d-flex justify-content-end '>
               <button
                 className={`text-${color} btn bg-white p-0 d-flex align-items-center`}
                 onClick={() => setRegionMap((prevState) => !prevState)}
               >
-                <FiMap className="btn-icon" />
+                <FiMap className='btn-icon' />
                 přepnout mapu
               </button>
             </div>
