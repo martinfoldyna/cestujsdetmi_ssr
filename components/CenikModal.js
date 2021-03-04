@@ -8,9 +8,6 @@ import discount2 from "@iconify/icons-tabler/discount-2";
 import { Icon, InlineIcon } from "@iconify/react";
 
 const CenikModal = ({ cenik, slevy, onClose, open }) => {
-  console.log(cenik);
-  console.log(slevy);
-
   const modalParams = {
     onClose,
     open,

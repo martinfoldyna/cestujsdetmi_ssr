@@ -21,8 +21,6 @@ const Lightbox = ({ open, images, clickedImage, onClose, ...rest }) => {
     );
   };
 
-  console.log("Lightbox initialized");
-
   const previousImage = () => {
     setLoadingImage(true);
     setImage((prevState) => {
@@ -35,9 +33,7 @@ const Lightbox = ({ open, images, clickedImage, onClose, ...rest }) => {
     });
   };
 
-  const onMouseDown = (e) => {
-    console.log(e);
-  };
+  const onMouseDown = (e) => {};
 
   const onKeyDown = (e) => {
     const key = e.key.toLowerCase();
@@ -59,8 +55,6 @@ const Lightbox = ({ open, images, clickedImage, onClose, ...rest }) => {
 
   useEffect(() => {
     setImage(clickedImage);
-    console.log("clickedImage", clickedImage);
-    console.log("images", images);
   }, [clickedImage]);
 
   return currentImage ? (
