@@ -51,7 +51,7 @@ export async function getStaticProps({ params }) {
   return { props: { objekty, locations }, revalidate: 3600 };
 }
 
-const TipyNaVyletyKategorie = ({ objekty }) => {
+const TipyNaVyletyKategorie = ({ objekty, locations }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   // How many objects are shown and at which number start api call query
