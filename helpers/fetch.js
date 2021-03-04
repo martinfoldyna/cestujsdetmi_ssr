@@ -16,8 +16,6 @@ export const fetchQuery = async (path, params = null, headers) => {
     }
 
     const response = await fetch(`${url}`, headers);
-    console.log("url", url);
-    console.log("response", response);
     const data = await response.json();
     return data;
     // return "";
