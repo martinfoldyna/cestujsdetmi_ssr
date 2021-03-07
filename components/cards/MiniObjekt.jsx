@@ -1,10 +1,8 @@
 import React from "react";
 import LoadingSkeleton from "../../layouts/LoadingSkeleton";
-import { IoMdPin } from "react-icons/io";
-import Link from "next/link";
 import Image from "next/image";
 import enums from "../../enums";
-import LocationBadge from "../locationBadge";
+import LocationBadge from "../LocationBadge";
 import MyLink from "../../layouts/MyLink";
 
 const MiniObjekt = ({ objekt }) => {

@@ -122,6 +122,10 @@
     height: 22vh;
   }
 
+  .sitemap-header {
+    margin-bottom: 1em;
+  }
+
   .hero {
     height: auto;
     background-color: unset;
@@ -131,6 +135,7 @@
       rgba(255, 255, 255, 0) 100%
     );
     padding-top: 1em;
+    padding-bottom: 0;
 
     & .wrapper {
       width: 100%;
@@ -328,7 +333,8 @@
     background-color: $highlight-grey;
   }
 
-  .article-card.d-flex {
+  .article-card.d-flex,
+  .data-wrapper .article-card {
     display: block !important;
     padding: 1em 0.5em;
 

@@ -223,20 +223,19 @@ const Map = ({ mesta, kraje, oblasti }) => {
             color={color}
           />
         </Col>
-        {kraje &&
+        {/* {kraje &&
           kraj &&
           Array.isArray(filteredCities) &&
-          filteredCities.length > 0 && (
-            <Col md={2} className='col p-0'>
-              <CustomSelect
-                placeholder='Město'
-                options={filteredCities}
-                onChange={(e) => setMesto(e.key)}
-                color={color}
-              />
-            </Col>
-          )}
-
+          filteredCities.length > 0 && ( */}
+        <Col md={2} className='col p-0'>
+          <CustomSelect
+            placeholder='Město'
+            options={filteredCities}
+            onChange={(e) => setMesto(e.key)}
+            color={color}
+          />
+        </Col>
+        {/* )} */}
         <Col md={2} className='col p-0'>
           <CustomSelect
             placeholder='Oblast'

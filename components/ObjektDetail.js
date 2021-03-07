@@ -32,12 +32,12 @@ import { addToFavorite, removeFromFavorite } from "../helpers/user";
 import ClampLines from "react-clamp-lines";
 import CenikModal from "./CenikModal";
 import MiniObjekt from "./cards/MiniObjekt";
-import LocationBadge from "./locationBadge";
+import LocationBadge from "./LocationBadge";
 import Head from "next/head";
 
 const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
   const [viewport, setViewport] = useState({
-    width: "100%",
+    width: "auto",
     height: "50vh",
     latitude: 50.7301,
     longitude: 15.1761383,
@@ -709,7 +709,7 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
                 </Col>
               )}
             </Row>
-            <Section className=''>
+            <Section className='detail-map'>
               <SectionHeading background='white'>
                 <h2>Mapa</h2>
               </SectionHeading>
@@ -722,7 +722,7 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
                 }
                 scrollZoom={false}
                 className='mapbox'
-                style={{ maxWidth: "100%", width: "auto" }}
+                style={{ maxWidth: "100%", width: "100%" }}
               >
                 <div style={{ position: "absolute", left: 10, top: 10 }}>
                   <NavigationControl />

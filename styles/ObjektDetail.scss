@@ -3,15 +3,17 @@
   font-weight: 600;
 }
 
+.objekt-detail .detail-map > div {
+  width: 100% !important;
+}
 
-.highlight-card h2{
-  margin-bottom: .5em;
+.highlight-card h2 {
+  margin-bottom: 0.5em;
 }
 
 .highlight-card .rating .stars svg {
-  margin-left: .4em;
+  margin-left: 0.4em;
   font-size: $font-size-description;
-;
 }
 
 .highlight-card .rating .stars svg:first-of-type {
@@ -19,7 +21,7 @@
 }
 
 .highlight-card .rating {
-  margin-top: .2em;
+  margin-top: 0.2em;
 }
 
 .highlight-card .rating-counter {
@@ -34,12 +36,12 @@
 }
 
 .service-item {
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
 .service-item-icon {
   font-size: 1.8em;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .service-item span {
@@ -76,7 +78,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .objekt-detail-image .overlay.on-hover {
@@ -131,12 +133,12 @@
 .contact-list li {
   display: flex;
   align-content: center;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   //margin-bottom: 10px;
 }
 
 .contact-list li .icon {
-  margin-right: .5em;
+  margin-right: 0.5em;
   font-size: 1.3em;
 }
 
@@ -145,5 +147,5 @@
 }
 
 .add-review .stars {
-  margin-left: .5em;
+  margin-left: 0.5em;
 }
