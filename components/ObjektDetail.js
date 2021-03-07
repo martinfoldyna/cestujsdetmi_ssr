@@ -9,21 +9,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { HiHome, HiOutlineChevronRight, HiOutlineMail } from "react-icons/hi";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillCompass, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiPhone, BiWifi } from "react-icons/bi";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FaDog, FaGlobeAmericas, FaHeart, FaSearchPlus } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { IoMdCheckmark, IoMdPin } from "react-icons/io";
 import { RiCupLine, RiParkingBoxLine } from "react-icons/ri";
-import { connect } from "react-redux";
-import {
-  getObjektByID,
-  addReview,
-  getObjektyInOblast,
-  removeObjektInStorage,
-} from "../redux/actions/objekty";
-import PropTypes from "prop-types";
 import LoadingSkeleton from "../layouts/LoadingSkeleton";
 import parse from "html-react-parser";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
@@ -36,11 +28,12 @@ import CityPin from "../public/cityPin";
 import SideBar from "../layouts/Sidebar";
 import enums from "../enums";
 import MyLink from "../layouts/MyLink";
-import { fetchQuery } from "../helpers/fetch";
 import { addToFavorite, removeFromFavorite } from "../helpers/user";
-import { GlobalContext } from "../context/GlobalContext";
 import ClampLines from "react-clamp-lines";
 import CenikModal from "./CenikModal";
+import MiniObjekt from "./cards/MiniObjekt";
+import LocationBadge from "./locationBadge";
+import Head from "next/head";
 
 const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
   const [viewport, setViewport] = useState({
@@ -61,7 +54,6 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
   const [selectedStar, setSelectedStar] = useState(null);
   const [shownEquipment, setShownEquipment] = useState("vnitrni_vybaveni");
   const [color, setColor] = useState("blue");
-  const [relatedObjects, setRelated] = useState(related);
   const [openPriceList, setOpenPriceList] = useState(false);
   const [outerEquipmentLength, setOuterEquipmentLength] = useState(0);
   const [innerEquipmentLength, setInnerEquipmentLength] = useState(0);
@@ -142,11 +134,15 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
       >
         <a href={`mailto:${objekt.email}`}>Poslat dotaz</a>
       </button>
-      <button
-        className={`btn-logo d-flex align-items-center btn outline-${color} text-${color}`}
-      >
-        Webové stránky
-      </button>
+      {objekt.web && (
+        <button
+          className={`btn-logo d-flex align-items-center btn outline-${color} text-${color}`}
+        >
+          <a href={objekt.web} target='_blank' rel='noopener'>
+            Webové stránky
+          </a>
+        </button>
+      )}
     </div>
   );
 
@@ -248,6 +244,18 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
     <LoadingSkeleton />
   ) : (
     <>
+      <Head>
+        <title>
+          {objekt.page_title
+            ? objekt.page_title
+            : `${objekt.nazev} | Cestuj s dětmi.cz`}
+        </title>
+        <meta name='description' content={objekt.page_description} />
+        {objekt.page_keywords && (
+          <mata name='keywords' content={objekt.page_keywords} />
+        )}
+        <meta name='robots' content='index, follow' />
+      </Head>
       <div className='objekt-detail'>
         <span className='breadcrumb'>
           <Link href='/'>Úvodní stránka</Link>&nbsp;/&nbsp;
@@ -285,10 +293,17 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
               <div className='objekt-detail-heading d-flex align-items-center justify-content-between mb-2'>
                 <div>
                   <div className='d-flex icon'>
-                    <HiHome
-                      className={"text-" + color}
-                      style={{ marginRight: ".5em", fontSize: "2.5em" }}
-                    />
+                    {color === "blue" ? (
+                      <HiHome
+                        className={"text-" + color}
+                        style={{ marginRight: ".5em", fontSize: "2.5em" }}
+                      />
+                    ) : (
+                      <AiFillCompass
+                        className={"text-" + color}
+                        style={{ marginRight: ".5em", fontSize: "2.5em" }}
+                      />
+                    )}
 
                     <div>
                       <h1 className='m-0'>{objekt?.nazev}</h1>
@@ -306,21 +321,7 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
                         {/*<span className="text-grey rating-counter ml-1">*/}
                         {/*  (48 hodnocení)*/}
                         {/*</span>*/}
-                        <div className={`d-flex align-items-center`}>
-                          <span style={{ fontSize: "12px", marginTop: ".2em" }}>
-                            <IoMdPin className={`icon text-${color}`} />
-                            {objekt.nazev}, {objekt.adresa_ulice}
-                            {objekt.mesto
-                              ? ", " + objekt.mesto.value
-                              : ", " + objekt.adresa?.mesto}
-                            {objekt.kraj
-                              ? `, ${objekt.kraj.value} kraj`
-                              : `, ${objekt.adresa?.kraj} kraj`}
-                            {objekt.adresa_stat
-                              ? `, ${objekt.adresa_stat}`
-                              : ""}
-                          </span>
-                        </div>
+                        <LocationBadge objekt={objekt} color={color} />
                       </div>
                     </div>
                   </div>
@@ -799,14 +800,14 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
                 </SectionHeading>
                 <SectionContent>
                   <Row>
-                    {/*{related.map(*/}
-                    {/*  (objektItem) =>*/}
-                    {/*    objektItem.id !== objekt.id && (*/}
-                    {/*      <Col md={6} lg={4} key={objekt.id}>*/}
-                    {/*        <MiniObjekt objekt={objektItem} />*/}
-                    {/*      </Col>*/}
-                    {/*    )*/}
-                    {/*)}*/}
+                    {related.map(
+                      (objektItem) =>
+                        objektItem.id !== objekt.id && (
+                          <Col md={6} lg={4} key={objekt.id}>
+                            <MiniObjekt objekt={objektItem} />
+                          </Col>
+                        )
+                    )}
                   </Row>
                 </SectionContent>
               </Section>

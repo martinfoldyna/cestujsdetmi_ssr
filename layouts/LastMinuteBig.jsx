@@ -1,41 +1,33 @@
 import { Col, Row } from "react-grid-system";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
+import SmallArticle from "../components/cards/SmallArticle";
 import MyLink from "./MyLink";
 
 const LastMinuteBig = ({ background = "grey", posts }) => {
   return (
-    <div
-      className={`bg-${background} ${
-        background === "red" ? "text-white" : ""
-      } p-1`}
-    >
-      <Row className="m-0">
-        <div className="hide-mobile">
+    <div className='last-minute-big'>
+      <Row className='m-0'>
+        <div className='hide-mobile'>
           <Col
             md={0.5}
-            className="d-flex p-0 align-items-center justify-content-center"
+            className='d-flex p-0 align-items-center justify-content-center'
           >
-            <HiOutlineChevronLeft className="arrow-heading" />
+            <HiOutlineChevronLeft className='arrow-heading' />
           </Col>
         </div>
-        <Col md={11} className="p-0">
-          <Row>
+        <Col md={11} className='p-0'>
+          <div className='d-flex'>
             {posts.map((post) => (
-              <Col md={3} key={post.id}>
-                <MyLink href={`/ubytovani/detail/${post.id}`}>
-                  <h3>{post.nazev}</h3>
-                  <p className="text-white">{post.last_minute_popis}</p>
-                </MyLink>
-              </Col>
+              <SmallArticle article={post} />
             ))}
-          </Row>
+          </div>
         </Col>
-        <div className="hide-mobile">
+        <div className='hide-mobile'>
           <Col
             md={0.5}
-            className="d-flex p-0 align-items-center justify-content-center"
+            className='d-flex p-0 align-items-center justify-content-center'
           >
-            <HiOutlineChevronRight className="arrow-heading" />
+            <HiOutlineChevronRight className='arrow-heading' />
           </Col>
         </div>
       </Row>

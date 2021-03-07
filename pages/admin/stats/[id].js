@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { fetchQuery } from "../../helpers/fetch";
+import { fetchQuery } from "../../../helpers/fetch";
 import { ResponsiveLine } from "@nivo/line";
+import { useRouter } from "next/router";
+import { Container } from "react-grid-system";
+import {
+  Section,
+  SectionContent,
+  SectionHeading,
+} from "../../../layouts/Section";
+import Link from "next/link";
 
 const MyResponsiveLine = ({ data /* see data tab */ }) => (
   <ResponsiveLine
@@ -71,7 +79,9 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
   />
 );
 
-const AdminObjektStats = () => {
+const ObjektStats = () => {
+  const router = useRouter();
+  const { id } = router.query;
   /*
 
         Data model:
@@ -82,10 +92,11 @@ const AdminObjektStats = () => {
     */
 
   const [statistic, setStatistics] = useState(null);
+  const [objekt, setObjekt] = useState(null);
   const [graphData, setGraphData] = useState(null);
   const fetchData = async () => {
-    const response = await fetchQuery("objekt-infos/60283664aec45b2c4065339d");
-    console.log(response.statistiky);
+    const response = await fetchQuery(`objekt-infos/${id}`);
+    setObjekt(response);
 
     setStatistics(response.statistiky);
   };
@@ -124,6 +135,8 @@ const AdminObjektStats = () => {
       }
     });
 
+    console.log(resultData);
+
     setGraphData(resultData);
   };
 
@@ -138,11 +151,28 @@ const AdminObjektStats = () => {
   }, [statistic]);
 
   return (
-    <>
-      <h1>Hello world</h1>
-      {graphData && <MyResponsiveLine data={graphData} />}
-    </>
+    <Container className='main-container '>
+      <span className='breadcrumb'>
+        <Link href='/admin'>Nástěnka administrátora</Link>
+        &nbsp;/&nbsp;Statistiky objektu: {objekt?.nazev}
+      </span>
+      <Section className='mt-0'>
+        <SectionHeading>
+          <h2>Statistiky pro objekt {objekt?.nazev}</h2>
+        </SectionHeading>
+        <SectionContent>
+          {graphData && graphData.length > 0 && (
+            <MyResponsiveLine data={graphData} />
+          )}
+          {graphData?.length === 0 && (
+            <p className='m-0'>
+              Pro tento objekt nemáme zaznamenány žádné statistiky
+            </p>
+          )}
+        </SectionContent>
+      </Section>
+    </Container>
   );
 };
 
-export default AdminObjektStats;
+export default ObjektStats;

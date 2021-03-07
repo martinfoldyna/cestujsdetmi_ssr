@@ -35,6 +35,8 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
     _limit: limit,
     _start: 0,
   };
+  const [pageLoad, setPageLoad] = useState(limit);
+  const [loading, setLoading] = useState(false);
 
   const fetchObjects = async () => {
     const objekty = await fetchQuery(
@@ -69,7 +71,6 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
       if (mesto) fetchParams = { ...fetchParams, adresa_mesto: mesto };
       if (oblast) fetchParams = { ...fetchParams, adresa_oblast: oblast };
       fetchObjects();
-    } else {
     }
   }, [router.query]);
 
@@ -92,6 +93,8 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
     // });
     // setNext((prevState) => prevState + limit);
 
+    setLoading(true);
+
     const objekty = await fetchQuery(
       `objekt-infos?${searchParamsToQueryString({
         ...fetchParams,
@@ -103,6 +106,16 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
     setNext((prevState) => prevState + limit);
 
     setListObjects((prevState) => [...prevState, ...objekty]);
+
+    setLoading(false);
+
+    setPageLoad((prevState) => prevState + limit);
+    const { pathname, query } = router;
+
+    router.push({
+      pathname,
+      query: { ...query, pageLoad },
+    });
   };
 
   const filteredItems = () => {
@@ -214,17 +227,22 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
       {/* Filter badges */}
       {router.query && (
         <div className='filter–badges d-flex'>
-          {Object.keys(router.query).map((key) => (
-            <span
-              className={`filter-badge d-flex align-items-center bg-${translateColor(
-                typ_objektu
-              )}`}
-              onClick={() => removeFilterValue(key)}
-            >
-              <IoClose className='icon' />
-              {renderFilterBadgeValue(key)}
-            </span>
-          ))}
+          {Object.keys(router.query)
+            .filter((queryKey) => ["kraj", "oblast"].indexOf(queryKey) > -1)
+            .map(
+              (key) =>
+                router.query[key] && (
+                  <span
+                    className={`filter-badge d-flex align-items-center bg-${translateColor(
+                      typ_objektu
+                    )}`}
+                    onClick={() => removeFilterValue(key)}
+                  >
+                    <IoClose className='icon' />
+                    {renderFilterBadgeValue(key)}
+                  </span>
+                )
+            )}
         </div>
       )}
 
@@ -257,8 +275,8 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
             </Fragment>
           );
         })}
-      {previoObjekty?.map((objekt, index) => (
-        <PrevioObjekt objekt={objekt} />
+      {previoObjekty?.map((objekt) => (
+        <PrevioObjekt objekt={objekt} key={objekt.id} />
       ))}
       {objekty && objekty.length === 0 && objektyCount === 0 && (
         <p>Omlouvám se, ale tato kategorie neobsahuje žádné objekty.</p>
@@ -266,17 +284,17 @@ const ListFilteredItems = ({ objekty, typ_objektu, previoObjekty }) => {
       {/* {objekty?.length > 0 && objekty?.length < objektyCount && ( */}
       <div className='d-flex justify-content-center'>
         <button className={`btn bg-${color} text-white`} onClick={paginate}>
-          Načíst další
+          {loading ? "Loading..." : "Načíst další"}
         </button>
       </div>
       {/* )} */}
-      {previoObjekty?.length > 0 && (
+      {/* {previoObjekty?.length > 0 && (
         <div className='d-flex justify-content-center'>
           <button className={`btn bg-${color} text-white`} onClick={paginate}>
             Načíst další
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

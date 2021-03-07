@@ -13,33 +13,68 @@
     margin-top: 0.5rem;
   }
 
+  .section {
+    margin: 1.5rem 0;
+  }
+
   .section .heading-with-icons h2,
   .objekt-detail .highlight-card h1 {
     font-size: $font-size-heading-sections;
   }
 
-  .homepage .section.rady-tipy-homepage .category {
-    padding: 0;
+  .homepage {
+    & .section.rady-tipy-homepage .category {
+      padding: 0;
 
-    & .category-heading {
-      font-size: 20px;
-      margin: 0.5em 0;
+      & .category-heading {
+        font-size: 20px;
+        margin: 0.5em 0;
+      }
+
+      & .btn-small-logo {
+        display: none;
+      }
+
+      &.bg-grey {
+        background-color: $white;
+      }
+    }
+    & .article-homepage-card {
+      margin-bottom: 1em;
+
+      &::after {
+        bottom: -0.5em;
+      }
     }
 
-    & .btn-small-logo {
-      display: none;
+    & .last-minute-big,
+    & .new-published-content {
+      background-color: $grey;
+      padding: 0;
+
+      & .d-flex {
+        overflow: scroll;
+      }
+
+      & .small-article-card {
+        // width: 100%;
+        flex: 0 0 75%;
+        margin: 5px 5px 15px;
+        flex-wrap: nowrap;
+        border-radius: $border-radius;
+
+        &:first-of-type {
+          margin-left: 15px;
+        }
+      }
     }
 
-    &.bg-grey {
-      background-color: $white;
+    & .last-minute-big .small-article-card {
+      background-color: $red;
     }
-  }
 
-  .homepage .article-homepage-card {
-    margin-bottom: 1em;
-
-    &::after {
-      bottom: -0.5em;
+    & .new-published-content .small-article-card {
+      background-color: $green;
     }
   }
 
@@ -214,6 +249,10 @@
       margin-top: 2em;
     }
 
+    & .badge-location {
+      display: none;
+    }
+
     & .margin-wrapper {
       margin-left: 0;
     }
@@ -253,6 +292,18 @@
     }
   }
 
+  .actions-component {
+    margin-top: 0;
+  }
+
+  .actions-component > .d-flex {
+    display: block !important;
+
+    & .btn {
+      width: 100%;
+    }
+  }
+
   .mapbox {
     width: 100%;
   }
@@ -279,8 +330,7 @@
 
   .article-card.d-flex {
     display: block !important;
-    padding: 0.5em;
-    padding-top: 0.75em;
+    padding: 1em 0.5em;
 
     & .show-objekt {
       display: flex;
@@ -412,16 +462,27 @@
     }
   }
 
-  .admin-objekt .section-content {
-    font-size: 14px;
-  }
+  .admin-objekt {
+    & .section-content {
+      font-size: 14px;
+      padding-top: 0;
+    }
 
-  .admin-objekt .buttons {
-    display: block;
-  }
+    & .buttons {
+      display: block;
+    }
 
-  .admin-objekt .buttons button {
-    margin-bottom: 0.5em;
+    & .buttons button {
+      margin-bottom: 0.5em;
+    }
+
+    & .img-wrapper {
+      height: 10rem;
+    }
+
+    & .heading-with-icons h2 {
+      margin: 0.7em 0;
+    }
   }
 
   .footer .d-flex {

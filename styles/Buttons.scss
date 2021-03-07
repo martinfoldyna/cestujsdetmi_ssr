@@ -12,6 +12,12 @@
   display: block;
 }
 
+.clamp-lines__button {
+  background-color: transparent;
+  color: $blue;
+  margin-left: auto;
+}
+
 .btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
@@ -21,7 +27,7 @@
 }
 
 .btn:hover,
-.clamp-lines__button {
+.clamp-lines__button:hover {
   opacity: 0.65;
 }
 

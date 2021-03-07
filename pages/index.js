@@ -62,14 +62,20 @@ export default Home;
 
 export async function getStaticProps() {
   const [
-    objekty,
+    objektyUbytovani,
+    objektyZabava,
     lastMinute,
     previoHotels,
     locations,
     radyTipy,
     newPublished,
   ] = await Promise.all([
-    fetchQuery(`${enums.URLS.objektInfoMini}&_limit=20`),
+    fetchQuery(
+      `${enums.URLS.objektInfoMini}&_limit=3&typ_objektu=${enums.TYP_OBJEKTU.ubytovani.key}`
+    ),
+    fetchQuery(
+      `${enums.URLS.objektInfoMini}&_limit=5&typ_objektu=${enums.TYP_OBJEKTU.zabava.key}`
+    ),
     fetchQuery(`${enums.URLS.lastMinute}&_limit=4`),
     fetchAllPrevioHotels(2),
     fetchQuery("locations"),
@@ -79,9 +85,11 @@ export async function getStaticProps() {
 
   const { kraje, oblasti, mesta } = locations;
 
+  const objekty = [...objektyUbytovani, ...objektyZabava];
+
   return {
     props: {
-      objekty: objekty,
+      objekty,
       previo: previoHotels.data,
       lastMinute,
       kraje,

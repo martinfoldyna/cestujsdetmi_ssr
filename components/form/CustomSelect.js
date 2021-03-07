@@ -74,12 +74,19 @@ const CustomSelect = ({
     setOptions(options);
   }, [options]);
 
+  useEffect(() => {
+    console.log(value);
+    if (value) {
+      setSelectedOption(value);
+    }
+  }, [value]);
+
   return Array.isArray(selectOptions) ? (
     <>
-      <div className="custom-select-wrapper" ref={wrapperRef}>
+      <div className='custom-select-wrapper' ref={wrapperRef}>
         <div className={`custom-select  ${selectState ? "open" : ""}`}>
           <div
-            className="custom-select__trigger "
+            className='custom-select__trigger '
             onClick={() => setSelectState((prevState) => !prevState)}
           >
             {/*<input*/}
@@ -96,22 +103,28 @@ const CustomSelect = ({
             {/*      : inputValue*/}
             {/*  }*/}
             {/*/>*/}
-            <span>
+            <span
+              className={
+                selectedOption && selectedOption.value
+                  ? `selected text-${color}`
+                  : ""
+              }
+            >
               {selectedOption && selectedOption.value && selectedOption.key
                 ? selectedOption.value
                 : `${placeholder ? placeholder : "Vyberte možnost"}`}
             </span>
 
-            <div className="arrow">
+            <div className='arrow'>
               <BsFillTriangleFill className={"text-" + color} />
             </div>
           </div>
-          <div className="custom-options">
+          <div className='custom-options'>
             {selectOptions?.map((option, index) => (
               <span
                 key={option.key}
                 className={`custom-option ${
-                  selectedOption && selectedOption.value === option.key
+                  selectedOption && selectedOption.key === option.key
                     ? "selected bg-" + color
                     : ""
                 }`}

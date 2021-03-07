@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Row, Col } from "react-grid-system";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { AiFillCompass } from "react-icons/ai";
@@ -10,6 +11,7 @@ import PrevioObjekt from "../components/cards/PrevioObjekt";
 import enums from "../enums";
 
 const Highlighted = ({ data, previo }) => {
+  const [numberOfTrips, setNumberOfTrips] = useState(0);
   return (
     <div className='section highlighted'>
       <Row className='justify-content-arround m-0'>
@@ -35,22 +37,19 @@ const Highlighted = ({ data, previo }) => {
               {previo.map((objekt) => (
                 <PrevioObjekt
                   objekt={objekt}
-                  key={objekt.id}
+                  key={objekt.hotId}
                   word_count={15}
                   homepage
                 />
               ))}
               <div className='text-align-right'>
                 <button className='btn btn-small-logo btn-homepage-detail bg-blue text-white'>
-                  <MyLink
-                    href='/ubytovani'
-                    className='d-flex align-items-center'
-                  >
+                  <Link href='/ubytovani' className='d-flex align-items-center'>
                     <>
                       Další ubytování{" "}
                       <RiArrowRightSLine style={{ marginLeft: ".5em" }} />
                     </>
-                  </MyLink>
+                  </Link>
                 </button>
               </div>
             </div>
@@ -72,7 +71,7 @@ const Highlighted = ({ data, previo }) => {
                 {data &&
                   data.length > 0 &&
                   data.map((article, index) => {
-                    if (article.typ_objektu === "zabava" && index < 4) {
+                    if (article.typ_objektu === "zabava") {
                       return (
                         <HomePageObjekt
                           article={article}

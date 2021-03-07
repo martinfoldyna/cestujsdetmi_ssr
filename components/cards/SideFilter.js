@@ -4,11 +4,11 @@ import { Col, Row } from "react-grid-system";
 import CustomSelect from "../form/CustomSelect";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { objectToArray } from "../../helpers/helpers";
 import enums from "../../enums";
 import CustomDateRangePicker from "../form/CustomDateRangePicker";
-import { GlobalContext } from "../../context/GlobalContext";
-import StickyBox from "react-sticky-box";
+import Checkbox from "../form/Checkbox";
+import { fetchQuery } from "../../helpers/fetch";
+import e from "cors";
 
 const SideFilter = ({
   color,
@@ -22,10 +22,16 @@ const SideFilter = ({
   fullPadding = false,
   beSticky = true,
 }) => {
+  const [filteredCities, setFilteredCities] = useState(mesta);
+  const [filteredOblasts, setFilteredOblasts] = useState(oblasti);
+  const [filteredKrajs, setFilteredKrajs] = useState(kraje);
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedOblast, setSelectedOblast] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const router = useRouter();
+  const { query } = router;
+  let cityParams = {};
 
   const cancelFilter = (e) => {
     if (e.target.classList.contains("selected")) {
@@ -34,8 +40,35 @@ const SideFilter = ({
     }
   };
 
+  useEffect(() => {
+    console.log(kraje);
+
+    const queryKeys = Object.keys(query);
+    if (queryKeys.length > 0) {
+      if (query.oblast && !selectedOblast) {
+        const foundOblast = oblasti.find(
+          (oblast) => oblast.key === query.oblast
+        );
+        setSelectedOblast(foundOblast);
+      }
+    }
+  }, [router.query]);
+
   const queryParams = () => {
     return new URLSearchParams(router.search);
+  };
+
+  const onKrajChange = async (e) => {
+    const foundKraj = kraje.find((kraj) => kraj.key === e.key);
+    const dbOblast = await fetchQuery(
+      `oblasts-woobjectswkrajs?kraj=${foundKraj._id}`
+    );
+    const cities = await fetchQuery(`mestos?kraj_id=${foundKraj.old_id}`);
+    console.log(cities);
+    setFilteredOblasts(dbOblast);
+    setSelectedRegion(foundKraj);
+    setFilteredCities(cities);
+    cityParams.kraj = foundKraj._id;
   };
 
   const onRegionsSelect = (param) => {
@@ -56,54 +89,32 @@ const SideFilter = ({
   };
 
   const onCitySelect = (city) => {
-    const query = queryParams();
+    console.log(city);
+  };
 
-    const queryString = `${
-      query && (query.includes("?") || query.includes("=")) ? "&" : "?"
-    }mesto=`;
+  const onOblastSelect = async (e) => {
+    const foundOblast = oblasti.find((oblast) => oblast.key === e.key);
+    const dbKraje = await fetchQuery(
+      `krajs-woobjectswoblasts?oblast=${foundOblast._id}`
+    );
+    setFilteredKrajs(dbKraje);
+    setSelectedOblast(foundOblast);
+    cityParams.oblast = foundOblast._id;
+
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, ...{ oblast: foundOblast.key } },
+    });
   };
 
   // Add search query parameter to URL
   const onCategorySelect = (category) => {
-    const query = queryParams();
-
-    // List value of "kategorie" query string
-    const categoryQuery = query.get("kategorie");
-
-    if (
-      categoryQuery?.length === 0 ||
-      !categoryQuery?.includes(category.hodnota)
-    ) {
-      // Check if if a) query parameter is empty or b) if the value is already added.
-      router.push({
-        pathname: router.url,
-        search: `?kategorie=${categoryQuery ? `${categoryQuery},` : ""}${
-          category.hodnota
-        }`,
-      });
-    } else {
-      // If value is already contained in query string, remove it -> Checkbox like functionality
-
-      // Check if there are more values in query
-      const splittedQuery =
-        categoryQuery.includes(",") && categoryQuery.split(",");
-
-      // If there are more values filter out the to be removed one and then stringify
-      // If just one value remove whole query string
-      const queryString = splittedQuery
-        ? splittedQuery
-            .filter((param) => {
-              if (param !== category.hodnota) {
-                return param;
-              }
-            })
-            .join(",")
-        : categoryQuery.replace(category.hodnota, "");
-      router.push({
-        pathname: router.url,
-        search: queryString?.length > 0 && `?kategorie=${queryString}`,
-      });
-    }
+    router.push({
+      pathname: `/${topic.url}/[filterKategorie]`,
+      query: {
+        filterKategorie: category.hodnota,
+      },
+    });
   };
 
   const findInParam = (paramValue) => {
@@ -117,22 +128,6 @@ const SideFilter = ({
 
     return returnValue;
   };
-
-  // useEffect(() => {
-  //   if (router.query) {
-  //     // console.log(router.query);
-  //     // console.log(
-  //     //   beautifiedKraj.find((kraj) => kraj.key === router.query.kraj)
-  //     // );
-  //   }
-
-  //   console.log("urceni", topic.key);
-  //   console.log("kategorie", kategorie);
-  //   console.log(
-  //     "kategorie.find",
-  //     kategorie.find((categoryItem) => categoryItem.urceni === topic.key)
-  //   );
-  // }, [kategorie]);
 
   return (
     <div
@@ -153,13 +148,15 @@ const SideFilter = ({
             <Row>
               <Col md={12}>
                 <CustomSelect
-                  options={kraje}
-                  onChange={(kraj) => onRegionsSelect({ kraj: kraj.key })}
+                  options={filteredKrajs}
+                  onChange={(kraj) => onKrajChange(kraj)}
                   placeholder='Kraj'
                   color={color}
                   value={
                     router.query.kraj
-                      ? kraje.find((kraj) => kraj.key === router.query.kraj)
+                      ? filteredKrajs.find(
+                          (kraj) => kraj.key === router.query.kraj
+                        )
                       : null
                   }
                 />
@@ -168,15 +165,38 @@ const SideFilter = ({
             <Row className='m-0'>
               <Col md={12} className='p-0'>
                 <CustomSelect
-                  options={oblasti}
-                  onChange={(oblast) => onRegionsSelect({ oblast: oblast.key })}
-                  placeholder='Oblast'
+                  options={filteredCities}
+                  onChange={(city) => onCitySelect(city)}
+                  placeholder='Mesto'
                   color={color}
-                  value={router.query.oblast}
+                  value={
+                    router.query.mesto
+                      ? filteredCities.find(
+                          (mesto) => mesto.key === router.query.mesto
+                        )
+                      : null
+                  }
                 />
               </Col>
             </Row>
-            {(selectedCity !== null || selectedRegion !== null) && (
+            <Row className='m-0'>
+              <Col md={12} className='p-0'>
+                <CustomSelect
+                  options={filteredOblasts}
+                  onChange={onOblastSelect}
+                  placeholder='Oblast'
+                  color={color}
+                  value={
+                    router.query.oblast
+                      ? filteredOblasts.find(
+                          (oblast) => oblast.key === router.query.oblast
+                        )
+                      : null
+                  }
+                />
+              </Col>
+            </Row>
+            {/* {(selectedCity !== null || selectedRegion !== null) && (
               <Link
                 href='#'
                 onClick={() => {
@@ -187,7 +207,7 @@ const SideFilter = ({
               >
                 Zrušit filtry
               </Link>
-            )}
+            )} */}
           </div>
         </Col>
         <Col lg={12} className='col p-0'>
@@ -220,7 +240,7 @@ const SideFilter = ({
                           }`}
                           key={categoryItem.id}
                         >
-                          <Link
+                          {/* <Link
                             href={{
                               pathname: `/${topic.url}/[filterKategorie]`,
                               query: {
@@ -229,17 +249,14 @@ const SideFilter = ({
                             }}
                           >
                             {categoryItem.nazev}
-                          </Link>
-                          {/*<Checkbox*/}
-                          {/*  text={categoryItem.nazev}*/}
-                          {/*  name={categoryItem.hodnota}*/}
-                          {/*  value={categoryItem.hodnota}*/}
-                          {/*  type={enums.CHECKBOX.checkbox}*/}
-                          {/*  checked={new URLSearchParams(router.search)*/}
-                          {/*    .get("kategorie")*/}
-                          {/*    ?.includes(categoryItem.hodnota)}*/}
-                          {/*  onChange={() => onCategorySelect(categoryItem)}*/}
-                          {/*/>*/}
+                          </Link> */}
+                          <Checkbox
+                            text={categoryItem.nazev}
+                            name='kategorie'
+                            value={categoryItem.hodnota}
+                            type={enums.CHECKBOX.radio}
+                            onChange={() => onCategorySelect(categoryItem)}
+                          />
                         </li>
                       )
                   )}

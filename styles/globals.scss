@@ -230,6 +230,13 @@ input[type="number"] {
 
 .homepage .article-card {
   padding: 0;
+  cursor: pointer;
+}
+
+.last-minute-big {
+  background-color: $red;
+  color: #fff;
+  padding: 1rem;
 }
 
 //.hero::after {
@@ -683,7 +690,7 @@ input[type="number"] {
 }
 
 .filtered-objects {
-  padding: 0.5rem 0.7rem;
+  padding: 0 0.7rem;
   overflow: hidden;
 }
 
@@ -975,16 +982,24 @@ input[type="number"] {
 .objekt-mini-heading {
   text-decoration: underline;
   font-weight: 600;
+  margin: 0.5rem 0;
 }
 
+.objekt-mini {
+  margin-bottom: 1.25rem;
+
+  & .image-wrapper {
+    height: 10rem;
+  }
+
+  & svg {
+    margin-right: 0.2em;
+  }
+}
 .objekt-mini-image {
   max-width: 100%;
   font-size: $font-size-heading-articles;
   border-radius: $border-radius;
-}
-
-.objekt-mini svg {
-  margin-right: 0.2em;
 }
 
 .contact .content a {
@@ -1148,12 +1163,18 @@ input[type="number"] {
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.aktuality-slider::-webkit-scrollbar {
+.aktuality-slider::-webkit-scrollbar,
+.last-minute-big
+  .d-flex::-webkit-scrollbar
+  .new-published-content
+  .d-flex::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.aktuality-slider {
+.aktuality-slider,
+.last-minute-big .d-flex,
+.new-published-content .d-flex {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

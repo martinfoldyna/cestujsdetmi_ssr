@@ -28,20 +28,16 @@ const NewPublished = ({ newPublished }) => {
 
       <Row className='justify-content-arround'>
         <Col md={12}>
-          <div className='new-published-content text-white bg-green p-1'>
-            <Row className='row'>
+          <div className='new-published-content text-white bg-green'>
+            <div className='d-flex'>
               {newPublished ? (
                 newPublished?.map((article) => (
-                  <Col md={3} key={article.id}>
-                    <SmallArticle article={article} />
-                  </Col>
+                  <SmallArticle article={article} />
                 ))
               ) : (
-                <Col md={3}>
-                  <LoadingSkeleton />
-                </Col>
+                <LoadingSkeleton />
               )}
-            </Row>
+            </div>
           </div>
         </Col>
       </Row>

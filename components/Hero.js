@@ -58,28 +58,7 @@ const Hero = () => {
             </div>
           </div>
           <div className='image-wrapper'>
-            <img src='/img/hero-background01.jpg' alt='rodina s dětmi' />{" "}
-            <div className='overlay'>
-              <div className='hide-mobile'>
-                <span className='badge d-flex align-items-center ml-0'>
-                  Sledujte nás
-                  <a
-                    href='https://www.facebook.com/cestujsdetmi.cz/'
-                    className='d-flex align-items-center'
-                    target='_blank'
-                  >
-                    <AiFillFacebook className='btn-icon right' />
-                  </a>
-                  <a
-                    href='https://www.instagram.com/cestujsdetmi.cz/'
-                    className='d-flex align-items-center'
-                    target='_blank'
-                  >
-                    <AiOutlineInstagram className='btn-icon right' />
-                  </a>
-                </span>
-              </div>
-            </div>
+            <img src='/img/hero-background01.jpg' alt='rodina s dětmi' />
           </div>
         </div>
 

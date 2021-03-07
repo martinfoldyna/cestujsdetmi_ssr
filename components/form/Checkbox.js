@@ -8,11 +8,11 @@ const Checkbox = React.forwardRef(
   ) => {
     return (
       <Fragment>
-        <div className="form-item">
-          <label className="checkbox-container">
-            <span className="radio-label text-black">{text}</span>
+        <div className='form-item'>
+          <label className='checkbox-container'>
+            <span className='radio-label text-black'>{text}</span>
             <input
-              type="checkbox"
+              type={type}
               name={name}
               ref={ref}
               defaultChecked={checked}
@@ -20,14 +20,14 @@ const Checkbox = React.forwardRef(
             />
             <span
               className={`checkmark ${
-                type === enums.CHECKBOX.checkbox && "check"
+                type === enums.CHECKBOX.checkbox ? "check" : "round"
               } ${errors && errors[name] ? "border-danger" : ""}`}
             />
           </label>
         </div>
         {!removeErr && (
-          <div className="error-wrapper">
-            <p className="error-message">
+          <div className='error-wrapper'>
+            <p className='error-message'>
               {errors && errors[name] ? errors[name].message : ""}
             </p>
           </div>

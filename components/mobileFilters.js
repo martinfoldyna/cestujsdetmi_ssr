@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsFilter } from "react-icons/bs";
 import SideFilter from "./cards/SideFilter";
 
 const MobileFilters = ({
-  filterTopic,
+  topic,
   kategorie,
   toggleText = "Upřesnit požadavky",
   color,
@@ -15,13 +15,23 @@ const MobileFilters = ({
   const [openFilter, setOpenFilter] = useState(false);
 
   const sideFilterProps = {
-    topic: filterTopic,
+    topic,
     kategorie,
     color,
     kraje,
     mesta,
     oblasti,
   };
+
+  const handleFilterOpen = () => {
+    console.log("Filter opening");
+    console.log(topic);
+    setOpenFilter((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    console.log(sideFilterProps);
+  }, []);
 
   return (
     <div className='hide-desktop bg-white mb-05 border-radius filter-wrappper'>
@@ -31,13 +41,13 @@ const MobileFilters = ({
         }`}
       >
         <button
-          className='btn btn-small-logo ghost m-0'
-          onClick={() => setOpenFilter((prevState) => !prevState)}
+          className='btn btn-small-logo ghost m-0 w-100'
+          onClick={handleFilterOpen}
         >
           <Icon className={`text-${color} btn-icon left`} /> {toggleText}
         </button>
       </div>
-      {openFilter && filterTopic && <SideFilter {...sideFilterProps} />}
+      {openFilter && topic && <SideFilter {...sideFilterProps} />}
     </div>
   );
 };

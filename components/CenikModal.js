@@ -40,9 +40,9 @@ const CenikModal = ({ cenik, slevy, onClose, open }) => {
                 </div>
               </li>
               {cenik.map(
-                (cenikItem) =>
+                (cenikItem, index) =>
                   (cenikItem.doba || cenikItem.cena || cenikItem.popis) && (
-                    <li className='pricelist-item'>
+                    <li className='pricelist-item' key={index}>
                       <div className='column first-column'>
                         {cenikItem.doba ? (
                           <p>{cenikItem.doba}</p>
@@ -83,9 +83,9 @@ const CenikModal = ({ cenik, slevy, onClose, open }) => {
               </div>
             </li>
             {slevy.map(
-              (saleItem) =>
+              (saleItem, index) =>
                 (saleItem.doba || saleItem.cena || saleItem.popis) && (
-                  <li className='pricelist-item'>
+                  <li className='pricelist-item' key={index}>
                     <div className='column first-column'>
                       {saleItem.doba ? (
                         <p>{saleItem.doba}</p>

@@ -5,66 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc264aa-680e-452c-b5d4-540cf0ad7e11" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/HomeRadyTipy.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HomeRadyTipy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Inquiry.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Inquiry.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LastMinute.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LastMinute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LoginComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LoginComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ObjednatObjektInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjednatObjektInfo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/ObjektDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ObjektDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/LastMinuteSmall.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/LastMinuteSmall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/Objekt.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/Objekt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/OurSuggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/OurSuggestions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/PrevioObjekt.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/PrevioObjekt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/cards/SideFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/SideFilter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/form/CustomSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/form/CustomSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/listFilteredItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/listFilteredItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/fetch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/Highlighted.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/Highlighted.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/HomePageObjekt.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/LastMinuteBig.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/LastMinuteBig.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/MobileNewsArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/MobileNewsArticle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/News.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/PromoArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/PromoArticle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/Section.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/Section.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/VerticalPost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/VerticalPost.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/siteLayouts/RadyTipyLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/siteLayouts/RadyTipyLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/aktuality/detail/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aktuality/detail/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/aktuality/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/aktuality/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/objekty/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/objekty/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/[kategorie].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/[kategorie].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/detail/[hodnota].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rady-a-tipy/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ubytovani/[filterKategorie].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/[filterKategorie].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/cards/MiniObjekt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/cards/MiniObjekt.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/ubytovani/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/detail/[hodnota].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ubytovani/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ubytovani/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/vylety/[filterKategorie].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/[filterKategorie].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/detail/[hodnota].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/vylety/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/vylety/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/React App.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/React App.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/actions/objekty.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/actions/objekty.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report.20210110.135909.29058.0.001.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report.20210203.090148.69525.0.001.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report.20210217.073310.44415.0.001.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report.20210220.131022.30880.0.001.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Cards.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Colors.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Colors.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/MediaQueries.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/MediaQueries.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +33,11 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="JsBowerSettings">
+    <node-interpreter value="project" />
+    <bower-package value="" />
+    <bower.json value="" />
+  </component>
   <component name="ProjectId" id="1mZ0pPxKJg4bAb7jFAipW0EusuZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -101,16 +50,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pages/tipy-na-vylety/detail" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$USER_HOME$/.nvm/versions/node/v12.10.0/lib/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="xslt.associations" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -182,6 +134,7 @@
       <workItem from="1613997780257" duration="34223000" />
       <workItem from="1614200801811" duration="672000" />
       <workItem from="1614272320885" duration="25845000" />
+      <workItem from="1614942645648" duration="112000" />
     </task>
     <servers />
   </component>
@@ -189,7 +142,17 @@
     <option name="version" value="3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
+    <expand>
+      <path>
+        <item name="cestujsdetmi_ssr" type="b2602c69:ProjectViewProjectNode" />
+        <item name="cestujsdetmi_ssr" type="462c0819:PsiDirectoryNode" />
+      </path>
+      <path>
+        <item name="cestujsdetmi_ssr" type="b2602c69:ProjectViewProjectNode" />
+        <item name="cestujsdetmi_ssr" type="462c0819:PsiDirectoryNode" />
+        <item name="components" type="462c0819:PsiDirectoryNode" />
+      </path>
+    </expand>
     <select />
   </component>
 </project>

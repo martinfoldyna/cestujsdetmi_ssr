@@ -21,6 +21,7 @@ import {
 import { GlobalContext } from "../../context/GlobalContext";
 import Head from "next/head";
 import MobileFilters from "../../components/mobileFilters";
+import { objectToArray } from "../../helpers/helpers";
 
 export async function getStaticPaths() {
   const kategorie = await fetchQuery(
@@ -103,7 +104,11 @@ const TipyNaUbytovaniKategorie = ({ objekty, locations }) => {
 
         <HeadingWithIcon
           background='blue'
-          heading={enums.KATEGORIE.UBYTOVANI[filterKategorie]?.value}
+          heading={
+            objectToArray(enums.KATEGORIE.UBYTOVANI).find(
+              (enumItem) => enumItem.key === filterKategorie
+            ).value
+          }
           icon={HiHome}
           icon_size='medium'
         >

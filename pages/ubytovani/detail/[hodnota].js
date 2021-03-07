@@ -39,6 +39,12 @@ export async function getStaticProps({ params }) {
       );
     }
 
+    if (objekt.oblast) {
+      related = await fetchQuery(
+        `objekt-infos?kraj=${objekt.kraj.id}&_limit=9&typ_objektu=${enums.TYP_OBJEKTU.ubytovani.key}`
+      );
+    }
+
     const locations = await fetchQuery("locations");
 
     return objekt

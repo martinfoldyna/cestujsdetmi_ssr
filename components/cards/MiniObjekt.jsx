@@ -4,51 +4,52 @@ import { IoMdPin } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
 import enums from "../../enums";
+import LocationBadge from "../locationBadge";
+import MyLink from "../../layouts/MyLink";
 
 const MiniObjekt = ({ objekt }) => {
+  const images =
+    objekt?.galerie && objekt?.galerie?.length > 0
+      ? objekt?.galerie
+      : objekt?.relative_galerie && objekt?.relative_galerie?.length > 0
+      ? objekt?.relative_galerie
+      : null;
+
   return objekt ? (
-    <div className="objekt-mini">
-      {objekt?.galerie || objekt?.relative_galerie ? (
-        <div className="image-wrapper" style={{ position: "relative" }}>
+    <div className='objekt-mini'>
+      {images ? (
+        <div className='image-wrapper' style={{ position: "relative" }}>
           <Image
-            className="objekt-mini-image mt-1"
+            className='objekt-mini-image'
             src={
-              objekt.relative_galerie
-                ? objekt.relative_galerie[0].sm.includes("http") ||
-                  objekt.relative_galerie[0].sm.includes("https")
-                  ? objekt.relative_galerie[0].sm
-                  : `https://www.cestujsdetmi.cz/${objekt.relative_galerie[0]}`
-                : "/img/placeholder.png"
+              images[0].relativeUrl
+                ? `https://www.cestujsdetmi.cz/${images[0].relativeUrl}`
+                : images[0].formats.small.url
             }
             alt={
-              objekt.relative_galerie && objekt.relative_galerie?.length > 0
-                ? objekt?.relative_galerie[0].popis
-                : objekt.nazev
+              images[0].alternativeText
+                ? images[0].alternativeText
+                : `${objekt.nazev} ${(i < 10 ? "0" : "") + `${i}`}`
             }
-            layout="fill"
+            layout='fill'
+            objectFit='cover'
           />
         </div>
       ) : (
         ""
       )}
-      <div className="data">
-        <Link href={`/ubytovani/detail/${objekt.id}/#top`}>
-          <h3 className="objekt-mini-heading mb-1">{objekt.nazev}</h3>
-        </Link>
-        {objekt.adresa && (
-          <div className="d-flex">
-            <IoMdPin
-              className={`text-${
-                objekt.hlavni_kategorie === enums.KATEGORIE.ZABAVA
-                  ? "orange"
-                  : "blue"
-              }`}
-            />
-            <p style={{ fontSize: "12px" }} className="m-0">
-              {objekt.nazev}, {objekt.adresa.ulice}, {objekt.adresa.mesto}
-            </p>
-          </div>
-        )}
+      <div className='data'>
+        <MyLink href={`/ubytovani/detail/${objekt.id}/#top`}>
+          <h3 className='objekt-mini-heading'>{objekt.nazev}</h3>
+        </MyLink>
+        <LocationBadge
+          objekt={objekt}
+          color={
+            objekt.typ_objektu === enums.TYP_OBJEKTU.zabava.key
+              ? "orange"
+              : "blue"
+          }
+        />
       </div>
     </div>
   ) : (

@@ -31,9 +31,9 @@ export async function getStaticProps({ params }) {
 
   const objekt = objektQuery[0];
   let related = [];
-  if (objekt?.adresa_oblast) {
+  if (objekt.oblast) {
     related = await fetchQuery(
-      `${enums.URLS.objektInfo}?adresa_oblast=${objekt.adresa_oblast}&_limit=10`
+      `objekt-infos?kraj=${objekt.kraj.id}&_limit=9&typ_objektu=${enums.TYP_OBJEKTU.zabava.key}`
     );
   }
 

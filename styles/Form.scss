@@ -5,7 +5,7 @@
 .form-item textarea.inputText:not(:focus):valid ~ .floating-label,
 .form-item.forShow input.inputText ~ .floating-label,
 .date-form-item.forShow input.inputText ~ .floating-label {
-  transform: scale3d(0.7,0.7,1);
+  transform: scale3d(0.7, 0.7, 1);
   top: 5px;
 }
 
@@ -35,9 +35,9 @@ textarea.inputText {
   top: 50%;
   left: 38px;
   transform: translateY(-50%);
-  transition: top .2s, transform 0.2s;
+  transition: top 0.2s, transform 0.2s;
   transition-timing-function: ease-out;
-  color: #8F8F8F;
+  color: #8f8f8f;
 }
 
 .form-item textarea.inputText ~ .floating-label {
@@ -64,7 +64,7 @@ textarea.inputText {
   top: 2px;
   color: $danger;
   margin: 0;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 /**** CUSTOM CHECKBOX AND RADIO ****/
@@ -100,9 +100,13 @@ textarea.inputText {
   top: 50%;
   transform: translateY(-50%);
   width: 25px;
-  background-color: #F8F8F8;
-  border: 3px solid #E3E3E3;
+  background-color: #f8f8f8;
+  border: 3px solid #e3e3e3;
   border-radius: $border-radius;
+}
+
+.checkmark.round {
+  border-radius: 50%;
 }
 
 /* On mouse-over, add a grey background color */
@@ -112,8 +116,8 @@ textarea.inputText {
 
 /* When the radio button is checked, add a blue background */
 .checkbox-container input:checked ~ .checkmark {
-  background-color: $blue;
-  border-color: $blue;
+  background-color: #fff;
+  // border-color: $blue;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -133,10 +137,10 @@ textarea.inputText {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  background: white;
+  background: $blue;
 }
 
 .checkbox-container .checkmark.check:after {
@@ -155,8 +159,8 @@ textarea.inputText {
   top: 50%;
   left: 19px;
   transform: translate(-50%, -50%);
-  font-size: .8em;
-  color: #8F8F8F;
+  font-size: 0.8em;
+  color: #8f8f8f;
 }
 
 /**** CUSTOM SELECT ****/
@@ -165,8 +169,11 @@ textarea.inputText {
   user-select: none;
   width: 100%;
   margin: 2em 0 2em;
-}
 
+  & span.selected {
+    font-weight: 600;
+  }
+}
 
 .custom-select {
   position: relative;
@@ -181,7 +188,7 @@ textarea.inputText {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 .8em;
+  padding: 0 0.8em;
   height: 2.1em;
   //line-height: 60px;
   background-color: transparent;
@@ -212,7 +219,6 @@ textarea.inputText {
   overflow-x: hidden;
 }
 
-
 .custom-select.open .custom-options {
   opacity: 1;
   visibility: visible;
@@ -239,7 +245,6 @@ textarea.inputText {
   background-color: $blue;
 }
 
-
 .arrow {
   position: absolute;
   height: 15px;
@@ -248,8 +253,8 @@ textarea.inputText {
   transform: translateY(-50%) rotate(-180deg);
   right: 1em;
   color: $blue;
-  font-size: .9em;
-  transition: .5s transform ease-in-out;
+  font-size: 0.9em;
+  transition: 0.5s transform ease-in-out;
 }
 
 .open .arrow {
@@ -302,7 +307,7 @@ textarea.inputText {
 }
 
 .map-component .custom-select {
-  border: 2px solid #E3E3E3;
+  border: 2px solid #e3e3e3;
   background-color: transparent;
 }
 
@@ -317,7 +322,6 @@ textarea.inputText {
 }
 
 .thumbnail-wrapper {
-
 }
 
 .objekt-image {
@@ -337,17 +341,17 @@ textarea.inputText {
   right: 0;
   bottom: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
 
-.objekt-image .image-container:hover .overlay{
+.objekt-image .image-container:hover .overlay {
   display: block;
   z-index: 100;
 }
 
 .objekt-image .image-container .overlay .enlarge-icon,
-.objekt-detail-image .overlay .enlarge-icon{
+.objekt-detail-image .overlay .enlarge-icon {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -386,7 +390,7 @@ textarea.inputText {
   pointer-events: none;
 }
 
-.form-select .arrow{
+.form-select .arrow {
   top: 21px;
   //transform: rotate(180deg);
   right: 2em;
@@ -424,8 +428,3 @@ textarea.inputText {
 .custom-select-wrapper .search-input.placeholder-blue::placeholder {
   color: $blue;
 }
-
-
-
-
-

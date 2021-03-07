@@ -4,47 +4,70 @@ import { FaTag } from "react-icons/fa";
 import { connect } from "react-redux";
 import Link from "next/link";
 import { fetchQuery } from "../../helpers/fetch";
+import MyLink from "../../layouts/MyLink";
+import { useRouter } from "next/router";
+import LoadingSkeleton from "../../layouts/LoadingSkeleton";
 
 const LastMinuteSmall = ({ background }) => {
   const [lastMinute, setLastMinute] = useState(null);
   const [selectedLM, setSelectedLM] = useState(0);
 
+  const router = useRouter();
+
   const getLastMinute = async () => {
+    console.log(Math.floor(Math.random() * lastMinute?.length));
+    console.log("length", lastMinute?.length);
+    setSelectedLM(() => Math.floor(Math.random() * lastMinute?.length));
+  };
+
+  const fetchLastMinute = async () => {
     const fetchedLastMinute = await fetchQuery(
       `objekt-infos?_sort=druh_zapisu:DESC,createdAt:DESC&last_minute_popis_null=false&druh_zapisu=04_premium_gold`
     );
     setLastMinute(fetchedLastMinute);
-    console.log(Math.floor(Math.random() * fetchedLastMinute?.length));
-    console.log("length", fetchedLastMinute?.length);
-    setSelectedLM(() => Math.floor(Math.random() * fetchedLastMinute?.length));
   };
 
   useEffect(() => {
-    getLastMinute();
+    if (!lastMinute) {
+      fetchLastMinute();
+    }
   }, []);
+
+  useEffect(() => {
+    if (lastMinute) {
+      getLastMinute();
+      if (router.query.hodnota === lastMinute[selectedLM].hodnota) {
+        getLastMinute();
+      }
+    }
+  }, [router]);
 
   return (
     <div>
-      {lastMinute && lastMinute.length > 0 && (
-        <div
-          className={`${
-            background ? `bg-${background} border-grey` : "bg-grey"
-          } last-minute-small mb-1`}
-        >
-          <Link href={`/ubytovani/detail/${lastMinute[selectedLM].hodnota}`}>
-            <>
-              <div className="d-flex align-items-center small-card-heading">
-                <FaTag className="icon text-red" />
-                <h3>Last minute</h3>
-              </div>
-              <h3 className="card-heading m-0">
+      <div
+        className={`${
+          background ? `bg-${background} border-grey` : "bg-grey"
+        } last-minute-small mb-1`}
+      >
+        <div className='d-flex align-items-center small-card-heading'>
+          <FaTag className='icon text-red' />
+          <h3>Last minute</h3>
+        </div>
+        {lastMinute && lastMinute.length > 0 ? (
+          <>
+            <MyLink
+              href={`/ubytovani/detail/${lastMinute[selectedLM].hodnota}`}
+            >
+              <h3 className='card-heading m-0'>
                 {lastMinute[selectedLM].nazev}
               </h3>
-              <p>{lastMinute[selectedLM].last_minute_popis}</p>
-            </>
-          </Link>
-        </div>
-      )}
+            </MyLink>
+            <p>{lastMinute[selectedLM].last_minute_popis}</p>
+          </>
+        ) : (
+          <LoadingSkeleton />
+        )}
+      </div>
     </div>
   );
 };

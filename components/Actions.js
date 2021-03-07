@@ -31,46 +31,48 @@ const Actions = () => {
         </div>
       </Col>
       <Col lg={4.5}>
-        <div className='bg-white map-component actions-component border-radius'>
-          <div className='heading-with-icons d-flex align-items-center justify-content-between'>
-            <h2 className='d-flex align-items-center'>Sledování novinek</h2>
-            <div className='d-flex justify-content-end'>
-              <div className='mr-1'>
-                <button className='btn d-flex align-items-center btn-circle'>
-                  <a
-                    href='https://www.facebook.com/cestujsdetmi.cz/'
-                    target='_blank'
-                    rel='noopener'
-                  >
-                    <ImFacebook2 />
-                  </a>
-                </button>
-              </div>
-              <div className='mr-1 '>
-                <button className='btn d-flex align-items-center btn-circle'>
-                  <a
-                    href='https://www.instagram.com/cestujsdetmi.cz/'
-                    target='_blank'
-                    rel='noopener'
-                  >
-                    <IoLogoInstagram />
-                  </a>
-                </button>
-              </div>
-              <div>
-                <button className='btn d-flex align-items-center btn-circle'>
-                  <a
-                    href='mailto:info@cestujsdetmi.cz'
-                    target='_blank'
-                    rel='noopener'
-                  >
-                    <FaRegEnvelope />
-                  </a>
-                </button>
+        <div className='hide-mobile'>
+          <div className='bg-white map-component actions-component border-radius'>
+            <div className='heading-with-icons d-flex align-items-center justify-content-between'>
+              <h2 className='d-flex align-items-center'>Sledování novinek</h2>
+              <div className='d-flex justify-content-end'>
+                <div className='mr-1'>
+                  <button className='btn d-flex align-items-center btn-circle'>
+                    <a
+                      href='https://www.facebook.com/cestujsdetmi.cz/'
+                      target='_blank'
+                      rel='noopener'
+                    >
+                      <ImFacebook2 />
+                    </a>
+                  </button>
+                </div>
+                <div className='mr-1 '>
+                  <button className='btn d-flex align-items-center btn-circle'>
+                    <a
+                      href='https://www.instagram.com/cestujsdetmi.cz/'
+                      target='_blank'
+                      rel='noopener'
+                    >
+                      <IoLogoInstagram />
+                    </a>
+                  </button>
+                </div>
+                <div>
+                  <button className='btn d-flex align-items-center btn-circle'>
+                    <a
+                      href='mailto:info@cestujsdetmi.cz'
+                      target='_blank'
+                      rel='noopener'
+                    >
+                      <FaRegEnvelope />
+                    </a>
+                  </button>
+                </div>
               </div>
             </div>
+            <p> Sledujte nás na soc. sítích nebo formou newletteru.</p>
           </div>
-          <p> Sledujte nás na soc. sítích nebo formou newletteru.</p>
         </div>
       </Col>
     </Row>
