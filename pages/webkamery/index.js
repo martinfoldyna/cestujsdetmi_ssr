@@ -10,15 +10,17 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { searchParamsToQueryString } from "../../helpers/helpers";
 import { Section, SectionContent } from "../../layouts/Section";
+import parse from "html-react-parser";
 
 export async function getStaticProps() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
   const locations = await fetchQuery("locations");
+  const ads = await fetchQuery("reklamni-banners");
 
-  return { props: { webcams, locations }, revalidate: 3600 };
+  return { props: { webcams, locations, ads }, revalidate: 3600 };
 }
 
-const Webcams = ({ webcams, locations }) => {
+const Webcams = ({ webcams, locations, ads }) => {
   const router = useRouter();
   const { query } = router;
   const { kraj, mesto, oblast } = query;
@@ -29,12 +31,15 @@ const Webcams = ({ webcams, locations }) => {
 
   const layoutProps = {
     ...locations,
+    ads,
   };
 
   useEffect(() => {
     if (Object.keys(query) > 0) {
       loadFilteredWebcams();
     }
+
+    console.log(ads);
   }, [query]);
 
   const loadMoreWebcams = async () => {
@@ -86,8 +91,8 @@ const Webcams = ({ webcams, locations }) => {
       <Row className='mr-0 bg-white pt-1 position-relative border-radius'>
         <>
           {allWebcams?.map((webcam) => (
-            <Col md={4} key={webcam.id}>
-              <VerticalPost post={webcam} useNextImg={false} />
+            <Col md={4} key={webcam.id} className='col-with-bottomdash'>
+              <VerticalPost post={webcam} useNextImg={false} wordLength={13} />
             </Col>
           ))}
           <div className='d-flex justify-content-center w-100 mt-1'>
@@ -103,6 +108,11 @@ const Webcams = ({ webcams, locations }) => {
           </div>
         </>
       </Row>
+      {ads
+        ?.filter(
+          (advert) => advert.umisteni === enums.ADVERTS.LOCATIONS.footer.key
+        )
+        .map((advert) => parse(advert.script))}
     </WebcamsLayout>
   );
 };

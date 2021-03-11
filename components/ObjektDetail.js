@@ -34,6 +34,8 @@ import CenikModal from "./CenikModal";
 import MiniObjekt from "./cards/MiniObjekt";
 import LocationBadge from "./LocationBadge";
 import Head from "next/head";
+import { objectToArray } from "../helpers/helpers";
+import Icon from "@iconify/react";
 
 const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
   const [viewport, setViewport] = useState({
@@ -57,6 +59,8 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
   const [openPriceList, setOpenPriceList] = useState(false);
   const [outerEquipmentLength, setOuterEquipmentLength] = useState(0);
   const [innerEquipmentLength, setInnerEquipmentLength] = useState(0);
+  const equipmentIcons = objectToArray(enums.OBJEKTY.VYBAVENI.IKONY);
+  const [finalIcons, setFinalIcons] = useState([]);
 
   // If objekt has zero equipment selected as true -> false is set, when equipment element is found as true in map function
   const [noEquipemnt, setNoEquipemnt] = useState(true);
@@ -88,9 +92,31 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
   useEffect(() => {
     if (objekt) {
       setColor(translateColor(objekt.typ_objektu));
+      if (objekt.vnitrni_vybaveni) {
+        setInnerEquipmentLength(objekt.vnitrni_vybaveni.length);
+      }
 
-      setInnerEquipmentLength(objekt.vnitrni_vybaveni?.length);
-      setOuterEquipmentLength(objekt.vnejsi_vybaveni?.length);
+      if (objekt.vnejsi_vybaveni) {
+        setOuterEquipmentLength(objekt.vnejsi_vybaveni?.length);
+      }
+
+      let selectedIcons = [];
+      equipmentIcons.forEach((equipmentIcon) => {
+        let foundEquipment = undefined;
+        foundEquipment = Object.keys(objekt.vnejsi_vybaveni).find(
+          (item) => `outside_${item}` === equipmentIcon.key
+        );
+        if (!foundEquipment) {
+          foundEquipment = Object.keys(objekt.vnitrni_vybaveni).find(
+            (item) => `inside_${item}` === equipmentIcon.key
+          );
+        }
+        if (foundEquipment) {
+          selectedIcons.push(equipmentIcon);
+        }
+      });
+
+      setFinalIcons(selectedIcons);
 
       // Init mapbox
       if (
@@ -172,10 +198,10 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
 
       return (
         <Row>
-          {finalEquipment.map((item) => {
+          {finalEquipment.map((item, index) => {
             return (
               item.length > 0 && (
-                <Col md={12 / finalEquipment.length}>
+                <Col md={12 / finalEquipment.length} key={index}>
                   <ul className='list-style-none pl-0'>
                     {objekt &&
                       shownEquipment &&
@@ -455,7 +481,7 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
                 {objekt?.zakladni_popis && (
                   <Col md={8.7} className='p-0'>
                     <div className='objekt-detail-description'>
-                      <div className='text-wrapper'>
+                      <div className='text-wrapper pb-1'>
                         <h2>Základní popis</h2>
                         <div>{parse(objekt?.zakladni_popis)}</div>
                       </div>
@@ -467,7 +493,7 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
                   <div className='objekt-detail-services'>
                     <h2>Služby</h2>
                     <ul className='services'>
-                      <li className='service-item d-flex align-items-center'>
+                      {/* <li className='service-item d-flex align-items-center'>
                         <BiWifi className={`text-${color} service-item-icon`} />{" "}
                         <span>WiFi Zdarma</span>
                       </li>
@@ -486,7 +512,28 @@ const ObjektDetail = ({ addReview, objekt, user, locations, related }) => {
                       <li className='service-item d-flex align-items-center'>
                         <FaDog className={`text-${color} service-item-icon`} />{" "}
                         <span>Domácí mazlíčci</span>
-                      </li>
+                      </li> */}
+                      {finalIcons.map((iconItem) => {
+                        const MyIcon = iconItem.icon;
+                        return (
+                          <li
+                            key={iconItem.key}
+                            className='service-item d-flex align-items-center'
+                          >
+                            {iconItem.iconify ? (
+                              <Icon
+                                icon={iconItem.icon}
+                                className={`text-${color} service-item-icon`}
+                              />
+                            ) : (
+                              <MyIcon
+                                className={`text-${color} service-item-icon`}
+                              />
+                            )}
+                            <span>{iconItem.value}</span>
+                          </li>
+                        );
+                      })}
                     </ul>
                     <div className='hide-desktop'>{descriptionButtons}</div>
                   </div>

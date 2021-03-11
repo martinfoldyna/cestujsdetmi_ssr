@@ -3,7 +3,16 @@ import enums from "../../enums";
 
 const Checkbox = React.forwardRef(
   (
-    { text, name, errors, checked, removeErr = false, type = "radio", ...rest },
+    {
+      text,
+      name,
+      errors,
+      checked,
+      removeErr = false,
+      type = "radio",
+      color = "blue",
+      ...rest
+    },
     ref
   ) => {
     return (
@@ -19,7 +28,7 @@ const Checkbox = React.forwardRef(
               {...rest}
             />
             <span
-              className={`checkmark ${
+              className={`checkmark ${color} ${
                 type === enums.CHECKBOX.checkbox ? "check" : "round"
               } ${errors && errors[name] ? "border-danger" : ""}`}
             />

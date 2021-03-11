@@ -72,44 +72,44 @@ const HeaderComponent = () => {
 
   return (
     <header className={`main-header ${stickyUp ? "sticky" : ""}`}>
-      <div className="hide-mobile">
-        <Container className="main-container">
-          <div className="d-flex justify-content-between align-items-center">
-            <MyLink href="/" className="d-flex align-items-center">
+      <div className='hide-mobile'>
+        <Container className='main-container'>
+          <div className='d-flex justify-content-between align-items-center'>
+            <MyLink href='/' className='d-flex align-items-center'>
               <Image
-                src="/cestuj_big.svg"
+                src='/cestuj_big.svg'
                 height={35}
                 width={220}
-                alt="logo cestuj s dětmi"
+                alt='logo cestuj s dětmi'
               />
             </MyLink>
-            <div className="d-flex align-items-center justify-content-end header-wrapper">
-              <div className="search-bar">
-                <div className="d-flex align-items-center justify-content-end">
+            <div className='d-flex align-items-center justify-content-end header-wrapper'>
+              <div className='search-bar'>
+                <div className='d-flex align-items-center justify-content-end'>
                   <input
-                    type="text"
-                    placeholder="Povězte nám, co hledáte"
-                    className="bg-grey"
+                    type='text'
+                    placeholder='Povězte nám, co hledáte'
+                    className='bg-grey'
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <button className="btn bg-grey search-bar-button">
+                  <button className='btn bg-grey search-bar-button'>
                     <MyLink href={`/search?query=${searchQuery}`}>
-                      <FaSearch className="text-blue" />
+                      <FaSearch className='text-blue' />
                     </MyLink>
                   </button>
                 </div>
               </div>
-              <MyLink href={sesssion ? "/oblibene" : "/auth/login"}>
+              <MyLink href={sesssion ? "/user" : "/auth/login"}>
                 {/*<button className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost mr-0">*/}
                 {/*  <FaRegHeart className="btn-icon text-red" />*/}
                 {/*  <span>Oblíbené</span>*/}
                 {/*</button>*/}
                 <SmallButton
-                  color="grey"
+                  color='grey'
                   ghost
                   icon={FaRegHeart}
-                  iconColor="red"
+                  iconColor='red'
                   onClick={() => {
                     if (!sesssion) {
                       console.log("toasting");
@@ -125,10 +125,10 @@ const HeaderComponent = () => {
               {/*  <span>Odběr newsletteru</span>*/}
               {/*</button>*/}
               <SmallButton
-                color="grey"
+                color='grey'
                 ghost
                 icon={FaRegEnvelope}
-                iconColor="blue"
+                iconColor='blue'
                 onClick={() => setOpenNewsletter(true)}
               >
                 Odběr newsletteru
@@ -137,7 +137,7 @@ const HeaderComponent = () => {
                 open={openNewsletter}
                 onClose={() => onCloseModal(setOpenNewsletter)}
               />
-              <MyLink href="/objekty">
+              <MyLink href='/objekty'>
                 {/*<button*/}
                 {/*  className="btn-small-logo d-flex align-items-center btn outline-blue text-grey ghost"*/}
                 {/*  style={{ marginLeft: "0" }}*/}
@@ -145,7 +145,7 @@ const HeaderComponent = () => {
                 {/*  <IoMdAdd className="btn-icon text-blue" />*/}
                 {/*  <span>Přidat objekt</span>*/}
                 {/*</button>*/}
-                <SmallButton color="grey" ghost icon={IoMdAdd} iconColor="blue">
+                <SmallButton color='grey' ghost icon={IoMdAdd} iconColor='blue'>
                   Přidat objekt
                 </SmallButton>
               </MyLink>
@@ -158,24 +158,24 @@ const HeaderComponent = () => {
               {/*  <span>Přihlášení</span>*/}
               {/*</button>*/}
               {sesssion || userLoggedIn ? (
-                <MyLink href={sesssion ? "/user" : "/admin"} className="pr-0">
+                <MyLink href={sesssion ? "/user" : "/admin"} className='pr-0'>
                   <SmallButton
-                    color="grey"
+                    color='grey'
                     ghost
                     icon={FaRegUser}
-                    iconColor="blue"
-                    className="pr-0"
+                    iconColor='blue'
+                    className='pr-0'
                   >
                     Uživatel
                   </SmallButton>
                 </MyLink>
               ) : (
                 <SmallButton
-                  color="grey"
+                  color='grey'
                   ghost
                   icon={FaRegUser}
-                  iconColor="blue"
-                  className="pr-0"
+                  iconColor='blue'
+                  className='pr-0'
                   onClick={() => setOpenLogin(true)}
                 >
                   Přihlášení
@@ -186,29 +186,29 @@ const HeaderComponent = () => {
           </div>
         </Container>
       </div>
-      <div className="hide-desktop">
-        <div className="d-flex justify-content-between header-wrapper">
-          <MyLink href="/">
+      <div className='hide-desktop'>
+        <div className='d-flex justify-content-between header-wrapper'>
+          <MyLink href='/'>
             <Image
-              src="/cestuj_big.svg"
-              alt="logo Cestuj s detmi"
-              className="cestuj-logo"
-              layout="intrinsic"
+              src='/cestuj_big.svg'
+              alt='logo Cestuj s detmi'
+              className='cestuj-logo'
+              layout='intrinsic'
               height={35}
               width={126}
               style={{ height: "80%" }}
             />
           </MyLink>
-          <div className="d-flex align-items-center">
-            <button className="btn ghost">
+          <div className='d-flex align-items-center'>
+            <button className='btn ghost'>
               {/*<Image src="/icons/search.svg" alt="search" layout="fill" />*/}
-              <BiSearch className="text-black" />
+              <BiSearch className='text-black' />
             </button>
-            <button className="btn ghost">
-              <BiUser className="text-black" />
+            <button className='btn ghost'>
+              <BiUser className='text-black' />
             </button>
-            <button className="btn ghost" onClick={toggleNav}>
-              <GiHamburgerMenu className="text-black" />
+            <button className='btn ghost' onClick={toggleNav}>
+              <GiHamburgerMenu className='text-black' />
               {/*<Image
               src="/icons/hamburger.svg"
               alt="hamburger menu"

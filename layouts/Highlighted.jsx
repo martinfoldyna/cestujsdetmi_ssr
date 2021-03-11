@@ -58,7 +58,7 @@ const Highlighted = ({ data, previo }) => {
           )}
         </Col>
         <Col lg={6}>
-          <div className='heading-with-icons d-flex align-items-center'>
+          <div className='heading-with-icons d-flex align-items-center pl-0'>
             <AiFillCompass
               className='text-white icon-heading bg-orange'
               style={{ marginRight: "1em" }}
@@ -67,7 +67,7 @@ const Highlighted = ({ data, previo }) => {
           </div>
           {data ? (
             <>
-              <div className='section-content'>
+              <div className='section-content pl-0'>
                 {data &&
                   data.length > 0 &&
                   data.map((article, index) => {

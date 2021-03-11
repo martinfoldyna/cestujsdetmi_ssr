@@ -2,7 +2,7 @@ import React from "react";
 import { IoMdPin } from "react-icons/io";
 
 export default function LocationBadge({ objekt, color }) {
-  return (
+  return objekt.adresa_ulice && (objekt.kraj || objekt.oblast) ? (
     <div className={`d-flex align-items-center`}>
       <span style={{ fontSize: "12px", marginTop: ".2em" }}>
         <IoMdPin className={`icon text-${color}`} />
@@ -18,5 +18,7 @@ export default function LocationBadge({ objekt, color }) {
         {objekt.adresa_stat ? `, ${objekt.adresa_stat}` : ""}
       </span>
     </div>
+  ) : (
+    ""
   );
 }

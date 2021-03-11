@@ -12,16 +12,16 @@
   cursor: pointer;
 }
 
-.article-card::after {
-  position: absolute;
-  left: -15px;
-  right: -15px;
-  bottom: 0;
-  background-color: $grey;
-  height: 2px;
-  border-radius: $border-radius;
-  content: "";
-}
+// .article-card::after {
+//   position: absolute;
+//   left: -15px;
+//   right: -15px;
+//   bottom: 0;
+//   background-color: $grey;
+//   height: 2px;
+//   border-radius: $border-radius;
+//   content: "";
+// }
 
 .news-article {
   position: relative;
@@ -261,6 +261,10 @@
 .filter-card .col .categories-list li {
   padding: 0.5em 1.5em;
   position: relative;
+}
+
+.filter-card .col .categories-list li:last-of-type::after {
+  display: none;
 }
 
 // .filter-card .col .categories-list li.blue:hover,

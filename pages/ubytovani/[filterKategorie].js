@@ -107,7 +107,7 @@ const TipyNaUbytovaniKategorie = ({ objekty, locations }) => {
           heading={
             objectToArray(enums.KATEGORIE.UBYTOVANI).find(
               (enumItem) => enumItem.key === filterKategorie
-            ).value
+            )?.value
           }
           icon={HiHome}
           icon_size='medium'

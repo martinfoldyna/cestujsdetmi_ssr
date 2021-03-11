@@ -249,9 +249,21 @@
 
   .map-component {
     margin-top: 1.5em;
+    padding: 1em 15px;
 
     & .map {
       margin-top: 2em;
+      filter: none;
+    }
+
+    & .map-toggler .btn {
+      font-weight: normal;
+      margin-bottom: 0.5em;
+    }
+
+    & .map-filters {
+      margin-top: 0 !important;
+      margin-left: 0 !important;
     }
 
     & .badge-location {
@@ -270,8 +282,9 @@
       margin: 0;
 
       & > .d-flex {
-        // padding: 0 !important;
-        padding: 0.5em 15px !important;
+        justify-content: center;
+        padding: 0 !important;
+        // padding: 0.5em 15px !important;
       }
     }
 
@@ -345,6 +358,10 @@
     }
   }
 
+  .rady-a-tipy-kategorie .article-card.d-flex {
+    display: flex !important;
+  }
+
   .article-card .w-100 > div {
     padding-right: 0;
     padding-left: 0;
@@ -394,11 +411,6 @@
 
   .header-wrapper .btn.ghost {
     margin-left: 1em;
-  }
-
-  .map-component .map-filters {
-    margin-top: 1em !important;
-    margin-left: 0 !important;
   }
 
   .custom-select-wrapper {
@@ -762,8 +774,21 @@
 }
 
 /* iPads (portrait) ----------- */
-@media only screen and (min-width: 768px) and (orientation: portrait) {
+@media only screen and (min-width: 768px) {
   /* Styles */
+  .map-filters {
+    position: relative;
+  }
+  .map-filters.row::before {
+    right: -2em;
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    content: "";
+    background-color: #e8e8e8;
+    height: 1px;
+    left: -5em;
+  }
 }
 
 /* Desktops and laptops ----------- */

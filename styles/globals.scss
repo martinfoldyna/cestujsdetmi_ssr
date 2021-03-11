@@ -106,7 +106,7 @@ input[type="number"] {
 .main-container,
 .hero .wrapper,
 .sitemap {
-  max-width: 1330px !important;
+  max-width: 1180px !important;
 }
 
 .sticky {
@@ -534,8 +534,8 @@ input[type="number"] {
 }
 
 .map-component .map {
-  margin-top: -3em;
-  margin-bottom: 3em;
+  margin-top: -2em;
+  margin-bottom: 1em;
   filter: drop-shadow(0px 49px 80px rgba(0, 0, 0, 0.05))
     drop-shadow(0px 31.7593px 46.8519px rgba(0, 0, 0, 0.037963))
     drop-shadow(0px 18.8741px 25.4815px rgba(0, 0, 0, 0.0303704))
@@ -544,6 +544,7 @@ input[type="number"] {
     drop-shadow(0px 0.907407px 3.14815px rgba(0, 0, 0, 0.012037));
   stroke-width: 2px;
   stroke-allignement: center;
+  z-index: 1;
 }
 
 .map-component .map-description {
@@ -634,6 +635,10 @@ input[type="number"] {
   border-radius: $border-radius;
   border-collapse: separate;
   position: relative;
+}
+
+.side-cards .section {
+  margin: 1em 0;
 }
 
 .col .section:first-of-type {
@@ -744,7 +749,7 @@ input[type="number"] {
 .objekty-heading p {
   margin-left: 4em;
   margin-bottom: 0.5em;
-  margin-top: 0.5em;
+  margin-top: 0;
   color: #fff;
 }
 
@@ -979,9 +984,13 @@ input[type="number"] {
 }
 
 .objekt-mini-heading {
-  text-decoration: underline;
   font-weight: 600;
   margin: 0.5rem 0;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .objekt-mini {
@@ -993,6 +1002,30 @@ input[type="number"] {
 
   & svg {
     margin-right: 0.2em;
+  }
+
+  &.empty-card {
+    cursor: pointer;
+
+    & h3 {
+      text-decoration: none;
+      color: #fff;
+      transition: 0.5s all;
+    }
+
+    &:hover h3 {
+      visibility: visible;
+      color: $text-black;
+    }
+
+    & .objekt-mini-image {
+      height: 100%;
+
+      & .icon {
+        font-size: 1.5em;
+        padding: 0;
+      }
+    }
   }
 }
 .objekt-mini-image {
@@ -1051,6 +1084,25 @@ input[type="number"] {
   padding: 0 15px;
 }
 
+.post {
+  padding-bottom: 0.5em;
+}
+
+.col-with-bottomdash {
+  position: relative;
+  padding-bottom: 0.5em;
+
+  &::after {
+    position: absolute;
+    bottom: 1em;
+    left: 0;
+    right: 0;
+    height: 1px;
+    content: "";
+    background-color: $highlight-grey;
+  }
+}
+
 .post-thumbnail-wrapper {
   width: 100%;
   padding-bottom: 56.25%;
@@ -1071,13 +1123,13 @@ input[type="number"] {
 
 .post-heading {
   font-weight: 600;
-  text-decoration: underline;
+  text-decoration: none;
   margin-bottom: 0.5em;
   cursor: pointer;
 }
 
 .post-heading:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .post-description,
@@ -1104,6 +1156,8 @@ input[type="number"] {
 
 .post-detail .content-wrapper p {
   margin: 0;
+
+  text-align: left !important;
 }
 
 .post-detail .date {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import enums from "../../enums";
 import LocationBadge from "../LocationBadge";
 import MyLink from "../../layouts/MyLink";
+import Link from "next/link";
 
 const MiniObjekt = ({ objekt }) => {
   const images =
@@ -20,14 +21,18 @@ const MiniObjekt = ({ objekt }) => {
           <Image
             className='objekt-mini-image'
             src={
-              images[0].relativeUrl
+              typeof images[0] === "string"
+                ? images[0]
+                : images[0].relativeUrl
                 ? `https://www.cestujsdetmi.cz/${images[0].relativeUrl}`
                 : images[0].formats.small.url
             }
             alt={
-              images[0].alternativeText
+              typeof images[0] === "string"
+                ? images[0]
+                : images[0].alternativeText
                 ? images[0].alternativeText
-                : `${objekt.nazev} ${(i < 10 ? "0" : "") + `${i}`}`
+                : `${objekt.nazev}`
             }
             layout='fill'
             objectFit='cover'
@@ -37,9 +42,9 @@ const MiniObjekt = ({ objekt }) => {
         ""
       )}
       <div className='data'>
-        <MyLink href={`/ubytovani/detail/${objekt.id}/#top`}>
+        <Link href={`/ubytovani/detail/${objekt.id}/#top`}>
           <h3 className='objekt-mini-heading'>{objekt.nazev}</h3>
-        </MyLink>
+        </Link>
         <LocationBadge
           objekt={objekt}
           color={

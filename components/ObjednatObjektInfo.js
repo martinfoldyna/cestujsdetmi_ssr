@@ -1449,7 +1449,7 @@ const ObjednatObjektInfo = ({
                   />
                   <Checkbox
                     name='inside_sauna'
-                    text='inside_sauna / whirlpool'
+                    text='sauna / whirlpool'
                     checked={objekt?.vnitrni_vybaveni?.sauna}
                     ref={register}
                   />

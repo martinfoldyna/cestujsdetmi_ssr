@@ -1,6 +1,24 @@
-import { BiWifi } from "react-icons/bi";
 import { FaDog } from "react-icons/fa";
-import { RiCupLine, RiParkingBoxLine } from "react-icons/ri";
+import { RiCupLine, RiParkingBoxLine, RiFootballLine } from "react-icons/ri";
+import { BiBowlingBall, BiTennisBall, BiWifi } from "react-icons/bi";
+import Pool from "@iconify/icons-tabler/pool";
+import Restaurant from "@iconify/icons-uil/restaurant";
+import OutlineToys from "@iconify/icons-ic/outline-toys";
+import ElevatorUp from "@iconify/icons-mdi/elevator-up";
+import AnimalDog from "@iconify/icons-fluent/animal-dog-24-regular";
+import SmokingNo from "@iconify/icons-tabler/smoking-no";
+import Eye from "@iconify/icons-akar-icons/eye";
+import Parking from "@iconify/icons-uil/parking-square";
+import Kid from "@iconify/icons-tabler/mood-kid";
+import FireIcon from "@iconify/icons-uil/fire";
+import TableTennis from "@iconify/icons-la/table-tennis";
+import Volleyball from "@iconify/icons-uil/volleyball";
+import JumpRope from "@iconify/icons-tabler/jump-rope";
+import Key from "@iconify/icons-heroicons-outline/key";
+import HorseBold from "@iconify/icons-ph/horse-bold";
+import BabyCarriage from "@iconify/icons-la/baby-carriage";
+import Snowflake from "@iconify/icons-ph/snowflake";
+import Golf from "@iconify/icons-ic/round-sports-golf";
 
 export default {
   MEDIA_QUERIES: {
@@ -302,7 +320,22 @@ export default {
       },
     },
   },
-
+  ADVERTS: {
+    LOCATIONS: {
+      sidebar: {
+        key: "postranni_menu",
+      },
+      vypis_po_4: {
+        key: "vypis_objektu_po_4_polozce",
+      },
+      vypis_po_8: {
+        key: "vypis_objektu_po_8_polozce",
+      },
+      footer: {
+        key: "paticka",
+      },
+    },
+  },
   URLS: {
     objektInfoMini: "objekt-infos?_sort=druh_zapisu:DESC,created_at:DESC",
     objektInfo: "objekt-infos",
@@ -355,21 +388,283 @@ export default {
           value: "Domácí mazlíčci",
           key: "inside_mazlicci_vitani",
           icon: FaDog,
+          iconify: false,
         },
         parking: {
           value: "Parkování",
           key: "outside_parkoviste",
           icon: RiParkingBoxLine,
+          iconify: false,
         },
         snidane: {
           value: "Snídaně/Polopenze/Plná penze",
           key: "inside_snidane_polopenze_plnapenze",
           icon: RiCupLine,
+          iconify: false,
         },
-        wifi: {
+        wifi_zdarma: {
           value: "WiFi Zdarma",
           key: "inside_internet_zdarma",
           icon: BiWifi,
+          iconify: false,
+        },
+        wifi_placena: {
+          value: "WiFi - placená",
+          key: "inside_internet_placeny",
+          icon: BiWifi,
+          iconify: false,
+        },
+        bazen: {
+          value: "Bazén",
+          key: "inside_bazen",
+          icon: Pool,
+          iconify: true,
+        },
+        detska_strava: {
+          value: "Dětská strava",
+          key: "inside_detska_strava",
+          icon: Restaurant,
+          iconify: true,
+        },
+        detske_menu: {
+          value: "Dětské menu",
+          key: "inside_detske_menu",
+          icon: Restaurant,
+          iconify: true,
+        },
+        detsky_koutek: {
+          value: "Dětský koutek",
+          key: "inside_detsky_koutek",
+          icon: OutlineToys,
+          iconify: true,
+        },
+        detsky_pribor: {
+          value: "Dětský příbor",
+          key: "inside_detsky_pribor",
+          icon: Restaurant,
+          iconify: true,
+        },
+        dilnicky_pro_deti: {
+          value: "Dílničky pro děti",
+          key: "inside_dilnicky_pro_deti",
+          icon: Kid,
+          iconify: true,
+        },
+        mazlicci_vitani: {
+          value: "Domácí mazlíčci vítáni / po dohodě",
+          key: "inside_mazlicci_vitani",
+          icon: FaDog,
+          iconify: false,
+        },
+        expozice_pro_deti: {
+          value: "Expozice pro děti",
+          key: "inside_expozice_pro_deti",
+          icon: Eye,
+          iconify: true,
+        },
+        nekuracke_prostredi: {
+          value: "Nekuřácké prostředí",
+          key: "inside_nekuracke",
+          icon: SmokingNo,
+          iconify: true,
+        },
+        oceneni_baby: {
+          value: "Ocenění BABY FRIENDLY CERTIFICATE",
+          key: "inside_baby_friendly",
+          icon: Kid,
+          iconify: true,
+        },
+        prebalovaci_pult: {
+          value: "Přebalovací pult",
+          key: "inside_prebalovaci_pult",
+          icon: Kid,
+          iconify: true,
+        },
+        programy_pro_deti: {
+          value: "Programy pro děti",
+          key: "inside_porgramy_pro_deti",
+          icon: Kid,
+          iconify: true,
+        },
+        restaurace_jidelna: {
+          value: "Restaurace / jídelna",
+          key: "inside_restaurace_jidelna",
+          icon: Restaurant,
+          iconify: true,
+        },
+        sauna_whirpool: {
+          value: "Sauna / whirlpool",
+          key: "inside_sauna",
+          icon: Pool,
+          iconify: true,
+        },
+        stolni_tenis: {
+          value: "Stolní tenis",
+          key: "inside_stolni_tenis",
+          icon: TableTennis,
+          iconify: true,
+        },
+        vytah: {
+          value: "Výtah",
+          key: "inside_vytah",
+          icon: ElevatorUp,
+          iconify: true,
+        },
+        bazen: {
+          value: "Bazén",
+          key: "outside_bazen",
+          icon: Pool,
+          iconify: true,
+        },
+        brouzdaliste: {
+          value: "Brouzdaliště",
+          key: "outside_brouzdaliste",
+          icon: Pool,
+          iconify: true,
+        },
+        detska_lyzarska_skolicka: {
+          value: "Dětská lyžařská školička",
+          key: "outside_detska_lyzarska_skolicka",
+          icon: Snowflake,
+          iconify: true,
+        },
+        detska_sjezdovka: {
+          value: "Dětská sjezdovka",
+          key: "outside_detska_sjezdovka",
+          icon: Snowflake,
+          iconify: true,
+        },
+        detsky_vlek: {
+          value: "Dětský lyžařský vlek",
+          key: "outside_detsky_lyzarsky_vlek",
+          icon: Snowflake,
+          iconify: true,
+        },
+        detsky_koutek: {
+          value: "Dětský koutek",
+          key: "outside_detsky_koutek",
+          icon: OutlineToys,
+          iconify: true,
+        },
+        fotbalove_hriste: {
+          value: "Fotbalové hřiště",
+          key: "outside_fotbalove_hriste",
+          icon: RiFootballLine,
+          iconify: false,
+        },
+        hriste: {
+          value: "Hřiště",
+          key: "outside_hriste",
+          icon: Kid,
+          iconify: true,
+        },
+        kocarek: {
+          value: "Kočárek",
+          key: "outside_kocarek",
+          icon: BabyCarriage,
+          iconify: true,
+        },
+        lanove_atrakce: {
+          value: "Lanové atrakce",
+          key: "outside_lanove_atrakce",
+          icon: JumpRope,
+          iconify: true,
+        },
+        lezecka_stena: {
+          value: "Lezecká stěna",
+          key: "outside_lezecka_stena",
+          icon: JumpRope,
+          iconify: true,
+        },
+        lyzarska_skola: {
+          value: "Lyžařská škola",
+          key: "outside_lyzarska_skola",
+          icon: Snowflake,
+          iconify: true,
+        },
+        minigolf: {
+          value: "Minigolf",
+          key: "outside_minigolf",
+          icon: Golf,
+          iconify: true,
+        },
+        vstup_s_kocarkem: {
+          value: "Možný vstup s kočárkem",
+          key: "outside_vstup_s_kocarkem",
+          icon: BabyCarriage,
+          iconify: true,
+        },
+        ohniste_grill_krb: {
+          value: "Ohniště / grill / krb",
+          key: "outside_ohniste_grill_krb",
+          icon: FireIcon,
+          iconify: true,
+        },
+        parkoviste: {
+          value: "Parkoviště",
+          key: "outside_parkoviste",
+          icon: Parking,
+          iconify: true,
+        },
+        prebalovaci_pult: {
+          value: "Přebalovací pult",
+          key: "outside_prebalovaci_pult",
+          icon: Kid,
+          iconify: true,
+        },
+        programy_pro_deti: {
+          value: "Programy pro děti",
+          key: "outside_programy_pro_deti",
+          icon: Kid,
+          iconify: true,
+        },
+        projizdky_na_konich: {
+          value: "Projížďka na koních",
+          key: "outside_projizdky_na_konich",
+          icon: HorseBold,
+          iconify: true,
+        },
+        pujcovna_kol: {
+          value: "Půjčovna kol",
+          key: "outside_pujcovna_kol",
+          icon: Key,
+          iconify: true,
+        },
+        pujcovna_lyzi: {
+          value: "Půjčovna lyží",
+          key: "outside_pujcovna_lyzi",
+          icon: Snowflake,
+          iconify: true,
+        },
+        pujcovna_sportovniho_vybaveni: {
+          value: "Půjčovna sportovního vybavení",
+          key: "outside_pujcovna_sportovniho_vybaveni",
+          icon: Key,
+          iconify: true,
+        },
+        ski_servis: {
+          value: "SKI servis",
+          key: "outside_ski_servis",
+          icon: Snowflake,
+          iconify: true,
+        },
+        stolni_tenis: {
+          value: "Stolní tenis",
+          key: "outside_stolni_tenis",
+          icon: TableTennis,
+          iconify: true,
+        },
+        tenisovy_kurt: {
+          value: "Tenisový kurt",
+          key: "outside_tenisovy_kurt",
+          icon: BiTennisBall,
+          iconify: false,
+        },
+        volejbalove_hriste: {
+          value: "Volejbalové hřiště",
+          key: "outside_volejbalove_hriste",
+          icon: Volleyball,
+          iconify: true,
         },
       },
     },

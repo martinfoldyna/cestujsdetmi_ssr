@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import { Col, Row } from "react-grid-system";
 import CustomSelect from "../form/CustomSelect";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import enums from "../../enums";
 import CustomDateRangePicker from "../form/CustomDateRangePicker";
 import Checkbox from "../form/Checkbox";
 import { fetchQuery } from "../../helpers/fetch";
-import e from "cors";
+import parse from "html-react-parser";
 
 const SideFilter = ({
   color,
@@ -21,6 +20,7 @@ const SideFilter = ({
   dateRange = false,
   fullPadding = false,
   beSticky = true,
+  ads,
 }) => {
   const [filteredCities, setFilteredCities] = useState(mesta);
   const [filteredOblasts, setFilteredOblasts] = useState(oblasti);
@@ -29,6 +29,7 @@ const SideFilter = ({
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedOblast, setSelectedOblast] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [filteredAds, setFilteredAds] = useState([]);
   const router = useRouter();
   const { query } = router;
   let cityParams = {};
@@ -53,6 +54,15 @@ const SideFilter = ({
       }
     }
   }, [router.query]);
+
+  useEffect(() => {
+    if (ads) {
+      const filtered = ads.filter(
+        (advert) => advert.umisteni === enums.ADVERTS.LOCATIONS.sidebar.key
+      );
+      setFilteredAds(filtered);
+    }
+  }, [ads]);
 
   const queryParams = () => {
     return new URLSearchParams(router.search);
@@ -109,10 +119,24 @@ const SideFilter = ({
 
   // Add search query parameter to URL
   const onCategorySelect = (category) => {
+    setSelectedCategory(category);
+
     router.push({
       pathname: `/${topic.url}/[filterKategorie]`,
       query: {
         filterKategorie: category.hodnota,
+      },
+    });
+  };
+
+  const onSubcategorySelect = (subcategory) => {
+    router.push({
+      pathname: `/${topic.url}/[filterKategorie]`,
+      query: {
+        ...router.query,
+        ...{
+          subcategory: subcategory.hodnota,
+        },
       },
     });
   };
@@ -130,73 +154,74 @@ const SideFilter = ({
   };
 
   return (
-    <div
-      className={`filter-card ${
-        fullPadding ||
-        !kategorie ||
-        !kategorie?.some((categoryItem) => categoryItem.urceni === topic.key)
-          ? "full-padding"
-          : ""
-      } bg-white`}
-    >
-      {/* <Waypoint onEnter={() => setSticky(true)} /> */}
+    <>
+      <div
+        className={`filter-card ${
+          fullPadding ||
+          !kategorie ||
+          !kategorie?.some((categoryItem) => categoryItem.urceni === topic.key)
+            ? "full-padding"
+            : ""
+        } bg-white`}
+      >
+        {/* <Waypoint onEnter={() => setSticky(true)} /> */}
 
-      <Row className='m-0'>
-        <Col md={6} lg={12} className='col p-0'>
-          <div className='selects'>
-            <p className='filter-name'>Vyberte lokalitu</p>
-            <Row>
-              <Col md={12}>
-                <CustomSelect
-                  options={filteredKrajs}
-                  onChange={(kraj) => onKrajChange(kraj)}
-                  placeholder='Kraj'
-                  color={color}
-                  value={
-                    router.query.kraj
-                      ? filteredKrajs.find(
-                          (kraj) => kraj.key === router.query.kraj
-                        )
-                      : null
-                  }
-                />
-              </Col>
-            </Row>
-            <Row className='m-0'>
-              <Col md={12} className='p-0'>
-                <CustomSelect
-                  options={filteredCities}
-                  onChange={(city) => onCitySelect(city)}
-                  placeholder='Mesto'
-                  color={color}
-                  value={
-                    router.query.mesto
-                      ? filteredCities.find(
-                          (mesto) => mesto.key === router.query.mesto
-                        )
-                      : null
-                  }
-                />
-              </Col>
-            </Row>
-            <Row className='m-0'>
-              <Col md={12} className='p-0'>
-                <CustomSelect
-                  options={filteredOblasts}
-                  onChange={onOblastSelect}
-                  placeholder='Oblast'
-                  color={color}
-                  value={
-                    router.query.oblast
-                      ? filteredOblasts.find(
-                          (oblast) => oblast.key === router.query.oblast
-                        )
-                      : null
-                  }
-                />
-              </Col>
-            </Row>
-            {/* {(selectedCity !== null || selectedRegion !== null) && (
+        <Row className='m-0'>
+          <Col md={6} lg={12} className='col p-0'>
+            <div className='selects'>
+              <p className='filter-name'>Vyberte lokalitu</p>
+              <Row>
+                <Col md={12}>
+                  <CustomSelect
+                    options={filteredKrajs}
+                    onChange={(kraj) => onKrajChange(kraj)}
+                    placeholder='Kraj'
+                    color={color}
+                    value={
+                      router.query.kraj
+                        ? filteredKrajs.find(
+                            (kraj) => kraj.key === router.query.kraj
+                          )
+                        : null
+                    }
+                  />
+                </Col>
+              </Row>
+              <Row className='m-0'>
+                <Col md={12} className='p-0'>
+                  <CustomSelect
+                    options={filteredCities}
+                    onChange={(city) => onCitySelect(city)}
+                    placeholder='Mesto'
+                    color={color}
+                    value={
+                      router.query.mesto
+                        ? filteredCities.find(
+                            (mesto) => mesto.key === router.query.mesto
+                          )
+                        : null
+                    }
+                  />
+                </Col>
+              </Row>
+              <Row className='m-0'>
+                <Col md={12} className='p-0'>
+                  <CustomSelect
+                    options={filteredOblasts}
+                    onChange={onOblastSelect}
+                    placeholder='Oblast'
+                    color={color}
+                    value={
+                      router.query.oblast
+                        ? filteredOblasts.find(
+                            (oblast) => oblast.key === router.query.oblast
+                          )
+                        : null
+                    }
+                  />
+                </Col>
+              </Row>
+              {/* {(selectedCity !== null || selectedRegion !== null) && (
               <Link
                 href='#'
                 onClick={() => {
@@ -208,64 +233,99 @@ const SideFilter = ({
                 Zrušit filtry
               </Link>
             )} */}
-          </div>
-        </Col>
-        <Col lg={12} className='col p-0'>
-          <div className='selects pt-0'>
-            {dateRange && (
-              <div className='date-range-picker'>
-                <p className='filter-name'>Vyberte termín</p>
-                <CustomDateRangePicker />
-              </div>
-            )}
-          </div>
-        </Col>
-        <Col className='col p-0'>
-          {kategorie &&
-            kategorie.find(
-              (categoryItem) => categoryItem.urceni === topic?.key
-            ) && (
-              <div className='categories'>
-                <p className='filter-name'>Kategorie</p>
-                <ul className='categories-list list-style-none p-0 mb-0'>
-                  {kategorie.map(
-                    (categoryItem) =>
-                      categoryItem.urceni === topic.key && (
-                        <li
-                          className={`d-flex justify-content-between align-items-center ${color} ${
-                            router.pathname.split("/").pop() ===
-                            categoryItem.hodnota
-                              ? "selected"
-                              : ""
-                          }`}
-                          key={categoryItem.id}
-                        >
-                          {/* <Link
-                            href={{
-                              pathname: `/${topic.url}/[filterKategorie]`,
-                              query: {
-                                filterKategorie: categoryItem.hodnota,
-                              },
-                            }}
-                          >
-                            {categoryItem.nazev}
-                          </Link> */}
-                          <Checkbox
-                            text={categoryItem.nazev}
-                            name='kategorie'
-                            value={categoryItem.hodnota}
-                            type={enums.CHECKBOX.radio}
-                            onChange={() => onCategorySelect(categoryItem)}
-                          />
-                        </li>
-                      )
-                  )}
-                </ul>
-              </div>
-            )}
-        </Col>
-      </Row>
-    </div>
+            </div>
+          </Col>
+          <Col lg={12} className='col p-0'>
+            <div className='selects pt-0'>
+              {dateRange && (
+                <div className='date-range-picker'>
+                  <p className='filter-name'>Vyberte termín</p>
+                  <CustomDateRangePicker />
+                </div>
+              )}
+            </div>
+          </Col>
+          <Col className='col p-0'>
+            {kategorie &&
+              kategorie.find(
+                (categoryItem) => categoryItem.urceni === topic?.key
+              ) && (
+                <>
+                  <div className='categories'>
+                    <p className='filter-name'>Kategorie</p>
+                    <ul className='categories-list list-style-none p-0 mb-0'>
+                      <li
+                        className={`d-flex justify-content-between align-items-center ${color}`}
+                      >
+                        <Checkbox
+                          text='Všechny hodnoty'
+                          name='kategorie'
+                          value='all_values'
+                          type={enums.CHECKBOX.radio}
+                          onChange={() =>
+                            router.push({
+                              pathname: `/${topic.url}`,
+                            })
+                          }
+                        />
+                      </li>
+                      {kategorie.map(
+                        (categoryItem) =>
+                          categoryItem.urceni === topic.key && (
+                            <li
+                              className={`d-flex justify-content-between align-items-center ${color}`}
+                              key={categoryItem.id}
+                            >
+                              <Checkbox
+                                text={categoryItem.nazev}
+                                name='kategorie'
+                                value={categoryItem.hodnota}
+                                type={enums.CHECKBOX.radio}
+                                onChange={() => onCategorySelect(categoryItem)}
+                                color='orange'
+                              />
+                            </li>
+                          )
+                      )}
+                    </ul>
+                  </div>
+                  {selectedCategory &&
+                    selectedCategory.podkategorie &&
+                    selectedCategory.podkategorie.length > 0 && (
+                      <div className='categories'>
+                        <p className='filter-name'>Podkategorie</p>
+                        <ul className='categories-list list-style-none p-0 mb-0'>
+                          {selectedCategory.podkategorie.map(
+                            (subcategoryItem) => (
+                              <li
+                                className={`d-flex justify-content-between align-items-center ${color}`}
+                                key={subcategoryItem.id}
+                              >
+                                <Checkbox
+                                  text={subcategoryItem.nazev}
+                                  name='podkategorie'
+                                  value={subcategoryItem.hodnota}
+                                  type={enums.CHECKBOX.radio}
+                                  onChange={() =>
+                                    onSubcategorySelect(subcategoryItem)
+                                  }
+                                  color='orange'
+                                />
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                </>
+              )}
+          </Col>
+        </Row>
+      </div>
+      {filteredAds?.length > 0 && (
+        <div>{ads.map((advert) => parse(advert.script))}</div>
+      )}
+    </>
   );
 };
 

@@ -23,6 +23,7 @@ const WebcamsLayout = ({
   oblasti,
   kategorie,
   pageProps,
+  ads,
 }) => {
   const router = useRouter();
   const { hodnota } = router.query;
@@ -34,6 +35,7 @@ const WebcamsLayout = ({
     mesta,
     oblasti,
     kategorie,
+    ads,
     fullPadding: true,
     color: "purple",
   };

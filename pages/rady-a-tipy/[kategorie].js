@@ -44,7 +44,7 @@ const RadyTipyKategorie = ({ radyTipy }) => {
         <title>{enums.RADY_TIPY.KATEGORIE[kategorie].value}</title>
         <meta name='robots' content='index, follow' />
       </Head>
-      <div className='border-radius mb-1 bg-white p-1'>
+      <div className='border-radius mb-1 bg-white p-1 rady-a-tipy-kategorie'>
         {radyTipy.map((post, index) => (
           <div key={post.id}>
             <div className='hide-mobile'>

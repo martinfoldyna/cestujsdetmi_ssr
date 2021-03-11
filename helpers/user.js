@@ -8,13 +8,16 @@ export const addToFavorite = async ({
   externalObject,
   user,
   radyTipyId,
+  webkameryId,
 }) => {
   try {
     if (user) {
       console.log(user.oblibene);
-      console.log(localId);
+      console.log(webkameryId);
 
       const requestBody = {};
+
+      //TODO: simplify
 
       if (localId) {
         requestBody.oblibene = user.oblibene
@@ -30,6 +33,14 @@ export const addToFavorite = async ({
             ? [...user.rady_a_tipy, radyTipyId]
             : [radyTipyId]
           : [radyTipyId];
+      }
+
+      if (webkameryId) {
+        requestBody.webkamery = user.webkamery
+          ? user.webkamery.length !== 0
+            ? [...user.webkamery, webkameryId]
+            : [webkameryId]
+          : [webkameryId];
       }
 
       if (externalObject) {
@@ -77,6 +88,7 @@ export const removeFromFavorite = async ({
   user,
   hotId,
   radyTipyId,
+  webkameryId,
 }) => {
   try {
     console.log("user", user);
@@ -92,6 +104,9 @@ export const removeFromFavorite = async ({
     }
     if (radyTipyId) {
       requestBody.rady_a_tipy = radyTipyId;
+    }
+    if (webkameryId) {
+      requestBody.webkamery = webkameryId;
     }
 
     const response = await axios.put(

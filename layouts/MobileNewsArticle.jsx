@@ -5,6 +5,7 @@ import { BsClock } from "react-icons/bs";
 import parse from "html-react-parser";
 import { trimString } from "../helpers/helpers";
 import MyLink from "./MyLink";
+import Link from "next/link";
 
 const MobileNewsArticle = ({
   article,
@@ -14,7 +15,7 @@ const MobileNewsArticle = ({
   index,
 }) => {
   return (
-    <MyLink href={`/rady-a-tipy/detail/${article?.hodnota}`}>
+    <Link href={`/rady-a-tipy/detail/${article?.hodnota}`}>
       <div
         className={`article-card news-article d-flex align-items-center p-0 pb-1`}
       >
@@ -31,8 +32,8 @@ const MobileNewsArticle = ({
           alt={article.nazev}
           width={110}
           height={100}
-          objectFit="cover"
-          className="border-radius"
+          objectFit='cover'
+          className='border-radius'
         />
         <div style={{ flexBasis: "60%", marginLeft: "0.6em" }}>
           <h3 style={{ margin: "0", textAlign: "left" }}>{article?.nazev}</h3>
@@ -57,10 +58,10 @@ const MobileNewsArticle = ({
           {/*    </p>*/}
           {/*  )}*/}
           {/*</div>*/}
-          <div className="d-flex align-items-center date text-grey">
-            <BsClock className=" btn-icon" />
+          <div className='d-flex align-items-center date text-grey'>
+            <BsClock className=' btn-icon' />
             <span
-              className="d-block"
+              className='d-block'
               style={{ fontSize: "12px", marginTop: ".5em" }}
             >
               {new Date(article?.createdAt).toLocaleString("cs", {
@@ -72,7 +73,7 @@ const MobileNewsArticle = ({
           </div>
         </div>
       </div>
-    </MyLink>
+    </Link>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   SectionHeading,
   SectionContent,
 } from "../../../layouts/Section";
+import { useSession } from "next-auth/client";
 import LoadingSkeleton from "../../../layouts/LoadingSkeleton";
 import { Row, Col } from "react-grid-system";
 import VerticalPost from "../../../layouts/VerticalPost";
@@ -16,6 +17,7 @@ import { fetchQuery } from "../../../helpers/fetch";
 import enums from "../../../enums";
 import WebcamsLayout from "../../../layouts/siteLayouts/WebcamsLayout";
 import Head from "next/head";
+import AddToFavoriteButton from "../../../components/addToFavoriteButton";
 
 export async function getStaticPaths() {
   const webcams = await fetchQuery(`${enums.URLS.webkamery}`);
@@ -50,6 +52,7 @@ const WebcamDetail = ({ webcam, locations }) => {
   const { hodnota } = router.query;
   const { isFallback } = useRouter();
   const [related, setRelated] = useState(null);
+  const [session] = useSession();
 
   const loadWebcam = async () => {
     const fetchRelated = await fetchQuery(
@@ -89,6 +92,11 @@ const WebcamDetail = ({ webcam, locations }) => {
         {/*  <h2>{webcam.nazev}</h2>*/}
         {/*</SectionHeading>*/}
         <SectionContent className='border-radius'>
+          <AddToFavoriteButton
+            user={session?.user}
+            post={webcam}
+            submitProps={{ webkameryId: webcam.id }}
+          />
           <div className='content-wrapper'>
             {webcam.text && parse(webcam?.text)}
           </div>

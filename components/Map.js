@@ -172,15 +172,6 @@ const Map = ({ mesta, kraje, oblasti }) => {
                   <span className='hide-desktop'> Výlety</span>
                 </button>
               </div>
-              <button
-                className={`text-${color} btn p-0 ghost mt-2 d-flex align-items-center font-weight-600 hide-mobile`}
-                onClick={() => setOpenModal(true)}
-              >
-                <>
-                  <FiSend />
-                  &nbsp; Zaslat nezvávaznou nabídku
-                </>
-              </button>
             </div>
           </div>
         </Col>
@@ -213,6 +204,15 @@ const Map = ({ mesta, kraje, oblasti }) => {
           )}
         </Col>
       </Row>
+      <div className='hide-desktop map-toggler'>
+        <button
+          className={`text-${color} btn bg-white p-0 d-flex align-items-center`}
+          onClick={() => setRegionMap((prevState) => !prevState)}
+        >
+          <FiMap className='btn-icon' />
+          Přepnout mapu na oblasti
+        </button>
+      </div>
       <Row className='align-items-center m-0 ml-3 map-filters row'>
         <Col md={2} className='col p-0'>
           <CustomSelect
@@ -273,7 +273,7 @@ const Map = ({ mesta, kraje, oblasti }) => {
                 onClick={() => setRegionMap((prevState) => !prevState)}
               >
                 <FiMap className='btn-icon' />
-                přepnout mapu
+                Přepnout mapu na oblasti
               </button>
             </div>
           </div>
